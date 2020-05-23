@@ -1,5 +1,8 @@
 const app = getApp();
 Component({
+  data:{
+    isShow:false
+  },
   /**
    * 组件的一些选项
    */

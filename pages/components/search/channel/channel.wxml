@@ -1,2 +1,19 @@
-<!--pages/components/search/channel/channel.wxml-->
-<text>pages/components/search/channel/channel.wxml</text>
+<!-- 搜索 -->
+<view class="cu-bar search bg-white">
+  <view class="search-form round">
+    <text class="cuIcon-search"></text>
+    <input type="text" placeholder="搜索图片、文章、视频" confirm-type="search"></input>
+  </view>
+  <view class="action">
+    <button class="cu-btn bg-green shadow-blur round">搜索</button>
+  </view>
+</view>
+
+<!-- 展示没有搜索内容时的界面 -->
+<view wx:if="!isShowContent">
+  
+</view>
+<!-- 展示有搜索内容时的界面 -->
+<view wx:else>
+
+</view>

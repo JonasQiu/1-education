@@ -1,10 +1,15 @@
+<cu-custom bgColor="bg-gradual-green" isBack="{{isShow}}">
+  <view slot="backText">返回</view>
+  <view slot="content">找课</view>
+</cu-custom>
+
 <!-- 选项导航 -->
-<scroll-view scroll-x class=" nav text-center">
-  <view class="cu-item {{0==TabCur?'text-white cur':''}}" bindtap="tabSelect" data-id="0" data-cur="channel">
-    <text class="cuIcon-camerafill"></text> 频道
+<scroll-view scroll-x class="bg-white nav text-center">
+  <view class="cu-item {{0==TabCur?'text-black cur':'text-gray'}}" bindtap="tabSelect" data-id="0" data-cur="channel">
+    <text class="cuIcon-camerafill"></text> 搜索
   </view>
-  <view class="cu-item {{1==TabCur?'text-white cur':''}}" bindtap="tabSelect" data-id="1" data-cur="partitions">
-    <text class="cuIcon-upstagefill"></text> 分区
+  <view class="cu-item {{1==TabCur?'text-black cur':'text-gray'}}" bindtap="tabSelect" data-id="1" data-cur="partitions">
+    <text class="cuIcon-upstagefill"></text> 分类
   </view>
 </scroll-view>
 

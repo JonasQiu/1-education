@@ -9,7 +9,22 @@ Page({
     VerticalNavTop: 0,
     list: [{
       name:'a'},
-      {name:'b'}
+      {name:'b'},
+      {name:'b'},
+      {name:'b'},
+      {name:'b'},
+      {name:'b'},
+      {name:'b'},
+      {name:'b'},
+      {name:'b'},
+      {name:'b'},
+      {name:'b'},
+      {name:'b'},
+      {name:'b'},
+      {name:'b'},
+      {name:'b'},
+      {name:'b'},
+      {name:'b'},
     ],
     load: true
   },
