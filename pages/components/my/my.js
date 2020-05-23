@@ -22,7 +22,6 @@ Component({
   //组件初始化处理
   attached() {
     const that=this;
-    console.log("success")
     wx.showLoading({
       title: '数据加载中',
       mask: true,

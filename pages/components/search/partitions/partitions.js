@@ -7,7 +7,10 @@ Page({
     TabCur: 0,
     MainCur: 0,
     VerticalNavTop: 0,
-    list: ['a','b','c','d','e','f','g','h','i','j','k','l'],
+    list: [{
+      name:'a'},
+      {name:'b'}
+    ],
     load: true
   },
   onLoad() {
@@ -45,9 +48,9 @@ Page({
         let view = wx.createSelectorQuery().select("#main-" + list[i].id);
         view.fields({
           size: true
-        }, data => {
+        }, odata => {
           list[i].top = tabHeight;
-          tabHeight = tabHeight + data.height;
+          tabHeight = tabHeight + odata.height;
           list[i].bottom = tabHeight;     
         }).exec();
       }
