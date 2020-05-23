@@ -1,0 +1,13 @@
+
+@import "/colorui/main.wxss";
+@import "/colorui/icon.wxss";
+.nav{
+  background-image: linear-gradient(to right,rgb(91, 243, 86),rgb(69, 153, 13));
+  padding-top: 30rpx;
+  padding-right: 20rpx;
+  color: #fff;
+}
+.flex{
+  display: flex;
+  justify-content: center;
+}

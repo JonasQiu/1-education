@@ -1,0 +1,8 @@
+{
+  "component": true,
+  "usingComponents": {
+    "channel":"./channel/channel",
+    "partitions":"./partitions/partitions"
+  }
+
+}

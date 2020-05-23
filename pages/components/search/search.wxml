@@ -1,0 +1,13 @@
+<!-- 选项导航 -->
+<scroll-view scroll-x class=" nav text-center">
+  <view class="cu-item {{0==TabCur?'text-white cur':''}}" bindtap="tabSelect" data-id="0" data-cur="channel">
+    <text class="cuIcon-camerafill"></text> 频道
+  </view>
+  <view class="cu-item {{1==TabCur?'text-white cur':''}}" bindtap="tabSelect" data-id="1" data-cur="partitions">
+    <text class="cuIcon-upstagefill"></text> 分区
+  </view>
+</scroll-view>
+
+<!-- 选择模块的跳转 -->
+<channel wx:if="{{PageCur=='channel'}}"></channel>
+<partitions wx:if="{{PageCur=='partitions'}}"></partitions>

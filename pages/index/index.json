@@ -1,0 +1,9 @@
+{
+    "usingComponents": {
+      "homePage":"/pages/components/homePage/homePage",
+      "my":"/pages/components/my/my",
+      "ask":"/pages/components/ask/ask",
+      "talk":"/pages/components/talk/talk",
+      "search":"/pages/components/search/search"
+    }
+}

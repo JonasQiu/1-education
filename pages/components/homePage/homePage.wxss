@@ -1,0 +1,49 @@
+@import "/colorui/main.wxss";
+@import "/colorui/icon.wxss";
+/* 顶部导航栏 */
+.position{
+  font-size: 28rpx;
+  position: fixed;
+  left: 50rpx;
+}
+.addresschoose{
+  position: absolute;
+}
+.weather{
+  font-size: 20rpx;
+  position: absolute;
+  top: 34rpx;
+}
+
+.search{
+  display: flex;
+  font-size: 28rpx;
+  align-items: center;
+  margin-right: 80rpx;
+  border-radius: 16rpx;
+  padding-left: 25rpx;
+}
+.cuIcon-search{
+  margin-right: -8rpx;
+}
+.cu-custom .cu-bar .content {
+  width: calc(100% - 300rpx);
+}
+.navigator{
+  position: fixed;
+  left: 150rpx;
+  top: 50rpx;
+  width: calc(100% - 380rpx);
+  height: 60rpx;
+  background-color: transparent;
+  z-index: 9999;
+}
+.position{
+  position: fixed;
+  height: 70rpx;
+  width: 100rpx;
+  top: 40rpx;
+  left: 30rpx;
+  z-index: 9999;
+  background-color: transparent;
+}

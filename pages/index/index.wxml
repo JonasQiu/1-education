@@ -1,0 +1,29 @@
+<!-- 五大模块的内容 -->
+<homePage wx:if="{{PageCur=='homePage'}}"></homePage>
+<talk wx:if="{{PageCur=='talk'}}"></talk>
+<search wx:if="{{PageCur=='search'}}"></search>
+<ask wx:if="{{PageCur=='ask'}}"></ask>
+<my wx:if="{{PageCur=='my'}}"></my>
+
+<!-- 底部导航 -->
+<view class="shadow foot cu-bar tabbar bg-white">
+	<view class="action {{PageCur=='homePage'?'text-green':'text-gray'}}" bindtap="NavChange" data-cur="homePage">
+		<view class="cuIcon-homefill"></view>首页
+	</view>
+	<view class="action {{PageCur=='ask'?'text-green':'text-gray'}}" bindtap="NavChange" data-cur="ask">
+		<view class="iconfont icon-jurassic_bbs">
+			<view class="cu-tag badge">{{askNum}}</view>
+		</view>咨询
+	</view>
+	<view class="action  {{PageCur=='search'?'text-green':'text-gray'}} add-action" bindtap="NavChange" data-cur="search">
+		<button class="cu-btn cuIcon-add bg-green shadow">
+      <text class="cuIcon-search"></text>
+    </button>找课
+	</view>
+  <view class="action {{PageCur=='talk'?'text-green':'text-gray'}}" bindtap="NavChange" data-cur="talk">
+		<view class="cuIcon-similar"></view>生态圈
+	</view>
+	<view class="action {{PageCur=='my'?'text-green':'text-gray'}}" bindtap="NavChange" data-cur="my">
+		<view class="cuIcon-my"></view>我的
+	</view>
+</view>

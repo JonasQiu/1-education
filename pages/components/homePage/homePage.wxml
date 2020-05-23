@@ -1,0 +1,21 @@
+<!-- 顶部导航 -->
+<cu-custom bgColor="bg-gradual-blue">
+  <view slot="content">
+		<view class="position">
+			<view class="addresschoose">
+				{{position}}
+				<text class="cuIcon-unfold lg"></text>
+			</view>
+			<view class="weather">{{weather}}  {{degree+'°C'}}</view>
+		</view>
+		<view class="search bg-white">
+      <text class="cuIcon-search"></text>
+			<input placeholder="{{hotSearch}}"></input>
+		</view>
+	</view>
+</cu-custom>
+<!-- 顶部导航搜索，不确定什么原因无法使用事件，所以手动添加元素进行覆盖 -->
+<navigator class="navigator" url="/pages/components/search/search"></navigator>
+<!-- 顶部导航定位，不确定什么原因无法使用事件，所以手动添加元素进行覆盖 -->
+<navigator class="position" url="/pages/components/position/position"></navigator>
+

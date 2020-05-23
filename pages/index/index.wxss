@@ -1,0 +1,74 @@
+@import "/colorui/main.wxss";
+@import "/colorui/icon.wxss";
+
+/* icon字体库 */
+@font-face {font-family: "iconfont";
+  src: url('//at.alicdn.com/t/font_1834242_52mk5ngd45x.eot?t=1590059177743'); /* IE9 */
+  src: url('//at.alicdn.com/t/font_1834242_52mk5ngd45x.eot?t=1590059177743#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('data:application/x-font-woff2;charset=utf-8;base64,d09GMgABAAAAAAKsAAsAAAAABoQAAAJgAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHEIGVgCCcAqBCIEPATYCJAMICwYABCAFhG0HNhu7BRHVkw1kPw4ct/k/6CQluaVQhSbSfw6eR7vvz00ybzNYyV9U9VuIFaweLVhSFQNgv22PtCtpIWGR16F/q+hODNjtmwHX1K8BDSQPaG6dFJUcCTiw6UCjgka2Cc14w9gFL/A4BPDIoAzp0q3PECwGe5wAMmfm9InYgg+DYUmLEGpYapDNOFi1Rj0ANkXflw/UiAWFo7HLBkzrOoUOr3c5aXrx/8VjAgI/CGi1A2igDDAgQxpj/dAIY2u8mCEHjlUs8HrX//+BFTmqCWF/nV0YAJAGxc8k8aSPWqgAMElvMVA16RpQsQnzgkO30tTu2/X+UPGv3s3Ue+5M8sV3NASXmm5nuC97Hzc2dho84cdpSdSfq/qc3bhpSNXnMlFOLy7dUVZR3issH6C+VKVtPL+h3Z/I9t1+0gH7Z/qe+i2AwP09j96Pj2zzy/oGgGcflxyPjIZhDrD7tgv8I8nAFmPIbIsymqTRoSieNFYBHh7wH7tieDVVH39DKcESf1uOMNIzaCx5pGGVwcGnDiEs7eFRSvfVPrHMRSPGBUpYASBEcRaKCO5CE8VD0rBewiGBTwgRJRoewyR2S58C8YzoTLgw7rD+wWxHlK6NRVx8Q/X2C+VlEeeFlEwQ2qopJ0eMSEvMSB/VMUuQdAQYwGno/QEnHRY3rjTz2de1bHpTtR0hE1lnwoVxh/UPZjuiDLqzqHz+hurtF+qoqAu/kJLpH9qqGUCO6jio4lFeSR/VMUuQdAQYwCD0/oCzeZDFjSs9IXL2tdNJDlVX22vDDxSxGmyDyp35msC+aUnJbNO6piwD') format('woff2'),
+  url('//at.alicdn.com/t/font_1834242_52mk5ngd45x.woff?t=1590059177743') format('woff'),
+  url('//at.alicdn.com/t/font_1834242_52mk5ngd45x.ttf?t=1590059177743') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
+  url('//at.alicdn.com/t/font_1834242_52mk5ngd45x.svg?t=1590059177743#iconfont') format('svg'); /* iOS 4.1- */
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-jurassic_bbs:before {
+  content: "\e697";
+  width: 100rpx;
+  position: relative;
+  display: block;
+  height: auto;
+  margin: 0 auto 10rpx;
+  text-align: center;
+  font-size: 40rpx;
+}
+.cu-tag.badge{
+  right:10rpx
+}
+
+
+.cuIcon-add:before {
+	content: ""!important;
+}
+.cuIcon-search{
+  top: 0rpx!important;
+}
+
+/* 顶部导航栏 */
+.position{
+  font-size: 28rpx;
+  position: fixed;
+  left: 26rpx;
+  top: 34rpx;
+}
+.addresschoose{
+  position: absolute;
+}
+.weather{
+  font-size: 20rpx;
+  position: absolute;
+  top: 34rpx;
+}
+
+.search{
+  display: flex;
+  font-size: 28rpx;
+  align-items: center;
+  margin-right: 80rpx;
+  border-radius: 16rpx;
+  padding-left: 25rpx;
+}
+.cuIcon-search{
+  margin-right: -8rpx;
+}
+.cu-custom .cu-bar .content {
+  width: calc(100% - 300rpx);
+}
+  
