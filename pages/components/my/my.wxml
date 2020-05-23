@@ -1,5 +1,6 @@
+<!-- 登录模块 -->
 <scroll-view scroll-y class="scrollPage">
-  <button class="UCenter-bg" open-type="getUserInfo" bindgetuserinfo="onGetUserInfo">
+  <button class="UCenter-bg padding-40" open-type="getUserInfo" bindgetuserinfo="onGetUserInfo">
     <image src="{{headImg}}" class="png" mode="widthFix"></image>
       <view class="text-xl">{{name}}
     </view>
@@ -8,6 +9,7 @@
     </view>
     <image src="/images/wave.gif" mode="scaleToFill" class="gif-wave"></image>
   </button>
+  <!-- 粉丝关注收藏 -->
   <view class="padding flex text-center text-grey bg-white shadow-warp">
     <view class="flex flex-sub flex-direction solid-right">
       <view class="text-xxl text-orange">{{fansCount}}</view>

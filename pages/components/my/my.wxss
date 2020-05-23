@@ -16,6 +16,7 @@
   color: #fff;
   font-weight: 300;
   text-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+  font-size: 36rpx;
 }
 
 .UCenter-bg text {
@@ -53,9 +54,12 @@ map,.mapBox{
   height: 400rpx;
 }
 .m-10{
-  margin-top: -26rpx;
-  font-size: 34rpx;
+  margin-top: -32rpx;
+  font-size: 30rpx;
 }
 .png{
   border-radius: 50%;
+}
+.padding-40{
+  padding-top: 40rpx;
 }
