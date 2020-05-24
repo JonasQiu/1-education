@@ -6,7 +6,3 @@
   padding-right: 20rpx;
   color: #fff;
 } */
-.flex{
-  display: flex;
-  justify-content: center;
-}

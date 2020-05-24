@@ -1,2 +1,4 @@
-<!--components/talk/talk.wxml-->
-<text>components/talk/talk.wxml</text>
+<cu-custom bgColor="bg-gradual-orange" isBack="{{isShow}}">
+  <view slot="backText">返回</view>
+  <view slot="content">生态圈</view>
+</cu-custom>

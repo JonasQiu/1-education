@@ -1,4 +1,7 @@
 {
   "component": true,
-  "usingComponents": {}
+  "usingComponents": {
+    "noContent":"../noContent/noContent",
+    "haveContent":"../haveContent/haveContent"
+  }
 }

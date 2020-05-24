@@ -1,2 +1,4 @@
-<!--components/ask/ask.wxml-->
-<text>components/ask/ask.wxml</text>
+<cu-custom bgColor="bg-gradual-purple" isBack="{{isShow}}">
+  <view slot="backText">返回</view>
+  <view slot="content">咨询</view>
+</cu-custom>
