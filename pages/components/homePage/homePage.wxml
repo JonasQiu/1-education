@@ -19,3 +19,51 @@
 <!-- 顶部导航定位，不确定什么原因无法使用事件，所以手动添加元素进行覆盖 -->
 <navigator class="position" url="/pages/components/position/position"></navigator>
 
+<!-- 第一行列表 -->
+<view class="contain">
+	<view class="box">
+		<image src="/images/tubiao.png" class="img"></image>
+		<text class="txt">自习室</text>
+	</view>
+	<view class="box">
+		<image src="/images/tubiao.png" class="img"></image>
+		<text class="txt">自习室</text>
+	</view>
+	<view class="box">
+		<image src="/images/tubiao.png" class="img"></image>
+		<text class="txt">自习室</text>
+	</view>
+	<view class="box">
+		<image src="/images/tubiao.png" class="img"></image>
+		<text class="txt">自习室</text>
+	</view>
+</view>
+
+<!-- 宫格列表 -->
+<view class="contain_box">
+	<!-- 第一导航 -->
+	<view class="contain_1">
+		<view class="box" wx:for="{{navList}}">
+			<image src="{{item.image}}" class="img_1"></image>
+			<text class="txt_1">{{item.name}}</text>
+		</view>
+	</view>
+	<!-- 第二导航 -->
+	<view class="contain_2">
+		<view class="box" wx:for="{{barList}}">
+			<image src="{{item.image}}" class="img_2"></image>
+			<text class="txt_2">{{item.name}}</text>
+		</view>
+	</view>
+</view>
+
+<!-- 卡片列表 -->
+<view class="card_contain">
+	<view class="card_box" wx:for="{{cardList}}">
+		<image src="{{item.imgUrl}}" class="card_img"></image>
+		<text class="desc">{{item.desc}}</text>
+		<text class="assess">{{item.assess}}</text>
+		<text class="price">{{item.price}}</text>
+	</view>
+</view>
+

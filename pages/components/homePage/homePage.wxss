@@ -47,3 +47,114 @@
   z-index: 9999;
   background-color: transparent;
 }
+
+/* 第一行列表 */
+.contain {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.box {
+  display: flex;
+  flex-direction: column;
+  padding: 5rpx;
+}
+
+.img {
+  height: 90rpx;
+  width: 113rpx;
+}
+
+.txt {
+  font-size: 30rpx;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* 宫格列表样式 */
+.contain_box {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 30rpx 30rpx 0rpx 0rpx;
+  margin: 30rpx 30rpx 0 30rpx;
+}
+
+.contain_1 {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  
+}
+
+.contain_2 {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.img_1 {
+  height: 100rpx;
+  width: 130rpx;
+}
+
+.txt_1 {
+  font-size: 30rpx;
+  text-align: center;
+}
+
+.img_2 {
+  height: 100rpx;
+  width: 130rpx;
+}
+
+.txt_2 {
+  font-size: 30rpx;
+  text-align: center;
+}
+
+/* 卡片列表 */
+.card_contain {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 0 10rpx;
+  margin-top: 20rpx;
+}
+
+.card_box {
+  display: flex;
+  flex-direction: column;
+  border-radius: 5rpx;
+  padding: 10rpx;
+  margin-bottom: 15rpx;
+  background-color: white;
+  border-radius:20rpx;
+  
+}
+
+.card_img {
+  height: 300rpx;
+  width: 300rpx;
+}
+
+.desc {
+  font-size: 30rpx;
+  text-align: center;
+}
+
+.assess {
+  font-size: 26rpx;
+  color: gainsboro;
+  text-align: center;
+}
+
+.price {
+  font-size: 35rpx;
+  color: gold;
+  text-align: center;
+}
