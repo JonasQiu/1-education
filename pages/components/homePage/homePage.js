@@ -121,14 +121,4 @@ Component({
       })
     }
   },
-  gridchange: function (e) {
-    this.setData({
-      gridCol: e.detail.value
-    });
-  },
-  gridswitch: function (e) {
-    this.setData({
-      gridBorder: e.detail.value
-    });
-  },
 })
