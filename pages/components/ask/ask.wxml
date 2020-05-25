@@ -2,3 +2,47 @@
   <view slot="backText">返回</view>
   <view slot="content">咨询</view>
 </cu-custom>
+
+<!-- 回复我的、@我、系统通知、收到的赞 -->
+<view class="ask">
+  <view class="msg" bindtap="changePage" data-page="reply">
+    <text class="iconfont icon-talk ask-style icon-reply"></text>
+    <view class="view">回复我的</view>
+  </view>
+  <view class="msg" bindtap="changePage" data-page="book">
+    <text class="iconfont icon-addressbook ask-style icon-book"></text>
+    <view class="view">通讯录</view>
+  </view>
+  <view class="msg" bindtap="changePage" data-page="praise">
+    <text class="iconfont icon-good ask-style icon-praise"></text>
+    <view class="view">收到的赞</view>
+  </view>
+  <view class="msg" bindtap="changePage" data-page="sys">
+    <text class="iconfont icon-tongzhi ask-style icon-sys"></text>
+    <view class="view">系统通知</view>
+  </view>
+</view>
+<!-- 对话列表 -->
+<view class="cu-bar bg-white solid-bottom margin-top">
+  <view class="action">
+    <text class="cuIcon-title text-orange "></text> 咨询列表
+  </view>
+</view> 
+<view class="cu-list menu-avatar">
+  <view class="cu-item {{modalName=='move-box-'+ index?'move-cur':''}}" wx:for="{{4}}" wx:key="{{index}}" bindtouchstart="ListTouchStart" bindtouchmove="ListTouchMove" bindtouchend="ListTouchEnd" data-target="move-box-{{index}}">
+    <view class="cu-avatar round lg" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big2100{{index+1}}.jpg);"></view>
+    <view class="content">
+      <view class="text-grey">文晓港</view>
+      <view class="text-gray text-sm">
+        <text class="cuIcon-infofill text-red"></text> 消息未送达</view>
+    </view>
+    <view class="action">
+      <view class="text-grey text-xs">22:20</view>
+      <view class="cu-tag round bg-grey sm">5</view>
+    </view>
+    <view class="move">
+      <view class="bg-grey">置顶</view>
+      <view class="bg-red">删除</view>
+    </view>
+  </view>
+</view>

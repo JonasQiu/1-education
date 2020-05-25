@@ -1,0 +1,4 @@
+<cu-custom bgColor="bg-gradual-purple" isBack="{{isShow}}">
+  <view slot="backText">返回</view>
+  <view slot="content">收到的赞</view>
+</cu-custom>

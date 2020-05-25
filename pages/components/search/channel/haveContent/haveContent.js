@@ -4,9 +4,11 @@ Component({
    * 组件的属性列表
    */
   properties: {
+    // 接受查找结果的数据
     list:{
       type:Array
     }
+
   },
 
   /**

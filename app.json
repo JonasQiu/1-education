@@ -7,7 +7,11 @@
     "pages/components/my/my",
     "pages/components/position/position",
     "pages/components/talk/talk",
-    "pages/components/search/channel/haveContent/haveContent"
+    "pages/components/search/channel/haveContent/haveContent",
+    "pages/components/ask/reply/reply",
+    "pages/components/ask/book/book",
+    "pages/components/ask/praise/praise",
+    "pages/components/ask/sys/sys"
   ],
   "window": {
     "backgroundTextStyle": "light",

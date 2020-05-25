@@ -22,10 +22,6 @@ Component({
   //组件初始化处理
   attached() {
     const that=this;
-    wx.showLoading({
-      title: '数据加载中',
-      mask: true,
-    })
     let i = 0;
     numDH();
     function numDH() {
@@ -48,7 +44,38 @@ Component({
         })
       }
     }
-    wx.hideLoading()
+    wx.getStorage({
+      key: 'userInfo',
+      success(res){
+        wx.showLoading({
+          title: '正在更新数据',
+          mask: true
+        })
+        wx.cloud.callFunction({
+          name:"databaseopt",
+          data:{
+            db:"User",
+            type:"get",
+            condition:{
+              _id:res.data._id
+            },
+            skip:0,
+            limit:20
+          }
+        }).then(res=>{
+          that.loginObj=res.result.data[0]
+          
+          that.setData({
+            headImg:that.loginObj.avatarUrl,
+            name:that.loginObj.nickName,
+            authName:"已登录",
+            //更新粉丝关注收藏数据 attentionNum：
+          })
+          wx.hideLoading()
+          console.log(that.loginObj)
+        })
+      }
+    })
   },
  
   //  组件的方法列表
@@ -79,6 +106,10 @@ Component({
         wx.getStorage({
           key: 'userInfo',
           success(res){
+            wx.showLoading({
+              title: '正在更新数据',
+              mask: true
+            })
             wx.cloud.callFunction({
               name:"databaseopt",
               data:{
@@ -92,9 +123,6 @@ Component({
               }
             }).then(res=>{
               that.loginObj=res.result.data[0]
-              wx.showLoading({
-                title: '正在更新数据',
-              })
               that.setData({
                 headImg:that.loginObj.avatarUrl,
                 name:that.loginObj.nickName,
@@ -109,8 +137,8 @@ Component({
       }else{
         wx.showModal({
           title:"提示",
-          content:"请重新打开小程序",
-          showCancel:true
+          content:"请重新点击登录",
+          showCancel:false
         })
       }
     },
