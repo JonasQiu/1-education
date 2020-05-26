@@ -3,7 +3,7 @@
       "homePage":"/pages/components/homePage/homePage",
       "my":"/pages/components/my/my",
       "ask":"/pages/components/ask/ask",
-      "talk":"/pages/components/ecosystem/ecosystem",
+      "ecosystem":"/pages/components/ecosystem/ecosystem",
       "search":"/pages/components/search/search"
     }
 }

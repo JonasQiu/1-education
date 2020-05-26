@@ -1,6 +1,6 @@
 <!-- 导航条 -->
 <scroll-view scroll-x class="bg-white nav" scroll-with-animation scroll-left="{{scrollLeft}}">
-  <view class="cu-item {{index==TabCur?'text-green cur':''}}" wx:for="{{10}}" wx:key bindtap="tabSelect" data-id="{{index}}">
+  <view class="cu-item {{index==TabCur?'text-green cur':''}}" wx:for="{{10}}" wx:key ="index" bindtap="tabSelect" data-id="{{index}}">
     Tab{{index}}
   </view>
 </scroll-view>
