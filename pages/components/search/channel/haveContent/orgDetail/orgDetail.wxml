@@ -1,0 +1,15 @@
+<cu-custom class="detail-back" isBack="{{isShow}}">
+	<view slot="backText">返回</view>
+	<view slot="content">机构详情</view>
+</cu-custom>
+
+<view class="detail">
+	<view class="detail-pro" style="background-image: url({{org.img.bgimg}});">
+		<image src="{{org.img.bgimg}}" class="detail-info-avatar"></image>
+		<view class="info">
+			<view style="font-size: 40rpx;">{{org.info.orgName}}</view>
+      <view style="font-size: 30rpx;">⭐⭐⭐⭐⭐{{org.star}} | 7354km</view>
+      <view style="font-size: 30rpx;">{{org.location.address}}</view>
+		</view>
+	</view>
+</view>

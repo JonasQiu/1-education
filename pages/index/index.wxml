@@ -16,7 +16,7 @@
 		</view>咨询
 	</view>
 	<view class="action  {{PageCur=='search'?'text-green':'text-gray'}} add-action" bindtap="NavChange" data-cur="search">
-		<button class="cu-btn cuIcon-add bg-green shadow">
+		<button class="cu-btn f-45 cuIcon-add bg-green shadow">
       <text class="cuIcon-search"></text>
     </button>找课
 	</view>

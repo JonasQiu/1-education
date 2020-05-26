@@ -48,22 +48,7 @@ Component({
       name: '自习室'
     }, {
       image:"/images/tubiao.png",
-      name: '成绩'
-    },{
-      image:"/images/tubiao.png",
-      name: '学校'
-    }, {
-      image:"/images/tubiao.png",
-      name: '老师'
-    }, {
-      image:"/images/tubiao.png",
-      name: '同学'
-    }, {
-      image:"/images/tubiao.png",
-      name: '通知'
-    }, {
-      image:"/images/tubiao.png",
-      name: '版权'
+      name: '自习室'
     }],
      // 卡片列表
     cardList: [{

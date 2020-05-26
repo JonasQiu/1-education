@@ -12,10 +12,23 @@ Component({
    */
   data: {
     hotList:['shuai','sad','asdasd','shuai','sad','asdasd','shuai','sad','asdasd'], //数据截取前10个
-    historyList:['s','shuai','sad','asdasd','shuai','sad','asdasd','shuai'], //数据截取前8个
-    showClear:true
+    showClear:false,
+    historyList:['shuai','sad','asdasd','shuai','sad','asdasd','shuai','sad','asdasd']
+
   },
-  // show(e){  未能实现，没有历史数据时，初始化不显示
+  attached(){
+    var that = this;
+    
+    if(that.data.historyList){
+      // historylist,后台请求数据进行渲染
+      console.log(that.data.historyList)
+      that.setData({
+        showClear:true,
+      })
+    }
+  },
+  // 未能实现，没有历史数据时，初始化不显示
+  // show(e){  
   //   if(this.data.historyList === []){
   //     this.setData({
   //       showClear:false

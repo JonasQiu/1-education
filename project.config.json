@@ -56,6 +56,13 @@
 					"id": -1,
 					"name": "pages/components/search/channel/haveContent/haveContent",
 					"pathName": "pages/components/search/channel/haveContent/haveContent",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "详情页",
+					"pathName": "pages/components/search/channel/haveContent/orgDetail/orgDetail",
 					"scene": null
 				}
 			]

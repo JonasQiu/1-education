@@ -1,10 +1,10 @@
-<cu-custom bgColor="bg-gradual-green" isBack="{{isShow}}">
+<!-- <cu-custom bgColor="bg-gradual-green" isBack="{{isShow}}">
   <view slot="backText">返回</view>
   <view slot="content">找课</view>
-</cu-custom>
+</cu-custom> -->
 
 <!-- 选项导航 -->
-<scroll-view scroll-x class="bg-white nav text-center">
+<scroll-view scroll-x class="bg-white nav text-center" style="margin-top:{{navTop}}px">
   <view class="cu-item {{0==TabCur?'text-black cur':'text-gray'}}" bindtap="tabSelect" data-id="0" data-cur="channel">
     <text class="cuIcon-search"></text> 搜索
   </view>

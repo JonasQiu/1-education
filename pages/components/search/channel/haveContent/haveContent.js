@@ -16,7 +16,11 @@ Component({
    */
   data: {
     TabCur: 0,
-    scrollLeft:0
+    scrollLeft:0,
+    searchedList:[{
+      src:'/images/logo.png',
+      userName:'hhan'
+    }]
   },
   
 

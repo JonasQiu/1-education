@@ -11,7 +11,8 @@ Component({
    * 组件的初始数据
    */
   data: {
-    isShow:false
+    isShow:false,
+    // navTop:wx.getSystemInfoSync().statusBarHeight,
   },
   attached(){
     //判断返回键的显示

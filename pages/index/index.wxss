@@ -71,4 +71,9 @@
 .cu-custom .cu-bar .content {
   width: calc(100% - 300rpx);
 }
+
+.cu-bar.tabbar .action.add-action [class*="cuIcon-"] {
+  font-size: 47rpx!important;
+}
+  
   

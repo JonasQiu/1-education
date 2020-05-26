@@ -14,9 +14,12 @@ Component({
     TabCur: 0,
     scrollLeft:0,
     PageCur:"channel",
-    isShow:false
+    isShow:false,
+    navTop:wx.getSystemInfoSync().statusBarHeight,
   },
   attached(){
+    
+    
     //判断返回键的显示
    if(getCurrentPages().length > 1){
     this.setData({

@@ -1,0 +1,38 @@
+.detail-back{
+  border-bottom: 2rpx solid #ccc;
+}
+.detail-pro{
+  position: relative;
+  width: 100%;
+  height: 350rpx;
+  color: #fff;
+  background-repeat: no-repeat;
+  background-size: 100% 120%;
+  
+  display: flex;
+  align-items: flex-end;
+  padding: 20rpx 10rpx;
+}
+.detail-pro::before{
+  position: absolute;
+  left: 0;
+  top: 0;
+  content: "";
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .5);
+}
+.detail-pro view{
+  margin: 8rpx 0;
+}
+.detail-info-avatar{
+  width: 150rpx;
+  height: 150rpx;
+  border-radius: 50%;
+  margin: 20rpx ;
+  border: 4rpx solid #fff;
+}
+.info{
+  z-index: 2;
+  margin-bottom: 20rpx;
+}

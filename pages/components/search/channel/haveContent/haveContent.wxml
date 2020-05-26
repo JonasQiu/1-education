@@ -13,7 +13,7 @@
   </block>
 </view> -->
 <view class="content">
-  <view class="item">
+  <view class="item" bindtap="orgDetail" data-detailIndex="{{index}}" wx:for="{{searchedList}}">
     <image src='/images/logo.png' class="item-img"></image>
     <view class="info">
       <view class="info-content">

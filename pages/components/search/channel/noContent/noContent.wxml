@@ -1,6 +1,6 @@
 <view class="noContent">
   <!-- 热搜 -->
-  <view class="hot">
+  <view class="hot bg-white">
     <text class="search-title">热搜</text>
     <view class="hotContent">
       <navigator url="../haveContent/haveContent?query={{item}}" wx:for="{{hotList}}" wx:key="index" class="hotItem">
@@ -11,7 +11,7 @@
     </view>
   </view>
   <!-- 搜索历史 -->
-  <view class="history" wx:if="{{showClear}}">
+  <view class="history bg-white" wx:if="{{showClear}}">
     <text class="search-title">搜索历史</text>
     <view  class="padding-top">
        <navigator url="../haveContent/haveContent?query={{item}}" wx:for="{{historyList}}" class="historyContent" wx:key="index">

@@ -6,3 +6,6 @@
   padding-right: 20rpx;
   color: #fff;
 } */
+.nav{
+  border-bottom: 1px solid #ccc;
+}
