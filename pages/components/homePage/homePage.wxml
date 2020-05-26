@@ -43,14 +43,14 @@
 <view class="contain_box">
 	<!-- 第一导航 -->
 	<view class="contain_1">
-		<view class="box" wx:for="{{navList}}">
+		<view class="box" wx:for="{{navList}}" wx:key="index">
 			<image src="{{item.image}}" class="img_1"></image>
 			<text class="txt_1">{{item.name}}</text>
 		</view>
 	</view>
 	<!-- 第二导航 -->
 	<view class="contain_2">
-		<view class="box" wx:for="{{barList}}">
+		<view class="box" wx:for="{{barList}}" wx:key="index">
 			<image src="{{item.image}}" class="img_2"></image>
 			<text class="txt_2">{{item.name}}</text>
 		</view>
@@ -59,7 +59,7 @@
 
 <!-- 卡片列表 -->
 <view class="card_contain">
-	<view class="card_box" wx:for="{{cardList}}">
+	<view class="card_box" wx:for="{{cardList}}" wx:key="index">
 		<image src="{{item.imgUrl}}" class="card_img"></image>
 		<text class="desc">{{item.desc}}</text>
 		<text class="assess">{{item.assess}}</text>

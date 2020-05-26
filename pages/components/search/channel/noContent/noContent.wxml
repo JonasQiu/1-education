@@ -3,7 +3,7 @@
   <view class="hot">
     <text class="search-title">热搜</text>
     <view class="hotContent">
-      <navigator url="../haveContent/haveContent?query={{item}}" wx:for="{{hotList}}" wx:key="{{index}}" class="hotItem">
+      <navigator url="../haveContent/haveContent?query={{item}}" wx:for="{{hotList}}" wx:key="index" class="hotItem">
         <text class="{{index<4? '':'color999'}}">{{index+1}}</text>
         <text class="margin-15">{{item}}</text>
         <text class="{{index<2?'hotText':index<6?'newText':''}}"></text>
@@ -14,7 +14,7 @@
   <view class="history" wx:if="{{showClear}}">
     <text class="search-title">搜索历史</text>
     <view  class="padding-top">
-       <navigator url="../haveContent/haveContent?query={{item}}" wx:for="{{historyList}}" class="historyContent" wx:key="{{index}}">
+       <navigator url="../haveContent/haveContent?query={{item}}" wx:for="{{historyList}}" class="historyContent" wx:key="index">
           <text class="historyItem">{{item}}</text>
       </navigator>
     </view>

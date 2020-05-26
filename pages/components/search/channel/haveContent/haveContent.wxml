@@ -7,7 +7,7 @@
 <!-- 内容 -->
 <!-- <view class="content">
   <block wx:for="{{contentList}}" >
-    <view class="item" wx:key="{{index}}">
+    <view class="item" wx:key="index">
       <image src='{{item.src}}'></image>
     </view>
   </block>

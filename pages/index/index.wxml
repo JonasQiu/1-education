@@ -1,6 +1,6 @@
 <!-- 五大模块的内容 -->
 <homePage wx:if="{{PageCur=='homePage'}}"></homePage>
-<talk wx:if="{{PageCur=='talk'}}"></talk>
+<ecosystem wx:if="{{PageCur=='ecosystem'}}"></ecosystem>
 <search wx:if="{{PageCur=='search'}}"></search>
 <ask wx:if="{{PageCur=='ask'}}"></ask>
 <my wx:if="{{PageCur=='my'}}"></my>
@@ -20,7 +20,7 @@
       <text class="cuIcon-search"></text>
     </button>找课
 	</view>
-  <view class="action {{PageCur=='talk'?'text-green':'text-gray'}}" bindtap="NavChange" data-cur="talk">
+  <view class="action {{PageCur=='ecosystem'?'text-green':'text-gray'}}" bindtap="NavChange" data-cur="ecosystem">
 		<view class="cuIcon-similar"></view>生态圈
 	</view>
 	<view class="action {{PageCur=='my'?'text-green':'text-gray'}}" bindtap="NavChange" data-cur="my">
