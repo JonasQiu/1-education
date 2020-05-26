@@ -4,8 +4,6 @@ cloud.init()
 const db = cloud.database()
 const _ = db.command
 
-cloud.init()
-
 // 云函数入口函数
 exports.main = (event, context) => {
   return new Promise(async (resolve, reject) => {
@@ -25,10 +23,10 @@ exports.main = (event, context) => {
     db.collection('User').where({
       openId: _.eq(userInfo.openId)
     }).get().then(res => {
-      console.log('chakan',res)
       if (res.data.length == 0) {
         // 添加记录
-        userInfo.type = 1;
+        userInfo.userType = 1;
+        userInfo.type = 0;
         userInfo.phone = "";
         userInfo.registerTime = Date.now();
         userInfo.myFans = [],

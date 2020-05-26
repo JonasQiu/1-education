@@ -32,13 +32,6 @@ Component({
 
   //  组件的方法列表
   methods: {
-    getNum(obj) {
-      let num = obj['1'].length + obj['2'].length;
-      for (let key in Object.keys(obj['3'])) {
-        num += obj['3'][key].length;
-      }
-      return num;
-    },
     numDH(i) {
       const that = this;
       if (i < 20) {
@@ -53,9 +46,9 @@ Component({
       } else {
         that.setData({
           // 注释代码为真实生产环境运行代码，下方为测试代码
-          // attentionCount: that.coutNum(getNum(that.data.userInfo.myFollow)),
-          // collectionCount: that.coutNum(getNum(that.data.userInfo.myCollection)),
-          // fansCount: that.coutNum(getNum(that.data.userInfo.myFans))
+          // attentionCount: that.coutNum(that.data.userInfo.myFollow.length),
+          // collectionCount: that.coutNum(that.data.userInfo.myCollection.length),
+          // fansCount: that.coutNum(that.data.userInfo.myFans.length),
           attentionCount: that.coutNum(2000),
           collectionCount: that.coutNum(35000),
           fansCount: that.coutNum(450000),
@@ -80,7 +73,6 @@ Component({
       const that = this;
       if (e.detail.userInfo) {
         commonLogin.Login(e.detail.userInfo).then(res => {
-          console.log(res)
           that.setData({
             userInfo: res,
           })
