@@ -9,7 +9,6 @@ cloud.init()
 // 云函数入口函数
 exports.main = (event, context) => {
   return new Promise(async (resolve, reject) => {
-    console.log(event,1111)
     const wxContext = cloud.getWXContext();
     let userInfo = {
       openId: wxContext.OPENID,
@@ -32,8 +31,8 @@ exports.main = (event, context) => {
         userInfo.type = 1;
         userInfo.phone = "";
         userInfo.registerTime = Date.now();
-        userInfo.myFans = { 1: [], 2: [], 3: {} },
-          userInfo.myFollow = { 1: [], 2: [], 3: {} },
+        userInfo.myFans = [],
+          userInfo.myFollow = [],
           userInfo.myCollection = [],
           userInfo.myArticle = [],
           db.collection('User').add({

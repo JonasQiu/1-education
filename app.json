@@ -15,7 +15,7 @@
     "pages/components/search/channel/noContent/noContent",
     "pages/components/search/channel/channel",
     "pages/components/search/partitions/partitions",
-    "pages/components/search/channel/haveContent/orgDetail/orgDetail"
+    "pages/components/orgDetail/orgDetail"
   ],
   "window": {
     "backgroundTextStyle": "light",
