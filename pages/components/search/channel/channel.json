@@ -1,7 +1,7 @@
 {
   "component": true,
   "usingComponents": {
-    "noContent":"../noContent/noContent",
-    "haveContent":"../haveContent/haveContent"
+    "noContent":"./noContent/noContent",
+    "haveContent":"./haveContent/haveContent"
   }
 }

@@ -5,8 +5,8 @@ Component({
    */
   properties: {
     // 接受查找结果的数据
-    list:{
-      type:Array
+    list: {
+      type: Array
     }
 
   },
@@ -16,13 +16,13 @@ Component({
    */
   data: {
     TabCur: 0,
-    scrollLeft:0,
-    searchedList:[{
-      src:'/images/logo.png',
-      userName:'hhan'
+    scrollLeft: 0,
+    searchedList: [{
+      src: '/images/logo.png',
+      userName: 'hhan'
     }]
   },
-  
+
 
   /**
    * 组件的方法列表
@@ -31,7 +31,12 @@ Component({
     tabSelect(e) {
       this.setData({
         TabCur: e.currentTarget.dataset.id,
-        scrollLeft: (e.currentTarget.dataset.id-1)*60
+        scrollLeft: (e.currentTarget.dataset.id - 1) * 60
+      })
+    },
+    orgDetail(e) {
+      wx.navigateTo({
+        url: '/pages/components/orgDetail/orgDetail',
       })
     }
   }
