@@ -5,13 +5,13 @@
 
 <!-- 机构信息 -->
 <view class="detail">
-	<view class="detail-pro" style="background-image: url({{org.img.bgimg}});">
-		<image src="{{org.img.bgimg}}" class="detail-info-avatar"></image>
+	<view class="detail-pro" style="background-image: url({{infoData.img.bgimg}});">
+		<image src="{{infoData.img.bgimg}}" class="detail-info-avatar"></image>
 		<view class="info">
 			<!-- 可设置学生数（报名课程的同学），课程数，好评率 -->
-			<view style="font-size: 36rpx;">{{org.info.orgName}}</view>
-			<view style="font-size: 28rpx;">⭐⭐⭐⭐⭐{{org.star}} | 7354km</view>
-			<view style="font-size: 28rpx;">{{org.location.address}}</view>
+			<view style="font-size: 36rpx;">{{infoData.info.orgName}}</view>
+			<view style="font-size: 28rpx;">⭐⭐⭐⭐⭐{{infoData.star}} | 7354km</view>
+			<view style="font-size: 28rpx;">{{infoData.location.address}}</view>
 		</view>
 	</view>
 </view>
@@ -20,13 +20,13 @@
 <view class="resources">
 	<scroll-view scroll-x class="bg-white nav text-center" scroll-with-animation scroll-left="{{scrollLeft}}">
 		<view class="cu-item {{index==TabCur?'text-green cur':''}}" wx:for="{{orgResourcesNav}}" wx:key="index" bindtap="tabSelect" data-id="{{index}}">
-			{{item.nav}} {{item.list?('('+item.list.length+')'):''}}
+			{{item.nav}} {{item.length!=undefined?('('+item.length+')'):''}}
 		</view>
 	</scroll-view>
 </view>
 
 <!-- 组件跳转 -->
 <info wx:if="{{0===TabCur}}" infoList="{{infoData}}" />
-<lesson wx:if="{{1===TabCur}}" lessonList="{{orgResourcesNav[1].list}}" />
-<teacher wx:if="{{2===TabCur}}" teacherList="{{orgResourcesNav[2].list}}" />
-<active wx:if="{{3===TabCur}}" activeList="{{orgResourcesNav[3].list}}" />
+<lesson wx:if="{{1===TabCur}}" lessonList="{{lesson}}" />
+<teacher wx:if="{{2===TabCur}}" teacherList="{{teacher}}" />
+<active wx:if="{{3===TabCur}}" activeList="{{active}}" />

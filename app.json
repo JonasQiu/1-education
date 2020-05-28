@@ -18,7 +18,10 @@
     "pages/components/orgDetail/orgDetail",
     "pages/components/orgDetail/active/active",
     "pages/components/orgDetail/info/info",
-    "pages/components/map/map"
+    "pages/components/map/map",
+    "pages/components/orgDetail/lesson/lesson",
+    "pages/components/orgDetail/teacher/teacher"
+
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -1,2 +1,9 @@
-<!--pages/components/orgDetail/teacher/teacher.wxml-->
-<text>pages/components/orgDetail/teacher/teacher.wxml</text>
+<view wx:for="{{teacherList}}" wx:key="index" class="teacher">
+  <image src="{{item.cover_picurl}}" class="cover_picurl"></image>
+  <view class="info">
+    <view class="name">{{item.name}}</view>
+    <text class="b-right">课程 {{item.course_num}}</text>
+    <text>学生 {{item.student_num}}</text>
+    <view class="pro">{{item.summary}}</view>
+  </view>
+</view>

@@ -8,7 +8,9 @@ Component({
       type: Array
     }
   },
+  attached() {
 
+  },
   /**
    * 组件的初始数据
    */

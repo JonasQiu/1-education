@@ -1,2 +1,11 @@
-<!--pages/components/orgDetail/lesson/lesson.wxml-->
-<text>pages/components/orgDetail/lesson/lesson.wxml</text>
+<view class="lesson" wx:for="{{lessonList}}" wx:key="index">
+	<view class="imageInfo">
+		<image src="{{item.cover_url}}" class="image"></image>
+		<text class="apply_num">{{item.apply_num}} 人购买</text>
+	</view>
+	<view class="info">
+		<view>{{item.name}}</view>
+		<view class="price">{{item.price==0 ? '免费' : '￥'+item.price/100}}</view>
+    <view class="line">线下</view>
+	</view>
+</view>
