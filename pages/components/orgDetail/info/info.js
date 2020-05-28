@@ -17,7 +17,7 @@ Component({
   },
   lifetimes: {
     ready(e) {
-      console.log(this.data)
+      console.log(this.data.infoList)
       this.setData({
         // [0]是调试数据，到时看是数组的第几个
         latitude: this.data.infoList.location.lat,
