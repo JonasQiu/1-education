@@ -26,7 +26,7 @@
 </view>
 
 <!-- 组件跳转 -->
-<info wx:if="{{0===TabCur}}" infoList="{{orgResourcesNav[0].infoList}}" />
+<info wx:if="{{0===TabCur}}" infoList="{{infoData}}" />
 <lesson wx:if="{{1===TabCur}}" lessonList="{{orgResourcesNav[1].list}}" />
 <teacher wx:if="{{2===TabCur}}" teacherList="{{orgResourcesNav[2].list}}" />
 <active wx:if="{{3===TabCur}}" activeList="{{orgResourcesNav[3].list}}" />
