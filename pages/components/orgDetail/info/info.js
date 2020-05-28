@@ -13,18 +13,19 @@ Component({
    * 组件的初始数据
    */
   data: {
-    cur:""
+    cur: ""
   },
   lifetimes: {
-    attached(e) {
+    ready(e) {
+      console.log(this.data)
       this.setData({
         // [0]是调试数据，到时看是数组的第几个
-        latitude: this.data.infoList[0].location.lat,
-        longitude: this.data.infoList[0].location.lng,
-        address: this.data.infoList[0].location.address,
-        phone: this.data.infoList[0].info.phone,
-        description: this.data.infoList[0].description,
-        images: [...this.data.infoList[0].img.images1, ...this.data.infoList[0].img.images2]
+        latitude: this.data.infoList.location.lat,
+        longitude: this.data.infoList.location.lng,
+        address: this.data.infoList.location.address,
+        phone: this.data.infoList.info.phone,
+        description: this.data.infoList.description,
+        images: [...this.data.infoList.img.images1, ...this.data.infoList.img.images2]
       })
       // console.log(this.data.location, this.data.infoList)
     },
@@ -41,10 +42,20 @@ Component({
         })
       } else {
         this.setData({
-          cur: "attention"
+          cur: ""
         })
       }
     },
-    
+    lookMap(e) {
+      //传终点的纬度经度的参数过去，通过onload获得,showNav判断到达的页面是否，yes进行导航的功能还是no只是展示地图
+      wx.navigateTo({
+        url: `/pages/components/map/map?latitude:${this.data.latitude}&longitude:${this.data.longitude}&showNav:${e.currentTarget.dataset.nav}`
+      })
+    },
+    callPhone(e) {
+      wx.makePhoneCall({
+        phoneNumber: this.data.phone,
+      })
+    }
   }
 })

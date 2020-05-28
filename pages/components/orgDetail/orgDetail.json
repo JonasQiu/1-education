@@ -1,6 +1,8 @@
 {
   "usingComponents": {
     "active":"./active/active",
-    "info":"./info/info"
+    "info":"./info/info",
+    "lesson":"./lesson/lesson",
+    "teacher":"./teacher/teacher"
   }
 }

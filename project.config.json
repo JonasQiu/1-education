@@ -23,7 +23,7 @@
 			"disablePlugins": [],
 			"outputPath": ""
 		},
-		"useCompilerModule": false,
+		"useCompilerModule": true,
 		"userConfirmedUseCompilerModuleSwitch": false
 	},
 	"compileType": "miniprogram",
@@ -60,7 +60,8 @@
 		},
 		"miniprogram": {
 			"current": -1,
-			"list": [{
+			"list": [
+				{
 					"id": -1,
 					"name": "搜索",
 					"pathName": "pages/components/search/search",
@@ -75,9 +76,10 @@
 					"scene": null
 				},
 				{
-					"id": -1,
-					"name": "详情页",
-					"pathName": "pages/components/search/channel/haveContent/orgDetail/orgDetail",
+					"id": 2,
+					"name": "pages/components/orgDetail/orgDetail",
+					"pathName": "pages/components/orgDetail/orgDetail",
+					"query": "",
 					"scene": null
 				}
 			]

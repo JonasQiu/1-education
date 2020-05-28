@@ -17,7 +17,8 @@
     "pages/components/search/partitions/partitions",
     "pages/components/orgDetail/orgDetail",
     "pages/components/orgDetail/active/active",
-    "pages/components/orgDetail/info/info"
+    "pages/components/orgDetail/info/info",
+    "pages/components/map/map"
   ],
   "window": {
     "backgroundTextStyle": "light",

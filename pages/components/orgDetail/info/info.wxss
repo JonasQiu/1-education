@@ -42,7 +42,7 @@
 .flex{
   padding-top: 30rpx;
   display: flex;
-  height: 70rpx;
+  height: 80rpx;
   align-items: center;
   justify-content: space-between;
 }
@@ -72,4 +72,11 @@
   background-color: #fff;
   justify-content: space-around;
   align-items: center;
+  text-align: center;
+}
+.w-50{
+  width: 50%;
+}
+.p-bottom{
+  padding-bottom: 50rpx;
 }

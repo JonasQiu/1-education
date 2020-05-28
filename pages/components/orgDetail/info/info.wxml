@@ -1,14 +1,14 @@
 <!-- 地图 -->
-<view class="map-container plr20">
+<view class="map-container plr20" bindtap="lookMap" data-nav="no">
 	<map class="map" id="map" latitude="{{latitude}}" longitude="{{longitude}}" scale="19"></map>
 </view>
 <!-- 具体信息 -->
 <view class="info">
-  <view class="flex ">
+  <view class="flex " bindtap="lookMap" data-nav="yes">
     <view><text class="cuIcon-locationfill"></text> {{address}} </view>
     <view><text class="cuIcon-right"></text></view>
   </view>
-  <view class="flex border">
+  <view class="flex border" bindtap="callPhone">
     <view><text class="cuIcon-friend"></text> {{phone}} </view>
     <view><text class="cuIcon-right"></text></view>
   </view>
@@ -16,7 +16,7 @@
     <text class="cuIcon-form"></text> 客户介绍
     <view class="p-top">{{description}}</view>
   </view>
-  <view class="pro">
+  <view class="pro p-bottom">
     <text class="cuIcon-picfill"></text> 机构样貌
     <view class="image-top">
       <image class="image" src="{{item}}" wx:for="{{images}}" wx:key="index"></image>
@@ -25,10 +25,10 @@
 
   <!-- 关注与分享 -->
   <view class="tabbar">
-    <view class="attention" bindtap="attentionTap">
-    <text class="{{cur!=='attention'?'cuIcon-favor':'cuIcon-favorfill'}}"></text> {{cur!=='attention'?'关注':'已关注'}}
+    <view class="attention w-50" bindtap="attentionTap">
+      <text class="{{cur!=='attention'?'cuIcon-favor':'cuIcon-favorfill'}}"></text> {{cur!=='attention'?'关注':'已关注'}}
     </view>
-    <view class="fork" bindtap="forkTap">
+    <view class="fork w-50" bindtap="forkTap">
       <text class="cuIcon-fork"></text> 收藏
     </view>
   </view>
