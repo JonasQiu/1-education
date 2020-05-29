@@ -1,1 +1,43 @@
-/* pages/components/orgDetail/active/active.wxss */
+.teacher {
+  display: flex;
+  background-color: #ffffff;
+  color: #000;
+  padding: 30rpx 20rpx;
+  border-bottom: 2rpx solid #ddd;
+}
+
+.cover_picurl {
+  width: 120rpx;
+  height: 120rpx;
+}
+
+.info {
+  padding-left: 20rpx;
+  width: 570rpx;
+
+}
+
+.name {
+  padding-bottom: 10rpx;
+  font-size: 32rpx;
+  color: rgb(16, 74, 180);
+}
+
+.pro {
+  padding-top: 15rpx;
+  text-align: justify;
+  overflow: hidden;
+  font-size: 28rpx;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3
+}
+
+.activeImg {
+  width: 350rpx;
+  height: 300rpx;
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+}

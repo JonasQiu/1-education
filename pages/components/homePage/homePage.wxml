@@ -1,15 +1,15 @@
 <!-- 顶部导航 -->
 <cu-custom bgColor="bg-gradual-blue">
-  <view slot="content">
+	<view slot="content">
 		<view class="position">
 			<view class="addresschoose">
 				{{position}}
 				<text class="cuIcon-unfold lg"></text>
 			</view>
-			<view class="weather">{{weather}}  {{degree+'°C'}}</view>
+			<view class="weather">{{weather}} {{degree+'°C'}}</view>
 		</view>
 		<view class="search bg-white">
-      <text class="cuIcon-search"></text>
+			<text class="cuIcon-search"></text>
 			<input placeholder="{{hotSearch}}"></input>
 		</view>
 	</view>
@@ -19,51 +19,49 @@
 <!-- 顶部导航定位，不确定什么原因无法使用事件，所以手动添加元素进行覆盖 -->
 <navigator class="position" url="/pages/components/position/position"></navigator>
 
-<!-- 第一行列表 -->
-<view class="contain">
-	<view class="box">
-		<image src="/images/tubiao.png" class="img"></image>
-		<text class="txt">自习室</text>
-	</view>
-	<view class="box">
-		<image src="/images/tubiao.png" class="img"></image>
-		<text class="txt">自习室</text>
-	</view>
-	<view class="box">
-		<image src="/images/tubiao.png" class="img"></image>
-		<text class="txt">自习室</text>
-	</view>
-	<view class="box">
-		<image src="/images/tubiao.png" class="img"></image>
-		<text class="txt">自习室</text>
-	</view>
-</view>
-
 <!-- 宫格列表 -->
-<view class="contain_box">
-	<!-- 第一导航 -->
-	<view class="contain_1">
-		<view class="box" wx:for="{{navList}}" wx:key="index">
-			<image src="{{item.image}}" class="img_1"></image>
-			<text class="txt_1">{{item.name}}</text>
+<view class="page">
+	<!-- 轮播图 -->
+	<swiper class="card-swiper {{DotStyle?'square-dot':'round-dot'}}" indicator-dots="true" circular="true" autoplay="true" interval="2000" duration="500" bindchange="cardSwiper" indicator-color="#8799a3" indicator-active-color="#0081ff">
+		<swiper-item wx:for="{{swiperList}}" wx:key class="{{cardCur==index?'cur':''}}">
+			<view class="swiper-item">
+				<image src="{{item.url}}" mode="aspectFill" wx:if="{{item.type=='image'}}"></image>
+				<video src="{{item.url}}" autoplay loop muted show-play-btn="{{false}}" controls="{{false}}" objectFit="cover" wx:if="{{item.type=='video'}}"></video>
+			</view>
+		</swiper-item>
+	</swiper>
+
+	<view class="contain_box">
+		<!-- 第一行列表 -->
+		<view class="contain">
+			<view class="box" wx:for="{{boxList}}">
+				<image src="{{item.src}}" class="img"></image>
+				<text class="txt">{{item.name}}</text>
+			</view>
+		</view>
+		<!-- 第一导航 -->
+		<view class="contain_1">
+			<view class="box" wx:for="{{navList}}" wx:key="index">
+				<image src="{{item.image}}" class="img_1"></image>
+				<text class="txt_1">{{item.name}}</text>
+			</view>
+		</view>
+		<!-- 第二导航 -->
+		<view class="contain_2">
+			<view class="box" wx:for="{{barList}}" wx:key="index">
+				<image src="{{item.image}}" class="img_2"></image>
+				<text class="txt_2">{{item.name}}</text>
+			</view>
 		</view>
 	</view>
-	<!-- 第二导航 -->
-	<view class="contain_2">
-		<view class="box" wx:for="{{barList}}" wx:key="index">
-			<image src="{{item.image}}" class="img_2"></image>
-			<text class="txt_2">{{item.name}}</text>
+
+	<!-- 卡片列表 -->
+	<view class="card_contain">
+		<view class="card_box" wx:for="{{cardList}}" wx:key="index">
+			<image src="{{item.imgUrl}}" class="card_img"></image>
+			<text class="desc">{{item.desc}}</text>
+			<text class="assess">{{item.assess}}</text>
+			<text class="price">{{item.price}}</text>
 		</view>
 	</view>
 </view>
-
-<!-- 卡片列表 -->
-<view class="card_contain">
-	<view class="card_box" wx:for="{{cardList}}" wx:key="index">
-		<image src="{{item.imgUrl}}" class="card_img"></image>
-		<text class="desc">{{item.desc}}</text>
-		<text class="assess">{{item.assess}}</text>
-		<text class="price">{{item.price}}</text>
-	</view>
-</view>
-

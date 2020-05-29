@@ -1,0 +1,10 @@
+<view wx:for="{{activeList}}" wx:key="index" class="teacher">
+	<image src="{{item.cover_picurl}}" class="cover_picurl"></image>
+	<view class="info">
+		<view class="name">{{item.name}}</view>
+		<view class="pro">{{item.summary}}</view>
+		<view class="activeImg">
+			<image wx:for="{{item.activeImg}}" wx:for-item="img" src="{{img}}" class="img"></image>
+		</view>
+	</view>
+</view>
