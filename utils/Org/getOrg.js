@@ -11,9 +11,13 @@ function getOrgList(startNum, Num) {
                 Num,
             }
         }).then(res => {
-            console.log('good', res)
+            if (res.result) {
+                resolve(res.result)
+            } else {
+                reject({orgList:[],isBottom:true})
+            }
         }).catch(res => {
-            console.log('fail', res)
+            reject({orgList:[],isBottom:true})
         })
     })
 }
@@ -34,7 +38,46 @@ function getOrg(orgId) {
         })
     })
 }
+
+function getTypeOrg(TypeId) {
+    return new Promise((resolve, reject) => {
+        db.collection('Org').where({
+            'type': TypeId
+        }).get().then(res => {
+            if (res.data.length > 0) {
+                resolve(res.data)
+            } else {
+                reject({})
+            }
+        }).catch(res => {
+            reject({})
+        })
+    })
+}
+
+function searchOrg(keyWord) {
+    return new Promise((resolve, reject) => {
+        db.collection('Org').where({
+            'info.orgName': db.RegExp({
+                regexp: keyWord, //做为关键字进行匹配
+                options: 'i', //不区分大小写
+            })
+        }).get().then(res => {
+            if (res.data.length > 0) {
+                resolve(res.data)
+            } else {
+                reject({})
+            }
+        }).catch(res => {
+            reject({})
+        })
+    })
+
+}
+
 module.exports = {
     getOrg,
     getOrgList,
+    getTypeOrg,
+    searchOrg,
 }

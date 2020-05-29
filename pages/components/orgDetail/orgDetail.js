@@ -1,4 +1,6 @@
 // pages/components/search/channel/haveContent/orgDetail/orgDetail.js
+const comOrg = require('../../../utils/Org/getOrg')
+
 Page({
 
   /**
@@ -23,60 +25,32 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    let that = this
     //判断返回键的显示
     if (getCurrentPages().length > 1) {
       this.setData({
         isShow: true
       })
     }
+    //得到一下传递的参数 
 
+
+    comOrg.getOrg(options.query).then(res => {
+      // that.setData({
+      //   isShowContent: true,
+      //   //数据初始化
+      //   searchList: res,
+      // })
+      that.setData({
+        infoData: res
+      })
+      console.log(that.data.infoData)
+    }).catch(res => {
+
+    })
     // 初始化信息课程老师动态list
     // 测试数据，具体数据到时请求
     this.setData({
-      infoData: {
-        "comment": [],
-        "description": "太原金桥双语学校是市教育局批准的全封闭寄宿制中学，校园环境优雅、景色宜人；师资力量雄厚、教学理念先进，人文及学术气氛浓厚，融合了“环球雅思”教育集团资源的双语特色，是山西省唯一实施国家级PDC青少年成长课程的基地。\n学校拥有一支善于思考、敢于创新、爱岗敬业的教师队伍。他们围绕“自主、合作、探究”的核心，因材施教，挖掘学生潜能；遵从规律、培养学习兴趣；关注心理，促进健康成长，为学生的未来发展奠定坚实基础。",
-        "img": {
-          "bgimg": "https://ossonline.197.com/202003/06/sns/sns_Cql0PTwADh0511KA1ZCHZ1.jpg",
-          "images1": [
-            "https://ossonline.197.com/202003/06/sns/sns_Cql0PTwADh0511KA1ZCHZ1.jpg",
-            "https://ossonline.197.com/202003/06/sns/sns_dao0lLMiv10511KA1ZCZV8.jpg",
-            "https://ossonline.197.com/202003/06/sns/sns_n026W7s8cQ0511KA1ZDITD.jpg",
-            "https://ossonline.197.com/202003/06/sns/sns_0QoLzeOKAv0511KA1ZDNCR.jpg"
-          ],
-          "images2": [
-            "https://ossonline.197.com/202003/06/sns1589170955000011253.jpg",
-            "https://ossonline.197.com/202003/06/sns1589170979000011254.jpg",
-            "https://ossonline.197.com/202003/06/sns1589170990000011255.jpg",
-            "https://ossonline.197.com/202003/06/sns1589170996000011256.jpg"
-          ]
-        },
-        "info": {
-          "orgName": "金桥双语学校（小学）",
-          "phone": "0351-2729193"
-        },
-        "location": {
-          "address": "许坦东街40号",
-          "lat": 22.536500464359964,
-          "lng": 114.03130531311035
-        },
-        "orther": {
-          "collectCount": 33,
-          "readCount": 99
-        },
-        "phone": [
-          "0351-2729193"
-        ],
-        "price": "",
-        "review": "",
-        "star": 4.7,
-        "time": {
-          "businessHours": "",
-          "businessType": 1,
-          "createTimes": 1589686348285
-        },
-        "type": "0"
-      },
       lesson: [{
           "ios_price": 1,
           "sub_bgtime": 0,

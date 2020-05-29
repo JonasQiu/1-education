@@ -23,7 +23,7 @@
 <view class="page">
 	<!-- 轮播图 -->
 	<swiper class="card-swiper {{DotStyle?'square-dot':'round-dot'}}" indicator-dots="true" circular="true" autoplay="true" interval="2000" duration="500" bindchange="cardSwiper" indicator-color="#8799a3" indicator-active-color="#0081ff">
-		<swiper-item wx:for="{{swiperList}}" wx:key class="{{cardCur==index?'cur':''}}">
+		<swiper-item wx:for="{{swiperList}}" wx:key="index" class="{{cardCur==index?'cur':''}}">
 			<view class="swiper-item">
 				<image src="{{item.url}}" mode="aspectFill" wx:if="{{item.type=='image'}}"></image>
 				<video src="{{item.url}}" autoplay loop muted show-play-btn="{{false}}" controls="{{false}}" objectFit="cover" wx:if="{{item.type=='video'}}"></video>
@@ -31,7 +31,7 @@
 		</swiper-item>
 	</swiper>
 
-	<view class="contain_box">
+	<view class="contain_box" wx:key="index">
 		<!-- 第一行列表 -->
 		<view class="contain">
 			<view class="box" wx:for="{{boxList}}">

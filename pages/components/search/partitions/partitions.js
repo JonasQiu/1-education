@@ -1,88 +1,48 @@
-const app = getApp()
-Page({
+const typeobj = require('../../../../utils/Type/Type')
+Component({
   data: {
-    StatusBar: app.globalData.StatusBar,
-    CustomBar: app.globalData.CustomBar,
-    Custom: app.globalData.Custom,
     TabCur: 0,
-    MainCur: 0,
-    VerticalNavTop: 0,
-    list: [{
-      name:'a'},
-      {name:'b'},
-      {name:'b'},
-      {name:'b'},
-      {name:'b'},
-      {name:'b'},
-      {name:'b'},
-      {name:'b'},
-      {name:'b'},
-      {name:'b'},
-      {name:'b'},
-      {name:'b'},
-      {name:'b'},
-      {name:'b'},
-      {name:'b'},
-      {name:'b'},
-      {name:'b'},
-    ],
+    list: [],
     load: true
   },
-  onLoad() {
+  attached() {
     wx.showLoading({
       title: '加载中...',
       mask: true
     });
-    let list = [{}];
-    for (let i = 0; i < 26; i++) {
-      list[i] = {};
-      list[i].name = String.fromCharCode(65 + i);
-      list[i].id = i;
+
+    let typeList = []
+    let objType = typeobj.getType()
+    for (let key in objType) {
+      let obj = {
+        'id': key,
+        'name': objType[key]['name'],
+        'list': []
+      }
+      for (let key2 in objType[key]['list']) {
+        obj['list'].push({
+          'id': key2,
+          'name': objType[key]['list'][key2]
+        })
+      }
+      typeList.push(obj)
     }
+    console.log(typeList)
+
     this.setData({
-      list: list,
-      listCur: list[0]
+      list: typeList,
     })
-  },
-  onReady() {
     wx.hideLoading()
   },
-  tabSelect(e) {
-    this.setData({
-      TabCur: e.currentTarget.dataset.id,
-      MainCur: e.currentTarget.dataset.id,
-      VerticalNavTop: (e.currentTarget.dataset.id - 1) * 50
-    })
+  Ready() {
   },
-  VerticalMain(e) {
-    let that = this;
-    let list = this.data.list;
-    let tabHeight = 0;
-    if (this.data.load) {
-      for (let i = 0; i < list.length; i++) {
-        let view = wx.createSelectorQuery().select("#main-" + list[i].id);
-        view.fields({
-          size: true
-        }, odata => {
-          list[i].top = tabHeight;
-          tabHeight = tabHeight + odata.height;
-          list[i].bottom = tabHeight;     
-        }).exec();
-      }
-      that.setData({
-        load: false,
-        list: list
+  methods: {
+    tabSelect(e) {
+      this.setData({
+        TabCur: e.currentTarget.dataset.id,
+        MainCur: e.currentTarget.dataset.id,
+        VerticalNavTop: (e.currentTarget.dataset.id - 1) * 50
       })
-    }
-    let scrollTop = e.detail.scrollTop + 20;
-    for (let i = 0; i < list.length; i++) {
-      if (scrollTop > list[i].top && scrollTop < list[i].bottom) {
-        that.setData({
-          VerticalNavTop: (list[i].id - 1) * 50,
-          TabCur: list[i].id
-        })
-        return false
-      }
-    }
+    },
   }
 })

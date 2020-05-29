@@ -41,7 +41,7 @@ Component({
             collectionCount: i,
             fansCount: i
           })
-          that.numDH(i+1);
+          that.numDH(i + 1);
         }, 20)
       } else {
         that.setData({
@@ -87,7 +87,7 @@ Component({
           showCancel: false
         })
       }
-      
+
     },
   }
 })

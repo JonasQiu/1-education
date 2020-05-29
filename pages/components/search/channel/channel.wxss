@@ -1,2 +1,136 @@
 @import "/colorui/main.wxss";
 @import "/colorui/icon.wxss";
+
+/* 无搜索内容时的展示 */
+.noContent {
+  color: #000;
+  /* padding: 0 20rpx; */
+  margin-top: 25rpx;
+  font-size: 28rpx;
+}
+
+/* 热搜 */
+.hot {
+  width: 100%;
+  padding: 20rpx 20rpx 10rpx;
+  margin-bottom: 20rpx;
+}
+
+.search-title {
+  font-size: 32rpx;
+  font-weight: 600;
+}
+
+.hotContent {
+  padding-top: 15rpx;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.hotItem {
+  width: 50%;
+  margin: 10rpx 0;
+}
+
+.color999 {
+  color: #999;
+}
+
+.margin-15 {
+  margin-left: 15rpx;
+}
+
+.hotText::after {
+  content: '热';
+  width: 15rpx;
+  height: 15rpx;
+  font-size: 20rpx;
+  color: #fff;
+  padding: 5rpx;
+  margin-left: 10rpx;
+  line-height: 15rpx;
+  background-color: rgb(247, 182, 61);
+}
+
+.newText::after {
+  content: '新';
+  width: 15rpx;
+  height: 15rpx;
+  font-size: 20rpx;
+  color: #fff;
+  padding: 5rpx;
+  margin-left: 10rpx;
+  line-height: 15rpx;
+  background-color: rgb(247, 52, 159);
+}
+
+/* 搜索历史 */
+.history {
+  width: 100%;
+  padding: 20rpx 20rpx 10rpx;
+  margin-bottom: 40rpx;
+}
+
+.padding-top {
+  padding-top: 15rpx;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.historyContent {
+  padding: 10rpx 15rpx;
+  margin-right: 10px;
+  margin-bottom: 15rpx;
+  background-color: rgba(0, 0, 0, .1);
+  border-radius: 6rpx;
+}
+
+/* 清除搜索历史 */
+.clearHistory {
+  color: #aaa;
+  margin: 0 auto;
+  width: 220rpx;
+}
+
+/* 有搜索内容 */
+@import "/colorui/main.wxss";
+@import "/colorui/icon.wxss";
+
+/* 内容 */
+.content {
+  padding: 20rpx;
+  background-color: #fff;
+  padding-top: 0;
+}
+
+.item {
+  padding: 5rpx 0;
+  border-bottom: 1rpx solid #ccc;
+  height: 250rpx;
+  display: flex;
+}
+
+.item-img {
+  width: 300rpx;
+  height: 100%;
+}
+
+.info {
+  margin-left: 15rpx;
+  width: 380rpx;
+  color: #aaa;
+  font-size: 28rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.info-content {
+  font-size: 34rpx;
+  color: #000;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2
+}

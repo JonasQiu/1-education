@@ -1,15 +1,67 @@
 <!-- 搜索 -->
 <view class="cu-bar search bg-white">
-  <view class="search-form round">
-    <text class="cuIcon-search"></text>
-    <input type="text" placeholder="搜索机构、文章、视频、技术" confirm-type="search" bindblur="getValue"></input>
-  </view>
-  <view class="action">
-    <button class="cu-btn bg-green shadow-blur round" bindtap="search">搜索</button>
-  </view>
+	<view class="search-form round">
+		<text class="cuIcon-search"></text>
+		<input type="text" placeholder="搜索机构、文章、视频、技术" confirm-type="search" bindinput="getValue" value="{{searchValue}}"></input>
+	</view>
+	<view class="action">
+		<button class="cu-btn bg-green shadow-blur round" bindtap="search">搜索</button>
+	</view>
 </view>
 
 <!-- 展示没有搜索内容时的界面 -->
-<noContent wx:if="{{!isShowContent}}" />
+<view wx:if="{{!isShowContent}}">
+	<view class="noContent">
+		<!-- 热搜 -->
+		<view class="hot bg-white">
+			<text class="search-title">热搜</text>
+			<view class="hotContent">
+				<!-- url="/pages/components/search/channel/haveContent/haveContent?query={{item}}" -->
+				<view wx:for="{{hotList}}" wx:key="index" class="hotItem" bindtap="addInfo" data-value="{{item}}">
+					<text class="{{index<4? '':'color999'}}">{{index+1}}</text>
+					<text class="margin-15">{{item}}</text>
+					<text class="{{index<2?'hotText':index<6?'newText':''}}"></text>
+				</view>
+			</view>
+		</view>
+		<!-- 搜索历史 -->
+		<view class="history bg-white" wx:if="{{showClear}}">
+			<text class="search-title">搜索历史</text>
+			<view class="padding-top">
+				<view bindtap="addInfo" data-value="{{item}}" wx:for="{{historyList}}" class="historyContent" wx:key="index">
+					<text class="historyItem">{{item}}</text>
+				</view>
+			</view>
+
+		</view>
+		<!-- 清除搜索历史 -->
+		<view class="clearHistory" bindtap="clearHistory" wx:if="{{showClear}}">
+			<text class="cuIcon-deletefill"></text> 清除搜索历史
+		</view>
+	</view>
+</view>
 <!-- 展示有搜索内容时的界面 -->
-<haveContent  wx:else list="haveContentList" />
+<view wx:else list="haveContentList">
+	<!-- 导航条 -->
+	<scroll-view scroll-x class="bg-white nav" scroll-with-animation scroll-left="{{scrollLeft}}">
+		<view class="cu-item {{index==TabCur?'text-green cur':''}}" wx:for="{{10}}" wx:key="index" bindtap="tabSelect" data-id="{{index}}">
+			Tab{{index}}
+		</view>
+	</scroll-view>
+
+	<view class="content">
+		<view class="item" bindtap="orgDetail" data-name="{{item._id}}" wx:for="{{searchList}}" wx:key="index">
+			<image src='{{item.img.logo}}' class="item-img"></image>
+			<view class="info">
+				<view class="info-content">
+					{{item.info.orgName}}
+				</view>
+				<view class="msg">
+					<view class="userName">{{item.description}}</view>
+					<text class="play cuIcon-playfill"></text> {{item.orther.collectCount}}
+					<text class=" barrage cuIcon-comment"></text> {{item.orther.readCount}}
+				</view>
+			</view>
+		</view>
+	</view>
+</view>

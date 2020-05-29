@@ -33,7 +33,6 @@ Component({
   methods: {
     // 导航栏选择
     tabSelect(e) {
-      console.log(e.currentTarget.dataset)
       this.setData({
         TabCur: e.currentTarget.dataset.id,
         scrollLeft: (e.currentTarget.dataset.id-1)*60,

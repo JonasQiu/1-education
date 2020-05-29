@@ -12,7 +12,6 @@
 	</view>
 	<view class="action {{PageCur=='ask'?'text-green':'text-gray'}}" bindtap="NavChange" data-cur="ask">
 		<view class="iconfont icon-jurassic_bbs">
-			<view class="cu-tag badge">{{askNum}}</view>
 		</view>咨询
 	</view>
 	<view class="action  {{PageCur=='search'?'text-green':'text-gray'}} add-action" bindtap="NavChange" data-cur="search">
