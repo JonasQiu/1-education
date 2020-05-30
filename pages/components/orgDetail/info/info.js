@@ -15,19 +15,6 @@ Component({
   data: {
     cur: ""
   },
-  lifetimes: {
-    ready(e) {
-      this.setData({
-        // [0]是调试数据，到时看是数组的第几个
-        latitude: this.data.infoList.location.lat,
-        longitude: this.data.infoList.location.lng,
-        address: this.data.infoList.location.address,
-        phone: this.data.infoList.info.phone,
-        description: this.data.infoList.description,
-        images: [...this.data.infoList.img.images1, ...this.data.infoList.img.images2]
-      })
-    },
-  },
 
   /**
    * 组件的方法列表
@@ -47,12 +34,12 @@ Component({
     lookMap(e) {
       //传终点的纬度经度的参数过去，通过onload获得,showNav判断到达的页面是否，yes进行导航的功能还是no只是展示地图
       wx.navigateTo({
-        url: `/pages/components/map/map?latitude:${this.data.latitude}&longitude:${this.data.longitude}&showNav:${e.currentTarget.dataset.nav}`
+        url: `/pages/components/map/map?latitude:${e.currentTarget.dataset.latitude}&longitude:${e.currentTarget.dataset.longitude}&showNav:${e.currentTarget.dataset.nav}`
       })
     },
     callPhone(e) {
       wx.makePhoneCall({
-        phoneNumber: this.data.phone,
+        phoneNumber: e.currentTarget.dataset.phoneNum,
       })
     }
   }

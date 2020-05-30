@@ -43,7 +43,6 @@ Component({
   methods: {
     getValue(e, value) {
       let that = this;
-
       if (that.timer) {
         clearTimeout(that.timer)
       }
@@ -59,8 +58,7 @@ Component({
         if (e.detail.value != '') {
           that.search(e)
         }
-      }, 300)
-
+      }, 700)
     },
     search(e) {
       if (this.data.searchValue !== "") {
@@ -71,9 +69,12 @@ Component({
             //数据初始化
             searchList: res,
           })
-          console.log(that.data.searchList)
         }).catch(res => {
-
+          wx.showModal({
+            title: '提示',
+            content: "没有搜索到更多的内容",
+            showCancel: false
+          })
         })
       } else {
         wx.showModal({
@@ -106,7 +107,6 @@ Component({
       })
     },
     addInfo(e) {
-
       this.getValue(e, e.currentTarget.dataset.value)
       this.search(e)
     }

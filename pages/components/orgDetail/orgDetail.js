@@ -33,18 +33,10 @@ Page({
       })
     }
     //得到一下传递的参数 
-
-
     comOrg.getOrg(options.query).then(res => {
-      // that.setData({
-      //   isShowContent: true,
-      //   //数据初始化
-      //   searchList: res,
-      // })
       that.setData({
         infoData: res
       })
-      console.log(that.data.infoData)
     }).catch(res => {
 
     })

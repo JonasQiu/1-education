@@ -1,2 +1,108 @@
 @import "/colorui/main.wxss";
 @import "/colorui/icon.wxss";
+
+.page {
+  margin-bottom: 100rpx;
+}
+
+/* 导航栏 */
+.nav .cu-item {
+  height: 60rpx;
+  display: inline-block;
+  line-height: 60rpx;
+  margin: 0 10rpx;
+  padding: 0 20rpx;
+}
+
+/* 内容 */
+.eco-nav {
+  width: 100%;
+  background-color: #fff;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+  font-size: 32rpx;
+}
+
+.head {
+  display: flex;
+  position: relative;
+}
+
+.eco-office {
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-size: 26rpx;
+  height: 45rpx;
+  line-height: 45rpx;
+  padding: 0 10rpx;
+  color: orangered;
+  border: 2rpx solid orangered;
+  border-radius: 7rpx;
+}
+
+.eco-name {
+
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.eco-headImg {
+  width: 110rpx;
+  height: 110rpx;
+}
+
+.eco-info {
+  margin-left: 15rpx;
+  color: rgb(100, 117, 194);
+  font-size: 38rpx;
+}
+
+.eco-time {
+  margin-top: 13rpx;
+  font-size: 30rpx;
+}
+
+.eco-desc {
+  margin: 20rpx 0;
+}
+
+.eco-imgContent {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 700rpx;
+}
+
+.eco-moreImg {
+  width: 33%;
+  height: 226rpx;
+}
+
+.eco-fourImg {
+  width: 50%;
+  height: 300rpx;
+}
+
+.eco-more {
+  padding: 20rpx 0;
+  border-bottom: 2rpx solid #ddd;
+  display: flex;
+  justify-content: space-between;
+}
+
+.eco-text {
+  font-size: 40rpx;
+  margin-left: 30rpx;
+}
+
+.eco-call {
+  display: flex;
+  margin-top: 20rpx;
+  align-items: center;
+}
+
+.margin-left {
+  margin-left: 18rpx;
+}

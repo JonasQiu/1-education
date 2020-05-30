@@ -88,6 +88,12 @@
 					"pathName": "pages/components/orgDetail/teacher/teacher",
 					"query": "",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "生态圈",
+					"pathName": "pages/components/ecosystem/ecosystem",
+					"scene": null
 				}
 			]
 		}

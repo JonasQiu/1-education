@@ -18,8 +18,8 @@
     "pages/components/orgDetail/info/info",
     "pages/components/map/map",
     "pages/components/orgDetail/lesson/lesson",
-    "pages/components/orgDetail/teacher/teacher"
-
+    "pages/components/orgDetail/teacher/teacher",
+    "pages/ecoDetail/ecoDetail"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -1,6 +1,58 @@
-<cu-custom bgColor="bg-gradual-orange" isBack="{{isShow}}">
-  <view slot="backText">返回</view>
-  <view slot="content">生态圈</view>
+<cu-custom bgColor="bg-gradual-green" isBack="{{isShow}}">
+	<view slot="backText">返回</view>
+	<view slot="content">生态圈</view>
 </cu-custom>
 
-<!-- <view style="margin-top:{{navTop}}px">123</view> -->
+<view class="page">
+	<!-- 搜索栏 -->
+	<view class="cu-bar search bg-white">
+		<view class="search-form round">
+			<text class="cuIcon-search"></text>
+			<input type="text" placeholder="搜索图片、文章、视频" confirm-type="search" bindinput="getValue"></input>
+		</view>
+		<view class="action">
+			<button class="cu-btn bg-green shadow-blur round" bindtap="search">搜索</button>
+		</view>
+	</view>
+
+	<!-- 导航栏nav -->
+	<scroll-view scroll-x class="bg-white nav">
+		<view class="flex text-center">
+			<view class="cu-item flex-sub {{index==TabCur?'text-orange cur':''}}" wx:for="{{ecoNavList}}" wx:key="index" bindtap="tabSelect" data-id="{{index}}">
+				{{item}}
+			</view>
+		</view>
+	</scroll-view>
+
+	<!-- 推荐、关注、热帖、官方-->
+	<view wx:for="{{TabCur===0?recommendList:TabCur===1?attentionList:TabCur===2?hotList:TabCur===3?officialList:''}}" class="eco-nav" wx:key="index">
+		<view bindtap="naviToDetail" data-query="{{item.userInfo.userId}}">
+			<view class="head">
+				<image src="{{item.cimg[0]}}" class="eco-headImg"></image>
+				<view class="eco-info">
+					<text class="eco-name">{{item.title}}</text>
+					<view class="eco-time text-gray">{{(item.lastTime-item.createTime)/1000/60>1?(item.lastTime-item.createTime)/1000/60+'分前':(item.lastTime-item.createTime)/1000/60/60>1?(item.lastTime-item.createTime)/1000/60+'时前':(item.lastTime-item.createTime)/1000/60/60/24>1?(item.lastTime-item.createTime)/1000/60+'天前':(item.lastTime-item.createTime)/1000/60<=1?'刚刚':'7天前'}}</view>
+				</view>
+				<text wx:if="s" class="eco-office">官方</text>
+			</view>
+			<view class="eco-desc">{{item.content}}</view>
+			<view class="eco-imgContent">
+				<image class="{{item.cimg.length===1 ? '' : item.cimg.length ===4 ? 'eco-fourImg' : 'eco-moreImg'}}" wx:for="{{item.cimg}}" wx:for-item="img" src="{{img}}" wx:key="index"></image>
+			</view>
+			<view class="eco-more">
+				<!-- 浏览是指，点击进去详情页则记录一次 -->
+				<text class="text-gray">{{'浏览'+item.shareNum+'次'}}</text>
+				<view>
+					<text class="eco-text cuIcon-likefill text-gray"></text>
+					<text class="eco-text text-gray cuIcon-commentfill"></text>
+				</view>
+			</view>
+		</view>
+		<view class="eco-call">
+			<text class="cuIcon-likefill {{like ? 'text-pink' : 'text-gray'}}" bindtap="addLike"></text>
+			<view class="eco-callImg">
+				<image class="cu-avatar radius margin-left" src="{{img}}" wx:for="{{item.imgUrls}}" wx:for-item="img" wx:key="index"></image>
+			</view>
+		</view>
+	</view>
+</view>

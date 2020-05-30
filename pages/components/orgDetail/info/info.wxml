@@ -1,25 +1,26 @@
 <!-- 地图 -->
-<view class="map-container plr20" bindtap="lookMap" data-nav="no">
-	<map class="map" id="map" latitude="{{latitude}}" longitude="{{longitude}}" scale="19"></map>
+<view class="map-container plr20" bindtap="lookMap" data-nav="no" data-latitude="{{infoList.location.lat}}" data-longitude="{{infoList.location.lng}}">
+	<map class="map" id="map" latitude="{{infoList.location.lat}}" longitude="{{infoList.location.lng}}" scale="19"></map>
 </view>
+
 <!-- 具体信息 -->
 <view class="info">
-	<view class="flex " bindtap="lookMap" data-nav="yes">
-		<view><text class="cuIcon-locationfill"></text> {{address}} </view>
+	<view class="flex " bindtap="lookMap" data-nav="yes" data-latitude="{{infoList.location.lat}}" data-longitude="{{infoList.location.lng}}">
+		<view><text class="cuIcon-locationfill"></text> {{infoList.location.address}} </view>
 		<view><text class="cuIcon-right"></text></view>
 	</view>
-	<view class="flex border">
-		<view><text class="cuIcon-friend"></text> {{phone}} </view>
+	<view class="flex border" bindtap="callPhone" data-phoneNum="{{infoList.info.phone}}">
+		<view><text class="cuIcon-friend"></text> {{infoList.info.phone}} </view>
 		<view><text class="cuIcon-right"></text></view>
 	</view>
 	<view class="pro border" bindtap="test">
 		<text class="cuIcon-form"></text> 客户介绍
-		<view class="p-top">{{description}}</view>
+		<view class="p-top">{{infoList.description}}</view>
 	</view>
 	<view class="pro p-bottom">
 		<text class="cuIcon-picfill"></text> 机构样貌
 		<view class="image-top">
-			<image class="image" src="{{item}}" wx:for="{{images}}" wx:key="index"></image>
+			<image class="image" src="{{item}}" wx:for="{{infoList.img.images1}}" wx:key="index"></image>
 		</view>
 	</view>
 
