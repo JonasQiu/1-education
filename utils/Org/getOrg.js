@@ -14,10 +14,16 @@ function getOrgList(startNum, Num) {
             if (res.result) {
                 resolve(res.result)
             } else {
-                reject({orgList:[],isBottom:true})
+                reject({
+                    orgList: [],
+                    isBottom: true
+                })
             }
         }).catch(res => {
-            reject({orgList:[],isBottom:true})
+            reject({
+                orgList: [],
+                isBottom: true
+            })
         })
     })
 }

@@ -12,7 +12,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    //判断返回键的显示
+    if (getCurrentPages().length > 1) {
+      this.setData({
+        isShow: true
+      })
+    }
   },
 
   /**

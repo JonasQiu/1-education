@@ -1,2 +1,6 @@
-<!--pages/ecoDetail/ecoDetail.wxml-->
-<text>pages/ecoDetail/ecoDetail.wxml</text>
+<cu-custom bgColor="bg-gradual-green" isBack="{{isShow}}">
+	<view slot="backText">返回</view>
+	<view slot="content">生态圈详情页</view>
+</cu-custom>
+
+<!--  -->

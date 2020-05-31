@@ -19,7 +19,7 @@
     "pages/components/map/map",
     "pages/components/orgDetail/lesson/lesson",
     "pages/components/orgDetail/teacher/teacher",
-    "pages/ecoDetail/ecoDetail"
+    "pages/components/ecoDetail/ecoDetail"
   ],
   "window": {
     "backgroundTextStyle": "light",

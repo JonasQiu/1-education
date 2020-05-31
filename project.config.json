@@ -93,6 +93,13 @@
 					"id": -1,
 					"name": "生态圈",
 					"pathName": "pages/components/ecosystem/ecosystem",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "生态圈详情页",
+					"pathName": "pages/components/ecoDetail/ecoDetail",
 					"scene": null
 				}
 			]
