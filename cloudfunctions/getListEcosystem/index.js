@@ -12,35 +12,22 @@ exports.main = function main(event, context) {
             Num,
         } = event;
         let totalNum = await db.collection('Eco').count();
-        let isBottom = startNum + Num <= totalNum.total;
+        let isBottom = startNum + Num >= totalNum.total;
         db.collection('Eco').skip(startNum).limit(Num).get().then(async (res) => {
             let ecoList = res.data
             if (ecoList.length < 1) {
                 resolve({
-                    ecoList: ecoList,
+                    ecoList,
                     isBottom: true,
                 })
             }
             for (let i = 0; i < ecoList.length; i++) {
-                console.log(ecoList[i]['orgInfo']['orgId'])
-                let setUserInfo = await db.collection('Org').where({
-                    "_id": ecoList[i]['orgInfo']['orgId']
-                }).get()
-                if (setUserInfo.length > 0) {
-                    ecoList[i]['orgInfo'] = setUserInfo
-                }
-
-                setUserInfo = await db.collection('User').where({
-                    "_id": ecoList[i]['userInfo']['userId']
-                }).get()
-                if (setUserInfo.length > 0) {
-                    ecoList[i]['userInfo'] = setUserInfo
-                }
-
+                ecoList[i]['orgInfo'] = (await db.collection('Org').doc(ecoList[i]['orgInfo']['orgId']).get()).data
+                ecoList[i]['userInfo'] = (await db.collection('User').doc(ecoList[i]['userInfo']['userId']).get()).data
             }
             resolve({
-                ecoList: ecoList,
-                isBottom: true,
+                ecoList,
+                isBottom
             })
         }).catch(res => {
             reject(res)

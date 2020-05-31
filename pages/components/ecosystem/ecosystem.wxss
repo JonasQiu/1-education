@@ -21,6 +21,7 @@
   padding: 30rpx;
   margin-bottom: 20rpx;
   font-size: 32rpx;
+
 }
 
 .head {
@@ -31,7 +32,7 @@
 .eco-office {
   position: absolute;
   right: 0;
-  top: 0;
+  top: 8rpx;
   font-size: 26rpx;
   height: 45rpx;
   line-height: 45rpx;
@@ -67,6 +68,8 @@
 
 .eco-desc {
   margin: 20rpx 0;
+  letter-spacing: 4rpx;
+  text-indent: 2em;
 }
 
 .eco-imgContent {
@@ -74,9 +77,14 @@
   flex-wrap: wrap;
   max-width: 700rpx;
 }
-
+.eco-oneImg{
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
 .eco-moreImg {
-  width: 33%;
+  width: 31%;
+  margin-right: 10rpx;
+  margin-bottom: 10rpx;
   height: 226rpx;
 }
 
@@ -92,6 +100,10 @@
   justify-content: space-between;
 }
 
+.text-gray {
+  font-size: 28rpx;
+}
+
 .eco-text {
   font-size: 40rpx;
   margin-left: 30rpx;
@@ -103,6 +115,12 @@
   align-items: center;
 }
 
+.cuIcon-likefill {
+  font-size: 40rpx;
+  margin: 0 15rpx;
+}
+
 .margin-left {
   margin-left: 18rpx;
+  box-shadow: 4rpx 4rpx #ccc;
 }

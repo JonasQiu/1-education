@@ -1,6 +1,44 @@
-<cu-custom bgColor="bg-gradual-green" isBack="{{isShow}}">
-	<view slot="backText">返回</view>
-	<view slot="content">生态圈详情页</view>
-</cu-custom>
+<!-- 详情页 -->
+<view class="page">
+	<!-- 是否返回 -->
+	<view wx:if="{{isShow}}" bindtap="backTo">
+		<text class="cuIcon-back"></text>
+	</view>
+	<!-- 轮播图 -->
+	<swiper class="screen-swiper {{DotStyle?'square-dot':'round-dot'}}" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500">
+		<swiper-item wx:for="{{swiperList}}" wx:key>
+			<image src="{{item.url}}" mode="aspectFill" wx:if="{{item.type=='image'}}"></image>
+			<video src="{{item.url}}" autoplay loop muted show-play-btn="{{false}}" controls="{{false}}" objectFit="cover" wx:if="{{item.type=='video'}}"></video>
+		</swiper-item>
+	</swiper>
+	<!-- 内容块 -->
+	<view class="chunk">
+		<view class="eco-head">
+			<image src="{{recommendList.cimg}}"></image>
+			<view class="eco-nameInfo">
+				<view class="eco-name">{{recommendList.name}}</view>
+				<!-- 创建时间 -->
+				<view class="eco-info">5月20日</view>
+			</view>
+		</view>
 
-<!--  -->
+		<view class="eco-info">
+			<view class="eco-title">{{recommendList.title}}</view>
+			<!-- 分割线有icon -->
+			<view class="eco-content">{{recommendList.content}}</view>
+		</view>
+	</view>
+	<!-- 机构介绍 -->
+	<view class="chunk">
+		<image class="eco-orgHeadImg" src=""></image>
+		<view class="eco-stars"></view>
+		<view class="eco-org"></view>
+		<view class="eco-good"></view>
+		<view class="eco-comment"> </view>
+	</view>
+	<view class="tabbar">
+		<view wx:for="{{tabbarList}}" class="attention w-50" bindtap="attentionTap" wx:key="index">
+			<text class="{{item}}"></text>
+		</view>
+	</view>
+</view>

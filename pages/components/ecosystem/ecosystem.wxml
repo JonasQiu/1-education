@@ -37,11 +37,11 @@
 			</view>
 			<view class="eco-desc">{{item.content}}</view>
 			<view class="eco-imgContent">
-				<image class="{{item.cimg.length===1 ? '' : item.cimg.length ===4 ? 'eco-fourImg' : 'eco-moreImg'}}" wx:for="{{item.cimg}}" wx:for-item="img" src="{{img}}" wx:key="index"></image>
+				<image mode="{{item.cimg.length===1?'widthFix':''}}" class="{{item.cimg.length===1 ? 'eco-oneImg' : item.cimg.length ===4 ? 'eco-fourImg' : 'eco-moreImg'}}" wx:for="{{item.cimg}}" wx:for-item="img" src="{{img}}" wx:key="index"></image>
 			</view>
 			<view class="eco-more">
 				<!-- 浏览是指，点击进去详情页则记录一次 -->
-				<text class="text-gray">{{'浏览'+item.shareNum+'次'}}</text>
+				<text class="text-gray">{{'浏览 '+item.shareNum+' 次'}}</text>
 				<view>
 					<text class="eco-text cuIcon-likefill text-gray"></text>
 					<text class="eco-text text-gray cuIcon-commentfill"></text>

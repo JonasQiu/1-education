@@ -1,1 +1,25 @@
-/* pages/ecoDetail/ecoDetail.wxss */
+
+
+
+/* 底部导航 */
+.tabbar {
+  width: 100%;
+  position: fixed;
+  display: flex;
+  bottom: 0;
+  height: 90rpx;
+  background-color: #fff;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+  box-shadow: 0 -4rpx 4rpx #ddd;
+  font-size: 47rpx;
+}
+
+.w-50 {
+  width: 50%;
+}
+
+.p-bottom {
+  padding-bottom: 50rpx;
+}
