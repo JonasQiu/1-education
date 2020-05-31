@@ -68,7 +68,7 @@ Component({
       "userInfo": {
         "userId": "d721728a5ecf306e00564d773e18ace5"
       }
-    },{
+    }, {
       "cimg": ["cloud://education-1hoqw.6564-education-1hoqw-1302178671/ecoImg/moments_HzKh6Flhs20528KAQMMQMB.jpg"],
       "comments": [],
       "content": "疫情耽误三个月，刷题一月补回来。\n学大教育核心秘密之一\n——————————————\n考前集中营———刷题\n组长带队训练讲授\n提分技巧宝典\n答题踩分100%",
@@ -211,7 +211,8 @@ Component({
     // 查找数据
     searchValue: '',
     // 点赞是否显示
-    like: false
+    like: false,
+    goTop:0
   },
   attached() {
     //判断返回键的显示
@@ -226,6 +227,13 @@ Component({
    * 组件的方法列表
    */
   methods: {
+    // 下滑触底操作
+    lower(e) {
+      // 刷新请求数据
+      console.log(e)
+
+    },
+    
     // 导航栏
     tabSelect(e) {
       this.setData({
@@ -287,6 +295,12 @@ Component({
         like: !this.data.like
       })
       // 数据传递
+    },
+    // 回到顶部
+    goTop(e) {
+      this.setData({
+        goTop:0
+      })
     }
   }
 })

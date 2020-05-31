@@ -53,10 +53,13 @@
 .eco-headImg {
   width: 110rpx;
   height: 110rpx;
+  border-radius: 50%;
+  border: 2rpx solid #ccc;
 }
 
 .eco-info {
-  margin-left: 15rpx;
+  margin-left: 23rpx;
+  margin-top: 6rpx;
   color: rgb(100, 117, 194);
   font-size: 38rpx;
 }
@@ -67,7 +70,7 @@
 }
 
 .eco-desc {
-  margin: 20rpx 0;
+  margin: 30rpx 0;
   letter-spacing: 4rpx;
   text-indent: 2em;
 }
@@ -77,10 +80,12 @@
   flex-wrap: wrap;
   max-width: 700rpx;
 }
-.eco-oneImg{
+
+.eco-oneImg {
   background-size: 100% 100%;
   background-repeat: no-repeat;
 }
+
 .eco-moreImg {
   width: 31%;
   margin-right: 10rpx;
@@ -94,18 +99,18 @@
 }
 
 .eco-more {
-  padding: 20rpx 0;
+  padding: 30rpx 0 10rpx 0;
   border-bottom: 2rpx solid #ddd;
   display: flex;
   justify-content: space-between;
 }
 
-.text-gray {
-  font-size: 28rpx;
+.read {
+  font-size: 30rpx;
+  margin-top: 5rpx;
 }
 
 .eco-text {
-  font-size: 40rpx;
   margin-left: 30rpx;
 }
 
@@ -116,11 +121,25 @@
 }
 
 .cuIcon-likefill {
-  font-size: 40rpx;
   margin: 0 15rpx;
 }
 
 .margin-left {
   margin-left: 18rpx;
   box-shadow: 4rpx 4rpx #ccc;
+}
+
+/* 回到顶部 */
+.goTop {
+  width: 100rpx;
+  height: 100rpx;
+  text-align: center;
+  line-height: 100rpx;
+  border-radius: 50%;
+  position: fixed;
+  bottom: 150rpx;
+  right: 50rpx;
+  background-color: rgb(93, 108, 243);
+  box-shadow: 0rpx 0rpx 20rpx #fff;
+  font-size: 60rpx;
 }

@@ -3,7 +3,7 @@
 	<view slot="content">生态圈</view>
 </cu-custom>
 
-<view class="page">
+<scroll-view scroll-y style="height:83vh" bindscrolltolower="lower" scroll-with-animation scroll-top="{{goTop}}">
 	<!-- 搜索栏 -->
 	<view class="cu-bar search bg-white">
 		<view class="search-form round">
@@ -41,18 +41,21 @@
 			</view>
 			<view class="eco-more">
 				<!-- 浏览是指，点击进去详情页则记录一次 -->
-				<text class="text-gray">{{'浏览 '+item.shareNum+' 次'}}</text>
-				<view>
-					<text class="eco-text cuIcon-likefill text-gray"></text>
+				<text class="text-gray read">{{'浏览 '+item.shareNum+' 次'}}</text>
+				<view style="font-size:50rpx">
+					<text class="eco-text cuIcon-likefill text-gray" ></text>
 					<text class="eco-text text-gray cuIcon-commentfill"></text>
 				</view>
 			</view>
 		</view>
-		<view class="eco-call">
+		<view class="eco-call" style="font-size:50rpx">
 			<text class="cuIcon-likefill {{like ? 'text-pink' : 'text-gray'}}" bindtap="addLike"></text>
 			<view class="eco-callImg">
 				<image class="cu-avatar radius margin-left" src="{{img}}" wx:for="{{item.imgUrls}}" wx:for-item="img" wx:key="index"></image>
 			</view>
 		</view>
 	</view>
-</view>
+	<view class="goTop" bindtap="goTop">
+		<text class="cuIcon-top text-white"></text>
+	</view>
+</scroll-view>
