@@ -100,6 +100,13 @@
 					"id": -1,
 					"name": "生态圈详情页",
 					"pathName": "pages/components/ecoDetail/ecoDetail",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "分类",
+					"pathName": "pages/components/search/partitions/partitions",
 					"scene": null
 				}
 			]

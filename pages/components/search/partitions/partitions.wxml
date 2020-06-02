@@ -7,36 +7,26 @@
 <view class="VerticalBox">
 	<!-- 左边导航 -->
 	<scroll-view class="VerticalNav nav" scroll-y scroll-with-animation scroll-top="{{VerticalNavTop}}" style="height:calc(100vh - 375rpx)">
-		<view class="cu-item {{index==TabCur?'text-green cur':''}}" wx:for="{{list}}" wx:key="index" bindtap='tabSelect' data-id="{{index}}">
-			{{item.name}}
+		<view class="p-item cu-item {{index==TabCur?'text-green cur':''}}" wx:for="{{list}}" wx:key="index" bindtap='tabSelect' data-id="{{index}}">
+			<text class="text-item">{{item.name}}</text>
 		</view>
 	</scroll-view>
 	<!-- 右边内容 -->
 	<scroll-view class="VerticalMain" scroll-y scroll-with-animation style="height:calc(100vh - 375rpx)" scroll-into-view="main-{{MainCur}}" bindscroll="VerticalMain">
 		<view class="padding-top padding-lr" wx:for="{{list}}" wx:key="index" id="main-{{index}}">
-			<view class='cu-bar solid-bottom bg-white'>
-				<view class='action'>
-					<text class='cuIcon-title text-green'></text> {{item.name}} </view>
-			</view>
-
-			<view class="cu-list menu-avatar" wx:for="{{item.list}}" wx:key="indx" wx:for-item="twoItem" data-typeId="{{twoItem.id}}">
-				<view class="cu-item">
-					<view class="cu-avatar round lg" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big10001.jpg);"></view>
-					<view class="content">
+			<view class=' bg-white'>
+				<view class=''>
+					<text class=' text-green'></text> {{item.name}}
+				</view>
+				<view class="" wx:for="{{item.list}}" wx:key="index" wx:for-item="twoItem" data-typeId="{{twoItem.id}}">
+				<view class="">
+					<view class="">
 						<view class="text-grey">{{twoItem.name}}</view>
-						<view class="text-gray text-sm flex">
-							<text class="text-cut">
-										<text class="cuIcon-infofill text-red  margin-right-xs"></text> 我已天理为凭，踏入这片荒芜，不再受凡人的枷锁遏制。我已天理为凭，踏入这片荒芜，不再受凡人的枷锁遏制。
-							</text>
-						</view>
-					</view>
-					<view class="action">
-						<view class="text-grey text-xs">22:20</view>
-						<view class="cu-tag round bg-grey sm">5</view>
 					</view>
 				</view>
 			</view>
-
+			</view>
+			
 		</view>
 	</scroll-view>
 </view>

@@ -43,3 +43,10 @@
 .VerticalMain{
   background-color: #f1f1f1;
 }
+
+.VerticalNav.nav .p-item {
+  width: 210rpx;
+}
+.VerticalNav .cu-bar {
+  flex-wrap: wrap;
+}
