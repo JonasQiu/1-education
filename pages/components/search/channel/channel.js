@@ -17,82 +17,52 @@ Component({
     haveContentList: [],
     // 没有搜索内容
     hotList: ['shuai', 'sad', 'asdasd', 'shuai', 'sad', 'asdasd', 'shuai', 'sad', 'asdasd'], //数据截取前10个
-    showClear: false,
-    historyList: ['shuai', 'sad', 'asdasd', 'shuai', 'sad', 'asdasd', 'shuai', 'sad', 'asdasd'],
+    historyList: [],
     // 有搜索内容
     TabCur: 0,
     scrollLeft: 0,
-    searchedList: [{
-      src: '/images/logo.png',
-      userName: 'hhan'
-    }]
+    searchList: []
   },
   attached() {
     var that = this;
-
-    if (that.data.historyList) {
-      // historylist,后台请求数据进行渲染
-      that.setData({
-        showClear: true,
-      })
-    }
+    wx.getStorage({
+      key: 'history_search',
+      success: (res) => {
+        that.setData({
+          historyList: res.data,
+        })
+      }
+    })
   },
   /**
    * 组件的方法列表
    */
   methods: {
-    getValue(e, value) {
-      let that = this;
-      if (that.timer) {
-        clearTimeout(that.timer)
-      }
-      if (e.detail.value === '' && value == undefined) {
-        this.setData({
-          isShowContent: false
-        })
-      }
-      this.setData({
-        searchValue: e.detail.value || value || ''
-      })
-      that.timer = setTimeout(function () {
-        if (e.detail.value != '') {
-          that.search(e)
-        }
-      }, 700)
-    },
     search(e) {
-      if (this.data.searchValue !== "") {
-        wx.showLoading({
-          title: '正在加载',
-        })
-        let that = this;
-        comOrg.searchOrg(that.data.searchValue).then(res => {
-          that.setData({
-            isShowContent: true,
-            //数据初始化
-            searchList: res,
+      fun_search(e);
+    },
+    fun_search(keyWord) {
+      let that = this;
+      comOrg.searchOrg(keyWord).then(res => {
+        let myData = {}
+        if (that.data.historyList.indexOf(keyWord) == -1) {
+          that.data.historyList.push(keyWord)
+          wx.setStorage({
+            data: that.data.historyList,
+            key: 'history_search',
           })
-        }).catch(res => {
-          wx.showModal({
-            title: '提示',
-            content: "没有搜索到更多的内容",
-            showCancel: false
-          })
-        })
-        wx.hideLoading()
-      } else {
-        wx.showModal({
-          title: '提示',
-          content: "请输入您要搜索的内容",
-          showCancel: false
-        })
-      }
-      // 根据searchValue，往云数据库发起请求,返回列表给haveContentList，然后往组件中传列表进行渲染
+          myData.historyList = that.data.historyList
+        }
+        myData.searchList = res
+        that.setData(myData)
+        return true
+      }).catch(res => {
+        return false
+      })
     },
     clearHistory(e) {
       this.setData({
-        historyList: [],
-        showClear: false
+        historyList: []
       })
       wx.showToast({
         title: '清除成功',
@@ -110,8 +80,41 @@ Component({
         url: `/pages/components/orgDetail/orgDetail?query=${e.currentTarget.dataset.name}`,
       })
     },
+    getValue(e) {
+      var that = this;
+      if (that.data.timer) {
+        clearTimeout(that.data.timer)
+      }
+      if (e.detail.value == "") {
+        that.setData({
+          searchList: []
+        })
+        return;
+      }
+      that.data.timer = setTimeout(function () {
+        if (!that.fun_search(e.detail.value)) {
+          that.setData({
+            searchList: []
+          })
+        }
+      }, 700)
+    },
     addInfo(e) {
-      this.getValue(e, e.currentTarget.dataset.value)
+      if (e.currentTarget.dataset.value) {
+        if (!this.fun_search(e.currentTarget.dataset.value)) {
+          wx.showModal({
+            title: '提示',
+            content: "没有搜索到更多的内容",
+            showCancel: false
+          })
+        }
+      } else {
+        wx.showModal({
+          title: '提示',
+          content: "请输入您要搜索的内容",
+          showCancel: false
+        })
+      }
     }
   }
 })

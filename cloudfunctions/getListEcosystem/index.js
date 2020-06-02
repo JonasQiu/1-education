@@ -8,9 +8,16 @@ const _ = db.command
 exports.main = function main(event, context) {
     return new Promise(async (resolve, reject) => {
         let ecoList = event.ecoList;
+        let pArr = [];
         for (let i = 0; i < ecoList.length; i++) {
-            ecoList[i]['orgInfo'] = (await db.collection('Org').doc(ecoList[i]['orgInfo']['orgId']).get()).data
-            ecoList[i]['userInfo'] = (await db.collection('User').doc(ecoList[i]['userInfo']['userId']).get()).data
+            pArr[i] = {
+                'org': db.collection('Org').doc(ecoList[i]['orgInfo']['orgId']).get(),
+                'user': db.collection('User').doc(ecoList[i]['userInfo']['userId']).get()
+            }
+        }
+        for (let i = 0; i < ecoList.length; i++) {
+            ecoList[i]['orgInfo'] = (await pArr[i]['org']).data
+            ecoList[i]['userInfo'] = (await pArr[i]['user']).data
         }
         resolve(ecoList)
     })

@@ -143,7 +143,7 @@ function getHistoryPage() {
         let history = wx.getStorageSync('history_Eco')
         let pList = []
         for (let i = 0; i < history.length; i++) {
-            pList.push(getPage(history[i]))
+            pList[i] = getPage(history[i])
         }
         (async () => {
             for (let i = 0; i < pList.length; i++) {
