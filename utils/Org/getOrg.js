@@ -1,4 +1,5 @@
 const db = wx.cloud.database()
+const _ = db.command
 
 function getOrgList(startNum, Num) {
     // startNum 从0开始获取
@@ -12,6 +13,7 @@ function getOrgList(startNum, Num) {
             }
         }).then(res => {
             if (res.result) {
+                res.result.orgList = isCollect(res.result.orgList)
                 resolve(res.result)
             } else {
                 reject({
@@ -35,7 +37,8 @@ function getOrg(orgId) {
             '_id': orgId
         }).get().then(res => {
             if (res.data.length > 0) {
-                resolve(res.data[0])
+                let orglist = isCollect([res.data[0]])
+                resolve(orglist[0])
             } else {
                 reject({})
             }
@@ -51,12 +54,12 @@ function getTypeOrg(TypeId) {
             'type': TypeId
         }).get().then(res => {
             if (res.data.length > 0) {
-                resolve(res.data)
+                resolve(isCollect(res.data))
             } else {
-                reject({})
+                reject([])
             }
         }).catch(res => {
-            reject({})
+            reject([])
         })
     })
 }
@@ -70,15 +73,23 @@ function searchOrg(keyWord) {
             })
         }).get().then(res => {
             if (res.data.length > 0) {
-                resolve(res.data)
+                resolve(isCollect(res.data))
             } else {
-                reject({})
+                reject([])
             }
         }).catch(res => {
-            reject({})
+            reject([])
         })
     })
 
+}
+
+function isCollect(orgList) {
+    let userInfo = wx.getStorageSync('userInfo')
+    for (let i = 0; i < orgList.length; i++) {
+        orgList[i].isCollect = (!!userInfo && (userInfo.myCollection.indexOf(orgList[i]._id) > -1))
+    }
+    return orgList;
 }
 
 module.exports = {

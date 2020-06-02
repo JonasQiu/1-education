@@ -22,7 +22,7 @@ function getPageList(startNum, Num) {
                     }
                 }).then(res => {
                     resolve({
-                        ecoList: res.result,
+                        ecoList: isLike(res.result),
                         isBottom
                     })
                 }).catch(res => {
@@ -67,12 +67,12 @@ function searchPage(keyWord) {
                     ecoList
                 }
             }).then(res => {
-                resolve(res.result)
+                resolve(isLike(res.result))
             }).catch(res => {
-                reject([])
+                reject(res)
             })
         }).catch(res => {
-            reject([])
+            reject(res)
         })
     })
 }
@@ -82,7 +82,7 @@ function getPage(ecoId) {
         db.collection('Eco').doc(ecoId).get().then((res) => {
             let ecoList = [res.data]
             if (ecoList.length < 1) {
-                resolve([])
+                resolve({})
             }
             wx.cloud.callFunction({
                 name: 'getListEcosystem',
@@ -90,18 +90,82 @@ function getPage(ecoId) {
                     ecoList
                 }
             }).then(res => {
-                resolve(res.result[0])
+                resolve(isLike(res.result)[0])
             }).catch(res => {
-                reject([])
+                reject(res)
             })
         }).catch(res => {
-            reject([])
+            reject(res)
         })
     })
+}
+
+function getHotPageList(startNum, Num) {
+    return new Promise((resolve, reject) => {
+        db.collection('Eco').count().then(res => {
+            let isBottom = startNum + Num >= res.total;
+            db.collection('Eco').orderBy('likeNum', 'desc').skip(startNum).limit(Num).get().then((res) => {
+                let ecoList = res.data
+                if (ecoList.length < 1) {
+                    resolve({
+                        ecoList,
+                        isBottom: true,
+                    })
+                }
+                wx.cloud.callFunction({
+                    name: 'getListEcosystem',
+                    data: {
+                        ecoList
+                    }
+                }).then(res => {
+                    resolve({
+                        ecoList: isLike(res.result),
+                        isBottom
+                    })
+                }).catch(res => {
+                    reject({
+                        ecoList: [],
+                        isBottom: true,
+                    })
+                })
+            }).catch(res => {
+                reject({
+                    ecoList: [],
+                    isBottom: true,
+                })
+            })
+        })
+    })
+}
+
+function getHistoryPage() {
+    return new Promise((resolve, reject) => {
+        let history = wx.getStorageSync('history_Eco')
+        let pList = []
+        for (let i = 0; i < history.length; i++) {
+            pList.push(getPage(history[i]))
+        }
+        (async () => {
+            for (let i = 0; i < pList.length; i++) {
+                pList[i] = await pList[i]
+            }
+            resolve(pList)
+        })()
+    })
+}
+
+function isLike(ecoList) {
+    let userInfo = wx.getStorageSync('userInfo')
+    for (let i = 0; i < ecoList.length; i++) {
+        ecoList[i].isLike = (!!userInfo && (ecoList[i].likes.indexOf(userInfo._id) > -1))
+    }
+    return ecoList;
 }
 
 module.exports = {
     getPage,
     getPageList,
+    getHotPageList,
+    getHistoryPage,
     searchPage
 }

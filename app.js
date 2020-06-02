@@ -1,22 +1,30 @@
 //app.js
 App({
-  onLaunch: function() {
+  onLaunch: function () {
+    Array.prototype.remove = function (val) {
+      var index = this.indexOf(val);
+      if (index > -1) {
+        this.splice(index, 1);
+        return true;
+      }
+      return false;
+    };
     if (wx.cloud) {
       wx.cloud.init({
         traceUser: true,
-        env:"education-1hoqw"
+        env: "education-1hoqw"
       })
     }
     wx.getSystemInfo({
       success: e => {
         this.globalData.StatusBar = e.statusBarHeight;
         let capsule = wx.getMenuButtonBoundingClientRect();
-		if (capsule) {
-		 	this.globalData.Custom = capsule;
-			this.globalData.CustomBar = capsule.bottom + capsule.top - e.statusBarHeight+5;
-		} else {
-			this.globalData.CustomBar = e.statusBarHeight + 55;
-		}
+        if (capsule) {
+          this.globalData.Custom = capsule;
+          this.globalData.CustomBar = capsule.bottom + capsule.top - e.statusBarHeight + 5;
+        } else {
+          this.globalData.CustomBar = e.statusBarHeight + 55;
+        }
       }
     })
   },
