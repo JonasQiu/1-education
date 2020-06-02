@@ -1,11 +1,21 @@
 @import "/colorui/main.wxss";
 @import "/colorui/icon.wxss";
+
 /* .nav{
   background-image: linear-gradient(to right,rgb(91, 243, 86),rgb(69, 153, 13));
   padding-top: 30rpx;
   padding-right: 20rpx;
   color: #fff;
 } */
-.nav{
+.nav {
   border-bottom: 1px solid #ccc;
+}
+
+/* 返回上一步 */
+.return {
+  z-index: 9999;
+  position: fixed;
+  top: 60rpx;
+  left: 25rpx;
+  font-size: 45rpx;
 }

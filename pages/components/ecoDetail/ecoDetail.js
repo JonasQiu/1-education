@@ -1,6 +1,6 @@
 // pages/ecoDetail/ecoDetail.js
+const comEco = require('../../../utils/Ecosystem/getPage')
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -24,8 +24,11 @@ Page({
       "title": "中考刷题班0351-3787792",
       "userInfo": {
         "userId": "54bac78c5ecd3a23005318b4110c12b3"
-      }
+      },
+      "name": '刘海弟弟'
     },
+    // 机构信息
+    orgObj: {},
     // 轮播图图片
     swiperList: [{
       id: 0,
@@ -68,6 +71,15 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    // 机构信息
+    comEco.getPage('gAxZc41UjAdVRFK6aMAcuIjCtvp9G3kQBpnUqzQgNwvXqZWn').then(res => {
+      this.setData({
+        orgObj: res
+      })
+    }).catch(res => {
+      // 异常报错
+      console.log(res)
+    })
     //判断返回键的显示
     if (getCurrentPages().length > 1) {
       this.setData({

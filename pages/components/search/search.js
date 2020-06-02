@@ -18,8 +18,6 @@ Component({
     navTop:wx.getSystemInfoSync().statusBarHeight,
   },
   attached(){
-    
-    
     //判断返回键的显示
    if(getCurrentPages().length > 1){
     this.setData({
@@ -31,6 +29,12 @@ Component({
    * 组件的方法列表
    */
   methods: {
+    // 返回上一个页面
+    backTo(e) {
+      wx.navigateBack({
+        delta: 1
+      });
+    },
     // 导航栏选择
     tabSelect(e) {
       this.setData({

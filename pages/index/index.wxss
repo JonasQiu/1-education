@@ -86,3 +86,6 @@
 .cu-bar.tabbar .action.add-action [class*="cuIcon-"] {
   font-size: 47rpx !important;
 }
+.foot{
+  border-top: 2rpx solid #ccc;
+}

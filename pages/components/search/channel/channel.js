@@ -62,6 +62,9 @@ Component({
     },
     search(e) {
       if (this.data.searchValue !== "") {
+        wx.showLoading({
+          title: '正在加载',
+        })
         let that = this;
         comOrg.searchOrg(that.data.searchValue).then(res => {
           that.setData({
@@ -76,6 +79,7 @@ Component({
             showCancel: false
           })
         })
+        wx.hideLoading()
       } else {
         wx.showModal({
           title: '提示',
@@ -108,7 +112,6 @@ Component({
     },
     addInfo(e) {
       this.getValue(e, e.currentTarget.dataset.value)
-      this.search(e)
     }
   }
 })

@@ -14,19 +14,14 @@
 	<!-- 右边内容 -->
 	<scroll-view class="VerticalMain" scroll-y scroll-with-animation style="height:calc(100vh - 375rpx)" scroll-into-view="main-{{MainCur}}" bindscroll="VerticalMain">
 		<view class="padding-top padding-lr" wx:for="{{list}}" wx:key="index" id="main-{{index}}">
-			<view class=' bg-white'>
-				<view class=''>
-					<text class=' text-green'></text> {{item.name}}
-				</view>
-				<view class="" wx:for="{{item.list}}" wx:key="index" wx:for-item="twoItem" data-typeId="{{twoItem.id}}">
-				<view class="">
-					<view class="">
-						<view class="text-grey">{{twoItem.name}}</view>
+			<view class='bg-white'>
+				<text class='cuIcon-title text-green first-floor'></text> {{item.name}}
+				<view class="second-floor">
+					<view class="item" wx:for="{{item.list}}" wx:key="index" wx:for-item="twoItem" data-typeId="{{twoItem.id}}">
+						<text>{{twoItem.name}}</text>
 					</view>
 				</view>
 			</view>
-			</view>
-			
 		</view>
 	</scroll-view>
 </view>

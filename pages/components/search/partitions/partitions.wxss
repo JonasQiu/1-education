@@ -1,6 +1,19 @@
 @import "/colorui/main.wxss";
 @import "/colorui/icon.wxss";
 
+.nav .cu-item {
+  padding: 0;
+}
+
+.padding-lr {
+  padding-left: 24rpx;
+  padding-right: 24rpx;
+}
+
+.padding-top {
+  padding-top: 24rpx;
+}
+
 /* pages/component/nav/nav.wxss */
 .VerticalNav.nav {
   width: 200rpx;
@@ -10,7 +23,7 @@
 .screen-swiper {
   min-height: 0;
 }
-  
+
 
 .VerticalNav.nav .cu-item {
   width: 100%;
@@ -25,6 +38,7 @@
 .VerticalNav.nav .cu-item.cur {
   background-color: #f1f1f1;
 }
+
 .VerticalNav.nav .cu-item.cur::after {
   content: "";
   width: 8rpx;
@@ -37,16 +51,46 @@
   bottom: 0;
   margin: auto;
 }
-.VerticalBox{
+
+.VerticalBox {
   display: flex;
+  margin-bottom: 110rpx;
 }
-.VerticalMain{
+
+.VerticalMain {
   background-color: #f1f1f1;
 }
 
 .VerticalNav.nav .p-item {
-  width: 210rpx;
+  width: 175rpx;
 }
+
 .VerticalNav .cu-bar {
   flex-wrap: wrap;
+}
+
+.bg-white {
+  font-size: 34rpx;
+  padding-bottom: 34rpx;
+}
+
+.first-floor {
+  height: 80rpx;
+  line-height: 80rpx;
+  padding-left: 20rpx;
+}
+
+.second-floor {
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 30rpx;
+}
+
+.item {
+  padding: 13rpx 20rpx;
+  border: 2rpx solid #ccc;
+  margin-left: 20rpx;
+  margin-top: 15rpx;
+  border-radius: 35rpx;
+  vertical-align: middle;
 }
