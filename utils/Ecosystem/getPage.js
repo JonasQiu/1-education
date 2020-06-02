@@ -1,3 +1,4 @@
+const comTime = require('../Func/time')
 const db = wx.cloud.database()
 const _ = db.command
 
@@ -22,7 +23,7 @@ function getPageList(startNum, Num) {
                     }
                 }).then(res => {
                     resolve({
-                        ecoList: isLike(res.result),
+                        ecoList: FixAll(res.result),
                         isBottom
                     })
                 }).catch(res => {
@@ -67,7 +68,7 @@ function searchPage(keyWord) {
                     ecoList
                 }
             }).then(res => {
-                resolve(isLike(res.result))
+                resolve(FixAll(res.result))
             }).catch(res => {
                 reject(res)
             })
@@ -90,7 +91,7 @@ function getPage(ecoId) {
                     ecoList
                 }
             }).then(res => {
-                resolve(isLike(res.result)[0])
+                resolve(FixAll(res.result)[0])
             }).catch(res => {
                 reject(res)
             })
@@ -119,7 +120,7 @@ function getHotPageList(startNum, Num) {
                     }
                 }).then(res => {
                     resolve({
-                        ecoList: isLike(res.result),
+                        ecoList: FixAll(res.result),
                         isBottom
                     })
                 }).catch(res => {
@@ -154,10 +155,22 @@ function getHistoryPage() {
     })
 }
 
+function FixAll(ecoList) {
+    return fixTime(isLike(ecoList))
+}
+
 function isLike(ecoList) {
     let userInfo = wx.getStorageSync('userInfo')
     for (let i = 0; i < ecoList.length; i++) {
         ecoList[i].isLike = (!!userInfo && (ecoList[i].likes.indexOf(userInfo._id) > -1))
+    }
+    return ecoList;
+}
+
+function fixTime(ecoList) {
+    for (let i = 0; i < ecoList.length; i++) {
+        ecoList[i].fixCreateTime = comTime.showTime(ecoList[i].createTime)
+        ecoList[i].fixLastTime = comTime.showTime(ecoList[i].lastTime)
     }
     return ecoList;
 }

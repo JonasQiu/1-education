@@ -3,6 +3,20 @@
 
 .page {
   margin-bottom: 100rpx;
+  background-color: #e4f9f5;
+}
+
+.scrollTop {
+  background-color: #fff;
+  width: 100%;
+  height: 80rpx;
+  text-align: center;
+  line-height: 95rpx;
+  color: #666;
+  font-size: 33rpx;
+  font-weight: 300;
+  letter-spacing: 2px;
+  font-family: "Microsoft Yahei";
 }
 
 /* 导航栏 */
@@ -16,12 +30,13 @@
 
 /* 内容 */
 .eco-nav {
-  width: 100%;
   background-color: #fff;
   padding: 30rpx;
-  margin-bottom: 20rpx;
+  margin: 20rpx 20rpx 50rpx;
   font-size: 32rpx;
-
+  box-shadow: 15rpx 20rpx 20rpx #ccc;
+  border-radius: 15rpx;
+  width: 95%;
 }
 
 .head {
@@ -43,7 +58,7 @@
 }
 
 .eco-name {
-
+  font-size: 32rpx;
   width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -51,8 +66,8 @@
 }
 
 .eco-headImg {
-  width: 110rpx;
-  height: 110rpx;
+  width: 100rpx;
+  height: 100rpx;
   border-radius: 50%;
   border: 2rpx solid #ccc;
 }
@@ -65,20 +80,30 @@
 }
 
 .eco-time {
-  margin-top: 13rpx;
-  font-size: 30rpx;
+  margin-top: 11rpx;
+  font-size: 24rpx;
 }
 
 .eco-desc {
+  color: #666;
+  font-size: 30rpx;
+  font-weight: 300;
+  letter-spacing: 2px;
+  font-family: "Microsoft Yahei";
   margin: 30rpx 0;
-  letter-spacing: 4rpx;
   text-indent: 2em;
 }
 
 .eco-imgContent {
   display: flex;
   flex-wrap: wrap;
+  align-content: space-around;
+  justify-content: space-between;
   max-width: 700rpx;
+}
+
+.eco-imgContent image {
+  margin-bottom: 20rpx;
 }
 
 .eco-oneImg {
@@ -89,17 +114,16 @@
 .eco-moreImg {
   width: 31%;
   margin-right: 10rpx;
-  margin-bottom: 10rpx;
   height: 226rpx;
 }
 
 .eco-fourImg {
-  width: 50%;
+  width: 49%;
   height: 300rpx;
 }
 
 .eco-more {
-  padding: 30rpx 0 10rpx 0;
+  padding: 10rpx 0 10rpx 0;
   border-bottom: 2rpx solid #ddd;
   display: flex;
   justify-content: space-between;
@@ -127,6 +151,7 @@
 .margin-left {
   margin-left: 18rpx;
   box-shadow: 4rpx 4rpx #ccc;
+  border-radius: 50%;
 }
 
 /* 回到顶部 */
@@ -142,4 +167,9 @@
   background-color: rgb(93, 108, 243);
   box-shadow: 0rpx 0rpx 20rpx #fff;
   font-size: 60rpx;
+  opacity: 0.6;
+}
+
+.goTop:hover {
+  opacity: 1;
 }

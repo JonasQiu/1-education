@@ -1,9 +1,10 @@
-<cu-custom bgColor="bg-gradual-green" isBack="{{isShow}}">
+<!-- <cu-custom bgColor="bg-white" isBack="{{isShow}}" wx:if="{{showTop}}">
 	<view slot="backText">返回</view>
 	<view slot="content">生态圈</view>
-</cu-custom>
+</cu-custom> -->
 
-<scroll-view scroll-y style="height:83vh" bindscrolltolower="lower" scroll-with-animation scroll-top="{{goTop}}">
+<scroll-view scroll-y style="height:93vh;margin-top:{{navTop}}px" bindscrolltolower="lower" scroll-with-animation scroll-top="{{goTop}}">
+	<view class="scrollTop">生态圈</view>
 	<!-- 搜索栏 -->
 	<view class="cu-bar search bg-white">
 		<view class="search-form round">
@@ -25,13 +26,13 @@
 	</scroll-view>
 
 	<!-- 推荐、关注、热帖、官方-->
-	<view wx:for="{{TabCur===0?recommendList:TabCur===1?attentionList:TabCur===2?hotList:TabCur===3?officialList:''}}" class="eco-nav" wx:key="index">
+	<view wx:for="{{EcoList}}" class="eco-nav" wx:key="index">
 		<view bindtap="naviToDetail" data-query="{{item.userInfo.userId}}">
 			<view class="head">
-				<image src="{{item.cimg[0]}}" class="eco-headImg"></image>
+				<image src="{{item.orgInfo.cimg.logo}}" class="eco-headImg" mode="aspectFill"></image>
 				<view class="eco-info">
-					<text class="eco-name">{{item.title}}</text>
-					<view class="eco-time text-gray">{{(item.lastTime-item.createTime)/1000/60>1?(item.lastTime-item.createTime)/1000/60+'分前':(item.lastTime-item.createTime)/1000/60/60>1?(item.lastTime-item.createTime)/1000/60+'时前':(item.lastTime-item.createTime)/1000/60/60/24>1?(item.lastTime-item.createTime)/1000/60+'天前':(item.lastTime-item.createTime)/1000/60<=1?'刚刚':'7天前'}}</view>
+					<text class="eco-name">{{item.orgInfo.info.orgName}}</text>
+					<view class="eco-time text-gray">发表于 {{item.fixCreateTime}}</view>
 				</view>
 				<text wx:if="s" class="eco-office">官方</text>
 			</view>
