@@ -138,6 +138,22 @@ function getHotPageList(startNum, Num) {
     })
 }
 
+function getHistoryPage() {
+    return new Promise((resolve, reject) => {
+        let history = wx.getStorageSync('history_Eco')
+        let pList = []
+        for (let i = 0; i < history.length; i++) {
+            pList.push(getPage(history[i]))
+        }
+        (async () => {
+            for (let i = 0; i < pList.length; i++) {
+                pList[i] = await pList[i]
+            }
+            resolve(pList)
+        })()
+    })
+}
+
 function isLike(ecoList) {
     let userInfo = wx.getStorageSync('userInfo')
     for (let i = 0; i < ecoList.length; i++) {
@@ -150,5 +166,6 @@ module.exports = {
     getPage,
     getPageList,
     getHotPageList,
+    getHistoryPage,
     searchPage
 }

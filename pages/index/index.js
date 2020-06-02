@@ -19,5 +19,7 @@ Page({
     })
   },
   // 加载页面立刻执行
-  onLoad: function () {}
+  onLoad: function () {
+
+  }
 })

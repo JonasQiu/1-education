@@ -6,12 +6,12 @@ function read(ecoId) {
     // resolve -> bool
     // reject -> 处理异常
     return new Promise((resolve, reject) => {
-        let history = wx.getStorageSync('history') || []
+        let history = wx.getStorageSync('history_Eco') || []
         let updateData = {}
         if (history.indexOf(ecoId) == -1) {
             //找不到历史记录，那么增加本地记录
             history.unshift(ecoId)
-            wx.setStorageSync('history', history)
+            wx.setStorageSync('history_Eco', history)
             updateData['readNum'] = _.inc(1);
             let userInfo = wx.getStorageSync('userInfo')
             db.collection('Eco').doc(ecoId).get().then(res => {
