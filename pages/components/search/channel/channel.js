@@ -42,6 +42,9 @@ Component({
       fun_search(e);
     },
     fun_search(keyWord) {
+      wx.showLoading({
+        title: '正在加载数据',
+      })
       let that = this;
       comOrg.searchOrg(keyWord).then(res => {
         let myData = {}
@@ -55,8 +58,14 @@ Component({
         }
         myData.searchList = res
         that.setData(myData)
+        wx.hideLoading()
         return true
       }).catch(res => {
+        wx.hideLoading()
+        wx.showToast({
+          title: '没有搜索到内容',
+          icon:"none"
+        })
         return false
       })
     },

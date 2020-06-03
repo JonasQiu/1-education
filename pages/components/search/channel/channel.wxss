@@ -96,28 +96,45 @@
 @import "/colorui/main.wxss";
 @import "/colorui/icon.wxss";
 
+/* 导航栏 */
+.nav .cu-item {
+  height: 60rpx;
+  display: inline-block;
+  line-height: 60rpx;
+  margin: 0 10rpx 20rpx;
+  padding: 0 20rpx;
+}
+
 /* 内容 */
 .content {
   padding: 20rpx;
-  background-color: #fff;
-  padding-top: 0;
+  background-color: #e4f9f5;
+  padding-top: 15rpx;
 }
 
 .item {
-  padding: 5rpx 0;
-  border-bottom: 1rpx solid #ccc;
+  padding: 15rpx 0;
   height: 250rpx;
   display: flex;
+
+  border: 2rpx solid rgb(241, 241, 241);
+  margin: 0 auto 40rpx;
+  width: 96%;
+  background: #fff;
+  box-shadow: 15rpx 20rpx 20rpx #ccc;
+  border-radius: 50rpx;
 }
 
 .item-img {
-  width: 300rpx;
+  margin-left: 15rpx;
+  width: 230rpx;
   height: 100%;
+  border-radius: 50%;
 }
 
 .info {
-  margin-left: 15rpx;
-  width: 380rpx;
+  margin-left: 25rpx;
+  width: 390rpx;
   color: #aaa;
   font-size: 28rpx;
   display: flex;
@@ -128,6 +145,18 @@
 .info-content {
   font-size: 34rpx;
   color: #000;
+  text-overflow: ellipsis;
+  width: 400rpx;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.userName{
+  margin-bottom: 15rpx;
+}
+.text-size{
+  font-size: 38rpx;
+}
+.userName {
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
