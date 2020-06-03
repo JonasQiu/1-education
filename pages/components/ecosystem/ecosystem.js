@@ -53,6 +53,7 @@ Component({
             that.setData({
               EcoList: res.ecoList
             })
+            wx.hideLoading()
           }).catch(res => {
             wx.showToast({
               title: '刷新失败！',
@@ -64,6 +65,7 @@ Component({
             that.setData({
               EcoList: res.ecoList
             })
+            wx.hideLoading()
           }).catch(res => {
             wx.showToast({
               title: '刷新失败！',
@@ -75,6 +77,7 @@ Component({
             that.setData({
               EcoList: res.ecoList
             })
+            wx.hideLoading()
           }).catch(res => {
             wx.showToast({
               title: '刷新失败！',
@@ -86,6 +89,7 @@ Component({
             that.setData({
               EcoList: res.ecoList
             })
+            wx.hideLoading()
           }).catch(res => {
             wx.showToast({
               title: '刷新失败！',
@@ -93,7 +97,6 @@ Component({
           })
           break;
       }
-      wx.hideLoading()
     },
     // 下滑触底操作
     lower(e) {
@@ -154,7 +157,7 @@ Component({
     // 详情页跳转，传递参数用户id
     naviToDetail(e) {
       wx.navigateTo({
-        url: `/pages/components/ecoDetail/ecoDetail?query=${e.currentTarget.dataset.query}`,
+        url: `/pages/components/ecoDetail/ecoDetail?ecoId=${e.currentTarget.dataset.ecoid}`,
       })
     },
     //点赞功能

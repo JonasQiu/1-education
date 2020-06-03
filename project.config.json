@@ -98,16 +98,17 @@
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 5,
 					"name": "生态圈详情页",
 					"pathName": "pages/components/ecoDetail/ecoDetail",
-					"query": "",
+					"query": "ecoId=gAxZc41UjAdVRFK6aMAcuIjCtvp9G3kQBpnUqzQgNwvXqZWn",
 					"scene": null
 				},
 				{
 					"id": -1,
 					"name": "分类",
 					"pathName": "pages/components/search/partitions/partitions",
+					"query": "",
 					"scene": null
 				}
 			]

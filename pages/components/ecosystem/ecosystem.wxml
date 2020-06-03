@@ -27,11 +27,11 @@
 
 	<!-- 推荐、关注、热帖、官方-->
 	<view wx:for="{{EcoList}}" class="eco-nav" wx:key="index">
-		<view bindtap="naviToDetail" data-query="{{item.userInfo.userId}}">
+		<view bindtap="naviToDetail" data-ecoid="{{item._id}}">
 			<view class="head">
-				<image src="{{item.orgInfo.cimg.logo}}" class="eco-headImg" mode="aspectFill"></image>
+				<image src="{{item.userInfo.avatarUrl}}" class="eco-headImg" mode="aspectFill"></image>
 				<view class="eco-info">
-					<text class="eco-name">{{item.orgInfo.info.orgName}}</text>
+					<text class="eco-name">{{item.userInfo.nickName}}</text>
 					<view class="eco-time text-gray">发表于 {{item.fixCreateTime}}</view>
 				</view>
 				<text wx:if="s" class="eco-office">官方</text>
