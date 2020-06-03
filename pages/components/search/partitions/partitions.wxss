@@ -94,3 +94,23 @@
   border-radius: 35rpx;
   vertical-align: middle;
 }
+
+/* 回到顶部 */
+.goTop {
+  width: 80rpx;
+  height: 80rpx;
+  text-align: center;
+  line-height: 80rpx;
+  border-radius: 50%;
+  position: fixed;
+  bottom: 150rpx;
+  right: 10rpx;
+  background-color: rgb(74, 240, 101);
+  box-shadow: 0rpx 0rpx 20rpx #fff;
+  font-size: 50rpx;
+  opacity: 0.6;
+}
+
+.goTop:hover {
+  opacity: 1;
+}

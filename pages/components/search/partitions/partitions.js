@@ -3,7 +3,8 @@ Component({
   data: {
     TabCur: 0,
     list: [],
-    load: true
+    load: true,
+    goTop: 0,
   },
   attached() {
     wx.showLoading({
@@ -27,14 +28,11 @@ Component({
       }
       typeList.push(obj)
     }
-    console.log(typeList)
 
     this.setData({
       list: typeList,
     })
     wx.hideLoading()
-  },
-  Ready() {
   },
   methods: {
     tabSelect(e) {
@@ -44,5 +42,13 @@ Component({
         VerticalNavTop: (e.currentTarget.dataset.id - 1) * 50
       })
     },
+    // 回到顶部
+    goTop(e) {
+      this.setData({
+        TabCur: 0,
+        VerticalNavTop: 0,
+        goTop: 0
+      })
+    }
   }
 })
