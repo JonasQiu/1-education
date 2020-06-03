@@ -1,5 +1,6 @@
 // components/talk/talk.js
 const comEco = require('../../../utils/Ecosystem/getPage')
+const comUserToEco = require('../../../utils/User/UserToEco')
 
 Component({
   /**
@@ -18,12 +19,9 @@ Component({
     // 导航栏
     TabCur: 0,
     scrollLeft: 0,
-    ecoNavList: ['推荐', '关注', '热帖', '官方'],
-    recommendList: [],
+    ecoNavList: ['推荐', '关注', '热帖', '搜索'],
     // 查找数据
     searchValue: '',
-    // 点赞是否显示
-    like: false,
     goTop: 0,
     EcoList: [],
     navTop: wx.getSystemInfoSync().statusBarHeight,
@@ -42,61 +40,52 @@ Component({
    * 组件的方法列表
    */
   methods: {
+    // 点赞
+    sendLike(e) {
+      var that = this;
+      wx.showLoading({
+        title: '请稍后…',
+      })
+      let index = e.currentTarget.dataset.myindex
+      let p = that.data.EcoList[index].isLike ? comUserToEco.disLike(that.data.EcoList[index]._id) : comUserToEco.like(that.data.EcoList[index]._id)
+      p.then(res => {
+        this.loadData(that.data.TabCur)
+      }).catch(res => {
+        wx.hideLoading()
+      })
+    },
     loadData(index) {
       var that = this;
       wx.showLoading({
         title: '正在加载数据中…',
       })
+      let p;
       switch (index) {
         case 0:
-          comEco.getPageList(0, 10).then(res => {
-            that.setData({
-              EcoList: res.ecoList
-            })
-            wx.hideLoading()
-          }).catch(res => {
-            wx.showToast({
-              title: '刷新失败！',
-            })
-          })
+          p = comEco.getPageList(0, 10)
           break;
         case 1:
-          comEco.getPageList(5, 5).then(res => {
-            that.setData({
-              EcoList: res.ecoList
-            })
-            wx.hideLoading()
-          }).catch(res => {
-            wx.showToast({
-              title: '刷新失败！',
-            })
-          })
+          p = comEco.getPageList(5, 5)
           break;
         case 2:
-          comEco.getHotPageList(0, 10).then(res => {
-            that.setData({
-              EcoList: res.ecoList
-            })
-            wx.hideLoading()
-          }).catch(res => {
-            wx.showToast({
-              title: '刷新失败！',
-            })
-          })
+          p = comEco.getHotPageList(0, 10)
           break;
         case 3:
-          comEco.getHotPageList(0, 5).then(res => {
-            that.setData({
-              EcoList: res.ecoList
-            })
-            wx.hideLoading()
-          }).catch(res => {
-            wx.showToast({
-              title: '刷新失败！',
-            })
-          })
+          p = comEco.getHotPageList(0, 5)
           break;
       }
+      p.then(res => {
+        comEco.fixLikeUser(res.ecoList).then(res => {
+          that.setData({
+            EcoList: res
+          })
+          wx.hideLoading()
+        })
+      }).catch(res => {
+        wx.showToast({
+          title: '刷新失败！',
+        })
+      })
     },
     // 下滑触底操作
     lower(e) {
@@ -159,13 +148,6 @@ Component({
       wx.navigateTo({
         url: `/pages/components/ecoDetail/ecoDetail?ecoId=${e.currentTarget.dataset.ecoid}`,
       })
-    },
-    //点赞功能
-    addLike(e) {
-      this.setData({
-        like: !this.data.like
-      })
-      // 数据传递
     },
     // 回到顶部
     goTop(e) {

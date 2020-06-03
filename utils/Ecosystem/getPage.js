@@ -1,4 +1,5 @@
 const comTime = require('../Func/time')
+const comFunUser = require('../User/Fun_User')
 const db = wx.cloud.database()
 const _ = db.command
 
@@ -175,10 +176,27 @@ function fixTime(ecoList) {
     return ecoList;
 }
 
+function fixLikeUser(ecoList) {
+
+    return new Promise((resolve, reject) => {
+        let pList = []
+        for (let i = 0; i < ecoList.length; i++) {
+            pList[i] = comFunUser.getInfoList(ecoList[i].likes)
+        }
+        (async () => {
+            for (let i = 0; i < pList.length; i++) {
+                ecoList[i].likes = (await pList[i])
+            }
+            resolve(ecoList)
+        })()
+    })
+}
+
 module.exports = {
     getPage,
     getPageList,
     getHotPageList,
     getHistoryPage,
+    fixLikeUser,
     searchPage
 }

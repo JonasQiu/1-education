@@ -14,20 +14,20 @@
 	<!-- 内容块 -->
 	<view class="relative">
 		<view class="absolute">
-			<view class="chunk">
+			<view class="chunk eco-head">
 				<!-- 头部 -->
-				<view class="eco-head">
-					<image class="avatar" src="{{ecoObj.userInfo.avatarUrl}}"></image>
-					<view class="eco-nameInfo">
-						<view class="eco-name">{{ecoObj.userInfo.nickName}}</view>
-						<!-- 创建时间 -->
-						<view class="first-change-time">发表于 {{ecoObj.fixCreateTime}}</view>
-					</view>
+				<image class="avatar" src="{{ecoObj.userInfo.avatarUrl}}"></image>
+				<view class="eco-nameInfo">
+					<view class="eco-name">{{ecoObj.userInfo.nickName}}</view>
+					<!-- 创建时间 -->
+					<view class="first-change-time">发表于 {{ecoObj.fixCreateTime}}</view>
 				</view>
+			</view>
+			<view class="chunk chInfo">
 				<!-- 描述 -->
 				<view class="eco-info">
 					<view class="eco-title">{{ecoObj.title}}</view>
-					<view class="line"></view>
+					<!-- <view class="line"></view> -->
 					<!-- 分割线line有icon -->
 					<view class="eco-content">{{ecoObj.content}}</view>
 					<view class="last-change-time">最后编辑于 {{ecoObj.fixLastTime}}</view>
@@ -48,12 +48,11 @@
 					<view class="info">
 						<view class="eco-orgName m-b-10">{{ecoObj.title}}</view>
 						<view class="eco-stars m-b-10">
-							价格
 							<!-- 评星展示 -->
-							<!-- 价格 -->
+							评分：{{ecoObj.orgInfo.star}} 分
 							<!-- 收藏 -->
 						</view>
-						<view class="eco-address">{{'屠户白云可'}}</view>
+						<view class="eco-address">{{ecoObj.orgInfo.location.address}}</view>
 					</view>
 				</view>
 			</view>

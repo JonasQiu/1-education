@@ -20,7 +20,7 @@
 
 .absolute {
   position: absolute;
-  top: -60rpx;
+  top: -103rpx;
   width: 100%;
 }
 
@@ -30,19 +30,21 @@
   width: 92%;
   background: #fff;
   box-shadow: 15rpx 20rpx 20rpx #ccc;
-  border-radius: 15rpx;
+  border-radius: 30rpx;
 }
 
 /* 头部 */
 .eco-head {
-  padding: 20rpx 0 0 20rpx;
+  padding: 30rpx;
   display: flex;
+  border-radius: 90rpx;
 }
 
 .avatar {
   border-radius: 50%;
   width: 100rpx;
   height: 100rpx;
+  box-shadow: 10rpx 10rpx 30rpx #ccc;
 }
 
 .eco-nameInfo {
@@ -53,17 +55,23 @@
 .eco-name {
   font-size: 33rpx;
   font-weight: bold;
-  margin: auto;
+  margin: 0 0 0 10rpx;
 }
 
 .first-change-time {
   font-size: 24rpx;
   font-weight: 300;
   letter-spacing: 1px;
-  margin-top: 10rpx;
+  margin: 20rpx 0 0 10rpx;
 }
 
 /* 描述 */
+.chInfo {
+  margin-top: -10rpx;
+  border-radius: 25rpx;
+  padding: 10rpx;
+}
+
 .eco-info {
   margin-top: 30rpx;
   margin-left: 20rpx;
@@ -72,13 +80,13 @@
 }
 
 .eco-title {
+  text-align: center;
   margin: 40rpx 0 30rpx 0;
   flex-direction: row;
   font-weight: bold;
   font-size: 40rpx;
   letter-spacing: 1px;
   font-family: "Microsoft Yahei";
-
 }
 
 .line {
@@ -131,19 +139,36 @@
 }
 
 .info {
-  margin-left: 10rpx;
-  font-size: 28rpx;
+  width: 500rpx;
+  margin: 0 0 0 20rpx;
+  font-size: 26rpx;
+  font-family: "Microsoft Yahei";
 }
 
 .eco-orgHeadImg {
   border: 2rpx solid #ccc;
   width: 120rpx;
   height: 120rpx;
-  border-radius: 6rpx;
+  border-radius: 50%;
 }
 
 .eco-orgName {
-  font-weight: 800;
+  font-weight: bold;
+  font-size: 30rpx;
+  letter-spacing: 1px;
+}
+
+.eco-address {
+  color: #ccc;
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  white-space: normal !important;
+  font-weight: 500;
+  letter-spacing: 2px;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
 }
 
 .m-b-10 {

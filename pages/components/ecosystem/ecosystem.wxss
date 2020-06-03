@@ -85,6 +85,7 @@
 }
 
 .eco-desc {
+  display: -webkit-box;
   color: #666;
   font-size: 30rpx;
   font-weight: 300;
@@ -92,6 +93,12 @@
   font-family: "Microsoft Yahei";
   margin: 30rpx 0;
   text-indent: 2em;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  white-space: normal !important;
 }
 
 .eco-imgContent {

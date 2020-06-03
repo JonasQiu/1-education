@@ -26,9 +26,6 @@ Page({
   onLoad: function (options) {
     // 机构信息
     comEco.getPage(options.ecoId).then(res => {
-      console.log(res)
-      console.log(res.cimg || res.orgInfo.cimg)
-
       this.setData({
         swiperList: res.cimg || res.orgInfo.cimg || [res.userInfo.avatarUrl],
         ecoObj: res
