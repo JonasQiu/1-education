@@ -58,10 +58,7 @@ function searchPage(keyWord) {
         }])).get().then((res) => {
             let ecoList = res.data
             if (ecoList.length < 1) {
-                resolve({
-                    ecoList,
-                    isBottom: true,
-                })
+                resolve(ecoList)
             }
             wx.cloud.callFunction({
                 name: 'getListEcosystem',
@@ -140,6 +137,44 @@ function getHotPageList(startNum, Num) {
     })
 }
 
+function getNewPageList(startNum, Num) {
+    return new Promise((resolve, reject) => {
+        db.collection('Eco').count().then(res => {
+            let isBottom = startNum + Num >= res.total;
+            db.collection('Eco').orderBy('createTime', 'desc').skip(startNum).limit(Num).get().then((res) => {
+                let ecoList = res.data
+                if (ecoList.length < 1) {
+                    resolve({
+                        ecoList,
+                        isBottom: true,
+                    })
+                }
+                wx.cloud.callFunction({
+                    name: 'getListEcosystem',
+                    data: {
+                        ecoList
+                    }
+                }).then(res => {
+                    resolve({
+                        ecoList: FixAll(res.result),
+                        isBottom
+                    })
+                }).catch(res => {
+                    reject({
+                        ecoList: [],
+                        isBottom: true,
+                    })
+                })
+            }).catch(res => {
+                reject({
+                    ecoList: [],
+                    isBottom: true,
+                })
+            })
+        })
+    })
+}
+
 function getHistoryPage() {
     return new Promise((resolve, reject) => {
         let history = wx.getStorageSync('history_Eco')
@@ -177,7 +212,6 @@ function fixTime(ecoList) {
 }
 
 function fixLikeUser(ecoList) {
-
     return new Promise((resolve, reject) => {
         let pList = []
         for (let i = 0; i < ecoList.length; i++) {
@@ -196,6 +230,7 @@ module.exports = {
     getPage,
     getPageList,
     getHotPageList,
+    getNewPageList,
     getHistoryPage,
     fixLikeUser,
     searchPage

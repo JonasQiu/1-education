@@ -25,6 +25,7 @@ Component({
     goTop: 0,
     EcoList: [],
     navTop: wx.getSystemInfoSync().statusBarHeight,
+    searchList: [],
   },
   attached() {
     //判断返回键的显示
@@ -62,7 +63,7 @@ Component({
       let p;
       switch (index) {
         case 0:
-          p = comEco.getPageList(0, 10)
+          p = comEco.getNewPageList(0, 10)
           break;
         case 1:
           p = comEco.getPageList(5, 5)
@@ -71,8 +72,11 @@ Component({
           p = comEco.getHotPageList(0, 10)
           break;
         case 3:
-          p = comEco.getHotPageList(0, 5)
-          break;
+          that.setData({
+            EcoList: that.data.searchList
+          })
+          wx.hideLoading()
+          return;
       }
       p.then(res => {
         comEco.fixLikeUser(res.ecoList).then(res => {
@@ -103,45 +107,25 @@ Component({
     },
     //搜索功能
     getValue(e) {
-      let that = this;
-      console.log('value')
-      if (that.timer) {
-        clearTimeout(that.timer)
+      var that = this;
+      if (that.data.timer) {
+        clearTimeout(that.data.timer)
       }
-      this.setData({
-        searchValue: e.detail.value || ''
-      })
-      that.timer = setTimeout(function () {
-        if (e.detail.value != '') {
-          that.search(e)
-        }
-      }, 700)
-    },
-    search(e) {
-      console.log('search')
-
-      if (this.data.searchValue !== "") {
-        // let that = this;
-        // comOrg.searchOrg(that.data.searchValue).then(res => {
-        //   that.setData({
-        //     //数据初始化
-        //     searchList: res,
-        //   })
-        // }).catch(res => {
-        //   wx.showModal({
-        //     title: '提示',
-        //     content: "没有搜索到更多的内容",
-        //     showCancel: false
-        //   })
-        // })
-      } else {
-        wx.showModal({
-          title: '提示',
-          content: "请输入您要搜索的内容",
-          showCancel: false
+      if (e.detail.value == "") {
+        return;
+      }
+      that.data.timer = setTimeout(function () {
+        comEco.searchPage(e.detail.value).then(res => {
+          if (res.length > 0) {
+            that.setData({
+              TabCur: 3,
+              scrollLeft: (3 - 1) * 60,
+              searchList: res,
+              EcoList: res
+            })
+          }
         })
-      }
-      // 根据searchValue，往云数据库发起请求,返回列表给haveContentList，然后往组件中传列表进行渲染
+      }, 700)
     },
     // 详情页跳转，传递参数用户id
     naviToDetail(e) {
