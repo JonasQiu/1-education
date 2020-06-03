@@ -3,7 +3,7 @@
 	<view slot="content">生态圈</view>
 </cu-custom> -->
 
-<scroll-view scroll-y style="height:93vh;margin-top:{{navTop}}px" bindscrolltolower="lower" scroll-with-animation scroll-top="{{goTop}}">
+<scroll-view scroll-y style="height:93vh;margin-top:{{navTop}}px" lower-threshold="200" bindscrolltolower="lower" scroll-with-animation scroll-top="{{goTop}}">
 	<view class="scrollTop">生态圈</view>
 	<!-- 搜索栏 -->
 	<view class="cu-bar search bg-white">
@@ -34,11 +34,11 @@
 					<text class="eco-name">{{item.userInfo.nickName}}</text>
 					<view class="eco-time text-gray">发表于 {{item.fixCreateTime}}</view>
 				</view>
-				<text wx:if="s" class="eco-office">官方</text>
+				<text wx:if="s" class="eco-office">{{item.userInfo.fixUserType}}</text>
 			</view>
 			<view class="eco-desc">{{item.content}}</view>
 			<view class="eco-imgContent">
-				<image mode="{{item.cimg.length === 1?'widthFix':''}}" class="{{item.cimg.length === 1 ? 'eco-oneImg' : item.cimg.length ===4 ? 'eco-fourImg' : 'eco-moreImg'}}" wx:for="{{item.cimg}}" wx:for-item="img" src="{{img}}" wx:key="index"></image>
+				<image mode="{{item.cimg.length === 1?'widthFix':'aspectFill'}}" class="{{item.cimg.length === 1 ? 'eco-oneImg' : item.cimg.length ===4 ? 'eco-fourImg' : 'eco-moreImg'}}" wx:for="{{item.cimg}}" wx:for-item="img" src="{{img}}" wx:key="index"></image>
 			</view>
 			<view class="eco-more">
 				<!-- 浏览是指，点击进去详情页则记录一次 -->

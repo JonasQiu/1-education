@@ -1,6 +1,7 @@
 // components/talk/talk.js
 const comEco = require('../../../utils/Ecosystem/getPage')
 const comUserToEco = require('../../../utils/User/UserToEco')
+const comType = require('../../../utils/Type/Type')
 
 Component({
   /**
@@ -25,7 +26,8 @@ Component({
     goTop: 0,
     EcoList: [],
     navTop: wx.getSystemInfoSync().statusBarHeight,
-    searchList: [],
+    searchLisst: [],
+    starNum: 0,
   },
   attached() {
     //判断返回键的显示
@@ -34,7 +36,7 @@ Component({
         isShow: true
       })
     }
-    this.loadData(0)
+    this.loadData(0, 3)
   },
 
   /**
@@ -55,35 +57,47 @@ Component({
         wx.hideLoading()
       })
     },
-    loadData(index) {
+    loadData(index, Num) {
       var that = this;
-      wx.showLoading({
-        title: '正在加载数据中…',
-      })
       let p;
+      // 判断是否换了个分类，换了分类则从第一个数据开始读取
+      if (that.data.TabCur != index) {
+        that.data.starNum = 0
+        that.data.EcoList = []
+      }
+      console.log('读取 ' + that.data.starNum + '~' + (that.data.starNum + Num))
       switch (index) {
         case 0:
-          p = comEco.getNewPageList(0, 10)
+          p = comEco.getNewPageList(that.data.starNum, Num)
           break;
         case 1:
-          p = comEco.getPageList(5, 5)
+          p = comEco.getPageList(that.data.starNum, Num)
           break;
         case 2:
-          p = comEco.getHotPageList(0, 10)
+          p = comEco.getHotPageList(that.data.starNum, Num)
           break;
         case 3:
           that.setData({
-            EcoList: that.data.searchList
+            TabCur: index,
+            scrollLeft: (index - 1) * 60,
+            EcoList: that.data.searchList || []
           })
           wx.hideLoading()
           return;
       }
       p.then(res => {
-        comEco.fixLikeUser(res.ecoList).then(res => {
+        comEco.fixLikeUser(res.ecoList).then(res_ecoList => {
+          res.ecoList = that.FixUserType(res_ecoList)
+          that.data.EcoList.push(...res.ecoList)
           that.setData({
-            EcoList: res
+            TabCur: index,
+            scrollLeft: (index - 1) * 60,
+            EcoList: that.data.EcoList,
+            starNum: that.data.starNum + Num,
+            isBottom: res.isBottom,
           })
           wx.hideLoading()
+          that.data.isLoading = false
         })
       }).catch(res => {
         wx.showToast({
@@ -93,17 +107,25 @@ Component({
     },
     // 下滑触底操作
     lower(e) {
-      // 刷新请求数据
-      console.log(e)
+      let that = this;
+      if (that.data.isLoading || that.data.TabCur == 3) {
+        return
+      }
+      that.data.isLoading = true
+      if (that.data.isBottom) {
+        console.log('到底了')
+      } else {
+        this.loadData(that.data.TabCur, 3)
+      }
     },
 
     // 导航栏
     tabSelect(e) {
-      this.setData({
-        TabCur: e.currentTarget.dataset.id,
-        scrollLeft: (e.currentTarget.dataset.id - 1) * 60,
+      wx.showLoading({
+        title: '正在加载数据中…',
       })
-      this.loadData(e.currentTarget.dataset.id)
+      this.data.isLoading = false
+      this.loadData(e.currentTarget.dataset.id, 3)
     },
     //搜索功能
     getValue(e) {
@@ -116,14 +138,17 @@ Component({
       }
       that.data.timer = setTimeout(function () {
         comEco.searchPage(e.detail.value).then(res => {
-          if (res.length > 0) {
-            that.setData({
-              TabCur: 3,
-              scrollLeft: (3 - 1) * 60,
-              searchList: res,
-              EcoList: res
-            })
-          }
+          comEco.fixLikeUser(res).then(res => {
+            if (res.length > 0) {
+              res = that.FixUserType(res)
+              that.setData({
+                TabCur: 3,
+                scrollLeft: (3 - 1) * 60,
+                searchList: res,
+                EcoList: res
+              })
+            }
+          })
         })
       }, 700)
     },
@@ -138,6 +163,18 @@ Component({
       this.setData({
         goTop: 0
       })
+    },
+    FixUserType(ecoList) {
+      let UserTypeList = ['普通用户', '专业人士', '机构', '官方']
+      let index;
+      for (let i = 0; i < ecoList.length; i++) {
+        index = ecoList[i].userInfo.userType - 1
+        ecoList[i].userInfo.fixUserType = UserTypeList[index]
+        if (index in [1, 2]) {
+          ecoList[i].userInfo.fixUserType = comType.getTypeName(ecoList[i].userInfo.type) + ' ' + ecoList[i].userInfo.fixUserType
+        }
+      }
+      return ecoList;
     }
   }
 })
