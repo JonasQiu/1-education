@@ -29,7 +29,8 @@
     "navigationBarTextStyle": "white"
   },
   "usingComponents": {
-    "cu-custom": "/colorui/components/cu-custom"
+    "cu-custom": "/colorui/components/cu-custom",
+    "return": "/pages/components/return/return"
   },
   "sitemapLocation": "sitemap.json"
 }

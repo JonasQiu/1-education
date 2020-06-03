@@ -1,9 +1,7 @@
 <!-- 详情页 -->
 <view class="page">
 	<!-- 是否返回 -->
-	<view class="return text-white" wx:if="{{isShow}}" bindtap="backTo">
-		<text class="cuIcon-back"></text>
-	</view>
+	<return />
 	<!-- 轮播图 -->
 	<swiper class="screen-swiper {{DotStyle?'square-dot':'round-dot'}}" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500">
 		<swiper-item wx:for="{{swiperList}}" wx:key bindtap="showImg" data-imgIndex="{{index}}">

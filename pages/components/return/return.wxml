@@ -1,0 +1,4 @@
+<!-- 是否返回 -->
+	<view class="return text-white" wx:if="{{isShow}}" bindtap="backTo">
+		<text class="cuIcon-back"></text>
+	</view>

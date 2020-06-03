@@ -1,7 +1,5 @@
 <!-- 是否返回 -->
-<view class="return " wx:if="{{isShow}}" bindtap="backTo">
-	<text class="cuIcon-back"></text>
-</view>
+<return />
 
 <!-- 选项导航 -->
 <scroll-view scroll-x class="bg-white nav text-center" style="margin-top:{{navTop}}px">

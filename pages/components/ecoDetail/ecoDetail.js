@@ -12,14 +12,8 @@ Page({
     swiperList: [],
     // 机构信息
     ecoObj: {},
-    // 返回键是否显示
-    isShow: false
   },
-  backTo(e) {
-    wx.navigateBack({
-      delta: 1
-    });
-  },
+  
   /**
    * 生命周期函数--监听页面加载
    */
@@ -34,20 +28,13 @@ Page({
       // 异常报错
       console.log(res)
     })
-    //判断返回键的显示
-    if (getCurrentPages().length > 1) {
-      this.setData({
-        isShow: true
-      })
-    }
+    
   },
+  //点击后，图片进行预览
   showImg(e) {
     wx.previewImage({
       current: this.data.swiperList[e.currentTarget.dataset.imgindex],
       urls: this.data.swiperList
     })
   },
-  methods: {
-
-  }
 })

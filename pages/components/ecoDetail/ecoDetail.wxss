@@ -1,12 +1,3 @@
-/* 返回上一步 */
-.return {
-  z-index: 9999;
-  position: fixed;
-  top: 60rpx;
-  left: 25rpx;
-  font-size: 45rpx;
-}
-
 /* 页面 */
 .page {
   background-color: #e4f9f5;

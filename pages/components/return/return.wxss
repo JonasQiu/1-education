@@ -1,0 +1,18 @@
+@import "/colorui/main.wxss";
+@import "/colorui/icon.wxss";
+
+/* 返回上一步 */
+.return {
+  z-index: 9999;
+  position: fixed;
+  width: 70rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  text-align: center;
+  background-color: #999;
+  color: #fff;
+  border-radius: 50%;
+  top: 50rpx;
+  left: 25rpx;
+  font-size: 40rpx;
+}
