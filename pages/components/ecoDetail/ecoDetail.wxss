@@ -14,8 +14,17 @@
 }
 
 /* 块 */
+.relative {
+  position: relative;
+}
+
+.absolute {
+  position: absolute;
+  top: -60rpx;
+}
+
 .chunk {
-  margin: 20rpx auto 0;
+  margin: 20rpx auto 40rpx;
   width: 92%;
   background: #fff;
   box-shadow: 15rpx 20rpx 20rpx #ccc;
@@ -43,9 +52,11 @@
   font-size: 34rpx;
   font-weight: 800;
 }
-.first-change-time{
+
+.first-change-time {
   margin-top: 15rpx;
 }
+
 /* 描述 */
 .eco-info {
   margin-top: 30rpx;
@@ -68,12 +79,13 @@
 }
 
 .eco-content {
-  color: #777;
+  color: #666;
   margin-top: 50rpx;
   margin-bottom: 40rpx;
 }
 
 .last-change-time {
+  color: #aaa;
   text-align: end;
   margin-bottom: 40rpx;
 }
@@ -96,30 +108,36 @@
 .m-20 {
   margin-left: 20rpx;
 }
+
 /* 机构介绍 */
-.org{
+.org {
   display: flex;
 }
+
 .padding-20 {
   padding: 20rpx;
 }
-.info{
+
+.info {
   margin-left: 10rpx;
   font-size: 28rpx;
 }
-.eco-orgHeadImg{
+
+.eco-orgHeadImg {
   border: 2rpx solid #ccc;
   width: 120rpx;
   height: 120rpx;
   border-radius: 6rpx;
 }
-.eco-orgName{
+
+.eco-orgName {
   font-weight: 800;
 }
 
-.m-b-10{
+.m-b-10 {
   margin-bottom: 4rpx;
 }
+
 /* 底部导航 */
 .tabbar {
   width: 100%;

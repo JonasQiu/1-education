@@ -11,54 +11,61 @@
 			<video src="{{item.url}}" autoplay loop muted show-play-btn="{{false}}" controls="{{false}}" objectFit="cover" wx:if="{{item.type=='video'}}"></video>
 		</swiper-item>
 	</swiper>
-
+	
 	<!-- 内容块 -->
-	<view class="chunk">
-		<!-- 头部 -->
-		<view class="eco-head">
-			<image class="avatar" src="{{recommendList.cimg}}"></image>
-			<view class="eco-nameInfo">
-				<view class="eco-name">{{recommendList.name}}</view>
-				<!-- 创建时间 -->
-				<view class="first-change-time">5月20日</view>
-			</view>
-		</view>
-		<!-- 描述 -->
-		<view class="eco-info">
-			<view class="eco-title">{{recommendList.title}}</view>
-			<view class="line"></view>
-			<!-- 分割线line有icon -->
-			<view class="eco-content">{{recommendList.content}}</view>
-			<view class="last-change-time">最后编辑于 {{'5月26日'}} 前</view>
-			<view class="line-2"></view>
-		</view>
-		<!-- 互动次数显示 -->
-		<view class="active">
-			<!-- 点赞多少次 -->
-			<text class="cuIcon-appreciatefill  "></text>{{}}
-			<!-- 评论多少次 -->
-			<text class="cuIcon-commentfill m-20"></text>{{}}
-		</view>
-	</view>
-	<!-- 机构介绍 -->
-	<view class="chunk">
-		<view class="padding-20 org">
-			<image class="eco-orgHeadImg" src="{{orgObj.cimg[0]}}"></image>
-			<view class="info">
-				<view class="eco-orgName m-b-10">{{orgObj.title}}</view>
-				<view class="eco-stars m-b-10">
-					价格
-					<!-- 评星展示 -->
-					<!-- 价格 -->
-					<!-- 收藏 -->
+	<view class="relative">
+		<view class="absolute">
+			<view class="chunk ">
+				<!-- 头部 -->
+				<view class="eco-head">
+					<image class="avatar" src="{{recommendList.cimg}}"></image>
+					<view class="eco-nameInfo">
+						<view class="eco-name">{{recommendList.name}}</view>
+						<!-- 创建时间 -->
+						<view class="first-change-time">5月20日</view>
+					</view>
 				</view>
-				<view class="eco-address">{{'屠户白云可'}}</view>
+				<!-- 描述 -->
+				<view class="eco-info">
+					<view class="eco-title">{{recommendList.title}}</view>
+					<view class="line"></view>
+					<!-- 分割线line有icon -->
+					<view class="eco-content">{{recommendList.content}}</view>
+					<view class="last-change-time">最后编辑于 {{'5月26日'}} 前</view>
+					<view class="line-2"></view>
+				</view>
+				<!-- 互动次数显示 -->
+				<view class="active">
+					<!-- 点赞多少次 -->
+					<text class="cuIcon-appreciatefill  "></text>{{}}
+					<!-- 评论多少次 -->
+					<text class="cuIcon-commentfill m-20"></text>{{}}
+				</view>
 			</view>
+			<!-- 机构介绍 -->
+			<view class="chunk">
+				<view class="padding-20 org">
+					<image class="eco-orgHeadImg" src="{{orgObj.cimg[0]}}"></image>
+					<view class="info">
+						<view class="eco-orgName m-b-10">{{orgObj.title}}</view>
+						<view class="eco-stars m-b-10">
+							价格
+							<!-- 评星展示 -->
+							<!-- 价格 -->
+							<!-- 收藏 -->
+						</view>
+						<view class="eco-address">{{'屠户白云可'}}</view>
+					</view>
+				</view>
+			</view>
+			<!-- 评论 -->
+			<view class="chunk"></view>
 		</view>
+
 	</view>
-	<!-- 评论 -->
-	<view class="chunk"></view>
 </view>
+
+
 
 <view class="tabbar">
 	<view wx:for="{{tabbarList}}" class="attention w-50" bindtap="attentionTap" wx:key="index">
