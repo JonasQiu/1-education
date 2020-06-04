@@ -4,7 +4,7 @@ Page({
     StatusBar: app.globalData.StatusBar,
     CustomBar: app.globalData.CustomBar,
     hidden: true,
-    isShow:false,
+    isShow: false,
   },
   onLoad() {
     let list = [];
@@ -17,20 +17,20 @@ Page({
     })
   },
   onReady() {
-    if(getCurrentPages().length > 1){
+    if (getCurrentPages().length > 1) {
       this.setData({
-        isShow:true
+        isShow: true
       })
-     }
+    }
 
 
     let that = this;
-    wx.createSelectorQuery().select('.indexBar-box').boundingClientRect(function(res) {
+    wx.createSelectorQuery().select('.indexBar-box').boundingClientRect(function (res) {
       that.setData({
         boxTop: res.top
       })
     }).exec();
-    wx.createSelectorQuery().select('.indexes').boundingClientRect(function(res) {
+    wx.createSelectorQuery().select('.indexes').boundingClientRect(function (res) {
       that.setData({
         barTop: res.top
       })

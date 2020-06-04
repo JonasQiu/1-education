@@ -117,6 +117,12 @@
 					"pathName": "pages/components/search/search",
 					"query": "",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/components/position/position",
+					"pathName": "pages/components/position/position",
+					"scene": null
 				}
 			]
 		}
