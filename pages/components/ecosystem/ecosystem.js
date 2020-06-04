@@ -65,55 +65,49 @@ Component({
         that.data.starNum = 0
         that.data.EcoList = []
       }
+      // 根据传入的分页索引，加载不同的数据，将返回的promise保存到p变量
       switch (index) {
         case 0:
+          // 推荐：获取最新的数据
           p = comEco.getNewPageList(that.data.starNum, Num)
           break;
         case 1:
+          // 关注：暂时随便获取
           p = comEco.getPageList(that.data.starNum, Num)
           break;
         case 2:
+          // 热帖：按点赞排行
           p = comEco.getHotPageList(that.data.starNum, Num)
           break;
         case 3:
+          // 搜索：从Data中的searchList数组里面分页加载
           p = that.getSearchList(Num)
           break;
       }
       console.log('读取 ' + that.data.starNum + '~' + (that.data.starNum + Num))
-      p.then(res => {
-        comEco.fixLikeUser(res.ecoList).then(res_ecoList => {
-          res.ecoList = that.FixUserType(res_ecoList)
-          that.data.EcoList.push(...res.ecoList)
-          that.setData({
-            TabCur: index,
-            scrollLeft: (index - 1) * 60,
-            EcoList: that.data.EcoList,
-            starNum: that.data.starNum + Num,
-            isBottom: res.isBottom,
-          })
-          wx.hideLoading()
-          that.data.isLoading = false
+      // 做统一处理
+      p.then(async res => {
+        // 因为搜索内容fix过了，所以不要再fix了，会报错，所以除了搜索之外的需要fix。fix就是完善数据
+        res.ecoList = index == 3 ? res.ecoList : that.FixUserType(await comEco.fixLikeUser(res.ecoList))
+        // 添加到原来的数组后面
+        that.data.EcoList.push(...res.ecoList)
+        that.setData({
+          TabCur: index, // 数据获取到了再渲染页面
+          scrollLeft: (index - 1) * 60,
+          EcoList: that.data.EcoList,
+          starNum: that.data.starNum + Num, // 将获取数据的开始指针向后移动
+          isBottom: res.isBottom, // 判断是否到底了
+          isLoading: false // 加载完毕，取消正在加载状态
         })
+        wx.hideLoading()
       }).catch(res => {
         wx.showToast({
           title: '刷新失败！',
         })
       })
     },
-    // 下滑触底操作
-    lower(e) {
-      let that = this;
-      if (that.data.isLoading) {
-        return
-      }
-      that.data.isLoading = true
-      if (that.data.isBottom) {
-        console.log('到底了')
-      } else {
-        this.loadData(that.data.TabCur, 3, false)
-      }
-    },
     getSearchList(Num) {
+      // 分页方式获取data里的searchList数组部分内容
       var that = this;
       return new Promise((resolve, reject) => {
         let isBottom, list = []
@@ -140,13 +134,23 @@ Component({
     },
     // 导航栏
     tabSelect(e) {
+      // 由于搜索页是要么没有要么提前获取了数据存到了searchList里面了，所以不需要提示
       if (e.currentTarget.dataset.id != 3) {
         wx.showLoading({
           title: '正在加载数据中…',
         })
       }
-      this.data.isLoading = false
       this.loadData(e.currentTarget.dataset.id, 3, true)
+    },
+    // 下滑触底操作
+    lower(e) {
+      let that = this;
+      // 防止重复加载
+      if (that.data.isLoading || that.data.isBottom) {
+        return
+      }
+      that.data.isLoading = true
+      this.loadData(that.data.TabCur, 3, false)
     },
     //搜索功能
     getValue(e) {
@@ -158,15 +162,11 @@ Component({
         return;
       }
       that.data.timer = setTimeout(function () {
-        that.fun_search(e.detail.value)
+        comEco.searchPage(e.detail.value).then(async res => {
+          that.data.searchList = that.FixUserType(await comEco.fixLikeUser(res))
+          that.loadData(3, 3, true)
+        })
       }, 700)
-    },
-    fun_search(keyWord) {
-      let that = this;
-      comEco.searchPage(keyWord).then(res => {
-        that.data.searchList = res
-        that.loadData(3, 3, true)
-      })
     },
     // 详情页跳转，传递参数用户id
     naviToDetail(e) {
