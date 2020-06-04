@@ -78,12 +78,13 @@
   height: 80rpx;
   line-height: 80rpx;
   padding-left: 20rpx;
+  font-size: 28rpx;
 }
 
 .second-floor {
   display: flex;
   flex-wrap: wrap;
-  font-size: 30rpx;
+  font-size: 25rpx;
 }
 
 .item {

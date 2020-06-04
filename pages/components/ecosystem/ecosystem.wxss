@@ -163,17 +163,17 @@
 
 /* 回到顶部 */
 .goTop {
-  width: 100rpx;
-  height: 100rpx;
+  width: 90rpx;
+  height: 90rpx;
   text-align: center;
-  line-height: 100rpx;
+  line-height: 95rpx;
   border-radius: 50%;
   position: fixed;
   bottom: 150rpx;
   right: 50rpx;
-  background-color: rgb(93, 108, 243);
+  background-color: rgb(167, 167, 167);
   box-shadow: 0rpx 0rpx 20rpx #fff;
-  font-size: 60rpx;
+  font-size: 55rpx;
   opacity: 0.6;
 }
 

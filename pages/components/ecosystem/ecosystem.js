@@ -120,9 +120,11 @@ Component({
 
     // 导航栏
     tabSelect(e) {
-      wx.showLoading({
-        title: '正在加载数据中…',
-      })
+      if (e.currentTarget.dataset.id != 3) {
+        wx.showLoading({
+          title: '正在加载数据中…',
+        })
+      }
       this.data.isLoading = false
       this.loadData(e.currentTarget.dataset.id, 3)
     },
