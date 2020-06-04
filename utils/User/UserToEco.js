@@ -1,5 +1,6 @@
 const db = wx.cloud.database()
 const _ = db.command
+const comEco = require('../Ecosystem/getPage')
 
 function read(ecoId) {
     // 用户(无需登录)查看了这个帖子
@@ -52,7 +53,7 @@ function like(ecoId) {
                     msg: '喜欢失败'
                 })
             } else {
-                let ecoData = isLike([res.data])[0]
+                let ecoData = comEco.isLike([res.data])[0]
                 if (ecoData.isLike) {
                     resolve({
                         status: 0,
@@ -85,7 +86,7 @@ function like(ecoId) {
     })
 }
 
-function disLike(ecoId) {
+function Unlike(ecoId) {
     // 用户(需登录)取消喜欢这个帖子,自减帖子likeNum，用户ID从likes列表删除
     // resolve -> 0:喜欢成功 1:喜欢失败 2:用户未登录
     // reject -> 处理异常
@@ -101,7 +102,7 @@ function disLike(ecoId) {
                     msg: '取消失败'
                 })
             } else {
-                let ecoData = isLike([res.data])[0]
+                let ecoData = comEco.isLike([res.data])[0]
                 if (!ecoData.isLike) {
                     resolve({
                         status: 0,
@@ -135,17 +136,9 @@ function disLike(ecoId) {
     })
 }
 
-function isLike(ecoList) {
-    let userInfo = wx.getStorageSync('userInfo')
-    for (let i = 0; i < ecoList.length; i++) {
-        ecoList[i].isLike = (!!userInfo && (ecoList[i].likes.indexOf(userInfo._id) > -1))
-    }
-    return ecoList;
-}
-
 // 还有评论，给评论点赞，评论热评、新评排序、分享、
 module.exports = {
     read,
     like,
-    disLike,
+    Unlike,
 }

@@ -26,7 +26,7 @@ Component({
     goTop: 0,
     EcoList: [],
     navTop: wx.getSystemInfoSync().statusBarHeight,
-    searchLisst: [],
+    searchList: [],
     starNum: 0,
   },
   attached() {
@@ -50,7 +50,7 @@ Component({
         title: '请稍后…',
       })
       let index = e.currentTarget.dataset.myindex
-      let p = that.data.EcoList[index].isLike ? comUserToEco.disLike(that.data.EcoList[index]._id) : comUserToEco.like(that.data.EcoList[index]._id)
+      let p = that.data.EcoList[index].isLike ? comUserToEco.Unlike(that.data.EcoList[index]._id) : comUserToEco.like(that.data.EcoList[index]._id)
       p.then(res => {
         this.loadData(that.data.TabCur, that.data.starNum, true)
       }).catch(res => {
@@ -65,7 +65,6 @@ Component({
         that.data.starNum = 0
         that.data.EcoList = []
       }
-      console.log('读取 ' + that.data.starNum + '~' + (that.data.starNum + Num))
       switch (index) {
         case 0:
           p = comEco.getNewPageList(that.data.starNum, Num)
@@ -77,13 +76,10 @@ Component({
           p = comEco.getHotPageList(that.data.starNum, Num)
           break;
         case 3:
-          that.setData({
-            TabCur: index,
-            scrollLeft: (index - 1) * 60,
-            EcoList: that.data.searchList || []
-          })
-          return;
+          p = that.getSearchList(Num)
+          break;
       }
+      console.log('读取 ' + that.data.starNum + '~' + (that.data.starNum + Num))
       p.then(res => {
         comEco.fixLikeUser(res.ecoList).then(res_ecoList => {
           res.ecoList = that.FixUserType(res_ecoList)
@@ -107,7 +103,7 @@ Component({
     // 下滑触底操作
     lower(e) {
       let that = this;
-      if (that.data.isLoading || that.data.TabCur == 3) {
+      if (that.data.isLoading) {
         return
       }
       that.data.isLoading = true
@@ -117,7 +113,31 @@ Component({
         this.loadData(that.data.TabCur, 3, false)
       }
     },
+    getSearchList(Num) {
+      var that = this;
+      return new Promise((resolve, reject) => {
+        let isBottom, list = []
+        if (!that.data.searchList || that.data.starNum >= that.data.searchList.length) {
+          resolve({
+            ecoList: [],
+            isBottom: true
+          })
+        } else {
+          if (Num + that.data.starNum >= that.data.searchList.length) {
+            list = that.data.searchList.slice(that.data.starNum)
+            isBottom = true
+          } else {
+            list = that.data.searchList.slice(that.data.starNum, that.data.starNum + Num)
+            isBottom = false
+          }
+          resolve({
+            ecoList: list,
+            isBottom: isBottom
+          })
+        }
+      })
 
+    },
     // 导航栏
     tabSelect(e) {
       if (e.currentTarget.dataset.id != 3) {
@@ -138,20 +158,15 @@ Component({
         return;
       }
       that.data.timer = setTimeout(function () {
-        comEco.searchPage(e.detail.value).then(res => {
-          comEco.fixLikeUser(res).then(res => {
-            if (res.length > 0) {
-              res = that.FixUserType(res)
-              that.setData({
-                TabCur: 3,
-                scrollLeft: (3 - 1) * 60,
-                searchList: res,
-                EcoList: res
-              })
-            }
-          })
-        })
+        that.fun_search(e.detail.value)
       }, 700)
+    },
+    fun_search(keyWord) {
+      let that = this;
+      comEco.searchPage(keyWord).then(res => {
+        that.data.searchList = res
+        that.loadData(3, 3, true)
+      })
     },
     // 详情页跳转，传递参数用户id
     naviToDetail(e) {

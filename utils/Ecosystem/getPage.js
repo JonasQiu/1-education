@@ -233,5 +233,6 @@ module.exports = {
     getNewPageList,
     getHistoryPage,
     fixLikeUser,
-    searchPage
+    searchPage,
+    isLike
 }

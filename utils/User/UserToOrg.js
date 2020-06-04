@@ -76,7 +76,7 @@ function collect(orgId) {
     })
 }
 
-function Notcollect(orgId) {
+function Uncollect(orgId) {
     // 用户(需登录) 取消收藏 了这个机构,自减机构收藏数，机构id从用户信息中删除，并更新本地缓存
     // resolve -> 0:取消成功 1:取消失败 2:用户未登录
     // reject -> 处理异常
@@ -148,5 +148,5 @@ function Notcollect(orgId) {
 module.exports = {
     read,
     collect,
-    Notcollect,
+    Uncollect,
 }
