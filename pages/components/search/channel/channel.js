@@ -97,7 +97,6 @@ Component({
       return list
     },
     changeTypeList(index) {
-      console.log(index)
       let that = this;
       this.setData({
         TabCur: index,
