@@ -110,11 +110,12 @@
   padding: 20rpx;
   background-color: #e4f9f5;
   padding-top: 15rpx;
+  margin-bottom: 100rpx;
 }
 
 .item {
-  padding: 15rpx 0;
-  height: 250rpx;
+  padding: 30rpx 0rpx;
+  height: 290rpx;
   display: flex;
 
   border: 2rpx solid rgb(241, 241, 241);
@@ -149,17 +150,32 @@
   width: 400rpx;
   overflow: hidden;
   white-space: nowrap;
+  font-weight: bold;
+  letter-spacing: 1px;
+  font-family: "Microsoft Yahei";
 }
-.userName{
-  margin-bottom: 15rpx;
-}
-.text-size{
+
+.text-size {
   font-size: 38rpx;
 }
+
 .userName {
+  margin-bottom: 15rpx;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2
+  -webkit-line-clamp: 2;
+
+  display: -webkit-box;
+  color: #666;
+  font-size: 25rpx;
+  font-weight: 300;
+  letter-spacing: 2px;
+  font-family: "Microsoft Yahei";
+  text-indent: 1em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  white-space: normal !important;
 }

@@ -82,7 +82,6 @@ Component({
             scrollLeft: (index - 1) * 60,
             EcoList: that.data.searchList || []
           })
-          wx.hideLoading()
           return;
       }
       p.then(res => {

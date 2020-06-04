@@ -24,7 +24,7 @@
 			"disablePlugins": [],
 			"outputPath": ""
 		},
-		"useCompilerModule": true,
+		"useCompilerModule": false,
 		"userConfirmedUseCompilerModuleSwitch": false
 	},
 	"compileType": "miniprogram",
@@ -108,6 +108,13 @@
 					"id": -1,
 					"name": "分类",
 					"pathName": "pages/components/search/partitions/partitions",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/components/search/search",
+					"pathName": "pages/components/search/search",
 					"query": "",
 					"scene": null
 				}

@@ -29,27 +29,27 @@ exports.main = (event, context) => {
         userInfo.type = 0;
         userInfo.phone = "";
         userInfo.registerTime = Date.now();
-        userInfo.myFans = [],
-          userInfo.myFollow = [],
-          userInfo.myCollection = [],
-          userInfo.myArticle = [],
-          db.collection('User').add({
-            data: userInfo
-          }).then(res => {
-            userInfo.recordId = res._id
-            resolve({
-              status: 0,
-              msg: '登录成功',
-              source: res,
-              userInfo,
-            })
-          }).catch(res => {
-            reject({
-              status: -2,
-              msg: '登录失败',
-              source: res,
-            })
+        userInfo.myFans = []
+        userInfo.myFollow = []
+        userInfo.myCollection = []
+        userInfo.myArticle = []
+        db.collection('User').add({
+          data: userInfo
+        }).then(res => {
+          userInfo.recordId = res._id
+          resolve({
+            status: 0,
+            msg: '登录成功',
+            source: res,
+            userInfo,
           })
+        }).catch(res => {
+          reject({
+            status: -2,
+            msg: '登录失败',
+            source: res,
+          })
+        })
       } else {
         var newUserInfo = res.data[0]
         db.collection('User').doc(newUserInfo._id).update({

@@ -1,5 +1,6 @@
 // pages/components/search/channel/channel.js
 const comOrg = require('../../../../utils/Org/getOrg')
+const comType = require('../../../../utils/Type/Type')
 Component({
   /**
    * 组件的属性列表
@@ -16,12 +17,14 @@ Component({
     searchValue: "",
     haveContentList: [],
     // 没有搜索内容
-    hotList: ['shuai', 'sad', 'asdasd', 'shuai', 'sad', 'asdasd', 'shuai', 'sad', 'asdasd'], //数据截取前10个
+    hotList: ['太原', '小学', '初中', '高中', '太', '原', '小', '学', '中'], //数据截取前10个
     historyList: [],
     // 有搜索内容
     TabCur: 0,
     scrollLeft: 0,
-    searchList: []
+    searchList: [],
+    showList: [],
+    typeList: []
   },
   attached() {
     var that = this;
@@ -56,18 +59,20 @@ Component({
           })
           myData.historyList = that.data.historyList
         }
+        res = comType.deOrgTypeList(res)
+        myData.typeList = Object.keys(res)
         myData.searchList = res
+        myData.TabCur = 0
+        myData.scrollLeft = (0 - 1) * 60
+        myData.showList = myData.searchList[myData.typeList[0]]
         that.setData(myData)
         wx.hideLoading()
         return true
       }).catch(res => {
         wx.hideLoading()
-        wx.showToast({
-          title: '没有搜索到内容',
-          icon:"none"
-        })
         return false
       })
+      return true
     },
     clearHistory(e) {
       this.setData({
@@ -79,9 +84,14 @@ Component({
       })
     },
     tabSelect(e) {
+      this.changeTypeList(e.currentTarget.dataset.id)
+    },
+    changeTypeList(index) {
+      let that = this;
       this.setData({
-        TabCur: e.currentTarget.dataset.id,
-        scrollLeft: (e.currentTarget.dataset.id - 1) * 60
+        TabCur: index,
+        scrollLeft: (index - 1) * 60,
+        showList: that.data.searchList[that.data.typeList[index]]
       })
     },
     orgDetail(e) {
@@ -110,6 +120,9 @@ Component({
     },
     addInfo(e) {
       if (e.currentTarget.dataset.value) {
+        this.setData({
+          searchValue: e.currentTarget.dataset.value
+        })
         if (!this.fun_search(e.currentTarget.dataset.value)) {
           wx.showModal({
             title: '提示',
