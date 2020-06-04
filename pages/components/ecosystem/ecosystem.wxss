@@ -157,7 +157,7 @@
 
 .margin-left {
   margin-left: 18rpx;
-  box-shadow: 4rpx 4rpx #ccc;
+  box-shadow: 5rpx 10rpx 20rpx #ccc;
   border-radius: 50%;
 }
 

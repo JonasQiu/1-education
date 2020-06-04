@@ -60,11 +60,11 @@ Component({
           myData.historyList = that.data.historyList
         }
         res = comType.deOrgTypeList(res)
-        myData.typeList = Object.keys(res)
+        myData.typeList = ['全部', ...Object.keys(res)]
         myData.searchList = res
         myData.TabCur = 0
         myData.scrollLeft = (0 - 1) * 60
-        myData.showList = myData.searchList[myData.typeList[0]]
+        myData.showList = that.getAll(myData.searchList)
         that.setData(myData)
         wx.hideLoading()
         return true
@@ -86,12 +86,22 @@ Component({
     tabSelect(e) {
       this.changeTypeList(e.currentTarget.dataset.id)
     },
+    getAll(searchList) {
+      let list = []
+      let objList = Object.keys(searchList)
+      for (let i = 0; i < objList.length - 1; i++) {
+        for (let j = 0; j < searchList[objList[i]].length; j++) {
+          list.push(searchList[objList[i]][j])
+        }
+      }
+      return list
+    },
     changeTypeList(index) {
       let that = this;
       this.setData({
         TabCur: index,
         scrollLeft: (index - 1) * 60,
-        showList: that.data.searchList[that.data.typeList[index]]
+        showList: index == 0 ? that.getAll(that.data.searchList) : that.data.searchList[that.data.typeList[index]]
       })
     },
     orgDetail(e) {
@@ -106,7 +116,7 @@ Component({
       }
       if (e.detail.value == "") {
         that.setData({
-          searchList: []
+          showList: []
         })
         return;
       }
