@@ -1,24 +1,17 @@
 <!-- 顶部导航 -->
-<cu-custom bgColor="bg-gradual-blue">
-	<view slot="content">
-		<!-- 定位及温度 -->
-		<view class="position">
-			{{position}}
-			<text class="cuIcon-unfold lg"></text>
-			<view class="weather">{{weather}} {{degree+'°C'}}</view>
-		</view>
-		
-		<!-- 搜索框 -->
-		<view class="search bg-white">
-			<text class="cuIcon-search"></text>
-			<input placeholder="{{hotSearch}}"></input>
-		</view>
+<view class="topFlex bg-gradual-blue ">
+	<!-- 定位及温度 -->
+	<view class="positionTem" bindtap="positionTem">
+		{{position}}
+		<text class="cuIcon-unfold lg"></text>
+		<view class="weather">{{weather}} {{degree+'°C'}}</view>
 	</view>
-</cu-custom>
-<!-- 顶部导航搜索，不确定什么原因无法使用事件，所以手动添加元素进行覆盖 -->
-<navigator class="navigator" url="/pages/components/search/search"></navigator>
-<!-- 顶部导航定位，不确定什么原因无法使用事件，所以手动添加元素进行覆盖 -->
-<navigator class="position" url="/pages/components/position/position"></navigator>
+	<!-- 搜索框 -->
+	<view class="search bg-white" bindtap="topSearch">
+		<text class="cuIcon-search"></text>
+		<input placeholder="{{hotSearch}}"></input>
+	</view>
+</view>
 
 <!-- 宫格列表 -->
 <view class="page">

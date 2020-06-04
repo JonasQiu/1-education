@@ -144,6 +144,19 @@ Component({
    * 组件的方法列表
    */
   methods: {
+    // 定位跳转
+    positionTem() {
+      wx.navigateTo({
+        url: '/pages/components/search/search',
+      })
+    },
+    // 顶部搜索跳转
+    topSearch() {
+      wx.navigateTo({
+        url: '/pages/components/position/position',
+      })
+    },
+    
     tabSelect(e) {
       this.setData({
         TabCur: e.currentTarget.dataset.id,
