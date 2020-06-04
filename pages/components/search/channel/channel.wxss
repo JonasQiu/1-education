@@ -93,9 +93,10 @@
 }
 
 /* 有搜索内容 */
-@import "/colorui/main.wxss";
-@import "/colorui/icon.wxss";
-
+.b-color{
+  height: 100vh;
+  background-color: #e4f9f5;
+}
 /* 导航栏 */
 .nav .cu-item {
   height: 60rpx;
@@ -108,7 +109,6 @@
 /* 内容 */
 .content {
   padding: 20rpx;
-  background-color: #e4f9f5;
   padding-top: 15rpx;
   margin-bottom: 100rpx;
 }

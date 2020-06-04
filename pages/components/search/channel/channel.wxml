@@ -41,7 +41,7 @@
 	</view>
 </view>
 <!-- 展示有搜索内容时的界面 -->
-<view wx:else list="haveContentList">
+<view wx:else list="haveContentList" class="b-color">
 	<!-- 导航栏nav -->
 	<scroll-view scroll-x class="bg-white nav">
 		<view class="flex text-center">

@@ -1,13 +1,14 @@
 <!-- 顶部导航 -->
 <cu-custom bgColor="bg-gradual-blue">
 	<view slot="content">
+		<!-- 定位及温度 -->
 		<view class="position">
-			<view class="addresschoose">
-				{{position}}
-				<text class="cuIcon-unfold lg"></text>
-			</view>
+			{{position}}
+			<text class="cuIcon-unfold lg"></text>
 			<view class="weather">{{weather}} {{degree+'°C'}}</view>
 		</view>
+		
+		<!-- 搜索框 -->
 		<view class="search bg-white">
 			<text class="cuIcon-search"></text>
 			<input placeholder="{{hotSearch}}"></input>

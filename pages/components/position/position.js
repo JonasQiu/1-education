@@ -1,16 +1,28 @@
 const app = getApp();
+const positionCity = require("../../../utils/Func/city")
 Page({
   data: {
     StatusBar: app.globalData.StatusBar,
     CustomBar: app.globalData.CustomBar,
     hidden: true,
     isShow: false,
+    allCityObj: {},
+    hotCityArr: [],
+    curCity: '上海市',
+    chooseCity:''
   },
   onLoad() {
+    // 初始化城市列表
+    this.setData({
+      allCityObj: positionCity.all,
+      hotCityArr: positionCity.hot
+    })
+    console.log(positionCity)
     let list = [];
     for (let i = 0; i < 26; i++) {
       list[i] = String.fromCharCode(65 + i)
     }
+    console.log(list)
     this.setData({
       list: list,
       listCur: list[0]
@@ -22,7 +34,6 @@ Page({
         isShow: true
       })
     }
-
 
     let that = this;
     wx.createSelectorQuery().select('.indexBar-box').boundingClientRect(function (res) {

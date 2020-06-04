@@ -69,3 +69,41 @@ movable-view.indexBar-item::before {
   text-align: center;
   font-size: 48rpx;
 }
+
+/* 城市样式 */
+.padding{
+  padding: 15rpx 30rpx;
+}
+/* 当前城市 */
+.curCity{
+  height: 100rpx;
+  line-height: 100rpx;
+  background-color: #fff;
+  font-size: 34rpx;
+  padding-left: 20rpx;
+  border-bottom: 2rpx solid #ccc;
+}
+
+/* 热搜城市 */
+.hotCity{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #fff;
+  padding-bottom: 20rpx;
+}
+.hotCityItem{
+  margin-top: 20rpx;
+  margin-left: 20rpx;
+  padding: 10rpx 15rpx;
+  border: 2rpx solid #ccc;
+  font-size: 28rpx;
+}
+/* 全部城市 */
+.cityContent {
+  height: 120rpx;
+  line-height: 120rpx;
+  background-color: #fff;
+  padding-left: 25rpx;
+  border-bottom: 4rpx dotted #ccc;
+}
