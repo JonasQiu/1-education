@@ -138,8 +138,19 @@ Component({
       price: '价格'
     }],
   },
-
-
+  attached(e) {
+    let that=this
+    // 进入页面读取城市
+    wx.getStorage({
+      key: 'location',
+      success(res) {
+        that.setData({
+          position: res.data.city
+        })
+        console.log(that.data.position)
+      }
+    })
+  },
   /**
    * 组件的方法列表
    */
@@ -147,16 +158,16 @@ Component({
     // 定位跳转
     positionTem() {
       wx.navigateTo({
-        url: '/pages/components/search/search',
+        url: '/pages/components/position/position',
       })
     },
     // 顶部搜索跳转
     topSearch() {
       wx.navigateTo({
-        url: '/pages/components/position/position',
+        url: '/pages/components/search/search',
       })
     },
-    
+
     tabSelect(e) {
       this.setData({
         TabCur: e.currentTarget.dataset.id,

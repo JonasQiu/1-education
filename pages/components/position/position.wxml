@@ -6,7 +6,7 @@
 <view class="cu-bar bg-white search fixed" style="top:{{CustomBar}}px;">
 	<view class="search-form round">
 		<text class="cuIcon-search"></text>
-		<input type="text" placeholder="输入搜索的城市" confirm-type="search" value="{{chooseCity}}"></input>
+		<input type="text" placeholder="输入搜索的城市" confirm-type="search" value="{{searchCity}}"></input>
 	</view>
 	<view class="action">
 		<button class="cu-btn bg-gradual-green shadow-blur round">搜索</button>
@@ -14,7 +14,7 @@
 </view>
 <!-- 当前城市 -->
 <view class="curCity">
-	当前定位城市：{{curCity}}
+	当前定位城市：{{chooseCity}}
 </view>
 
 <!-- 城市列表 -->
@@ -22,14 +22,14 @@
 	<!-- 热搜城市 -->
 	<view class="padding indexItem-{{list[index]}}">热门城市</view>
 	<view class="hotCity">
-		<text class="hotCityItem"  wx:for="{{hotCityArr}}">{{item.fullname}}</text>
+		<text class="hotCityItem" wx:key="index" wx:for="{{hotCityArr}}" bindtap="chooseCity" data-msg="hot" data-id="{{index}}">{{item.fullname}}</text>
 	</view>
 	<!-- 所有城市 -->
 	<block wx:for="{{list}}" wx:key="index">
 		<view class="padding indexItem-{{list[index]}}" id="indexes-{{list[index]}}" data-index="{{list[index]}}">{{list[index]}}</view>
 		<view class="cu-list menu-avatar no-padding">
 			<!-- 根据字母渲染字母下的城市列表 -->
-			<view class="cityContent" wx:for="{{allCityObj[item]}}" wx:key="index" wx:for-item="city">
+			<view class="cityContent" wx:for="{{allCityObj[item]}}" bindtap="chooseCity" wx:key="index" wx:for-item="city" data-msg="all" data-id="{{index}}" data-key="{{item}}">
 				<text class="">{{city.fullname}}</text>
 			</view>
 		</view>
@@ -37,11 +37,9 @@
 </scroll-view>
 
 <!-- 右边导航条 -->
-<view class="indexBar" style="height:calc(100vh - {{CustomBar}}px - 50px)">
-	<view class="indexBar-box" bindtouchstart="tStart" bindtouchend="tEnd" catchtouchmove="tMove">
-		<!-- 点击导航条跳转到，字母所在的城市列表 -->
-		<view class="indexBar-item" wx:for="{{list}}" wx:key="index" id="{{index}}" bindtouchstart="getCur" bindtouchend="setCur">{{list[index]}}</view>
-	</view>
+<view class="indexBar" style="height:calc(100vh - {{CustomBar}}px - 50px)" bindtouchstart="tStart" bindtouchend="tEnd" catchtouchmove="tMove">
+	<!-- 点击导航条跳转到，字母所在的城市列表 -->
+	<view class="indexBar-item" wx:for="{{list}}" wx:key="index" id="{{index}}" bindtouchstart="getCur" bindtouchend="setCur">{{list[index]}}</view>
 </view>
 
 <!--选择显示-->

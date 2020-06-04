@@ -3,7 +3,7 @@
 
 /* 顶部导航栏 */
 .topFlex {
-  height: 136rpx;
+  height: 140rpx;
   width: 100%;
   position: relative;
   display: flex;

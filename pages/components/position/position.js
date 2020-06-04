@@ -8,24 +8,34 @@ Page({
     isShow: false,
     allCityObj: {},
     hotCityArr: [],
-    curCity: '上海市',
-    chooseCity:''
+    chooseCity: '上海市',
+    // 搜索功能明天添加，刘海处理
+    searchCity: ''
   },
   onLoad() {
+    let that = this
     // 初始化城市列表
     this.setData({
       allCityObj: positionCity.all,
       hotCityArr: positionCity.hot
     })
-    console.log(positionCity)
+    console.log(this.data.allCityObj)
     let list = [];
     for (let i = 0; i < 26; i++) {
       list[i] = String.fromCharCode(65 + i)
     }
-    console.log(list)
     this.setData({
       list: list,
       listCur: list[0]
+    })
+    // 进入页面读取城市
+    wx.getStorage({
+      key: 'location',
+      success(res) {
+        that.setData({
+          chooseCity: res.data.city
+        })
+      }
     })
   },
   onReady() {
@@ -46,6 +56,32 @@ Page({
         barTop: res.top
       })
     }).exec()
+  },
+  // 选择城市
+  chooseCity(e) {
+    if (e.currentTarget.dataset.msg === 'hot') {
+      wx.setStorage({
+        data: {
+          city: this.data.hotCityArr[e.currentTarget.dataset.id].fullname,
+          location: this.data.hotCityArr[e.currentTarget.dataset.id].location
+        },
+        key: 'location',
+      })
+      wx.redirectTo({
+        url: '/pages/index/index',
+      })
+    } else if (e.currentTarget.dataset.msg === 'all') {
+      wx.setStorage({
+        data: {
+          city: this.data.allCityObj[e.currentTarget.dataset.key][e.currentTarget.dataset.id].fullname,
+          location: this.data.allCityObj[e.currentTarget.dataset.key][e.currentTarget.dataset.id].location
+        },
+        key: 'location',
+      })
+      wx.redirectTo({
+        url: '/pages/index/index',
+      })
+    }
   },
   //获取文字信息
   getCur(e) {
@@ -89,19 +125,4 @@ Page({
       listCurID: this.data.listCur
     })
   },
-  indexSelect(e) {
-    let that = this;
-    let barHeight = this.data.barHeight;
-    let list = this.data.list;
-    let scrollY = Math.ceil(list.length * e.detail.y / barHeight);
-    for (let i = 0; i < list.length; i++) {
-      if (scrollY < i + 1) {
-        that.setData({
-          listCur: list[i],
-          movableY: i * 20
-        })
-        return false
-      }
-    }
-  }
 });
