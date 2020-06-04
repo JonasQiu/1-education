@@ -52,7 +52,7 @@ Component({
       let index = e.currentTarget.dataset.myindex
       let p = that.data.EcoList[index].isLike ? comUserToEco.Unlike(that.data.EcoList[index]._id) : comUserToEco.like(that.data.EcoList[index]._id)
       p.then(res => {
-        this.loadData(that.data.TabCur, that.data.starNum, true)
+        that.fun_search()
       }).catch(res => {
         wx.hideLoading()
       })
@@ -162,11 +162,16 @@ Component({
         return;
       }
       that.data.timer = setTimeout(function () {
-        comEco.searchPage(e.detail.value).then(async res => {
-          that.data.searchList = that.FixUserType(await comEco.fixLikeUser(res))
-          that.loadData(3, 3, true)
-        })
+        that.data.searchValue = e.detail.value
+        that.fun_search()
       }, 700)
+    },
+    fun_search() {
+      var that = this;
+      comEco.searchPage(that.data.searchValue).then(async res => {
+        that.data.searchList = that.FixUserType(await comEco.fixLikeUser(res))
+        that.loadData(3, 3, true)
+      })
     },
     // 详情页跳转，传递参数用户id
     naviToDetail(e) {
