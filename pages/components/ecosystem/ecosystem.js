@@ -52,16 +52,16 @@ Component({
       let index = e.currentTarget.dataset.myindex
       let p = that.data.EcoList[index].isLike ? comUserToEco.disLike(that.data.EcoList[index]._id) : comUserToEco.like(that.data.EcoList[index]._id)
       p.then(res => {
-        this.loadData(that.data.TabCur)
+        this.loadData(that.data.TabCur, that.data.starNum, true)
       }).catch(res => {
         wx.hideLoading()
       })
     },
-    loadData(index, Num) {
+    loadData(index, Num, reload) {
       var that = this;
       let p;
       // 判断是否换了个分类，换了分类则从第一个数据开始读取
-      if (that.data.TabCur != index) {
+      if ((that.data.TabCur != index) || reload) {
         that.data.starNum = 0
         that.data.EcoList = []
       }
@@ -114,7 +114,7 @@ Component({
       if (that.data.isBottom) {
         console.log('到底了')
       } else {
-        this.loadData(that.data.TabCur, 3)
+        this.loadData(that.data.TabCur, 3, false)
       }
     },
 
@@ -126,7 +126,7 @@ Component({
         })
       }
       this.data.isLoading = false
-      this.loadData(e.currentTarget.dataset.id, 3)
+      this.loadData(e.currentTarget.dataset.id, 3, true)
     },
     //搜索功能
     getValue(e) {
