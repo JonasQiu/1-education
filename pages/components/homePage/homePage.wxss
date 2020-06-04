@@ -2,20 +2,17 @@
 @import "/colorui/icon.wxss";
 
 /* 顶部导航栏 */
+
 .position {
   font-size: 28rpx;
   position: fixed;
-  left: 50rpx;
-}
-
-.addresschoose {
-  position: absolute;
+  bottom: 0;
+  /* left: 50rpx; */
 }
 
 .weather {
-  font-size: 20rpx;
-  position: absolute;
-  top: 34rpx;
+  margin-top: -18rpx;
+  font-size: 22rpx;
 }
 
 .search {
