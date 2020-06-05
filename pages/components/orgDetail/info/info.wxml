@@ -1,36 +1,28 @@
-<!-- 地图 -->
-<view class="map-container plr20" bindtap="lookMap" data-nav="no" data-latitude="{{infoList.location.lat}}" data-longitude="{{infoList.location.lng}}">
-	<map class="map" id="map" latitude="{{infoList.location.lat}}" longitude="{{infoList.location.lng}}" scale="19"></map>
-</view>
+<view class="page">
+	<swiper class="screen-swiper round-dot chunk" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500">
+		<swiper-item wx:for="{{infoList.cimg.orgImg}}" wx:key bindtap="showImg" data-imgIndex="{{index}}">
+			<image src="{{item}}" mode="aspectFill"></image>
+		</swiper-item>
+	</swiper>
+	<!-- 地图 -->
+	<view class="map-container plr2 chunk" bindtap="lookMap" data-nav="no" data-latitude="{{infoList.location.lat}}" data-longitude="{{infoList.location.lng}}">
+		<map class="map" id="map" latitude="{{infoList.location.lat}}" longitude="{{infoList.location.lng}}" scale="19"></map>
+		<view class="flex " bindtap="lookMap" data-nav="yes" data-latitude="{{infoList.location.lat}}" data-longitude="{{infoList.location.lng}}">
+			<view><text class="cuIcon-locationfill"></text> {{infoList.location.address}} </view>
+			<view><text class="cuIcon-right"></text></view>
+		</view>
+	</view>
 
-<!-- 具体信息 -->
-<view class="info">
-	<view class="flex " bindtap="lookMap" data-nav="yes" data-latitude="{{infoList.location.lat}}" data-longitude="{{infoList.location.lng}}">
-		<view><text class="cuIcon-locationfill"></text> {{infoList.location.address}} </view>
-		<view><text class="cuIcon-right"></text></view>
-	</view>
-	<view class="flex border" bindtap="callPhone" data-phoneNum="{{infoList.info.phone}}">
-		<view><text class="cuIcon-friend"></text> {{infoList.info.phone}} </view>
-		<view><text class="cuIcon-right"></text></view>
-	</view>
-	<view class="pro border" bindtap="test">
-		<text class="cuIcon-form"></text> 客户介绍
+	<view class="pro border chunk" bindtap="test">
+		<!-- <text class="cuIcon-form"></text> 客户介绍 -->
+		<view class="orgDec">机构介绍</view>
 		<view class="p-top">{{infoList.description}}</view>
 	</view>
-	<view class="pro p-bottom">
-		<text class="cuIcon-picfill"></text> 机构样貌
-		<view class="image-top">
-			<image class="image" src="{{item}}" wx:for="{{infoList.img.images1}}" wx:key="index"></image>
+	<!-- 具体信息 -->
+	<!-- <view class="info">
+		<view class="flex border" bindtap="callPhone" data-phoneNum="{{infoList.info.phone}}" style="padding-top: 30rpx;">
+			<view><text class="cuIcon-phone"></text> {{infoList.info.phone}} </view>
+			<view><text class="cuIcon-right"></text></view>
 		</view>
-	</view>
-
-	<!-- 关注与分享 -->
-	<view class="tabbar">
-		<view class="attention w-50" bindtap="attentionTap">
-			<text class="{{cur!=='attention'?'cuIcon-favor':'cuIcon-favorfill'}}"></text> {{cur!=='attention'?'关注':'已关注'}}
-		</view>
-		<view class="fork w-50" bindtap="forkTap">
-			<text class="cuIcon-fork"></text> 收藏
-		</view>
-	</view>
+	</view> -->
 </view>

@@ -1,6 +1,21 @@
 @import "/colorui/main.wxss";
 @import "/colorui/icon.wxss";
 
+.page {
+  background-color: #e4f9f5;
+  padding-bottom: 80rpx;
+}
+
+.chunk {
+  border: 2rpx solid rgb(241, 241, 241);
+  margin: 20rpx auto 40rpx;
+  width: 92%;
+  background: #fff;
+  box-shadow: 15rpx 20rpx 20rpx #ccc;
+  border-radius: 30rpx;
+  overflow: hidden;
+}
+
 /* 地图样式 */
 .map-control-container {
   display: flex;
@@ -28,55 +43,55 @@
 }
 
 /* info信息 */
-.info{
+.info {
   width: 100%;
-  background-color: #fff;
   padding-bottom: 40rpx;
   font-size: 30rpx;
   box-sizing: border-box;
 }
-.border{
+
+.border {
   padding-bottom: 30rpx;
   border-bottom: 2rpx solid #ccc;
 }
-.flex{
-  padding-top: 30rpx;
+
+.flex {
+  /* padding-top: 30rpx; */
   display: flex;
   height: 80rpx;
+  margin: 0rpx 20rpx;
   align-items: center;
   justify-content: space-between;
 }
-.pro{
+
+.pro {
   padding-top: 30rpx;
 }
-.p-top{
-  padding-top: 15rpx;
-  text-indent: 2em;
+
+.p-top {
+  padding: 5rpx 30rpx;
   line-height: 50rpx;
+  color: #666;
+  font-size: 30rpx;
+  font-weight: 300;
+  letter-spacing: 2px;
+  font-family: "Microsoft Yahei";
+  margin: 20rpx 0 0 0;
+  text-indent: 2em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  white-space: normal !important;
+  text-align: justify;
 }
-.image{
+
+.image {
   width: 100%;
   height: 400rpx;
   background-size: 100% 100%;
   background-repeat: no-repeat;
 }
-.image-top{
+
+.image-top {
   padding-top: 15rpx;
-}
-.tabbar{
-  width: 100%;
-  position: fixed;
-  display: flex;
-  bottom: 0;
-  height: 80rpx;
-  background-color: #fff;
-  justify-content: space-around;
-  align-items: center;
-  text-align: center;
-}
-.w-50{
-  width: 50%;
-}
-.p-bottom{
-  padding-bottom: 50rpx;
 }

@@ -1,17 +1,14 @@
-<cu-custom class="detail-back" bgColor="bg-white" isBack="{{isShow}}">
-	<view slot="backText">返回</view>
-	<view slot="content">机构详情</view>
-</cu-custom>
+<return />
 
 <!-- 机构信息 -->
 <view class="detail">
-	<view class="detail-pro" style="background-image: url({{infoData.img.bgimg}});">
-		<image src="{{infoData.img.bgimg}}" class="detail-info-avatar"></image>
+	<view class="detail-pro" style="background-image: url({{infoData[0].obj.img.bgimg}});">
+		<image src="{{infoData[0].obj.img.logo}}" class="detail-info-avatar"></image>
 		<view class="info">
 			<!-- 可设置学生数（报名课程的同学），课程数，好评率 -->
-			<view style="font-size: 36rpx;">{{infoData.info.orgName}}</view>
-			<view style="font-size: 28rpx;">⭐⭐⭐⭐⭐{{infoData.star}} | 7354km</view>
-			<view style="font-size: 28rpx;">{{infoData.location.address}}</view>
+			<view style="font-size: 36rpx;">{{infoData[0].obj.info.orgName}}</view>
+			<view style="font-size: 28rpx;">⭐⭐⭐⭐⭐{{infoData[0].obj.star}} | 7354km</view>
+			<view style="font-size: 28rpx;">{{infoData[0].obj.location.address}}</view>
 		</view>
 	</view>
 </view>
@@ -19,14 +16,24 @@
 <!-- info -->
 <view class="resources">
 	<scroll-view scroll-x class="bg-white nav text-center" scroll-with-animation scroll-left="{{scrollLeft}}">
-		<view class="cu-item {{index==TabCur?'text-green cur':''}}" wx:for="{{orgResourcesNav}}" wx:key="index" bindtap="tabSelect" data-id="{{index}}">
-			{{item.nav}} {{item.length!=undefined?('('+item.length+')'):''}}
+		<view class="cu-item {{index==TabCur?'text-green cur':''}}" wx:for="{{infoData}}" wx:key="index" bindtap="tabSelect" data-id="{{index}}">
+			{{item.nav+(index==0?'':' ('+item.list.length+')')}}
 		</view>
 	</scroll-view>
 </view>
 
 <!-- 组件跳转 -->
-<info wx:if="{{0===TabCur}}" infoList="{{infoData}}" />
-<lesson wx:if="{{1===TabCur}}" lessonList="{{lesson}}" />
-<teacher wx:if="{{2===TabCur}}" teacherList="{{teacher}}" />
-<active wx:if="{{3===TabCur}}" activeList="{{active}}" />
+<info wx:if="{{0===TabCur}}" infoList="{{infoData[0].obj}}" />
+<lesson wx:if="{{1===TabCur}}" lessonList="{{infoData[1].list}}" />
+<teacher wx:if="{{2===TabCur}}" teacherList="{{infoData[2].list}}" />
+<active wx:if="{{3===TabCur}}" activeList="{{infoData[3].list}}" />
+
+<!-- 关注与分享 -->
+<view class="tabbar">
+	<view class="attention w-50" bindtap="attentionTap">
+		<text class="{{cur!=='attention'?'cuIcon-favor':'cuIcon-favorfill'}}"></text> {{infoData[0].obj.isCollect?'已关注':'关注'}}
+	</view>
+	<view class="fork w-50" bindtap="forkTap">
+		<text class="cuIcon-fork"></text> 收藏
+	</view>
+</view>
