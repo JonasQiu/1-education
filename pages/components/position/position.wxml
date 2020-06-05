@@ -19,28 +19,43 @@
 
 <!-- 城市列表 -->
 <scroll-view scroll-y class="indexes" scroll-into-view="indexes-{{listCurID}}" style="height:calc(100vh - {{CustomBar}}px - 50px)" scroll-with-animation="true" enable-back-to-top="true">
-	<!-- 热搜城市 -->
-	<view class="padding indexItem-{{list[index]}}">热门城市</view>
-	<view class="hotCity">
-		<text class="hotCityItem" wx:key="index" wx:for="{{hotCityArr}}" bindtap="chooseCity" data-msg="hot" data-id="{{index}}">{{item.fullname}}</text>
-	</view>
-	<!-- 所有城市 -->
-	<block wx:for="{{list}}" wx:key="index">
-		<view class="padding indexItem-{{list[index]}}" id="indexes-{{list[index]}}" data-index="{{list[index]}}">{{list[index]}}</view>
+	<!-- 无搜索内容时显示 -->
+	<block wx:if="{{isShowSearch}}">
+		<!-- 热搜城市 -->
+		<view class="padding indexItem-{{list[index]}}">热门城市</view>
+		<view class="hotCity">
+			<text class="hotCityItem" wx:key="index" wx:for="{{hotCityArr}}" bindtap="chooseCity" data-msg="hot" data-id="{{index}}">{{item.fullname}}</text>
+		</view>
+		<!-- 所有城市 -->
+		<block wx:for="{{list}}" wx:key="index">
+			<view class="padding indexItem-{{list[index]}}" id="indexes-{{list[index]}}" data-index="{{list[index]}}">{{list[index]}}</view>
+			<view class="cu-list menu-avatar no-padding">
+				<!-- 根据字母渲染字母下的城市列表 -->
+				<view class="cityContent" wx:for="{{allCityObj[item]}}" bindtap="chooseCity" wx:key="index" wx:for-item="city" data-msg="all" data-id="{{index}}" data-key="{{item}}">
+					<text class="">{{city.fullname}}</text>
+				</view>
+			</view>
+		</block>
+		<!-- 右边导航条 -->
+		<view class="indexBar" style="height:calc(100vh - {{CustomBar}}px - 50px)" bindtouchstart="tStart" bindtouchend="tEnd" catchtouchmove="tMove">
+			<!-- 点击导航条跳转到，字母所在的城市列表 -->
+			<view class="indexBar-item" wx:for="{{list}}" wx:key="index" id="{{index}}" bindtouchstart="getCur" bindtouchend="setCur">{{list[index]}}</view>
+		</view>
+	</block>
+
+	<!-- 有搜索内容时显示 -->
+	<block wx:else>
+		<view class="padding indexItem-{{list[index]}}" id="indexes-{{list[index]}}">搜索的城市</view>
 		<view class="cu-list menu-avatar no-padding">
 			<!-- 根据字母渲染字母下的城市列表 -->
-			<view class="cityContent" wx:for="{{allCityObj[item]}}" bindtap="chooseCity" wx:key="index" wx:for-item="city" data-msg="all" data-id="{{index}}" data-key="{{item}}">
-				<text class="">{{city.fullname}}</text>
+			<view class="cityContent" wx:for="{{searchCityList[item]}}" bindtap="chooseCity" wx:key="index" data-msg="all" data-id="{{index}}" data-key="{{item}}">
+				<text class="">{{item.fullname}}</text>
 			</view>
 		</view>
 	</block>
 </scroll-view>
 
-<!-- 右边导航条 -->
-<view class="indexBar" style="height:calc(100vh - {{CustomBar}}px - 50px)" bindtouchstart="tStart" bindtouchend="tEnd" catchtouchmove="tMove">
-	<!-- 点击导航条跳转到，字母所在的城市列表 -->
-	<view class="indexBar-item" wx:for="{{list}}" wx:key="index" id="{{index}}" bindtouchstart="getCur" bindtouchend="setCur">{{list[index]}}</view>
-</view>
+
 
 <!--选择显示-->
 <view hidden="{{hidden}}" class="indexToast">

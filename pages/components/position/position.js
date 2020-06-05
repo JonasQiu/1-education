@@ -10,7 +10,10 @@ Page({
     hotCityArr: [],
     chooseCity: '上海市',
     // 搜索功能明天添加，刘海处理
-    searchCity: ''
+    searchCity: '',
+    // 是否有展示搜索列表
+    isShowSearch: true,
+    searchCityList:[]
   },
   onLoad() {
     let that = this
@@ -19,7 +22,6 @@ Page({
       allCityObj: positionCity.all,
       hotCityArr: positionCity.hot
     })
-    console.log(this.data.allCityObj)
     let list = [];
     for (let i = 0; i < 26; i++) {
       list[i] = String.fromCharCode(65 + i)

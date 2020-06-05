@@ -139,7 +139,7 @@ Component({
     }],
   },
   attached(e) {
-    let that=this
+    let that = this
     // 进入页面读取城市
     wx.getStorage({
       key: 'location',
@@ -147,7 +147,6 @@ Component({
         that.setData({
           position: res.data.city
         })
-        console.log(that.data.position)
       }
     })
   },
