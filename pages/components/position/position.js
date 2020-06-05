@@ -48,7 +48,7 @@ Page({
     }
 
     let that = this;
-    wx.createSelectorQuery().select('.indexBar-box').boundingClientRect(function (res) {
+    wx.createSelectorQuery().select('.indexBar').boundingClientRect(function (res) {
       that.setData({
         boxTop: res.top
       })

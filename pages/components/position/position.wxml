@@ -48,9 +48,9 @@
 		<view class="padding indexItem-{{list[index]}}" id="indexes-{{list[index]}}">搜索的城市</view>
 		<view class="cu-list menu-avatar no-padding">
 			<!-- 根据字母渲染字母下的城市列表 -->
-			<view class="cityContent" wx:for="{{searchCityList[item]}}" bindtap="chooseCity" wx:key="index" data-msg="all" data-id="{{index}}" data-key="{{item}}">
+			<!-- <view class="cityContent" wx:for="{{searchCityList[item]}}" bindtap="chooseCity" wx:key="index" data-msg="all" data-id="{{index}}" data-key="{{item}}">
 				<text class="">{{item.fullname}}</text>
-			</view>
+			</view> -->
 		</view>
 	</block>
 </scroll-view>

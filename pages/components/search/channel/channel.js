@@ -24,7 +24,8 @@ Component({
     scrollLeft: 0,
     searchList: [],
     showList: [],
-    typeList: []
+    typeList: [],
+    toggleDelay: false
   },
   attached() {
     var that = this;
@@ -98,6 +99,8 @@ Component({
     },
     changeTypeList(index) {
       let that = this;
+      toggleDelay(that)
+
       this.setData({
         TabCur: index,
         scrollLeft: (index - 1) * 60,
@@ -147,6 +150,16 @@ Component({
           showCancel: false
         })
       }
+    },
+    toggleDelay(that) {
+      that.setData({
+        toggleDelay: true
+      })
+      setTimeout(function () {
+        that.setData({
+          toggleDelay: false
+        })
+      }, 3000)
     }
   }
 })
