@@ -2,6 +2,7 @@
 const comOrg = require('../../../utils/Org/getOrg')
 const comData = require('../../../utils/Org/getOrgDetailList')
 const comUTO = require('../../../utils/User/UserToOrg')
+const comUTU = require('../../../utils/User/UserToUser')
 
 Page({
 
@@ -35,22 +36,67 @@ Page({
   // 
   attentionTap(e) {
     let that = this;
-    if (that.data.isLoadding) {
+    if (!that.data.myUserInfo) {
+      wx.showToast({
+        'title': '请先登录'
+      })
+      return;
+    }
+    if (that.data.isLoaddingAttention) {
       wx.showToast({
         'title': '操作频繁'
       })
       return
     }
-    that.data.isLoadding = true
+    that.data.isLoaddingAttention = true
     that.data.infoData[0].obj.isCollect = !that.data.infoData[0].obj.isCollect
     that.setData({
       infoData: that.data.infoData
     })
     let p = !that.data.infoData[0].obj.isCollect ? comUTO.Uncollect(that.data.infoData[0].obj._id) : comUTO.collect(that.data.infoData[0].obj._id)
     p.then(res => {
-      that.data.isLoadding = false
+      that.data.isLoaddingAttention = false
       if (res.status != 0) {
         that.data.infoData[0].obj.isCollect = !that.data.infoData[0].obj.isCollect
+        that.setData({
+          infoData: that.data.infoData
+        })
+        wx.showToast({
+          title: res.msg
+        })
+      }
+    })
+  },
+  collectTap(e) {
+    let that = this;
+    if (!that.data.myUserInfo) {
+      wx.showToast({
+        'title': '请先登录'
+      })
+      return;
+    }
+    if (that.data.myUserInfo._id == that.data.infoData[0].obj.userInfo._id) {
+      wx.showToast({
+        'title': '你不能关注自己'
+      })
+      return;
+    }
+    if (that.data.isLoaddingCollect) {
+      wx.showToast({
+        'title': '操作频繁'
+      })
+      return
+    }
+    that.data.isLoaddingCollect = true
+    that.data.infoData[0].obj.userInfo.isMyFollow = !that.data.infoData[0].obj.userInfo.isMyFollow
+    that.setData({
+      infoData: that.data.infoData
+    })
+    let p = that.data.infoData[0].obj.userInfo.isMyFollow ? comUTU.follow(that.data.infoData[0].obj.userInfo._id) : comUTU.Unfollow(that.data.infoData[0].obj.userInfo._id)
+    p.then(res => {
+      that.data.isLoaddingCollect = false
+      if (res.status != 0) {
+        that.data.infoData[0].obj.userInfo.isMyFollow = !that.data.infoData[0].obj.userInfo.isMyFollow
         that.setData({
           infoData: that.data.infoData
         })
@@ -78,8 +124,19 @@ Page({
         isShow: true
       })
     }
+    wx.getStorage({
+      key: 'userInfo',
+      success: (res) => {
+        console.log(res.data);
+        that.setData({
+          myUserInfo: res.data
+        })
+      }
+    })
     //得到一下传递的参数 
-    comOrg.getOrg(options.query).then(res => {
+    comOrg.getOrg(options.query).then(async res => {
+      // fixUser 根据该机构的userId字段获取完整宿主信息
+      res.userInfo = await comOrg.fixUser(res)
       that.data.infoData[0].obj = res
       that.setData({
         infoData: that.data.infoData

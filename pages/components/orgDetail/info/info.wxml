@@ -1,12 +1,12 @@
 <view class="page">
-	<swiper class="screen-swiper round-dot chunk" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500">
+	<swiper wx:if="{{infoList.cimg.orgImg.length>0?true:false}}" class="screen-swiper round-dot chunk" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500">
 		<swiper-item wx:for="{{infoList.cimg.orgImg}}" wx:key bindtap="showImg" data-imgIndex="{{index}}">
 			<image src="{{item}}" mode="aspectFill"></image>
 		</swiper-item>
 	</swiper>
 	<!-- 地图 -->
 	<view class="map-container plr2 chunk" bindtap="lookMap" data-nav="no" data-latitude="{{infoList.location.lat}}" data-longitude="{{infoList.location.lng}}">
-		<map class="map" id="map" latitude="{{infoList.location.lat}}" longitude="{{infoList.location.lng}}" scale="19"></map>
+		<map class="map" id="map" latitude="{{infoList.location.lat}}" longitude="{{infoList.location.lng}}" scale="20" enable-rotate enable-traffic></map>
 		<view class="flex " bindtap="lookMap" data-nav="yes" data-latitude="{{infoList.location.lat}}" data-longitude="{{infoList.location.lng}}">
 			<view><text class="cuIcon-locationfill"></text> {{infoList.location.address}} </view>
 			<view><text class="cuIcon-right"></text></view>

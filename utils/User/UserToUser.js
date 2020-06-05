@@ -70,11 +70,11 @@ function Unfollow(userId) {
                     })).stats.updated) != 1) {
                     resolve({
                         status: 1,
-                        msg: '关注失败'
+                        msg: '取消失败'
                     })
                 }
             }
-            if (targetInfo.myFans.indexOf(originInfo._id) == -1) {
+            if (targetInfo.myFans.indexOf(originInfo._id) != -1) {
                 targetInfo.myFans.remove(originInfo._id)
                 if (((await db.collection('User').doc(targetInfo._id).update({
                         data: {
@@ -83,14 +83,14 @@ function Unfollow(userId) {
                     })).stats.updated) != 1) {
                     resolve({
                         status: 1,
-                        msg: '关注失败'
+                        msg: '取消失败'
                     })
                 }
             }
             wx.setStorageSync('userInfo', originInfo)
             resolve({
                 status: 0,
-                msg: '关注成功'
+                msg: '取消成功'
             })
         } else {
             resolve({

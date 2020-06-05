@@ -64,15 +64,6 @@
   text-align: center;
 }
 
-.orgDec {
-  text-align: center;
-  flex-direction: row;
-  font-weight: bold;
-  font-size: 34rpx;
-  letter-spacing: 1px;
-  font-family: "Microsoft Yahei";
-}
-
 .w-50 {
   width: 50%;
 }

@@ -2,7 +2,7 @@
 
 <!-- 机构信息 -->
 <view class="detail">
-	<view class="detail-pro" style="background-image: url({{infoData[0].obj.img.bgimg}});">
+	<view class="detail-pro" style="background-image: url({{infoData[0].obj.img.bgimg?infoData[0].obj.img.bgimg:infoData[0].obj.img.logo}});background-repeat: space;">
 		<image src="{{infoData[0].obj.img.logo}}" class="detail-info-avatar"></image>
 		<view class="info">
 			<!-- 可设置学生数（报名课程的同学），课程数，好评率 -->
@@ -31,9 +31,9 @@
 <!-- 关注与分享 -->
 <view class="tabbar">
 	<view class="attention w-50" bindtap="attentionTap">
-		<text class="{{cur!=='attention'?'cuIcon-favor':'cuIcon-favorfill'}}"></text> {{infoData[0].obj.isCollect?'已关注':'关注'}}
+		<text class="{{infoData[0].obj.isCollect?'cuIcon-favorfill':'cuIcon-favor'}}"></text> {{infoData[0].obj.isCollect?'已关注':'关注'}}
 	</view>
-	<view class="fork w-50" bindtap="forkTap">
-		<text class="cuIcon-fork"></text> 收藏
+	<view class="fork w-50" bindtap="collectTap">
+		<text class="cuIcon-fork"></text> {{infoData[0].obj.userInfo.isMyFollow?'已收藏':'收藏'}}
 	</view>
 </view>

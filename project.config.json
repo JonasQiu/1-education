@@ -24,7 +24,7 @@
 			"disablePlugins": [],
 			"outputPath": ""
 		},
-		"useCompilerModule": false,
+		"useCompilerModule": true,
 		"userConfirmedUseCompilerModuleSwitch": false
 	},
 	"compileType": "miniprogram",
@@ -78,9 +78,9 @@
 				},
 				{
 					"id": 2,
-					"name": "pages/components/orgDetail/orgDetail",
+					"name": "机构详情页",
 					"pathName": "pages/components/orgDetail/orgDetail",
-					"query": "query=eWu4xmOWBvjLGJvLbwitDSTchAhmiSeY1DQFhMH8HeKz16nI",
+					"query": "query=ak9JgjlGayh3j7V16tF8olEHjZsXYlrAefm6DMlCjhWPUtWw",
 					"scene": null
 				},
 				{
@@ -130,6 +130,13 @@
 					"name": "pages/components/orgDetail/orgDetail",
 					"pathName": "pages/components/orgDetail/orgDetail",
 					"query": "query='eWu4xmOWBvjLGJvLbwitDSTchAhmiSeY1DQFhMH8HeKz16nI'",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/components/orgDetail/orgDetail",
+					"pathName": "pages/components/orgDetail/orgDetail",
+					"query": "query=FeROQQ35jOh25P8XgnwPInQWQvoPS4TiliuuWbwJUjUWUktK",
 					"scene": null
 				}
 			]
