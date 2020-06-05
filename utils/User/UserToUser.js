@@ -65,7 +65,7 @@ function Unfollow(userId) {
                 originInfo.myFollow.remove(targetInfo._id)
                 if (((await db.collection('User').doc(originInfo._id).update({
                         data: {
-                            myFollow: _.unshift([targetInfo._id])
+                            myFollow: originInfo.myFollow
                         }
                     })).stats.updated) != 1) {
                     resolve({
@@ -75,9 +75,10 @@ function Unfollow(userId) {
                 }
             }
             if (targetInfo.myFans.indexOf(originInfo._id) == -1) {
+                targetInfo.myFans.remove(originInfo._id)
                 if (((await db.collection('User').doc(targetInfo._id).update({
                         data: {
-                            myFans: _.unshift([originInfo._id])
+                            myFans: targetInfo.myFans
                         }
                     })).stats.updated) != 1) {
                     resolve({
@@ -102,4 +103,5 @@ function Unfollow(userId) {
 
 module.exports = {
     follow,
+    Unfollow
 }

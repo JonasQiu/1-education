@@ -44,13 +44,13 @@
 				<!-- 浏览是指，点击进去详情页则记录一次 -->
 				<text class="text-gray read">{{'浏览 '+item.shareNum+' 次'}}</text>
 				<view style="font-size:55rpx">
-					<text class="eco-text cuIcon-likefill {{item.isLike ? 'text-pink' : 'text-gray'}}" catchtap="sendLike" data-myindex="{{index}}"></text>
+					<text class="eco-text cuIcon-likefill {{item.isLike ? 'text-red' : 'text-gray'}}" catchtap="sendLike" data-myindex="{{index}}"></text>
 					<text class="eco-text text-gray cuIcon-commentfill"></text>
 				</view>
 			</view>
 		</view>
 		<view class="eco-call" style="font-size:55rpx">
-			<text class="cuIcon-likefill {{item.isLike ? 'text-pink' : 'text-gray'}}"  catchtap="sendLike" data-myindex="{{index}}"></text>
+			<text class="cuIcon-likefill {{item.isLike ? 'text-red' : 'text-gray'}}"  catchtap="sendLike" data-myindex="{{index}}"></text>
 			<view class="eco-callImg">
 				<image class="cu-avatar radius margin-left" src="{{likeUser.avatarUrl}}" wx:for="{{item.likes}}" wx:for-item="likeUser" wx:key="index"></image>
 			</view>

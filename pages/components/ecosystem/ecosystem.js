@@ -46,6 +46,12 @@ Component({
     // 点赞
     sendLike(e) {
       var that = this;
+      if(!wx.getStorageSync('userInfo')){
+        wx.showToast({
+          title: '请先登录好吧',
+        })
+        return
+      }
       wx.showLoading({
         title: '请稍后…',
       })
