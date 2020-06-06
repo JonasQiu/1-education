@@ -8,7 +8,7 @@ Component({
   properties: {
 
   },
-
+  timer: null,
   /**
    * 组件的初始数据
    */
@@ -25,6 +25,7 @@ Component({
     searchList: [],
     showList: [],
     typeList: [],
+    // 动画
     toggleDelay: false
   },
   attached() {
@@ -66,6 +67,8 @@ Component({
         myData.TabCur = 0
         myData.scrollLeft = (0 - 1) * 60
         myData.showList = that.getAll(myData.searchList)
+        myData.toggleDelay = true
+        that.toggleDelay(that)
         that.setData(myData)
         wx.hideLoading()
         return true
@@ -85,6 +88,10 @@ Component({
       })
     },
     tabSelect(e) {
+      this.setData({
+        toggleDelay: false
+      })
+      this.toggleDelay(this)
       this.changeTypeList(e.currentTarget.dataset.id)
     },
     getAll(searchList) {
@@ -99,12 +106,11 @@ Component({
     },
     changeTypeList(index) {
       let that = this;
-      toggleDelay(that)
-
       this.setData({
         TabCur: index,
         scrollLeft: (index - 1) * 60,
-        showList: index == 0 ? that.getAll(that.data.searchList) : that.data.searchList[that.data.typeList[index]]
+        showList: index == 0 ? that.getAll(that.data.searchList) : that.data.searchList[that.data.typeList[index]],
+        toggleDelay: true
       })
     },
     orgDetail(e) {
@@ -152,10 +158,8 @@ Component({
       }
     },
     toggleDelay(that) {
-      that.setData({
-        toggleDelay: true
-      })
-      setTimeout(function () {
+      clearTimeout(that.timer)
+      that.timer = setTimeout(function () {
         that.setData({
           toggleDelay: false
         })

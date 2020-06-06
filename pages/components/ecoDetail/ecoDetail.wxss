@@ -1,3 +1,5 @@
+@import "/colorui/animation.wxss";
+
 /* 页面 */
 .page {
   background-color: #e4f9f5;
@@ -29,6 +31,7 @@
   padding: 30rpx;
   display: flex;
   border-radius: 90rpx;
+  align-items: center;
 }
 
 .avatar {
@@ -39,6 +42,10 @@
 }
 
 .eco-nameInfo {
+  width: 360rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   margin-left: 15rpx;
   margin-top: 7rpx;
 }
@@ -56,6 +63,16 @@
   margin: 20rpx 0 0 10rpx;
 }
 
+.head-attention {
+  margin-left: 50rpx;
+  padding: 0 17rpx;
+  color: #000;
+  border: 2rpx solid #aaa;
+  border-radius: 50%;
+  font-size: 60rpx;
+  /* background-color: rgb(231, 18, 196); */
+}
+
 /* 描述 */
 .chInfo {
   margin-top: -10rpx;
@@ -67,6 +84,7 @@
   margin-top: 30rpx;
   margin-left: 20rpx;
   margin-right: 40rpx;
+  overflow: hidden;
   text-align: justify;
 }
 
@@ -101,19 +119,68 @@
   margin-top: 20rpx;
   margin-bottom: 20rpx;
   color: #666;
-  font-size: 25rpx;
+  font-size: 27rpx;
   font-weight: 100;
   letter-spacing: 2px;
   font-family: "Microsoft Yahei";
 }
 
+.read {
+  float: left;
+}
+
+.edit {
+  float: right;
+}
 
 .active {
   margin-right: 40rpx;
-  height: 90rpx;
-  line-height: 90rpx;
-  font-size: 50rpx;
-  text-align: end;
+  height: 110rpx;
+  line-height: 110rpx;
+  font-size: 40rpx;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
+.appreciate {
+  height: 100%;
+  line-height: 100%;
+  padding: 20rpx 20rpx 10rpx 40rpx;
+}
+
+.avatarList {
+  height: 100%;
+  line-height: 100%;
+  width: 490rpx;
+  overflow: hidden;
+}
+
+.likeAvatar {
+  width: 64rpx;
+  height: 64rpx;
+  margin: 20rpx 0 10rpx 18rpx;
+  border-radius: 50%;
+  box-shadow: 5rpx 10rpx 20rpx #ccc;
+
+}
+
+.avat-more {
+  width: 64rpx;
+  height: 64rpx;
+  padding: 5rpx;
+  text-align: center;
+  line-height: 64rpx;
+  border-radius: 50%;
+  font-size: 22rpx;
+  background-color: #ddd;
+}
+
+.likeNum {
+  height: 40rpx;
+  line-height: 40rpx;
+  font-size: 26rpx;
+  text-align: center;
 }
 
 .m-20 {
@@ -123,6 +190,7 @@
 /* 机构介绍 */
 .org {
   display: flex;
+  position: relative;
 }
 
 .padding-20 {
@@ -130,7 +198,7 @@
 }
 
 .info {
-  width: 500rpx;
+  width: 400rpx;
   margin: 0 0 0 20rpx;
   font-size: 26rpx;
   font-family: "Microsoft Yahei";
@@ -165,6 +233,20 @@
 .m-b-10 {
   margin-bottom: 4rpx;
 }
+
+.collect {
+  padding: 10rpx;
+  border: 2rpx solid #aaa;
+  /* background-color:yellow; */
+  border-radius: 50%;
+  position: absolute;
+  right: 40rpx;
+  top: 45rpx;
+  color: #000;
+  font-size: 40rpx !important;
+
+}
+
 
 /* 底部导航 */
 .tabbar {

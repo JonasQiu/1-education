@@ -52,7 +52,7 @@
 	</scroll-view>
 
 	<view class="content">
-		<view class="item {{toggleDelay?'animation-slide-bottom':''}}" bindtap="orgDetail" data-name="{{item._id}}" wx:for="{{showList}}" wx:key="index" style="animation-delay: {{(index+1)*0.1}}s;">
+		<view class="item {{toggleDelay?'animation-slide-bottom':''}}" bindtap="orgDetail" data-name="{{item._id}}" wx:for="{{showList}}" wx:key="index" style="animation-delay: {{(index+1)*0.2}}s;">
 			<image src='{{item.img.logo}}' class="item-img"></image>
 			<view class="info">
 				<view class="info-content">

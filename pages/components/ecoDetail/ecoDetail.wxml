@@ -2,69 +2,80 @@
 <view class="page">
 	<!-- 是否返回 -->
 	<return />
-	<!-- 轮播图 -->
-	<swiper class="screen-swiper {{DotStyle?'square-dot':'round-dot'}}" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500">
-		<swiper-item wx:for="{{swiperList}}" wx:key bindtap="showImg" data-imgIndex="{{index}}">
-			<image src="{{item}}" mode="aspectFill"></image>
-		</swiper-item>
-	</swiper>
-
-	<!-- 内容块 -->
-	<view class="relative">
-		<view class="absolute">
-			<view class="chunk eco-head">
-				<!-- 头部 -->
-				<image class="avatar" src="{{ecoObj.userInfo.avatarUrl}}"></image>
-				<view class="eco-nameInfo">
-					<view class="eco-name">{{ecoObj.userInfo.nickName}}</view>
-					<!-- 创建时间 -->
-					<view class="first-change-time">发表于 {{ecoObj.fixCreateTime}}</view>
+	<scroll-view scroll-y style="height:110vh">
+		<!-- 轮播图 -->
+		<swiper class="screen-swiper {{DotStyle?'square-dot':'round-dot'}}" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500">
+			<swiper-item wx:for="{{swiperList}}" wx:key bindtap="showImg" data-imgIndex="{{index}}">
+				<image src="{{item}}" mode="aspectFill"></image>
+			</swiper-item>
+		</swiper>
+		<!-- 内容块 -->
+		<view class="relative">
+			<view class="absolute {{toggleDelay?'animation-slide-bottom':''}}" style="animation-delay: {{(index+1)*0.2}}s;">
+				<view class="chunk eco-head">
+					<!-- 头部 -->
+					<image class="avatar" src="{{ecoObj.userInfo.avatarUrl}}"></image>
+					<view class="eco-nameInfo">
+						<view class="eco-name">{{ecoObj.userInfo.nickName}}</view>
+						<!-- 创建时间 -->
+						<view class="first-change-time">发表于 {{ecoObj.fixCreateTime}}</view>
+					</view>
+					<view class="head-attention">+</view>
 				</view>
-			</view>
-			<view class="chunk chInfo">
-				<!-- 描述 -->
-				<view class="eco-info">
-					<view class="eco-title">{{ecoObj.title}}</view>
-					<!-- <view class="line"></view> -->
-					<!-- 分割线line有icon -->
-					<view class="eco-content">{{ecoObj.content}}</view>
-					<view class="last-change-time">最后编辑于 {{ecoObj.fixLastTime}}</view>
+				<view class="chunk chInfo">
+					<!-- 描述 -->
+					<view class="eco-info">
+						<view class="eco-title">{{ecoObj.title}}</view>
+						<!-- <view class="line"></view> -->
+						<!-- 分割线line有icon -->
+						<view class="eco-content">{{ecoObj.content}}</view>
+						<text class="last-change-time read">浏览 {{ecoObj.readNum}} 万</text>
+						<text class="last-change-time edit">最后编辑于 {{ecoObj.fixLastTime}}</text>
+					</view>
 					<view class="line"></view>
-				</view>
-				<!-- 互动次数显示 -->
-				<view class="active">
-					<!-- 点赞多少次 -->
-					<text class="cuIcon-appreciatefill  "></text>{{}}
-					<!-- 评论多少次 -->
-					<text class="cuIcon-commentfill m-20"></text>{{}}
-				</view>
-			</view>
-			<!-- 机构介绍 -->
-			<view class="chunk">
-				<view class="padding-20 org">
-					<image class="eco-orgHeadImg" src="{{ecoObj.cimg[0]}}"></image>
-					<view class="info">
-						<view class="eco-orgName m-b-10">{{ecoObj.title}}</view>
-						<view class="eco-stars m-b-10">
-							<!-- 评星展示 -->
-							评分：{{ecoObj.orgInfo.star}} 分
-							<!-- 收藏 -->
+
+					<!-- 互动次数显示 -->
+					<view class="active">
+						<!-- 点赞多少次 -->
+						<view class="appreciate" bindtap="appreciate">
+							<view class="{{isAppre? 'cuIcon-appreciate':'cuIcon-appreciatefill'}} likeNum"></view>
+							<view class="likeNum">{{ecoObj.likeNum}}</view>
 						</view>
-						<view class="eco-address">{{ecoObj.orgInfo.location.address}}</view>
+						<!-- 展示点赞人列表 -->
+						<view class="avatarList">
+							<image class="likeAvatar" src="{{item.avatarUrl}}" wx:for="{{ecoObj.likes}}"></image>
+						</view>
+						<text class="avat-more" bindtap="moreAppre">更多</text>
 					</view>
 				</view>
-			</view>
-			<!-- 评论 -->
-			<view class="chunk"></view>
-		</view>
+				<!-- 机构介绍 -->
+				<view class="chunk">
+					<view class="padding-20 org">
+						<image class="eco-orgHeadImg" src="{{ecoObj.cimg[0]}}"></image>
+						<view class="info">
+							<view class="eco-orgName m-b-10">{{ecoObj.title}}</view>
+							<view class="eco-stars m-b-10">
+								<!-- 评星展示 -->
+								评分：{{ecoObj.orgInfo.star}} 分
+								<!-- 收藏 -->
+							</view>
+							<view class="eco-address">{{ecoObj.orgInfo.location.address}}</view>
+						</view>
+						<text class="cuIcon-favor collect"></text>
 
-	</view>
+					</view>
+				</view>
+				<!-- 评论 -->
+				<view class="chunk comment">
+
+				</view>
+			</view>
+		</view>
+	</scroll-view>
 </view>
 
-
-
 <view class="tabbar">
-	<view wx:for="{{tabbarList}}" class="attention w-50" bindtap="attentionTap" wx:key="index">
-		<text class="{{item}}"></text>
+	<view wx:for="{{tabbarList}}" class="attention w-50" wx:key="index">
+		<text class="{{item.name}}" bindtap="{{item.event}}"></text>
 	</view>
 </view>
