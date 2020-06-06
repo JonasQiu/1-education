@@ -2,6 +2,8 @@ const comOrg = require('../../../utils/Org/getOrg')
 const comType = require('../../../utils/Type/Type')
 const comEco = require('../../../utils/Ecosystem/getPage')
 const comUserToEco = require('../../../utils/User/UserToEco')
+const comLocation = require('../../../utils/Func/location')
+const comFunUser = require('../../../utils/User/Fun_User')
 
 Component({
   properties: {
@@ -21,128 +23,176 @@ Component({
   data: {
     navTop: wx.getSystemInfoSync().statusBarHeight,
     TabCur: 0,
-    dataList: [{
-      nav: '最新',
-      list: []
-    }, {
-      nav: '最热',
-      list: []
-    }],
-    TabCur: 0,
+    dataList: [],
     // 动画
     toggleDelay: false
   },
   attached() {
-    let that = this;
-    switch (this.data.typeIndex) {
-      case 0:
-
-        break;
-      case 1:
-
-        break;
-      case 2:
-        comEco.getPageList(0, 5).then(res => {
-          that.setData({
-            dataList: [{
-              nav: '最新',
-              list: res.ecoList
-            }, {
-              nav: '最热',
-              list: []
-            }]
-          })
-        })
-        break;
-    }
-    // typeIndex: 0:用户 1:机构 2:生态圈
-    console.log(this.data.titleName);
-    console.log(this.data.typeIndex);
-    // console.log(this.data.list = this.getData());
+    this.LoadData()
 
   },
   methods: {
+    // ALL
+    LoadData() {
+      // 刷新页面数据
+      let that = this;
+      let p;
+      switch (that.data.typeIndex) {
+        case 0:
+          p = new Promise(async (resolve, reject) => {
+            let UserTypeList = ['普通用户', '专业人士', '机构', '官方']
+            let origin = await comFunUser.getInfoList(list)
+            let showData = [{
+              nav: '全部',
+              list: origin
+            }]
+            let typeName = ''
+            // 将获取到的用户列表进行分类到每个列表中。
+            for (let i = 0; i < origin.length; i++) {
+              if (origin[i].userType == 1) {
+                // 普通用户不需要加到其它分类，在全部乖乖躺好就好
+                origin[i].fixUserType = '普通用户'
+                continue;
+              }
 
+              typeName = comType.getTypeName(origin[i].type)
+              origin[i].fixUserType = typeName + ' ' + UserTypeList[origin[i].userType - 1]
+              for (let j = 1; j < showData.length; j++) {
+                if (showData[j]['nav'] == typeName) {
+                  showData[j]['list'].push(origin[i])
+                  typeName == 'ok'
+                  break;
+                }
+              }
+              if (typeName != 'ok') {
+                showData.push({
+                  nav: typeName,
+                  list: [origin[i]]
+                })
+              }
+            }
+            resolve(showData)
+          })
+          break;
+        case 1:
+          p = new Promise(async (resolve, reject) => {
+            let ecoList = list
+            let originList = comType.deOrgTypeList(ecoList)
+            let typeList = Object.keys(originList)
+            for (let i = 0; i < ecoList.length; i++) {
+              // 得到2地的距离
+              ecoList[i].distance = await comLocation.getDistance(ecoList[i].location.lat, ecoList[i].location.lng)
+              ecoList[i].showStar = parseInt(ecoList[i].star)
+            }
+            let showDataList = []
+            showDataList[0] = {
+              nav: '全部',
+              list: ecoList
+            }
+            for (let i = 1; i < typeList.length; i++) {
+              showDataList[i] = {
+                'nav': typeList[i],
+                'list': originList[typeList[i]]
+              }
+            }
+            resolve(showDataList)
+          });
+          break;
+        case 2:
+          p = new Promise(async (resolve, reject) => {
+            let ecoList = comEco.FixUserType(await comEco.fixLikeUser(list))
+            console.log(ecoList)
+            resolve([{
+              nav: '最新',
+              list: ecoList
+            }, {
+              nav: '最热',
+              list: []
+            }])
+          });
+          break;
+        default:
+          // 组件传参错误
+          return;
+      }
+      p.then(res => {
+        console.log(res)
+        that.setData({
+          dataList: res
+        })
+        wx.hideLoading()
+      })
+    },
     tabSelect(e) {
       this.setData({
         TabCur: e.currentTarget.dataset.id,
       })
     },
-    getData() {
-      return [{
-        "_id": "1TKhss0zkUbIppE36QVzKmwaw0dIHnWDBpsECbat4IzehpRm",
-        "cimg": ["cloud://education-1hoqw.6564-education-1hoqw-1302178671/ecoImg/moments_G2TRpwrPZO0424K9DRWUB6.jpg"],
-        "comments": [],
-        "content": "如果你对当地的小机构不太了解，请选择当地的大机构，因为大机构可以确保培训质量的下限。如果你对小机构很了解，可以优先小机构，因为小机构里面的头牌老师，可以给你带来巨大惊喜！因为小机构的头牌老师，就是这个机构的顶梁柱，也是中流砥柱！",
-        "createTime": {
-          "$numberLong": "1587707283301"
-        },
-        "imgUrls": ["https://oss.197.com/202004/04/sns/moments_G2TRpwrPZO0424K9DRWUB6.jpg"],
-        "lastTime": {
-          "$numberLong": "1587707283301"
-        },
-        "likes": [],
-        "orgInfo": {
-          "orgId": "hk1JO6GO45UEOnVvmoL77axIJBOMPMxVndCNyNs56ZDv3D7z"
-        },
-        "reads": [],
-        "shareNum": 471,
-        "title": "对于大机构和小机构的选择",
-        "userInfo": {
-          "userId": "54bac78c5ecd3a23005318b4110c12b3"
-        },
-        "likeNum": 0.0,
-        "readNum": 0.0
-      }, {
-        "_id": "CzUXrtWv2NPhIpN54HZuwnl5cuVqGm79xfvDNjIPbyEAKUWV",
-        "cimg": ["cloud://education-1hoqw.6564-education-1hoqw-1302178671/ecoImg/moments_XDGpq9OTRr0413K8YDL7C8.jpg"],
-        "comments": [],
-        "content": "2018年全国教育培训机构达9.3万所，市场规模达16600亿元，其中教育培训机构包括K12（指学前教育至高中教育的缩写）辅导、婴幼儿教育、兴趣辅导等为8700亿元。在教育培训行业，像新东方、学而思这样的巨头，所占市场份额也没有超过10个点，各种中小机构遍地开花，整个行业呈现出“大市场，小作坊”的态势。简单地说就是教育培训行业不存在所谓的“巨头碾压”的情况。  作者：语文李寨主 链接：https://www.zhihu.com/question/24040068/answer/724182398 来源：知乎 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。",
-        "createTime": {
-          "$numberLong": "1586776243239"
-        },
-        "imgUrls": ["https://oss.197.com/202004/03/sns/moments_XDGpq9OTRr0413K8YDL7C8.jpg"],
-        "lastTime": {
-          "$numberLong": "1586776243239"
-        },
-        "likes": ["d721728a5ecf306e00564d773e18ace5"],
-        "orgInfo": {
-          "orgId": "yiaBwBryu3PielTDe5ttCwu114RXjCu036TOulNLZT5TOIDr"
-        },
-        "reads": [],
-        "shareNum": 55,
-        "title": "大市场，小作坊",
-        "userInfo": {
-          "userId": "54bac78c5ecd3a23005318b4110c12b3"
-        },
-        "likeNum": 1.0,
-        "readNum": 0.0
-      }, {
-        "_id": "G7kOX5y0Yxr3pnGd79gk3KZqdYoVwgl7QvR2SYenw2KQhenT",
-        "cimg": ["cloud://education-1hoqw.6564-education-1hoqw-1302178671/ecoImg/moments_8TVCup48Ys0414K8ZVSB9R.jpg"],
-        "comments": [],
-        "content": "职能信息机构是行政信息的发布者与接受者之间的媒介。作为管理信息的机构，其作用有：①确定信息需要，即了解行政过程所需要的信息量，信息的形态和内容，信息需要者，信息需要时间，传递渠道等。②搜集和加工信息。搜集是直接从信源获取原始形态的信息，或接收外界传递过来的信息。加工是对搜集的信息进行验证、分析、加工、编制索引、传递和存贮等。③提取和使用信息，即信息的利用过程，用以作出命令指示，拟订办法或制度，以便实施行政活动。④信息的系统管理，对信息系统进行设计、运行和评价的过程。⑤理清信源、畅开信道、明确信宿，使信息迅速、及时、正确地从信息发布者输给信息接收者。",
-        "createTime": {
-          "$numberLong": "1586867275322"
-        },
-        "imgUrls": ["https://oss.197.com/202004/03/sns/moments_8TVCup48Ys0414K8ZVSB9R.jpg"],
-        "lastTime": {
-          "$numberLong": "1586867275322"
-        },
-        "likes": [],
-        "orgInfo": {
-          "orgId": "iw01KeULOooP2wBjTz9YLoNTA1fQupcnbkfCnvutqIRI4GqC"
-        },
-        "reads": [],
-        "shareNum": 443,
-        "title": "信息机构的作用",
-        "userInfo": {
-          "userId": "d721728a5ecf306e00564d773e18ace5"
-        },
-        "likeNum": 0.0,
-        "readNum": 0.0
-      }]
-    }
+    goTop(e) {
+      this.setData({
+        goTop: 0
+      })
+    },
+    naviToDetail(e) {
+      let url;
+      let that = this;
+      switch (that.data.typeIndex) {
+        case 0:
+          break;
+        case 1:
+          url = `/pages/components/orgDetail/orgDetail?query=` + e.currentTarget.dataset.id;
+          break;
+        case 2:
+          url = `/pages/components/ecoDetail/ecoDetail?ecoId=` + e.currentTarget.dataset.id
+          break;
+        default:
+          // 组件传参错误
+          return;
+      }
+      wx.navigateTo({
+        url: url
+      })
+    },
+    // ECO 生态圈
+    sendLike(e) {
+      var that = this;
+      if (!wx.getStorageSync('userInfo')) {
+        wx.showToast({
+          title: '请先登录好吧',
+        })
+        return
+      }
+      wx.showLoading({
+        title: '请稍后…',
+      })
+      let index = e.currentTarget.dataset.myindex
+      let p = that.data.dataList[that.data.TabCur]['list'][index].isLike ? comUserToEco.Unlike(that.data.dataList[that.data.TabCur]['list'][index]._id) : comUserToEco.like(that.data.dataList[that.data.TabCur]['list'][index]._id)
+      p.then(res => {
+        that.LoadData()
+      }).catch(res => {
+        wx.hideLoading()
+      })
+    },
+    // ORG 机构
+    changeTypeList(index) {
+      let that = this;
+      this.setData({
+        showList: index == 0 ? that.getAll(that.data.searchList) : that.data.searchList[that.data.typeList[index]],
+      })
+    },
+    getAll(searchList) {
+      let list = []
+      let objList = Object.keys(searchList)
+      for (let i = 0; i < objList.length - 1; i++) {
+        for (let j = 0; j < searchList[objList[i]].length; j++) {
+          list.push(searchList[objList[i]][j])
+        }
+      }
+      return list
+    },
+    // USER 用户
+
+
   }
 
 })

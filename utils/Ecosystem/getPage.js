@@ -1,5 +1,6 @@
 const comTime = require('../Func/time')
 const comFunUser = require('../User/Fun_User')
+const comType = require('../Type/Type')
 const db = wx.cloud.database()
 const _ = db.command
 
@@ -226,6 +227,19 @@ function fixLikeUser(ecoList) {
     })
 }
 
+function FixUserType(ecoList) {
+    let UserTypeList = ['普通用户', '专业人士', '机构', '官方']
+    let index;
+    for (let i = 0; i < ecoList.length; i++) {
+        index = ecoList[i].userInfo.userType - 1
+        ecoList[i].userInfo.fixUserType = UserTypeList[index]
+        if (index in [1, 2]) {
+            ecoList[i].userInfo.fixUserType = comType.getTypeName(ecoList[i].userInfo.type) + ' ' + ecoList[i].userInfo.fixUserType
+        }
+    }
+    return ecoList;
+}
+
 module.exports = {
     getPage,
     getPageList,
@@ -234,5 +248,6 @@ module.exports = {
     getHistoryPage,
     fixLikeUser,
     searchPage,
-    isLike
+    isLike,
+    FixUserType
 }
