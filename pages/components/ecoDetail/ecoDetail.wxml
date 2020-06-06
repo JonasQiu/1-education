@@ -45,7 +45,7 @@
 						<view class="avatarList">
 							<image class="likeAvatar" src="{{item.avatarUrl}}" wx:for="{{ecoObj.likes}}"></image>
 						</view>
-						<text class="avat-more" bindtap="moreAppre">更多</text>
+						<text class="avat-more" bindtap="moreAppre" wx:if="{{ecoObj.likes.length>5}}">更多</text>
 					</view>
 				</view>
 				<!-- 机构介绍 -->

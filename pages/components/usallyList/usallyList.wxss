@@ -1,0 +1,99 @@
+@import "/colorui/main.wxss";
+@import "/colorui/icon.wxss";
+@import "/colorui/animation.wxss";
+@import "/pages/components/ecosystem/ecosystem.wxss";
+
+/* topbar */
+.scrollTop {
+  background-color: #fff;
+  width: 100%;
+  height: 90rpx;
+  text-align: center;
+  line-height: 95rpx;
+  color: #666;
+  font-size: 33rpx;
+  font-weight: 300;
+  letter-spacing: 2px;
+  font-family: "Microsoft Yahei";
+}
+
+/* 导航栏 */
+.nav .cu-item {
+  height: 60rpx;
+  display: inline-block;
+  line-height: 60rpx;
+  margin: 0 10rpx 20rpx;
+  padding: 0 20rpx;
+}
+
+/* 内容1 生态圈 */
+@import "/pages/components/ecosystem/ecosystem.wxss";
+
+.content {
+  padding-top: 15rpx;
+}
+
+.item {
+  padding: 30rpx 0rpx;
+  display: flex;
+  border: 2rpx solid rgb(241, 241, 241);
+  margin: 0 auto 40rpx;
+  width: 96%;
+  background: #fff;
+  box-shadow: 15rpx 20rpx 20rpx #ccc;
+  border-radius: 50rpx;
+}
+
+.item-img {
+  margin-left: 15rpx;
+  width: 230rpx;
+  height: 230rpx;
+  border-radius: 50%;
+}
+
+.info {
+  margin-left: 25rpx;
+  width: 390rpx;
+  color: #aaa;
+  font-size: 28rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.info-content {
+  font-size: 34rpx;
+  color: #000;
+  text-overflow: ellipsis;
+  width: 400rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  font-weight: bold;
+  letter-spacing: 1px;
+  font-family: "Microsoft Yahei";
+}
+
+.text-size {
+  font-size: 38rpx;
+}
+
+.userName {
+  margin-bottom: 15rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+
+  display: -webkit-box;
+  color: #666;
+  font-size: 25rpx;
+  font-weight: 300;
+  letter-spacing: 2px;
+  font-family: "Microsoft Yahei";
+  text-indent: 1em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  white-space: normal !important;
+}

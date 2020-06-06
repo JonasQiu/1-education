@@ -138,6 +138,14 @@ Component({
       price: '价格'
     }],
   },
+  created() {
+   wx.showLoading({
+     title: '正在加载数据...',
+   })
+  },
+  ready() {
+   wx.hideLoading() 
+  },
   attached(e) {
     let that = this
     // 进入页面读取城市

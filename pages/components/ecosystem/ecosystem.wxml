@@ -1,8 +1,3 @@
-<!-- <cu-custom bgColor="bg-white" isBack="{{isShow}}" wx:if="{{showTop}}">
-	<view slot="backText">返回</view>
-	<view slot="content">生态圈</view>
-</cu-custom> -->
-
 <scroll-view scroll-y style="height:93vh;margin-top:{{navTop}}px" lower-threshold="500" bindscrolltolower="lower" scroll-with-animation scroll-top="{{goTop}}">
 	<view class="scrollTop">生态圈</view>
 	<!-- 搜索栏 -->

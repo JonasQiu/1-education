@@ -24,7 +24,7 @@
 			"disablePlugins": [],
 			"outputPath": ""
 		},
-		"useCompilerModule": false,
+		"useCompilerModule": true,
 		"userConfirmedUseCompilerModuleSwitch": false
 	},
 	"compileType": "miniprogram",
@@ -137,6 +137,13 @@
 					"name": "pages/components/orgDetail/orgDetail",
 					"pathName": "pages/components/orgDetail/orgDetail",
 					"query": "query=FeROQQ35jOh25P8XgnwPInQWQvoPS4TiliuuWbwJUjUWUktK",
+					"scene": null
+				},
+				{
+					"id": 11,
+					"name": "通用模板",
+					"pathName": "pages/components/usallyList/usallyList",
+					"query": "typeIndex=2&titleName=我的文章",
 					"scene": null
 				}
 			]

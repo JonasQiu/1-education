@@ -15,7 +15,14 @@ Component({
     collectionCount: 0,
     fansCount: 0,
   },
-
+  created() {
+    wx.showLoading({
+      title: '正在加载数据...',
+    })
+  },
+  ready() {
+    wx.hideLoading()
+  },
   //组件初始化处理
   attached() {
     const that = this;

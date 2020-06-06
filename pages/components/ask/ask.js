@@ -11,24 +11,33 @@ Component({
    * 组件的初始数据
    */
   data: {
-    isShow:false
+    isShow: false
   },
-  attached(){
-    //判断返回键的显示
-   if(getCurrentPages().length > 1){
-    this.setData({
-      isShow:true
+
+  created() {
+    wx.showLoading({
+      title: '正在加载数据...',
     })
-   }
+  },
+  ready() {
+    wx.hideLoading()
+  },
+  attached() {
+    //判断返回键的显示
+    if (getCurrentPages().length > 1) {
+      this.setData({
+        isShow: true
+      })
+    }
   },
   /**
    * 组件的方法列表
    */
   methods: {
     /*  回复我的、@我、系统通知、收到的赞 页面切换 */
-    changePage(e){
+    changePage(e) {
       wx.navigateTo({
-        url:`/pages/components/ask/${e.currentTarget.dataset.page}/${e.currentTarget.dataset.page}`,
+        url: `/pages/components/ask/${e.currentTarget.dataset.page}/${e.currentTarget.dataset.page}`,
       })
     },
 
@@ -48,7 +57,7 @@ Component({
 
     // ListTouch计算滚动
     ListTouchEnd(e) {
-      if (this.data.ListTouchDirection =='left'){
+      if (this.data.ListTouchDirection == 'left') {
         this.setData({
           modalName: e.currentTarget.dataset.target
         })
