@@ -1,2 +1,1 @@
-<!--pages/components/map/map.wxml-->
-<text>pages/components/map/map.wxml</text>
+<map longitude="{{longitude}}" latitude="{{latitude}}" style="height:100vh;width:100vw"></map>
