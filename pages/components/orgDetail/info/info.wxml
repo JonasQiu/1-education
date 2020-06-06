@@ -6,7 +6,7 @@
 	</swiper>
 	<!-- 地图 -->
 	<view class="map-container plr2 chunk" bindtap="lookMap" data-nav="no" data-latitude="{{infoList.location.lat}}" data-longitude="{{infoList.location.lng}}">
-		<map class="map" id="map" latitude="{{infoList.location.lat}}" longitude="{{infoList.location.lng}}" scale="20" enable-rotate enable-traffic></map>
+		<map class="map" id="map" latitude="{{infoList.location.lat}}" longitude="{{infoList.location.lng}}" scale="16" enable-rotate enable-traffic></map>
 		<view class="flex " bindtap="lookMap" data-nav="yes" data-latitude="{{infoList.location.lat}}" data-longitude="{{infoList.location.lng}}">
 			<view><text class="cuIcon-locationfill"></text> {{infoList.location.address}} </view>
 			<view><text class="cuIcon-right"></text></view>

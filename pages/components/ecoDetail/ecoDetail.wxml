@@ -51,23 +51,66 @@
 				<!-- 机构介绍 -->
 				<view class="chunk">
 					<view class="padding-20 org">
-						<image class="eco-orgHeadImg" src="{{ecoObj.cimg[0]}}"></image>
+						<image class="eco-orgHeadImg" src="{{ecoObj.orgInfo._id}}"></image>
 						<view class="info">
-							<view class="eco-orgName m-b-10">{{ecoObj.title}}</view>
+							<view class="eco-orgName m-b-10">{{ecoObj.orgInfo.info.orgName}}</view>
 							<view class="eco-stars m-b-10">
 								<!-- 评星展示 -->
 								评分：{{ecoObj.orgInfo.star}} 分
-								<!-- 收藏 -->
 							</view>
 							<view class="eco-address">{{ecoObj.orgInfo.location.address}}</view>
 						</view>
+
+						<!-- 收藏 -->
 						<text class="cuIcon-favor collect"></text>
 
 					</view>
 				</view>
 				<!-- 评论 -->
 				<view class="chunk comment">
-					
+					<text class="commentTitle">讨论</text>
+					<text class="commentNum">（33）</text>
+					<view class="commentChunk">
+						<image src="{{}}" class="avatar-comment"></image>
+						<input type="text" class="inputComment" placeholder="快来写下你的评论吧 ~ "></input>
+					</view>
+					<view class="commentList">
+						<view class="listShow">
+							<image class="avatar-comment"></image>
+							<view class="info">
+								<text class="info-name">刘海傻子</text>
+								<text class="cuIcon-appreciate">
+								<!-- 点赞个数 -->
+								<text class="appNum">(1)</text>
+								</text>
+								<view class="info-content">确确实实是个超级大傻逼，如果看不出来证明你也是个大傻逼</view>
+							</view>
+						</view>
+						<view class="listShow">
+							<image class="avatar-comment"></image>
+							<view class="info">
+								<text class="info-name">刘海傻子</text>
+								<text class="cuIcon-appreciate"></text>
+								<view>确确实实是个超级大傻逼，如果看不出来证明你也是个大傻逼</view>
+							</view>
+						</view>
+						<view class="listShow">
+							<image class="avatar-comment"></image>
+							<view class="info">
+								<text class="info-name">刘海傻子</text>
+								<text class="cuIcon-appreciate"></text>
+								<view>确确实实是个超级大傻逼，如果看不出来证明你也是个大傻逼</view>
+							</view>
+						</view>
+						<view class="listShow">
+							<image class="avatar-comment"></image>
+							<view class="info">
+								<text class="info-name">刘海傻子</text>
+								<text class="cuIcon-appreciate"></text>
+								<view>确确实实是个超级大傻逼，如果看不出来证明你也是个大傻逼</view>
+							</view>
+						</view>
+					</view>
 				</view>
 			</view>
 		</view>
