@@ -34,8 +34,7 @@ Component({
       title: '正在加载数据...',
     })
   },
-  ready() {
-  },
+  ready() {},
   attached() {
     //判断返回键的显示
     if (getCurrentPages().length > 1) {
@@ -101,7 +100,7 @@ Component({
       // 做统一处理
       p.then(async res => {
         // 因为搜索内容fix过了，所以不要再fix了，会报错，所以除了搜索之外的需要fix。fix就是完善数据
-        res.ecoList = index == 3 ? res.ecoList : that.FixUserType(await comEco.fixLikeUser(res.ecoList))
+        res.ecoList = index == 3 ? res.ecoList : comEco.FixUserType(await comEco.fixLikeUser(res.ecoList))
         // 添加到原来的数组后面
         that.data.EcoList.push(...res.ecoList)
         that.setData({
@@ -182,7 +181,7 @@ Component({
     fun_search() {
       var that = this;
       comEco.searchPage(that.data.searchValue).then(async res => {
-        that.data.searchList = that.FixUserType(await comEco.fixLikeUser(res))
+        that.data.searchList = comEco.FixUserType(await comEco.fixLikeUser(res))
         that.loadData(3, 3, true)
       })
     },
@@ -198,17 +197,5 @@ Component({
         goTop: 0
       })
     },
-    FixUserType(ecoList) {
-      let UserTypeList = ['普通用户', '专业人士', '机构', '官方']
-      let index;
-      for (let i = 0; i < ecoList.length; i++) {
-        index = ecoList[i].userInfo.userType - 1
-        ecoList[i].userInfo.fixUserType = UserTypeList[index]
-        if (index in [1, 2]) {
-          ecoList[i].userInfo.fixUserType = comType.getTypeName(ecoList[i].userInfo.type) + ' ' + ecoList[i].userInfo.fixUserType
-        }
-      }
-      return ecoList;
-    }
   }
 })

@@ -2,6 +2,7 @@
 @import "/colorui/icon.wxss";
 @import "/colorui/animation.wxss";
 @import "/pages/components/ecosystem/ecosystem.wxss";
+@import "/pages/components/search/channel/channel.wxss";
 
 /* topbar */
 .scrollTop {
@@ -17,6 +18,10 @@
   font-family: "Microsoft Yahei";
 }
 
+.item {
+  height: auto;
+}
+
 /* 导航栏 */
 .nav .cu-item {
   height: 60rpx;
@@ -27,7 +32,6 @@
 }
 
 /* 内容1 生态圈 */
-@import "/pages/components/ecosystem/ecosystem.wxss";
 
 .content {
   padding-top: 15rpx;
@@ -47,7 +51,7 @@
 .item-img {
   margin-left: 15rpx;
   width: 230rpx;
-  height: 230rpx;
+  height: 200rpx;
   border-radius: 50%;
 }
 
@@ -71,6 +75,7 @@
   font-weight: bold;
   letter-spacing: 1px;
   font-family: "Microsoft Yahei";
+  margin-bottom: 10rpx;
 }
 
 .text-size {
@@ -78,7 +83,7 @@
 }
 
 .userName {
-  margin-bottom: 15rpx;
+  margin-bottom: 10rpx;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;

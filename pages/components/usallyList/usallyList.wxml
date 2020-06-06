@@ -12,29 +12,44 @@
 	</scroll-view>
 
 	<!-- 内容 -->
-	<view class="content" >
-		<view class="item {{toggleDelay?'animation-slide-bottom':''}}" bindtap="orgDetail" data-name="{{item._id}}" wx:for="{{dataList[TabCur].list}}" wx:key="index" style="animation-delay: {{(index+1)*0.2}}s;" style="padding:25rpx">
-			<view wx:if="{{typeIndex==2}}">
-				<view bindtap="naviToDetail" data-ecoid="{{item._id}}">
-					<view class="head">
-						<image src="{{item.userInfo.avatarUrl}}" class="eco-headImg" mode="aspectFill"></image>
-						<view class="eco-info">
-							<text class="eco-name">{{item.userInfo.nickName}}</text>
-							<view class="eco-time text-gray">发表于 {{item.fixCreateTime}}</view>
-						</view>
-						<text wx:if="s" class="eco-office">{{item.userInfo.fixUserType}}</text>
+	<view class="content">
+		<view class="item {{toggleDelay?'animation-slide-bottom':''}}" bindtap="naviToDetail" data-id="{{item._id}}" wx:for="{{dataList[TabCur].list}}" wx:key="index" style="animation-delay: {{(index+1)*0.2}}s;" style="padding:25rpx">
+			<block wx:if="{{typeIndex==0}}">
+
+			</block>
+			<block wx:if="{{typeIndex==1}}">
+				<image src='{{item.img.logo}}' class="item-img"></image>
+				<view class="info">
+					<view class="info-content">
+						{{item.info.orgName}}
 					</view>
-					<view class="eco-desc">{{item.content}}</view>
-					<view class="eco-imgContent">
-						<image mode="{{item.cimg.length === 1?'widthFix':'aspectFill'}}" class="{{item.cimg.length === 1 ? 'eco-oneImg' : item.cimg.length ===4 ? 'eco-fourImg' : 'eco-moreImg'}}" wx:for="{{item.cimg}}" wx:for-item="img" src="{{img}}" wx:key="index"></image>
+					<view class="msg">
+						<view class="userName">{{item.description}}</view>
+						<text wx:for="{{item.showStar}}" class="cuIcon-favorfill text-yellow"></text><text wx:for="{{5-item.showStar}}" class="cuIcon-favor"></text>
+						<text> {{item.star}} 分</text>
+						<view style="margin-top: 5rpx;">距离 {{item.distance}} km</view>
 					</view>
-					<view class="eco-more">
-						<!-- 浏览是指，点击进去详情页则记录一次 -->
-						<text class="text-gray read">{{'浏览 '+item.shareNum+' 次'}}</text>
-						<view style="font-size:55rpx">
-							<text class="eco-text cuIcon-likefill {{item.isLike ? 'text-red' : 'text-gray'}}" catchtap="sendLike" data-myindex="{{index}}"></text>
-							<text class="eco-text text-gray cuIcon-commentfill"></text>
-						</view>
+				</view>
+			</block>
+			<block wx:if="{{typeIndex==2}}">
+				<view class="head">
+					<image src="{{item.userInfo.avatarUrl}}" class="eco-headImg" mode="aspectFill"></image>
+					<view class="eco-info">
+						<text class="eco-name">{{item.userInfo.nickName}}</text>
+						<view class="eco-time text-gray">发表于 {{item.fixCreateTime}}</view>
+					</view>
+					<text wx:if="s" class="eco-office">{{item.userInfo.fixUserType}}</text>
+				</view>
+				<view class="eco-desc">{{item.content}}</view>
+				<view class="eco-imgContent">
+					<image mode="{{item.cimg.length === 1?'widthFix':'aspectFill'}}" class="{{item.cimg.length === 1 ? 'eco-oneImg' : item.cimg.length ===4 ? 'eco-fourImg' : 'eco-moreImg'}}" wx:for="{{item.cimg}}" wx:for-item="img" src="{{img}}" wx:key="index"></image>
+				</view>
+				<view class="eco-more">
+					<!-- 浏览是指，点击进去详情页则记录一次 -->
+					<text class="text-gray read">{{'浏览 '+item.shareNum+' 次'}}</text>
+					<view style="font-size:55rpx">
+						<text class="eco-text cuIcon-likefill {{item.isLike ? 'text-red' : 'text-gray'}}" catchtap="sendLike" data-myindex="{{index}}"></text>
+						<text class="eco-text text-gray cuIcon-commentfill"></text>
 					</view>
 				</view>
 				<view class="eco-call" style="font-size:55rpx">
@@ -43,7 +58,7 @@
 						<image class="cu-avatar radius margin-left" src="{{likeUser.avatarUrl}}" wx:for="{{item.likes}}" wx:for-item="likeUser" wx:key="index"></image>
 					</view>
 				</view>
-			</view>
+			</block>
 
 		</view>
 	</view>
