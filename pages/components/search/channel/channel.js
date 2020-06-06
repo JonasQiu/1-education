@@ -1,6 +1,8 @@
 // pages/components/search/channel/channel.js
 const comOrg = require('../../../../utils/Org/getOrg')
 const comType = require('../../../../utils/Type/Type')
+const comLocation = require('../../../../utils/Func/location')
+
 Component({
   /**
    * 组件的属性列表
@@ -51,7 +53,7 @@ Component({
         title: '正在加载数据',
       })
       let that = this;
-      comOrg.searchOrg(keyWord).then(res => {
+      comOrg.searchOrg(keyWord).then(async res => {
         let myData = {}
         if (that.data.historyList.indexOf(keyWord) == -1) {
           that.data.historyList.push(keyWord)
@@ -67,9 +69,19 @@ Component({
         myData.TabCur = 0
         myData.scrollLeft = (0 - 1) * 60
         myData.showList = that.getAll(myData.searchList)
+        for (let j = 0; j < myData.showList.length; j++) {
+          // 得到2地的距离
+          myData.showList[j].distance = await comLocation.getDistance(myData.showList[j].location.lat, myData.showList[j].location.lng)
+          myData.showList[j].showStar = parseInt(myData.showList[j].star)
+        }
+
+        console.log(myData.showList);
+
         myData.toggleDelay = true
         that.toggleDelay(that)
         that.setData(myData)
+        console.log(this.data.showList[0].distance, this.data.showList[0].star);
+
         wx.hideLoading()
         return true
       }).catch(res => {

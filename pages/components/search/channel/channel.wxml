@@ -60,8 +60,9 @@
 				</view>
 				<view class="msg">
 					<view class="userName">{{item.description}}</view>
-					<text class="play text-size cuIcon-appreciatefill"></text> {{'点赞111'}}
-					<text class="barrage text-size cuIcon-commentfill"></text> {{'评论1111'}}
+					<text wx:for="{{item.showStar}}" class="cuIcon-favorfill text-yellow"></text><text wx:for="{{5-item.showStar}}" class="cuIcon-favor"></text>
+					<text> {{item.star}} 分</text>
+					<view style="margin-top: 5rpx;">距离 {{item.distance}} km</view>
 				</view>
 			</view>
 		</view>

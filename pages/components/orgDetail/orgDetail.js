@@ -47,6 +47,7 @@ Page({
         isShow: true
       })
     }
+    // 获取用户登录的状态
     wx.getStorage({
       key: 'userInfo',
       success: (res) => {
@@ -62,6 +63,7 @@ Page({
       res.userInfo = await comOrg.fixUser(res)
       res.location.distance = await comLocation.getDistance(res.location.lat, res.location.lng)
       res.star = res.star.toString().length == 1 ? res.star + '.0' : res.star
+      console.log(res)
       that.data.infoData[0].obj = res
       that.setData({
         showStar: parseInt(res.star),
@@ -71,7 +73,7 @@ Page({
       wx.navigateBack()
     })
   },
-  attentionTap(e) {
+  collectTap(e) {
     let that = this;
     if (!that.data.myUserInfo) {
       wx.showToast({
@@ -79,20 +81,20 @@ Page({
       })
       return;
     }
-    if (that.data.isLoaddingAttention) {
+    if (that.data.isLoaddingCollect) {
       wx.showToast({
         'title': '操作频繁'
       })
       return
     }
-    that.data.isLoaddingAttention = true
+    that.data.isLoaddingCollect = true
     that.data.infoData[0].obj.isCollect = !that.data.infoData[0].obj.isCollect
     that.setData({
       infoData: that.data.infoData
     })
     let p = !that.data.infoData[0].obj.isCollect ? comUTO.Uncollect(that.data.infoData[0].obj._id) : comUTO.collect(that.data.infoData[0].obj._id)
     p.then(res => {
-      that.data.isLoaddingAttention = false
+      that.data.isLoaddingCollect = false
       if (res.status != 0) {
         that.data.infoData[0].obj.isCollect = !that.data.infoData[0].obj.isCollect
         that.setData({
@@ -104,7 +106,7 @@ Page({
       }
     })
   },
-  collectTap(e) {
+  attentionTap(e) {
     let that = this;
     if (!that.data.myUserInfo) {
       wx.showToast({
@@ -118,20 +120,23 @@ Page({
       })
       return;
     }
-    if (that.data.isLoaddingCollect) {
+    if (that.data.isLoaddingAttention) {
       wx.showToast({
         'title': '操作频繁'
       })
       return
     }
-    that.data.isLoaddingCollect = true
+    // 正在读取数据
+    that.data.isLoaddingAttention = true
+    // 先将样式调整，再改变数据，用户体验无延迟
     that.data.infoData[0].obj.userInfo.isMyFollow = !that.data.infoData[0].obj.userInfo.isMyFollow
     that.setData({
       infoData: that.data.infoData
     })
-    let p = that.data.infoData[0].obj.userInfo.isMyFollow ? comUTU.follow(that.data.infoData[0].obj.userInfo._id) : comUTU.Unfollow(that.data.infoData[0].obj.userInfo._id)
+    // 开始数据操作
+    let p = !that.data.infoData[0].obj.userInfo.isMyFollow ? comUTU.Unfollow(that.data.infoData[0].obj.userInfo._id) : comUTU.follow(that.data.infoData[0].obj.userInfo._id)
     p.then(res => {
-      that.data.isLoaddingCollect = false
+      that.data.isLoaddingAttention = false
       if (res.status != 0) {
         that.data.infoData[0].obj.userInfo.isMyFollow = !that.data.infoData[0].obj.userInfo.isMyFollow
         that.setData({

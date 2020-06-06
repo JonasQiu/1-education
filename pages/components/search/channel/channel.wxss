@@ -94,10 +94,11 @@
 }
 
 /* 有搜索内容 */
-.b-color{
+.b-color {
   height: 100vh;
   background-color: #e4f9f5;
 }
+
 /* 导航栏 */
 .nav .cu-item {
   height: 60rpx;
@@ -161,7 +162,6 @@
 }
 
 .userName {
-  margin-bottom: 15rpx;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
