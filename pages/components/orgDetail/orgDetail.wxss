@@ -57,7 +57,7 @@
   position: fixed;
   display: flex;
   bottom: 0;
-  height: 80rpx;
+  height: 100rpx;
   background-color: #fff;
   justify-content: space-around;
   align-items: center;

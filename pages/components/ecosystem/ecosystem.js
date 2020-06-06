@@ -29,6 +29,13 @@ Component({
     searchList: [],
     starNum: 0,
   },
+  created() {
+    wx.showLoading({
+      title: '正在加载数据...',
+    })
+  },
+  ready() {
+  },
   attached() {
     //判断返回键的显示
     if (getCurrentPages().length > 1) {
@@ -46,7 +53,7 @@ Component({
     // 点赞
     sendLike(e) {
       var that = this;
-      if(!wx.getStorageSync('userInfo')){
+      if (!wx.getStorageSync('userInfo')) {
         wx.showToast({
           title: '请先登录好吧',
         })

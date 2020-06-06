@@ -25,7 +25,7 @@
 	</scroll-view>
 </view>
 
-<view style="margin-bottom: 120rpx;">
+<view style="margin-bottom: 100rpx;">
 	<!-- 组件跳转 -->
 	<info wx:if="{{0===TabCur}}" infoList="{{infoData[0].obj}}" />
 	<lesson wx:if="{{1===TabCur}}" lessonList="{{infoData[1].list}}" />
