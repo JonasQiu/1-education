@@ -1,5 +1,6 @@
 const db = wx.cloud.database()
 const _ = db.command
+const comFunUser = require('../User/Fun_User')
 
 function getOrgList(startNum, Num) {
     // startNum 从0开始获取
@@ -92,9 +93,14 @@ function isCollect(orgList) {
     return orgList;
 }
 
+function fixUser(orgInfo) {
+    return comFunUser.getUserInfo(orgInfo.userInfo.userId)
+}
+
 module.exports = {
     getOrg,
     getOrgList,
     getTypeOrg,
     searchOrg,
+    fixUser,
 }

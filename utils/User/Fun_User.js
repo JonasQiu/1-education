@@ -17,6 +17,7 @@ function getInfoList(userIdList) {
 }
 
 function getUserInfo(userId) {
+    // 返回目标用户完整信息obj
     return new Promise((resolve, reject) => {
         db.collection('User').doc(userId).get().then(res => {
             resolve(fixUserInfo(res.data))

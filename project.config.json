@@ -7,6 +7,7 @@
 	"setting": {
 		"urlCheck": false,
 		"es6": true,
+		"enhance": true,
 		"postcss": true,
 		"preloadBackgroundData": false,
 		"minified": true,
@@ -23,9 +24,8 @@
 			"disablePlugins": [],
 			"outputPath": ""
 		},
-		"useCompilerModule": false,
-		"userConfirmedUseCompilerModuleSwitch": false,
-		"enhance": true
+		"useCompilerModule": true,
+		"userConfirmedUseCompilerModuleSwitch": false
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.4.2",
@@ -78,9 +78,9 @@
 				},
 				{
 					"id": 2,
-					"name": "pages/components/orgDetail/orgDetail",
+					"name": "机构详情页",
 					"pathName": "pages/components/orgDetail/orgDetail",
-					"query": "",
+					"query": "query=ak9JgjlGayh3j7V16tF8olEHjZsXYlrAefm6DMlCjhWPUtWw",
 					"scene": null
 				},
 				{
@@ -122,6 +122,21 @@
 					"id": -1,
 					"name": "pages/components/position/position",
 					"pathName": "pages/components/position/position",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/components/orgDetail/orgDetail",
+					"pathName": "pages/components/orgDetail/orgDetail",
+					"query": "query='eWu4xmOWBvjLGJvLbwitDSTchAhmiSeY1DQFhMH8HeKz16nI'",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/components/orgDetail/orgDetail",
+					"pathName": "pages/components/orgDetail/orgDetail",
+					"query": "query=FeROQQ35jOh25P8XgnwPInQWQvoPS4TiliuuWbwJUjUWUktK",
 					"scene": null
 				}
 			]
