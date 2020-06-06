@@ -6,21 +6,35 @@
   border-bottom: 2rpx solid #ddd;
 }
 
+.chunk {
+  border: 2rpx solid rgb(241, 241, 241);
+  margin: 20rpx auto 40rpx;
+  width: 92%;
+  background: #fff;
+  box-shadow: 15rpx 20rpx 20rpx #ccc;
+  border-radius: 30rpx;
+  overflow: hidden;
+  padding: 30rpx;
+}
+
 .cover_picurl {
-  width: 130rpx;
-  height: 130rpx;
-  border-radius: 50%;
+  width: 170rpx;
+  height: 200rpx;
 }
 
 .info {
   padding-left: 30rpx;
   width: 570rpx;
-
 }
 
 .name {
   padding-bottom: 10rpx;
-  font-size: 36rpx;
+  font-size: 34rpx;
+  padding-left: 20rpx;
+  color: #666;
+  font-weight: 500;
+  letter-spacing: 2px;
+  font-family: "Microsoft Yahei";
 }
 
 .b-right {
@@ -31,11 +45,19 @@
 
 .pro {
   padding-top: 15rpx;
-  text-align: justify;
-  color: #999;
-  overflow: hidden;
-  text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3
+  -webkit-line-clamp: 3;
+  line-height: 40rpx;
+  color: #666;
+  font-size: 25rpx;
+  font-weight: 300;
+  letter-spacing: 2px;
+  font-family: "Microsoft Yahei";
+  text-indent: 2em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  white-space: normal !important;
+  text-align: justify;
 }

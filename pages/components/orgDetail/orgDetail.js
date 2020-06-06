@@ -3,6 +3,8 @@ const comOrg = require('../../../utils/Org/getOrg')
 const comData = require('../../../utils/Org/getOrgDetailList')
 const comUTO = require('../../../utils/User/UserToOrg')
 const comUTU = require('../../../utils/User/UserToUser')
+const comLocation = require('../../../utils/Func/location')
+
 
 Page({
 
@@ -33,7 +35,42 @@ Page({
     teacher: [],
     active: []
   },
-  // 
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    let that = this
+    //判断返回键的显示
+    if (getCurrentPages().length > 1) {
+      this.setData({
+        isShow: true
+      })
+    }
+    wx.getStorage({
+      key: 'userInfo',
+      success: (res) => {
+        console.log(res.data);
+        that.setData({
+          myUserInfo: res.data
+        })
+      }
+    })
+    //得到一下传递的参数 
+    comOrg.getOrg(options.query).then(async res => {
+      // fixUser 根据该机构的userId字段获取完整宿主信息
+      res.userInfo = await comOrg.fixUser(res)
+      res.location.distance = await comLocation.getDistance(res.location.lat, res.location.lng)
+      res.star = res.star.toString().length == 1 ? res.star + '.0' : res.star
+      that.data.infoData[0].obj = res
+      that.setData({
+        showStar: parseInt(res.star),
+        infoData: that.data.infoData
+      })
+    }).catch(res => {
+      wx.navigateBack()
+    })
+  },
   attentionTap(e) {
     let that = this;
     if (!that.data.myUserInfo) {
@@ -113,36 +150,5 @@ Page({
       scrollLeft: (e.currentTarget.dataset.id - 1) * 60
     })
   },
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-    let that = this
-    //判断返回键的显示
-    if (getCurrentPages().length > 1) {
-      this.setData({
-        isShow: true
-      })
-    }
-    wx.getStorage({
-      key: 'userInfo',
-      success: (res) => {
-        console.log(res.data);
-        that.setData({
-          myUserInfo: res.data
-        })
-      }
-    })
-    //得到一下传递的参数 
-    comOrg.getOrg(options.query).then(async res => {
-      // fixUser 根据该机构的userId字段获取完整宿主信息
-      res.userInfo = await comOrg.fixUser(res)
-      that.data.infoData[0].obj = res
-      that.setData({
-        infoData: that.data.infoData
-      })
-    }).catch(res => {
-      wx.navigateBack()
-    })
-  }
+
 })

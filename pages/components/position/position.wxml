@@ -37,7 +37,7 @@
 			</view>
 		</block>
 		<!-- 右边导航条 -->
-		<view class="indexBar" style="height:calc(100vh - {{CustomBar}}px - 50px)" bindtouchstart="tStart" bindtouchend="tEnd" catchtouchmove="tMove">
+		<view class="indexBar" style="height:calc(100vh - {{CustomBar}}px - 120px)" bindtouchstart="tStart" bindtouchend="tEnd" catchtouchmove="tMove">
 			<!-- 点击导航条跳转到，字母所在的城市列表 -->
 			<view class="indexBar-item" wx:for="{{list}}" wx:key="index" id="{{index}}" bindtouchstart="getCur" bindtouchend="setCur">{{list[index]}}</view>
 		</view>

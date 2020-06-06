@@ -2,34 +2,23 @@ const app = getApp();
 const positionCity = require("../../../utils/Func/city")
 Page({
   data: {
+    list: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"],
+    listCur: 'A',
     StatusBar: app.globalData.StatusBar,
     CustomBar: app.globalData.CustomBar,
     hidden: true,
     isShow: false,
-    allCityObj: {},
-    hotCityArr: [],
+    allCityObj: positionCity.all,
+    hotCityArr: positionCity.hot,
     chooseCity: '上海市',
     // 搜索功能明天添加，刘海处理
     searchCity: '',
     // 是否有展示搜索列表
     isShowSearch: true,
-    searchCityList:[]
+    searchCityList: []
   },
   onLoad() {
     let that = this
-    // 初始化城市列表
-    this.setData({
-      allCityObj: positionCity.all,
-      hotCityArr: positionCity.hot
-    })
-    let list = [];
-    for (let i = 0; i < 26; i++) {
-      list[i] = String.fromCharCode(65 + i)
-    }
-    this.setData({
-      list: list,
-      listCur: list[0]
-    })
     // 进入页面读取城市
     wx.getStorage({
       key: 'location',
