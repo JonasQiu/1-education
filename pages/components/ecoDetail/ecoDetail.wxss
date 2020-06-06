@@ -312,7 +312,7 @@
   line-height: 80rpx;
   font-size: 34rpx;
 }
-.cuIcon-appreciate{
+.info-call {
   position: absolute;
   right: 0;
   top: 14rpx;
