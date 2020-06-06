@@ -40,14 +40,24 @@ Component({
       switch (that.data.typeIndex) {
         case 0:
           p = new Promise(async (resolve, reject) => {
-            // 还有用户类别没弄好。
             let UserTypeList = ['普通用户', '专业人士', '机构', '官方']
-            let origin = await comFunUser.getInfoList(['54bac78c5ecd3a23005318b4110c12b3', 'd721728a5ecf306e00564d773e18ace5'])
-            let showData = []
+            let origin = await comFunUser.getInfoList(list)
+            let showData = [{
+              nav: '全部',
+              list: origin
+            }]
             let typeName = ''
+            // 将获取到的用户列表进行分类到每个列表中。
             for (let i = 0; i < origin.length; i++) {
+              if (origin[i].userType == 1) {
+                // 普通用户不需要加到其它分类，在全部乖乖躺好就好
+                origin[i].fixUserType = '普通用户'
+                continue;
+              }
+
               typeName = comType.getTypeName(origin[i].type)
-              for (let j = 0; j < showData.length; j++) {
+              origin[i].fixUserType = typeName + ' ' + UserTypeList[origin[i].userType - 1]
+              for (let j = 1; j < showData.length; j++) {
                 if (showData[j]['nav'] == typeName) {
                   showData[j]['list'].push(origin[i])
                   typeName == 'ok'
@@ -66,7 +76,7 @@ Component({
           break;
         case 1:
           p = new Promise(async (resolve, reject) => {
-            let ecoList = (await comOrg.getOrgList(0, 20)).orgList
+            let ecoList = list
             let originList = comType.deOrgTypeList(ecoList)
             let typeList = Object.keys(originList)
             for (let i = 0; i < ecoList.length; i++) {
@@ -90,7 +100,7 @@ Component({
           break;
         case 2:
           p = new Promise(async (resolve, reject) => {
-            let ecoList = comEco.FixUserType(await comEco.fixLikeUser((await comEco.getPageList(0, 5)).ecoList))
+            let ecoList = comEco.FixUserType(await comEco.fixLikeUser(list))
             console.log(ecoList)
             resolve([{
               nav: '最新',

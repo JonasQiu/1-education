@@ -2,6 +2,7 @@ const db = wx.cloud.database()
 const _ = db.command
 const comEco = require('../Ecosystem/getPage')
 
+// 阅读
 function read(ecoId) {
     // 用户(无需登录)查看了这个帖子
     // resolve -> bool
@@ -37,6 +38,7 @@ function read(ecoId) {
     })
 }
 
+// 喜欢
 function like(ecoId) {
     // 用户(需登录)喜欢这个帖子,自增帖子likeNum，用户ID添加到likes列表
     // resolve -> 0:喜欢成功 1:喜欢失败 2:用户未登录
@@ -86,6 +88,7 @@ function like(ecoId) {
     })
 }
 
+// 取消喜欢
 function Unlike(ecoId) {
     // 用户(需登录)取消喜欢这个帖子,自减帖子likeNum，用户ID从likes列表删除
     // resolve -> 0:喜欢成功 1:喜欢失败 2:用户未登录
@@ -133,6 +136,19 @@ function Unlike(ecoId) {
                 }
             }
         })
+    })
+}
+
+// 评论
+function setComment() {
+    // 用户(需登录)评论这个帖子,将评论信息添加到帖子comments字段
+    // resolve -> 0:喜欢成功 1:喜欢失败 2:用户未登录
+    // reject -> 处理异常
+    return new Promise((resolve, reject) => {
+        let userInfo = wx.getStorageSync('userInfo') || resolve({
+            status: 2,
+            msg: '用户未登录'
+        });
     })
 }
 

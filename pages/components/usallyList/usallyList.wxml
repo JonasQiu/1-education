@@ -15,6 +15,19 @@
 	<view class="content">
 		<view class="item {{toggleDelay?'animation-slide-bottom':''}}" bindtap="naviToDetail" data-id="{{item._id}}" wx:for="{{dataList[TabCur].list}}" wx:key="index" style="animation-delay: {{(index+1)*0.2}}s;" style="padding:25rpx">
 			<block wx:if="{{typeIndex==0}}">
+				<view class="userInfo"></view>
+				<image src='{{item.avatarUrl}}' class="avatarUrl"></image>
+				<view class="info2">
+					<view class="info3">
+						<text class="nickName">{{item.nickName}}</text>
+						<text class="fixUserType">{{item.fixUserType}}</text>
+					</view>
+					<view class="info3">
+						<text class="infoNum">帖子数：{{item.myArticle.length}}个</text>
+						<text class="infoNum">关注数：{{item.myFollow.length}}人</text>
+						<text class="infoNum">粉丝数：{{item.myFans.length}}人</text>
+					</view>
+				</view>
 
 			</block>
 			<block wx:if="{{typeIndex==1}}">
