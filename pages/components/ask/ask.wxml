@@ -4,25 +4,6 @@
 </cu-custom>
 
 <view class="page">
-	<!-- 回复我的、@我、系统通知、收到的赞 -->
-	<view class="ask">
-		<view class="msg" bindtap="changePage" data-page="reply">
-			<text class="iconfont icon-talk ask-style icon-reply"></text>
-			<view class="view">回复我的</view>
-		</view>
-		<view class="msg" bindtap="changePage" data-page="book">
-			<text class="iconfont icon-addressbook ask-style icon-book"></text>
-			<view class="view">通讯录</view>
-		</view>
-		<view class="msg" bindtap="changePage" data-page="praise">
-			<text class="iconfont icon-good ask-style icon-praise"></text>
-			<view class="view">收到的赞</view>
-		</view>
-		<view class="msg" bindtap="changePage" data-page="sys">
-			<text class="iconfont icon-tongzhi ask-style icon-sys"></text>
-			<view class="view">系统通知</view>
-		</view>
-	</view>
 	<!-- 对话列表 -->
 	<view class="cu-bar bg-white solid-bottom margin-top">
 		<view class="action">
