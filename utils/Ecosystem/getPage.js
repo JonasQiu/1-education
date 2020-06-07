@@ -227,6 +227,16 @@ function fixLikeUser(ecoList) {
     })
 }
 
+function fixComments(ecoObj) {
+    // 传入单个obj，返回获取评论人完整用户信息的ecoObj数据
+    return new Promise(async (resolve, reject) => {
+        for (let j = 0; j < ecoObj.comments.length; j++) {
+            ecoObj.comments[j]['userInfo'] = await comFunUser.getUserInfo(ecoObj.comments[j].userId)
+        }
+        resolve(ecoObj)
+    })
+}
+
 function FixUserType(ecoList) {
     let UserTypeList = ['普通用户', '专业人士', '机构', '官方']
     let index;
@@ -249,5 +259,6 @@ module.exports = {
     fixLikeUser,
     searchPage,
     isLike,
-    FixUserType
+    FixUserType,
+    fixComments
 }

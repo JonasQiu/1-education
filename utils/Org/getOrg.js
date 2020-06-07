@@ -97,10 +97,21 @@ function fixUser(orgInfo) {
     return comFunUser.getUserInfo(orgInfo.userInfo.userId)
 }
 
+function fixComments(orgObj) {
+    // 传入单个obj，返回获取评论人完整用户信息的orgObj数据
+    return new Promise(async (resolve, reject) => {
+        for (let j = 0; j < orgObj.comment.length; j++) {
+            orgObj.comment[j]['userInfo'] = await comFunUser.getUserInfo(orgObj.comment[j].userId)
+        }
+        resolve(orgObj)
+    })
+}
+
 module.exports = {
     getOrg,
     getOrgList,
     getTypeOrg,
     searchOrg,
     fixUser,
+    fixComments
 }
