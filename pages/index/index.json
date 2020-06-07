@@ -2,7 +2,6 @@
     "usingComponents": {
       "homePage":"/pages/components/homePage/homePage",
       "my":"/pages/components/my/my",
-      "ask":"/pages/components/ask/ask",
       "ecosystem":"/pages/components/ecosystem/ecosystem",
       "search":"/pages/components/search/search"
     }

@@ -1,0 +1,4 @@
+/* pages/components/ask/askWindow/askWindow.wxss */
+.page {
+  margin-bottom: 100rpx;
+}
