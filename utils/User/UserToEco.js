@@ -140,21 +140,147 @@ function Unlike(ecoId) {
 }
 
 // 评论
-function setComment() {
+function setComment(ecoId, content) {
     // 用户(需登录)评论这个帖子,将评论信息添加到帖子comments字段
-    // resolve -> 0:喜欢成功 1:喜欢失败 2:用户未登录
+    // resolve -> 0:评论成功 1:评论失败 2:用户未登录
     // reject -> 处理异常
     return new Promise((resolve, reject) => {
         let userInfo = wx.getStorageSync('userInfo') || resolve({
             status: 2,
             msg: '用户未登录'
         });
+        let time = Date.now()
+        db.collection('Eco').doc(ecoId).update({
+            data: {
+                comments: _.unshift([{
+                    Id: userInfo._id + "&" + time,
+                    userId: userInfo._id,
+                    content,
+                    time: time,
+                    likeNum: 0
+                }])
+            }
+        }).then(res => {
+            if (res.stats.updated == 1) {
+                resolve({
+                    status: 0,
+                    msg: '评论成功'
+                })
+            } else {
+                resolve({
+                    status: 1,
+                    msg: '评论失败'
+                })
+            }
+        }).catch(res => {
+            reject(res)
+        })
+
     })
 }
 
-// 还有评论，给评论点赞，评论热评、新评排序、分享、
+// 简单点赞评论
+function likeComment(ecoId, CommentId) {
+    // 用户点赞这个评论,通过判断本地缓存，自增评论likeNum
+    // resolve -> 0:点赞评论成功 1:点赞评论失败
+    // reject -> 处理异常
+    return new Promise(async (resolve, reject) => {
+        let likeCommentList = wx.getStorageSync('like_comment')
+        if (likeCommentList && likeCommentList.indexOf(CommentId) > -1) {
+            // 说明爱过
+            resolve({
+                status: 0,
+                msg: '点赞评论成功'
+            })
+        } else {
+            likeCommentList = likeCommentList ? likeCommentList : []
+            let commentList = (await db.collection('Eco').doc(ecoId).get()).data.comments
+            for (let i = 0; i < commentList.length; i++) {
+                if (commentList[i].Id == CommentId) {
+                    commentList[i].likeNum += 1
+                    if ((await db.collection('Eco').doc(ecoId).update({
+                            data: {
+                                comments: commentList
+                            }
+                        })).stats.updated == 1) {
+                        likeCommentList.push(CommentId)
+                        wx.setStorageSync('like_comment', likeCommentList)
+                        resolve({
+                            status: 0,
+                            msg: '点赞评论成功'
+                        })
+                    } else {
+                        resolve({
+                            status: 1,
+                            msg: '点赞评论失败'
+                        })
+                    }
+                    break;
+                }
+            }
+            resolve({
+                status: 1,
+                msg: '点赞评论失败'
+            })
+
+        }
+    })
+}
+
+// 简单取消点赞评论
+function disLikeComment(ecoId, CommentId) {
+    // 用户点赞这个评论,通过判断本地缓存，自增评论likeNum
+    // resolve -> 0:点赞评论成功 1:点赞评论失败
+    // reject -> 处理异常
+    return new Promise(async (resolve, reject) => {
+        let likeCommentList = wx.getStorageSync('like_comment') || []
+        if (!likeCommentList || likeCommentList.indexOf(CommentId) == -1) {
+            // 说明没爱过，没爱过取消啥？
+            resolve({
+                status: 0,
+                msg: '取消评论成功'
+            })
+        } else {
+            let commentList = (await db.collection('Eco').doc(ecoId).get()).data.comments
+            for (let i = 0; i < commentList.length; i++) {
+                if (commentList[i].Id == CommentId) {
+                    // 啊找到要操作的了
+                    commentList[i].likeNum -= 1
+                    if ((await db.collection('Eco').doc(ecoId).update({
+                            data: {
+                                comments: commentList
+                            }
+                        })).stats.updated == 1) {
+                        likeCommentList.remove(CommentId)
+                        wx.setStorageSync('like_comment', likeCommentList)
+                        resolve({
+                            status: 0,
+                            msg: '取消点赞评论成功'
+                        })
+                    } else {
+                        resolve({
+                            status: 1,
+                            msg: '取消点赞评论失败'
+                        })
+                    }
+                    break;
+                }
+            }
+            resolve({
+                status: 1,
+                msg: '取消点赞评论失败'
+            })
+
+        }
+    })
+}
+
+// 评论热评、新评排序、分享、
 module.exports = {
     read,
     like,
     Unlike,
+    setComment,
+    likeComment,
+    disLikeComment
 }
