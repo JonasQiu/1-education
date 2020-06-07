@@ -3,14 +3,9 @@
     "pages/index/index",
     "pages/components/homePage/homePage",
     "pages/components/search/search",
-    "pages/components/ask/ask",
     "pages/components/my/my",
     "pages/components/position/position",
     "pages/components/ecosystem/ecosystem",
-    "pages/components/ask/reply/reply",
-    "pages/components/ask/book/book",
-    "pages/components/ask/praise/praise",
-    "pages/components/ask/sys/sys",
     "pages/components/search/channel/channel",
     "pages/components/search/partitions/partitions",
     "pages/components/orgDetail/orgDetail",
@@ -21,7 +16,8 @@
     "pages/components/orgDetail/teacher/teacher",
     "pages/components/ecoDetail/ecoDetail",
     "pages/components/ecoDetail/appreciateList/appreciateList",
-    "pages/components/usallyList/usallyList"
+    "pages/components/usallyList/usallyList",
+    "pages/components/askWindow/askWindow"
   ],
   "window": {
     "backgroundTextStyle": "light",

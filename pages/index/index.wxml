@@ -2,8 +2,49 @@
 <homePage wx:if="{{PageCur=='homePage'}}"></homePage>
 <ecosystem wx:if="{{PageCur=='ecosystem'}}"></ecosystem>
 <search wx:if="{{PageCur=='search'}}"></search>
-<ask wx:if="{{PageCur=='ask'}}"></ask>
 <my wx:if="{{PageCur=='my'}}"></my>
+<!-- ask -->
+<view wx:if="{{PageCur=='ask'}}" class="ask">
+	<scroll-view scroll-y class="DrawerPage {{modalName=='viewModal'?'show':''}}">
+		<cu-custom bgColor="bg-gradual-blue">
+			<view slot="content">咨询</view>
+		</cu-custom>
+		<view class='padding-top  text-center'>
+			<view class='cu-btn bg-green lg block shadow radius margin-right-xl margin-left-xl' bindtap="showModal" data-target="viewModal">
+				咨询大厅
+			</view>
+		</view>
+		<view class=" cu-list menu card-menu margin-top-xl margin-bottom-xl shadow-lg" style="margin-bottom:120rpx">
+			<view class="cu-item arrow {{modalName=='move-box-'+ index?'move-cur':''}}" wx:for="{{20}}" wx:key="index" bindtouchstart="ListTouchStart" bindtouchmove="ListTouchMove" bindtouchend="ListTouchEnd" data-target="move-box-{{index}}">
+				<view class="content">
+					<text class="cuIcon-github text-grey"></text>
+					<text class="text-grey">{{index +1}}</text>
+				</view>
+				<view class="action">
+					<view class="text-grey text-xs">22:20</view>
+					<view class="cu-tag round bg-grey sm">5</view>
+				</view>
+				<view class="move">
+					<view class="bg-grey">置顶</view>
+					<view class="bg-red">删除</view>
+				</view>
+			</view>
+		</view>
+	</scroll-view>
+	<view class="DrawerClose {{modalName=='viewModal'?'show':''}}" bindtap="hideModal">
+		<text class="cuIcon-pullright"></text>
+	</view>
+	<scroll-view scroll-y style="padding-bottom:90rpx" class="DrawerWindow  {{modalName=='viewModal'?'show':''}}">
+		<view class="cu-list menu card-menu margin-top-xl margin-bottom-xl shadow-lg">
+			<view class="cu-item arrow" wx:for="{{20}}" wx:key="index" >
+				<view class="content">
+					<text class="cuIcon-github text-grey"></text>
+					<text class="text-grey">{{index +1}}</text>
+				</view>
+			</view>
+		</view>
+	</scroll-view>
+</view>
 
 <!-- 底部导航 -->
 <view class="shadow foot cu-bar tabbar bg-white">
@@ -16,10 +57,10 @@
 	</view>
 	<view class="action  {{PageCur=='search'?'text-green':'text-gray'}} add-action" bindtap="NavChange" data-cur="search">
 		<button class="cu-btn f-45 cuIcon-add bg-green shadow">
-      <text class="cuIcon-search"></text>
-    </button>找课
+			<text class="cuIcon-search"></text>
+		</button>找课
 	</view>
-  <view class="action {{PageCur=='ecosystem'?'text-green':'text-gray'}}" bindtap="NavChange" data-cur="ecosystem">
+	<view class="action {{PageCur=='ecosystem'?'text-green':'text-gray'}}" bindtap="NavChange" data-cur="ecosystem">
 		<view class="cuIcon-similar"></view>生态圈
 	</view>
 	<view class="action {{PageCur=='my'?'text-green':'text-gray'}}" bindtap="NavChange" data-cur="my">

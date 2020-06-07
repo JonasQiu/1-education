@@ -1,9 +1,14 @@
 @import "/colorui/main.wxss";
 @import "/colorui/icon.wxss";
 
+.page {
+  width: 100vw;
+  background-image: linear-gradient(to right, #0081ff, #1cbbb4);
+}
+
 /* 顶部导航栏 */
 .topFlex {
-  height: 140rpx;
+  height: 150rpx;
   width: 100%;
   position: relative;
   display: flex;
@@ -11,7 +16,7 @@
 
 .positionTem {
   position: absolute;
-  bottom: 15rpx;
+  bottom: 20rpx;
   font-size: 28rpx;
   margin: 0 40rpx;
 }
@@ -23,7 +28,7 @@
 .search {
   position: absolute;
   left: 165rpx;
-  bottom: 15rpx;
+  bottom: 20rpx;
   height: 60rpx;
   line-height: 60rpx;
   display: flex;
@@ -38,31 +43,42 @@
 }
 
 .page {
-  margin-bottom: 100rpx;
+  padding-bottom: 10rpx;
 }
 
 /* 轮播图 */
-.card-swiper {
-  margin-top: -12rpx;
+.homepage-swiper {
+  margin: 25rpx 30rpx 20rpx;
+  border-radius: 25rpx;
+  overflow: hidden;
 }
 
 /* 第一行列表 */
 .contain {
+  color: #fff;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-  padding-top: 10rpx;
+}
+
+.box1 {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20rpx;
 }
 
 .box {
   display: flex;
+  flex: 1;
   flex-direction: column;
-  padding: 5rpx;
+  align-items: center;
+  padding-top: 5rpx
 }
 
 .img {
-  height: 90rpx;
-  width: 113rpx;
+  font-size: 60rpx;
 }
 
 .txt {
@@ -77,8 +93,9 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  border-radius: 40rpx 40rpx 0rpx 0rpx;
-  margin: 0 30rpx 0 30rpx;
+  border-radius: 40rpx;
+  padding: 0 0 30rpx 0;
+  margin: 35rpx 30rpx 0 30rpx;
 }
 
 .contain_1 {
@@ -118,41 +135,98 @@
 }
 
 /* 卡片列表 */
-.card_contain {
+/* 线 */
+.line-area {
+  margin-top: 40rpx;
+  margin-bottom: 8rpx;
+  width: 100vw;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  margin: 20rpx 20rpx 0 20rpx;
+  align-items: center;
+  height: 60rpx;
+  color: #fff;
 }
 
-.card_box {
+.line {
+  margin: 0 auto;
+  width: 200rpx;
+  height: 0;
+  border: 4rpx solid #fff;
+}
+
+.card-info {
+  font-size: 34rpx;
+  width: 140rpx;
+  text-align: center;
+}
+
+/* 卡片内容 */
+.content {
+  padding: 20rpx;
+  padding-top: 15rpx;
+  margin-bottom: 100rpx;
+}
+
+.item {
+  padding: 30rpx 0rpx;
+  height: 290rpx;
   display: flex;
-  width: 47%;
+  border: 2rpx solid rgb(241, 241, 241);
+  margin: 0 auto 40rpx;
+  width: 96%;
+  background: #fff;
+  box-shadow: 5rpx 10rpx 10rpx #ccc;
+  border-radius: 50rpx;
+}
+
+.item-img {
+  margin-left: 15rpx;
+  width: 230rpx;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.info {
+  margin-left: 25rpx;
+  width: 390rpx;
+  color: #aaa;
+  font-size: 28rpx;
+  display: flex;
   flex-direction: column;
-  border-radius: 10rpx;
-  padding: 10rpx;
-  margin-bottom: 20rpx;
-  background-color: white;
+  justify-content: space-around;
 }
 
-.card_img {
-  height: 300rpx;
-  width: 300rpx;
+.info-content {
+  font-size: 34rpx;
+  color: #000;
+  text-overflow: ellipsis;
+  width: 400rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  font-weight: bold;
+  letter-spacing: 1px;
+  font-family: "Microsoft Yahei";
 }
 
-.desc {
-  font-size: 30rpx;
-  text-align: center;
+.text-size {
+  font-size: 38rpx;
 }
 
-.assess {
-  font-size: 26rpx;
-  color: gainsboro;
-  text-align: center;
-}
+.userName {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 
-.price {
-  font-size: 35rpx;
-  color: gold;
-  text-align: center;
+  display: -webkit-box;
+  color: #666;
+  font-size: 25rpx;
+  font-weight: 300;
+  letter-spacing: 2px;
+  font-family: "Microsoft Yahei";
+  text-indent: 1em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  white-space: normal !important;
 }
