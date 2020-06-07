@@ -33,6 +33,7 @@ Page({
     // 动画
     toggleDelay: false,
     commentHeight: 0,
+    commentValue: '',
     isAppre: true,
     Loading: {
       like: false,
@@ -110,6 +111,7 @@ Page({
       }]
       that.setData(showData)
       wx.hideLoading()
+      wx.hideToast()
     }).catch(res => {
       // 异常报错
       console.log(res)
@@ -174,6 +176,10 @@ Page({
         wx.showToast({
           title: '操作失败！',
         })
+      } else {
+        wx.showToast({
+          title: '操作成功！',
+        })
       }
       that.data.Loading.like = false
       that.loadData(that.data.ecoObj._id, false)
@@ -207,6 +213,10 @@ Page({
         wx.showToast({
           title: '操作失败！',
         })
+      } else {
+        wx.showToast({
+          title: '操作成功！',
+        })
       }
       that.data.Loading.collect = false
       that.loadData(that.data.ecoObj._id, false)
@@ -239,6 +249,10 @@ Page({
       if (res.status != 0) {
         wx.showToast({
           title: '操作失败！',
+        })
+      } else {
+        wx.showToast({
+          title: '操作成功！',
         })
       }
       that.data.Loading.follow = false
@@ -275,6 +289,10 @@ Page({
         wx.showToast({
           title: '操作失败！',
         })
+      } else {
+        wx.showToast({
+          title: '操作成功！',
+        })
       }
       that.data.Loading.likeComment = false
       that.loadData(that.data.ecoObj._id, false)
@@ -292,6 +310,9 @@ Page({
     } else {
       wx.showLoading({
         title: '正在提交中…',
+      })
+      that.setData({
+        commentValue: ''
       })
       comUTE.setComment(that.data.ecoObj._id, e.detail.value).then(res => {
         if (res.status == 0) {

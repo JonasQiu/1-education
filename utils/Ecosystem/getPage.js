@@ -259,6 +259,30 @@ function FixUserType(ecoList) {
     return ecoList;
 }
 
+function getEcoByOrg(orgId) {
+    // 传入机构ID，返回该机构宿主发表的生态圈文章
+    return new Promise((resolve, reject) => {
+        db.collection('Eco').where({
+            orgInfo: {
+                orgId
+            }
+        }).get().then(res => {
+            wx.cloud.callFunction({
+                name: 'getListEcosystem',
+                data: {
+                    ecoList: res.data
+                }
+            }).then(res => {
+                resolve(FixAll(res.result))
+            }).catch(res => {
+                reject(res)
+            })
+        }).catch(res => {
+            reject(res)
+        })
+    })
+}
+
 module.exports = {
     getPage,
     getPageList,
@@ -269,5 +293,6 @@ module.exports = {
     searchPage,
     isLike,
     FixUserType,
-    fixComments
+    fixComments,
+    getEcoByOrg
 }
