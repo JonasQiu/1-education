@@ -74,9 +74,11 @@ Component({
     },
     //获取用户信息，进行登录处理
     onGetUserInfo(e) {
+      // if (1) return;
       wx.showLoading({
         title: '正在登录中…请稍后…',
       })
+      console.log(e.detail.userInfo)
       const that = this;
       if (e.detail.userInfo) {
         commonLogin.Login(e.detail.userInfo).then(res => {

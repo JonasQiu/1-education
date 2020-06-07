@@ -18,17 +18,14 @@ Component({
     scrollLeft: 0,
     // box的列表
     boxList: [{
-      src: '/images/tubiao.png',
-      name: '点我'
+      src: 'cuIcon-scan',
+      name: '扫一扫'
     }, {
-      src: '/images/tubiao.png',
-      name: '点我'
+        src: 'cuIcon-barcode',
+      name: '付款码'
     }, {
-      src: '/images/tubiao.png',
-      name: '点我'
-    }, {
-      src: '/images/tubiao.png',
-      name: '点我'
+        src: 'cuIcon-redpacket',
+      name: '红包/卡卷'
     }],
     // 宫格列表——第一导航
     navList: [{
@@ -97,26 +94,6 @@ Component({
     }],
     // 卡片列表
     cardList: [{
-      imgUrl: "/images/new01.png",
-      desc: '描述',
-      assess: '评价',
-      price: '价格'
-    }, {
-      imgUrl: "/images/new01.png",
-      desc: '描述',
-      assess: '评价',
-      price: '价格'
-    }, {
-      imgUrl: "/images/new01.png",
-      desc: '描述',
-      assess: '评价',
-      price: '价格'
-    }, {
-      imgUrl: "/images/new01.png",
-      desc: '描述',
-      assess: '评价',
-      price: '价格'
-    }, {
       imgUrl: "/images/new01.png",
       desc: '描述',
       assess: '评价',
