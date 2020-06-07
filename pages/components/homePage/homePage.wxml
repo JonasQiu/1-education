@@ -23,8 +23,14 @@
 				<view class="txt">{{item.name}}</view>
 			</view>
 		</view>
+		<!-- 轮播图 -->
+		<swiper class="screen-swiper homepage-swiper {{DotStyle?'square-dot':'round-dot'}}" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500">
+			<swiper-item wx:for="{{swiperList}}" wx:key>
+				<image src="{{item.url}}" mode="aspectFill" wx:if="{{item.type=='image'}}"></image>
+				<video src="{{item.url}}" autoplay loop muted show-play-btn="{{false}}" controls="{{false}}" objectFit="cover" wx:if="{{item.type=='video'}}"></video>
+			</swiper-item>
+		</swiper>
 		<view class="contain_box" wx:key="index">
-
 			<!-- 第一导航 -->
 			<view class="contain_1">
 				<view class="box" wx:for="{{navList}}" wx:key="index">
@@ -40,21 +46,27 @@
 				</view>
 			</view>
 		</view>
-
-		<!-- 轮播图 -->
-		<swiper class="screen-swiper homepage-swiper {{DotStyle?'square-dot':'round-dot'}}" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500">
-			<swiper-item wx:for="{{swiperList}}" wx:key>
-				<image src="{{item.url}}" mode="aspectFill" wx:if="{{item.type=='image'}}"></image>
-				<video src="{{item.url}}" autoplay loop muted show-play-btn="{{false}}" controls="{{false}}" objectFit="cover" wx:if="{{item.type=='video'}}"></video>
-			</swiper-item>
-		</swiper>
 		<!-- 卡片列表 -->
-		<view class="card_contain">
-			<view class="card_box" wx:for="{{cardList}}" wx:key="index">
-				<image src="{{item.imgUrl}}" class="card_img"></image>
-				<text class="desc">{{item.desc}}</text>
-				<text class="assess">{{item.assess}}</text>
-				<text class="price">{{item.price}}</text>
+		<view class="line-area">
+			<view class="line"></view>
+			<view class="card-info">机构列表</view>
+			<view class="line"></view>
+		</view>
+
+		<view class="content">
+			<view class="item {{toggleDelay?'animation-slide-bottom':''}}" bindtap="orgDetail" data-name="{{item._id}}" wx:for="{{orgList}}" wx:key="index" style="animation-delay: {{(index+1)*0.2}}s;">
+				<image src='{{item.img.logo}}' class="item-img"></image>
+				<view class="info">
+					<view class="info-content">
+						{{item.info.orgName}}
+					</view>
+					<view class="msg">
+						<view class="userName">{{item.description}}</view>
+						<text wx:for="{{item.showStar}}" class="cuIcon-favorfill text-yellow"></text><text wx:for="{{5-item.showStar}}" class="cuIcon-favor"></text>
+						<text> {{item.star}} 分</text>
+						<view style="margin-top: 5rpx;">距离 {{item.distance}} km</view>
+					</view>
+				</view>
 			</view>
 		</view>
 	</view>
