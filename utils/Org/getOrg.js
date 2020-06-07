@@ -101,6 +101,8 @@ function fixUser(orgInfo) {
 function fixComments(orgObj) {
     // 传入单个obj，返回获取评论人完整用户信息的orgObj数据
     return new Promise(async (resolve, reject) => {
+        let likeCommentList = wx.getStorageSync('like_comment')
+        likeCommentList = likeCommentList ? likeCommentList : []
         for (let j = 0; j < orgObj.comment.length; j++) {
             orgObj.comment[j]['userInfo'] = await comFunUser.getUserInfo(orgObj.comment[j].userId)
             orgObj.comment[j]['showTime'] = comTime.showTime(orgObj.comment[j]['time'])

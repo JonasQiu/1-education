@@ -8,8 +8,8 @@
 			<!-- 可设置学生数（报名课程的同学），课程数，好评率 -->
 			<view style="font-size: 36rpx;">{{infoData[0].obj.info.orgName}}</view>
 			<view style="font-size: 28rpx;">
-				<text wx:for="{{showStar}}" class="cuIcon-favorfill text-yellow"></text>
-				<text wx:for="{{5-showStar}}" class="cuIcon-favor"></text> {{infoData[0].obj.star}} 分 | {{infoData[0].obj.location.distance}} km</view>
+				<text wx:for="{{infoData[0].obj.showStar}}" class="cuIcon-favorfill text-yellow"></text>
+				<text wx:for="{{5-infoData[0].obj.showStar}}" class="cuIcon-favor"></text> {{infoData[0].obj.star}} 分 | {{infoData[0].obj.location.distance}} km</view>
 
 			<view style="font-size: 28rpx;">{{infoData[0].obj.location.address}}</view>
 		</view>
@@ -27,11 +27,12 @@
 
 <view style="margin-bottom: 100rpx;">
 	<!-- 组件跳转 -->
-	<info wx:if="{{0===TabCur}}" infoList="{{infoData[0].obj}}" />
+	<info wx:if="{{0===TabCur}}" infoObj="{{infoData[0].obj}}" myUserInfo="{{myUserInfo}}" bind:callLoadData="loadData" />
 	<lesson wx:if="{{1===TabCur}}" lessonList="{{infoData[1].list}}" />
 	<teacher wx:if="{{2===TabCur}}" teacherList="{{infoData[2].list}}" />
 	<active wx:if="{{3===TabCur}}" activeList="{{infoData[3].list}}" />
 </view>
+
 <!-- 关注与分享 -->
 <view class="tabbar">
 	<view class="attention w-50" bindtap="attentionTap">

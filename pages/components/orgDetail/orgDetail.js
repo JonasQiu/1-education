@@ -47,29 +47,42 @@ Page({
         isShow: true
       })
     }
-    // 获取用户登录的状态
-    wx.getStorage({
-      key: 'userInfo',
-      success: (res) => {
-        console.log(res.data);
-        that.setData({
-          myUserInfo: res.data
-        })
-      }
+    wx.showLoading({
+      title: '正在加载中',
     })
-    //得到一下传递的参数 
-    comOrg.getOrg(options.query).then(async res => {
-      // fixUser 根据该机构的userId字段获取完整宿主信息
-      res.userInfo = await comOrg.fixUser(res)
+    that.loadData({
+      detail: options.query
+    })
+  },
+  loadData(e) {
+    let orgId = e.detail
+    let that = this
+    // 机构信息
+    comOrg.getOrg(orgId).then(async res => {
+      // 👇 读取评论列表
+      res = await comOrg.fixComments(res)
+      // 👇 读取距离信息
       res.location.distance = await comLocation.getDistance(res.location.lat, res.location.lng)
+      // 👇 展示星级信息
       res.star = res.star.toString().length == 1 ? res.star + '.0' : res.star
-      console.log(res)
+      res.showStar = parseInt(res.star)
+      // 👇 获取我的信息，用来展示讨论区头像
+      let userInfo = wx.getStorageSync('userInfo')
       that.data.infoData[0].obj = res
-      that.setData({
-        showStar: parseInt(res.star),
-        infoData: that.data.infoData
-      })
+      let showData = {
+        myUserInfo: {
+          avatarUrl: 'cloud://education-1hoqw.6564-education-1hoqw-1302178671/something/用户.png'
+        },
+        infoData: that.data.infoData,
+      }
+      if (userInfo) {
+        showData.myUserInfo = userInfo
+      }
+      that.setData(showData)
+      wx.hideLoading()
     }).catch(res => {
+      // 异常报错
+      console.log(res)
       wx.navigateBack()
     })
   },
