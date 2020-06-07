@@ -79,7 +79,7 @@
 							<image class="avatar-comment"></image>
 							<view class="info">
 								<text class="info-name">刘海傻子</text>
-								<text class="cuIcon-appreciate">
+								<text class="cuIcon-appreciate info-call">
 								<!-- 点赞个数 -->
 								<text class="appNum">(1)</text>
 								</text>
@@ -90,7 +90,7 @@
 							<image class="avatar-comment"></image>
 							<view class="info">
 								<text class="info-name">刘海傻子</text>
-								<text class="cuIcon-appreciate"></text>
+								<text class="cuIcon-appreciate info-call"></text>
 								<view>确确实实是个超级大傻逼，如果看不出来证明你也是个大傻逼</view>
 							</view>
 						</view>
@@ -98,7 +98,7 @@
 							<image class="avatar-comment"></image>
 							<view class="info">
 								<text class="info-name">刘海傻子</text>
-								<text class="cuIcon-appreciate"></text>
+								<text class="cuIcon-appreciate info-call"></text>
 								<view>确确实实是个超级大傻逼，如果看不出来证明你也是个大傻逼</view>
 							</view>
 						</view>
@@ -106,7 +106,7 @@
 							<image class="avatar-comment"></image>
 							<view class="info">
 								<text class="info-name">刘海傻子</text>
-								<text class="cuIcon-appreciate"></text>
+								<text class="cuIcon-appreciate info-call"></text>
 								<view>确确实实是个超级大傻逼，如果看不出来证明你也是个大傻逼</view>
 							</view>
 						</view>

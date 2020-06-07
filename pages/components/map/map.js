@@ -13,11 +13,22 @@ Page({
    */
   onLoad: function (options) {
     console.log(options);
-    
+
     this.setData({
       latitude: options.latitude,
       longitude: options.longitude
     })
+    // this.setData({
+    //   markers: [{
+    //     iconPath: '/images/location.png',
+    //     id: 1,
+    //     latitude: this.data.longitude,
+    //     longitude: this.data.longitude,
+    //     width: 50,
+    //     height: 50
+    //   }]
+
+    // })
   },
 
   /**

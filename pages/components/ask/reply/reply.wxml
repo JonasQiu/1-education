@@ -1,4 +1,0 @@
-<cu-custom bgColor="bg-gradual-purple" isBack="{{isShow}}">
-  <view slot="backText">返回</view>
-  <view slot="content">回复我的</view>
-</cu-custom>
