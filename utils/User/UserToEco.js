@@ -229,7 +229,7 @@ function likeComment(ecoId, CommentId) {
 
 // 简单取消点赞评论
 function disLikeComment(ecoId, CommentId) {
-    // 用户点赞这个评论,通过判断本地缓存，自增评论likeNum
+    // 用户取消点赞这个评论,通过判断本地缓存，自减评论likeNum
     // resolve -> 0:点赞评论成功 1:点赞评论失败
     // reject -> 处理异常
     return new Promise(async (resolve, reject) => {
@@ -238,7 +238,7 @@ function disLikeComment(ecoId, CommentId) {
             // 说明没爱过，没爱过取消啥？
             resolve({
                 status: 0,
-                msg: '取消评论成功'
+                msg: '取消点赞评论成功'
             })
         } else {
             let commentList = (await db.collection('Eco').doc(ecoId).get()).data.comments

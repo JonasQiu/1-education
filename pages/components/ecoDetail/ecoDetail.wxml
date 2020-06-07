@@ -20,7 +20,8 @@
 						<!-- 创建时间 -->
 						<view class="first-change-time">发表于 {{ecoObj.fixCreateTime}}</view>
 					</view>
-					<view class="head-attention">+</view>
+					<!-- <view class="head-attention">+</view> -->
+					<text class="{{ecoObj.userInfo.isMyFollow?'cuIcon-roundaddfill':'cuIcon-roundadd'}} follow" catchtap="setFollow"></text>
 				</view>
 				<view class="chunk chInfo">
 					<!-- 描述 -->
@@ -38,7 +39,7 @@
 					<view class="active">
 						<!-- 点赞多少次 -->
 						<view class="appreciate" bindtap="appreciate">
-							<view class="{{isAppre? 'cuIcon-appreciate':'cuIcon-appreciatefill'}} likeNum"></view>
+							<view class="{{ecoObj.isLike?'cuIcon-appreciatefill':'cuIcon-appreciate'}} likeNum"></view>
 							<view class="likeNum">{{ecoObj.likeNum}}</view>
 						</view>
 						<!-- 展示点赞人列表 -->
@@ -49,65 +50,40 @@
 					</view>
 				</view>
 				<!-- 机构介绍 -->
-				<view class="chunk">
+				<view class="chunk" bindtap="goOrgDetail">
 					<view class="padding-20 org">
-						<image class="eco-orgHeadImg" src="{{ecoObj.orgInfo._id}}"></image>
+						<image class="eco-orgHeadImg" src="{{ecoObj.orgInfo.cimg.logo}}"></image>
 						<view class="info">
 							<view class="eco-orgName m-b-10">{{ecoObj.orgInfo.info.orgName}}</view>
-							<view class="eco-stars m-b-10">
-								<!-- 评星展示 -->
-								评分：{{ecoObj.orgInfo.star}} 分
-							</view>
-							<view class="eco-address">{{ecoObj.orgInfo.location.address}}</view>
+							<text wx:for="{{ecoObj.orgInfo.showStar}}" class="cuIcon-favorfill text-yellow"></text><text wx:for="{{5-ecoObj.orgInfo.showStar}}" class="cuIcon-favor"></text>
+							<text style="margin-top: 5rpx;font-size: 23rpx;"> {{ecoObj.orgInfo.star}} 分 | 距离 {{ecoObj.orgInfo.distance}} km</text>
+							<!-- <text style="margin-top: 5rpx;font-size: 23rpx;"></text> -->
+							<view class="eco-address" style="margin-top: 10rpx;font-size: 23rpx;">{{ecoObj.orgInfo.location.address}}</view>
 						</view>
 
 						<!-- 收藏 -->
-						<text class="cuIcon-favor collect"></text>
-
+						<text class="{{ecoObj.orgInfo.isCollect?'cuIcon-favorfill':'cuIcon-favor'}} collect" catchtap="setCollect"></text>
 					</view>
 				</view>
 				<!-- 评论 -->
 				<view class="chunk comment">
 					<text class="commentTitle">讨论</text>
-					<text class="commentNum">（33）</text>
+					<text class="commentNum">（{{ecoObj.comments.length}}）</text>
 					<view class="commentChunk">
-						<image src="{{}}" class="avatar-comment"></image>
-						<input type="text" class="inputComment" placeholder="快来写下你的评论吧 ~ "></input>
+						<image src="{{myAvatar}}" class="avatar-comment"></image>
+						<input type="text" class="inputComment" placeholder="快来写下你的评论吧 ~ " confirm-type="发表" bindconfirm="sendUserComment"></input>
 					</view>
 					<view class="commentList">
-						<view class="listShow">
-							<image class="avatar-comment"></image>
-							<view class="info">
-								<text class="info-name">刘海傻子</text>
-								<text class="cuIcon-appreciate info-call">
+						<view class="listShow" wx:for="{{ecoObj.comments}}">
+							<image class="avatar-comment" src="{{item.userInfo.avatarUrl}}"></image>
+							<view class="info-comment">
+								<text class="info-name">{{item.userInfo.nickName}}</text>
+								<text class="info-time">{{item.showTime}}</text>
 								<!-- 点赞个数 -->
-								<text class="appNum">(1)</text>
+								<text class="{{item.isMyLike?'cuIcon-appreciatefill':'cuIcon-appreciate'}} info-call" catchtap="sendLikeComment" data-myindex="{{index}}">
+									<text class="appNum"> ({{item.likeNum}})</text>
 								</text>
-								<view class="info-content">确确实实是个超级大傻逼，如果看不出来证明你也是个大傻逼</view>
-							</view>
-						</view>
-						<view class="listShow">
-							<image class="avatar-comment"></image>
-							<view class="info">
-								<text class="info-name">刘海傻子</text>
-								<text class="cuIcon-appreciate info-call"></text>
-								<view>确确实实是个超级大傻逼，如果看不出来证明你也是个大傻逼</view>
-							</view>
-						</view>
-						<view class="listShow">
-							<image class="avatar-comment"></image>
-							<view class="info">
-								<text class="info-name">刘海傻子</text>
-								<text class="cuIcon-appreciate info-call"></text>
-								<view>确确实实是个超级大傻逼，如果看不出来证明你也是个大傻逼</view>
-							</view>
-						</view>
-						<view class="listShow">
-							<image class="avatar-comment"></image>
-							<view class="info">
-								<text class="info-name">刘海傻子</text>
-								<text class="cuIcon-appreciate info-call"></text>
-								<view>确确实实是个超级大傻逼，如果看不出来证明你也是个大傻逼</view>
+								<view class="info-content">{{item.content}}</view>
 							</view>
 						</view>
 					</view>

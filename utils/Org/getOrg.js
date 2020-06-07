@@ -1,6 +1,7 @@
 const db = wx.cloud.database()
 const _ = db.command
 const comFunUser = require('../User/Fun_User')
+const comTime = require('../Func/time')
 
 function getOrgList(startNum, Num) {
     // startNum 从0开始获取
@@ -102,6 +103,8 @@ function fixComments(orgObj) {
     return new Promise(async (resolve, reject) => {
         for (let j = 0; j < orgObj.comment.length; j++) {
             orgObj.comment[j]['userInfo'] = await comFunUser.getUserInfo(orgObj.comment[j].userId)
+            orgObj.comment[j]['showTime'] = comTime.showTime(orgObj.comment[j]['time'])
+            orgObj.comment[j]['isMyLike'] = likeCommentList.indexOf(orgObj.comment[j].Id) > -1
         }
         resolve(orgObj)
     })
@@ -112,6 +115,7 @@ module.exports = {
     getOrgList,
     getTypeOrg,
     searchOrg,
+    isCollect,
     fixUser,
     fixComments
 }

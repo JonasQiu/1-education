@@ -30,7 +30,7 @@ function getUserInfo(userId) {
 function fixUserInfo(userInfo) {
     let myUserInfo = wx.getStorageSync('userInfo')
     userInfo.isMyFollow = fixFollow(myUserInfo, userInfo)
-    userInfo.isMyFans = fixFollow(myUserInfo, userInfo)
+    userInfo.isMyFans = fixFans(myUserInfo, userInfo)
     return userInfo
 }
 
@@ -45,4 +45,5 @@ function fixFans(myUserInfo, userInfo) {
 module.exports = {
     getUserInfo,
     getInfoList,
+    fixUserInfo,
 }

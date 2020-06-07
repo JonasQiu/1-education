@@ -1,5 +1,6 @@
 const comTime = require('../Func/time')
 const comFunUser = require('../User/Fun_User')
+const comOrg = require('../Org/getOrg')
 const comType = require('../Type/Type')
 const db = wx.cloud.database()
 const _ = db.command
@@ -193,6 +194,10 @@ function getHistoryPage() {
 }
 
 function FixAll(ecoList) {
+    for (let i = 0; i < ecoList.length; i++) {
+        ecoList[i].orgInfo = comOrg.isCollect([ecoList[i].orgInfo])[0]
+        ecoList[i].userInfo = comFunUser.fixUserInfo(ecoList[i].userInfo)
+    }
     return fixTime(isLike(ecoList))
 }
 
@@ -230,8 +235,12 @@ function fixLikeUser(ecoList) {
 function fixComments(ecoObj) {
     // 传入单个obj，返回获取评论人完整用户信息的ecoObj数据
     return new Promise(async (resolve, reject) => {
+        let likeCommentList = wx.getStorageSync('like_comment')
+        likeCommentList = likeCommentList ? likeCommentList : []
         for (let j = 0; j < ecoObj.comments.length; j++) {
             ecoObj.comments[j]['userInfo'] = await comFunUser.getUserInfo(ecoObj.comments[j].userId)
+            ecoObj.comments[j]['showTime'] = comTime.showTime(ecoObj.comments[j]['time'])
+            ecoObj.comments[j]['isMyLike'] = likeCommentList.indexOf(ecoObj.comments[j].Id) > -1
         }
         resolve(ecoObj)
     })
