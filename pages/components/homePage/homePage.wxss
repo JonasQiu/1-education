@@ -3,7 +3,7 @@
 
 .page {
   width: 100vw;
-  background-image: linear-gradient(to right, #0081ff, #1cbbb4);
+  background-color: #e4f9f5;
 }
 
 /* 顶部导航栏 */
@@ -55,7 +55,7 @@
 
 /* 第一行列表 */
 .contain {
-  color: #fff;
+  color: #000;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
@@ -135,35 +135,25 @@
 }
 
 /* 卡片列表 */
-/* 线 */
-.line-area {
-  margin-top: 40rpx;
-  margin-bottom: 8rpx;
-  width: 100vw;
-  display: flex;
-  align-items: center;
-  height: 60rpx;
-  color: #fff;
+.card-chunk{
+  margin: 30rpx 30rpx 0;
 }
-
-.line {
-  margin: 0 auto;
-  width: 200rpx;
-  height: 0;
-  border: 4rpx solid #fff;
+/* 导航栏 */
+.nav{
+  border-radius: 15rpx;
 }
-
-.card-info {
-  font-size: 34rpx;
-  width: 140rpx;
-  text-align: center;
+.nav .cu-item {
+  height: 70rpx;
+  display: inline-block;
+  line-height: 70rpx;
+  margin: 10rpx;
+  padding: 0 20rpx;
 }
 
 /* 卡片内容 */
 .content {
-  padding: 20rpx;
   padding-top: 15rpx;
-  margin-bottom: 100rpx;
+  margin-bottom: 110rpx;
 }
 
 .item {

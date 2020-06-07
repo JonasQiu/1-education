@@ -19,7 +19,8 @@ Component({
     // box的列表
     boxList: [{
       src: 'cuIcon-scan',
-      name: '扫一扫'
+      name: '扫一扫',
+      event:'scanCode'
     }, {
       src: 'cuIcon-barcode',
       name: '付款码'
@@ -249,7 +250,8 @@ Component({
       "userInfo": {
         "userId": "54bac78c5ecd3a23005318b4110c12b3"
       }
-    }]
+    }],
+    typeList: ["全部", "设计", "硬件研发", "外语", "移动开发", "认证考试", "电商平台", "学校", "财会金融", "音乐舞蹈", "互联网产品"]
   },
   created() {
     wx.showLoading({
@@ -282,6 +284,15 @@ Component({
         url: `/pages/components/orgDetail/orgDetail?query=${e.currentTarget.dataset.name}`,
       })
     },
+    // 扫码
+    scanCode(e) {
+      wx.scanCode({
+        success(res) {
+          console.log(res.result)
+        }
+      })
+    }
+    ,
     // 定位跳转
     positionTem() {
       wx.navigateTo({
