@@ -23,7 +23,7 @@ Page({
       event: "setFollow"
     }, {
       name: 'cuIcon-share',
-      event: "share"
+      event: "share",
     }],
     // 内容list
     recommendList: {},
@@ -40,7 +40,8 @@ Page({
       likeComment: false,
       collect: false,
       follow: false,
-    }
+    },
+    scrollTop: 0
   },
   toggleDelay(that) {
     clearTimeout(that.timer)
@@ -64,6 +65,9 @@ Page({
       })
     }).exec();
 
+  },
+  onShareAppMessage(options) {
+    this.onShareAppMessage()
   },
   loadData(ecoId, reSet) {
     let that = this
@@ -118,17 +122,22 @@ Page({
     })
   },
   commentNavi() {
-    wx.pageScrollTo({
+    this.setData({
       scrollTop: this.data.commentHeight,
-      selector: '.comment'
     })
   },
 
   //分享
   share() {
-    wx.showShareMenu({
-      withShareTicket: true
-    })
+    console.log('share')
+    return {
+      title: this.data.ecoObj.title,
+      path: './ecoDetail',
+      // imageUrl: this.data.ecoObj.swiperList[0],
+      success(res) {
+        console.log('success', res)
+      }
+    }
   },
   // 更多点赞人
   moreAppre() {

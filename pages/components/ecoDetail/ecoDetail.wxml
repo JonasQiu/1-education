@@ -2,7 +2,7 @@
 <view class="page">
 	<!-- 是否返回 -->
 	<return />
-	<scroll-view scroll-y style="height:110vh">
+	<scroll-view scroll-y style="height:110vh" scroll-top="{{scrollTop}}">
 		<!-- 轮播图 -->
 		<swiper class="screen-swiper {{DotStyle?'square-dot':'round-dot'}}" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500">
 			<swiper-item wx:for="{{swiperList}}" wx:key bindtap="showImg" data-imgIndex="{{index}}">
@@ -94,7 +94,8 @@
 </view>
 
 <view class="tabbar">
-	<view wx:for="{{tabbarList}}" class="attention w-50" wx:key="index">
-		<text class="{{item.name}}" bindtap="{{item.event}}"></text>
+	<view wx:for="{{tabbarList}}" class="attention w-50" wx:key="index" bindtap="{{item.event}}">
+		<text wx:if="{{item.name!='cuIcon-share'}}" class="{{item.name}}" ></text>
+		<button wx:else class="{{item.name}}" open-type='share' style="background-color:#fff;height:80rpx;line-height:80rpx;border:none;"></button>
 	</view>
 </view>
