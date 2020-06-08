@@ -15,17 +15,32 @@
 		<view class="chat-area">
 			<view class="chat-title">{{roomObj.name}}</view>
 			<!-- 聊天记录展示 -->
-			<scroll-view scroll-y style="height:calc( 100vh - 120rpx - 260rpx)" class="cu-chat">
-				<view class="cu-item {{item.userId==myUserInfo._id?'self':''}}" wx:for="{{msgList}}">
-					<view class="main">
-						<view class="content {{item.userId==myUserInfo._id?'bg-green':''}} shadow">
-							<text wx:if="{{item.msgType==0}}">{{item.msgContent}}</text>
-							<image wx:elif="{{item.msgType==1}}" src="{{item.msgContent}}" bindtap="showImg" class="radius" mode="widthFix"></image>
+			<scroll-view scroll-y style="height:calc( 100vh - 120rpx - 290rpx);padding-bottom:50rpx" class="cu-chat">
+				<block wx:for="{{msgList}}">
+					<!-- 自己 -->
+					<view wx:if="{{item.userId==myUserInfo._id}}" class="cu-item self">
+						<view class="main">
+							<view class="content bg-green shadow">
+								<text wx:if="{{item.msgType==0}}">{{item.msgContent}}</text>
+								<image wx:elif="{{item.msgType==1}}" src="{{item.msgContent}}" bindtap="showImg" class="radius" mode="widthFix"></image>
+							</view>
 						</view>
+						<view class="cu-avatar radius" style="background-image:url({{item.userAvatar}});"></view>
+						<view class="date">{{item.userName}} 发表于 {{item.showTime}}</view>
 					</view>
-					<view class="cu-avatar radius" style="background-image:url({{item.userAvatar}});"></view>
-					<view class="date">{{item.userName}} 发表于 {{item.showTime}}</view>
-				</view>
+					<!-- 对方 -->
+					<view class="cu-item" wx:else>
+						<view class="cu-avatar radius" style="background-image:url({{item.userAvatar}});"></view>
+						<view class="main">
+							<view class="content shadow">
+								<text wx:if="{{item.msgType==0}}">{{item.msgContent}}</text>
+								<image wx:elif="{{item.msgType==1}}" src="{{item.msgContent}}" bindtap="showImg" class="radius" mode="widthFix"></image>
+							</view>
+						</view>
+						<view class="date">{{item.userName}} 发表于 {{item.showTime}}</view>
+					</view>
+				</block>
+
 			</scroll-view>
 
 			<!-- 输入框发送 -->

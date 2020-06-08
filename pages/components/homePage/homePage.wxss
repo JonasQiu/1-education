@@ -151,8 +151,8 @@
   height: 290rpx;
   display: flex;
   border: 2rpx solid rgb(241, 241, 241);
-  margin: 0 auto 40rpx;
-  width: 96%;
+  margin: 0 auto 30rpx;
+  width: 90%;
   background: #fff;
   box-shadow: 5rpx 10rpx 10rpx #ccc;
   border-radius: 50rpx;
