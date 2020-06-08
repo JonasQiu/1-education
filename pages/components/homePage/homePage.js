@@ -20,7 +20,7 @@ Component({
     boxList: [{
       src: 'cuIcon-scan',
       name: '扫一扫',
-      event:'scanCode'
+      event: 'scanCode'
     }, {
       src: 'cuIcon-barcode',
       name: '付款码'
@@ -29,38 +29,30 @@ Component({
       name: '红包/卡卷'
     }],
     // 宫格列表——第一导航
-    navList: [{
-      image: "/images/tubiao.png",
-      name: 'VR'
+    FunList: [{
+      icon: "cloud://education-1hoqw.6564-education-1hoqw-1302178671/something/小学.png",
+      name: '小学'
     }, {
-      image: "/images/tubiao.png",
-      name: '录像'
+      icon: "cloud://education-1hoqw.6564-education-1hoqw-1302178671/something/初中.png",
+      name: '初中'
     }, {
-      image: "/images/tubiao.png",
-      name: '图像'
+      icon: "cloud://education-1hoqw.6564-education-1hoqw-1302178671/something/高中fix.png",
+      name: '高中'
     }, {
-      image: "/images/tubiao.png",
-      name: '通知'
+      icon: "cloud://education-1hoqw.6564-education-1hoqw-1302178671/something/考研培训fix.png",
+      name: '考研培训'
     }, {
-      image: "/images/tubiao.png",
-      name: '版权'
-    }],
-    // 宫格列表——第二导航
-    barList: [{
-      image: "/images/tubiao.png",
-      name: '学习'
+      icon: "cloud://education-1hoqw.6564-education-1hoqw-1302178671/something/职场培训.png",
+      name: '职场培训'
     }, {
-      image: "/images/tubiao.png",
-      name: '标签'
+      icon: "cloud://education-1hoqw.6564-education-1hoqw-1302178671/something/兴趣培养.png",
+      name: '兴趣培养'
     }, {
-      image: "/images/tubiao.png",
-      name: '版权'
+      icon: "cloud://education-1hoqw.6564-education-1hoqw-1302178671/something/竞赛培训.png",
+      name: '竞赛培训'
     }, {
-      image: "/images/tubiao.png",
-      name: '自习室'
-    }, {
-      image: "/images/tubiao.png",
-      name: '自习室'
+      icon: "cloud://education-1hoqw.6564-education-1hoqw-1302178671/something/心理咨询.png",
+      name: '心理咨询'
     }],
     // 轮播图列表
     cardCur: 0,
@@ -291,8 +283,7 @@ Component({
           console.log(res.result)
         }
       })
-    }
-    ,
+    },
     // 定位跳转
     positionTem() {
       wx.navigateTo({

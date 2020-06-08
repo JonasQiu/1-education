@@ -1,22 +1,24 @@
 @import "/colorui/main.wxss";
 @import "/colorui/icon.wxss";
+@import "./icon.wxss";
 
 .page {
   width: 100vw;
-  background-color: #e4f9f5;
+  background-color: #ffd460;
 }
 
 /* 顶部导航栏 */
 .topFlex {
-  height: 150rpx;
+  height: 135rpx;
   width: 100%;
   position: relative;
   display: flex;
+  background-color: #ffd460;
 }
 
 .positionTem {
   position: absolute;
-  bottom: 20rpx;
+  bottom: 18rpx;
   font-size: 28rpx;
   margin: 0 40rpx;
 }
@@ -48,7 +50,7 @@
 
 /* 轮播图 */
 .homepage-swiper {
-  margin: 25rpx 30rpx 20rpx;
+  margin: 40rpx 30rpx 20rpx;
   border-radius: 25rpx;
   overflow: hidden;
 }
@@ -59,14 +61,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-}
-
-.box1 {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 20rpx;
+  margin: 30rpx 0 0 0;
 }
 
 .box {
@@ -74,7 +69,7 @@
   flex: 1;
   flex-direction: column;
   align-items: center;
-  padding-top: 5rpx
+  padding-top: 20rpx;
 }
 
 .img {
@@ -89,34 +84,31 @@
 
 /* 宫格列表样式 */
 .contain_box {
+  height: 550rpx;
   background-color: white;
   display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  border-radius: 40rpx;
-  padding: 0 0 30rpx 0;
-  margin: 35rpx 30rpx 0 30rpx;
-}
-
-.contain_1 {
-  display: flex;
   flex-direction: row;
-  justify-content: center;
-  padding-top: 10rpx;
-
-}
-
-.contain_2 {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
+  justify-content: space-around;
   flex-wrap: wrap;
-  padding-top: 10rpx;
+  overflow: hidden;
+  border-radius: 30rpx;
+  padding: 140rpx 30rpx 40rpx;
+  margin: -130rpx 0 0 0;
 }
 
-.img_1 {
-  height: 100rpx;
-  width: 130rpx;
+.fun_box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 5rpx
+}
+
+.fun_box_icon {
+  height: 90rpx;
+  width: 90rpx;
+  font-size: 80rpx;
+  text-align: center;
+  margin-bottom: 10rpx;
 }
 
 .txt_1 {
@@ -135,18 +127,20 @@
 }
 
 /* 卡片列表 */
-.card-chunk{
-  margin: 30rpx 30rpx 0;
+.card-chunk {
+  margin: -50rpx 0 0;
 }
+
 /* 导航栏 */
-.nav{
+.nav {
   border-radius: 15rpx;
 }
+
 .nav .cu-item {
   height: 70rpx;
   display: inline-block;
   line-height: 70rpx;
-  margin: 10rpx;
+  margin: 20rpx 10rpx 0;
   padding: 0 20rpx;
 }
 
@@ -154,6 +148,7 @@
 .content {
   padding-top: 15rpx;
   margin-bottom: 110rpx;
+  background-color: #e4f9f5;
 }
 
 .item {

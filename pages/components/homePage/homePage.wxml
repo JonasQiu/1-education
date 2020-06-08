@@ -1,6 +1,6 @@
 <view class="page">
 	<!-- 顶部导航 -->
-	<view class="topFlex bg-gradual-blue ">
+	<view class="topFlex">
 		<!-- 定位及温度 -->
 		<view class="positionTem" bindtap="positionTem">
 			{{position}}
@@ -18,7 +18,7 @@
 	<view class="page">
 		<!-- 第一行列表 -->
 		<view class="contain">
-			<view class="box1" wx:for="{{boxList}}" bindtap="{{item.event}}">
+			<view class="box" wx:for="{{boxList}}" bindtap="{{item.event}}">
 				<text class="img {{item.src}}"></text>
 				<view class="txt">{{item.name}}</view>
 			</view>
@@ -30,23 +30,13 @@
 				<video src="{{item.url}}" autoplay loop muted show-play-btn="{{false}}" controls="{{false}}" objectFit="cover" wx:if="{{item.type=='video'}}"></video>
 			</swiper-item>
 		</swiper>
+		<!-- 功能列表 -->
 		<view class="contain_box" wx:key="index">
-			<!-- 第一导航 -->
-			<view class="contain_1">
-				<view class="box" wx:for="{{navList}}" wx:key="index">
-					<image src="{{item.image}}" class="img_1"></image>
-					<text class="txt_1">{{item.name}}</text>
-				</view>
-			</view>
-			<!-- 第二导航 -->
-			<view class="contain_2">
-				<view class="box" wx:for="{{barList}}" wx:key="index">
-					<image src="{{item.image}}" class="img_2"></image>
-					<text class="txt_2">{{item.name}}</text>
-				</view>
+			<view class="fun_box" wx:for="{{FunList}}" wx:key="index">
+				<image class="fun_box_icon" src="{{item.icon}}" mode="widthFix"></image>
+				<text class="txt_1">{{item.name}}</text>
 			</view>
 		</view>
-
 		<!-- 卡片列表 -->
 		<view class="card-chunk">
 			<!-- 导航栏nav -->
