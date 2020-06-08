@@ -78,7 +78,6 @@ Page({
       }
     }
     comAsk.subscribeMessage(roominfo.userId, that.receiveMessages, function () {
-      comAsk.subscribePresence(roominfo.userId)
       wx.hideLoading()
       // 关闭左侧栏，将房间信息保存，清空聊天窗口记录，清空输入框
       that.setData({

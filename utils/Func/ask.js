@@ -84,15 +84,6 @@ async function unsubscribe(channel) {
         });
     })
 }
-// 监听用户上下线 onPresence参数 presenceEvents
-function subscribePresence(channel) {
-    app.globalData.goeasy.subscribePresence({
-        channel,
-        onPresence: function (presenceEvents) {
-            console.log("Presence events", presenceEvents);
-        }
-    });
-}
 
 // 是否连接在线
 function IsOnline() {
@@ -104,6 +95,5 @@ module.exports = {
     subscribeMessage,
     sendMessages,
     unsubscribe,
-    IsOnline,
-    subscribePresence
+    IsOnline
 }
