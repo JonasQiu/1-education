@@ -1,4 +1,5 @@
 //app.js
+// import GoEasy from './utils/goeasy-1.0.10';
 App({
   onLaunch: function () {
     Array.prototype.remove = function (val) {
@@ -27,6 +28,7 @@ App({
         }
       }
     })
+    // this.initGoEasy();
   },
   globalData: {
     ColorList: [{
@@ -105,5 +107,20 @@ App({
         color: '#ffffff'
       },
     ]
-  }
+  },
+  initGoEasy() { //初始化goeasy
+    this.globalData.goeasy = GoEasy({
+      host: 'hangzhou.goeasy.io',
+      appkey: "BC-fb5b04c9edb24642a6301a7dcac90bc3",
+      onConnected: function () {
+        console.log("GoEasy connect successfully.");
+      },
+      onDisconnected: function () {
+        console.log("GoEasy disconnected.")
+      },
+      onConnectFailed: function (error) {
+        console.log('连接失败，请检查您的appkey和host配置');
+      }
+    })
+  },
 })

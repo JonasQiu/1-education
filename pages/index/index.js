@@ -1,6 +1,7 @@
 //获取应用实例
 const app = getApp()
 let userInfo = {};
+const comAsk = require('../../utils/Func/ask')
 
 Page({
   data: {
@@ -94,13 +95,13 @@ Page({
     })
   },
   // 获取输入数据
-
   InputBlur(e) {
     this.setData({
       InputBottom: 0,
       inpValue: e.detail.value
     })
   },
+  // 选择列表
   naviToChat(e) {
     console.log(e.currentTarget.dataset.id)
     this.hideModal()
