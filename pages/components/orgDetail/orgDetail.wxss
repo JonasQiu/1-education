@@ -57,11 +57,16 @@
   position: fixed;
   display: flex;
   bottom: 0;
-  height: 100rpx;
+  height: 90rpx;
   background-color: #fff;
   justify-content: space-around;
   align-items: center;
   text-align: center;
+  color: #666;
+  font-weight: 600;
+  letter-spacing: 2px;
+  font-family: "Microsoft Yahei";
+  border-top: 1rpx solid #ddd;
 }
 
 .w-50 {

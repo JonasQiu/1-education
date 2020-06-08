@@ -2,8 +2,11 @@
 	<image src="{{item.cover_picurl}}" class="cover_picurl" mode="aspectFill"></image>
 	<view class="info">
 		<view class="name">{{item.name}}</view>
-		<text class="b-right">课程 {{item.course_num}}</text>
-		<text>学生 {{item.student_num}}</text>
+		<view class="showNum">
+			<text class="b-right">课程 {{item.course_num}}</text>
+			<text>学生 {{item.student_num}}</text>
+		</view>
+
 		<view class="pro">{{item.summary}}</view>
 	</view>
 </view>

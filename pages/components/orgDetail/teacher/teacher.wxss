@@ -29,11 +29,18 @@
 
 .name {
   padding-bottom: 10rpx;
-  font-size: 34rpx;
-  padding-left: 20rpx;
+  font-size: 31rpx;
   color: #666;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 2px;
+  font-family: "Microsoft Yahei";
+}
+
+.showNum {
+  font-size: 24rpx;
+  color: #666;
+  font-weight: 300;
+  letter-spacing: 1px;
   font-family: "Microsoft Yahei";
 }
 

@@ -64,7 +64,7 @@ Page({
       // 👇 读取评论列表
       res = await comOrg.fixComments(res)
       // 👇 读取生态圈列表
-      that.data.infoData[3].list = await comEco.getEcoByOrg(orgId)
+      that.data.infoData[3].list = comEco.FixUserType(await comEco.fixLikeUser(await comEco.getEcoByOrg(orgId)))
       // 👇 读取距离信息
       res.location.distance = await comLocation.getDistance(res.location.lat, res.location.lng)
       // 👇 展示星级信息
@@ -119,9 +119,17 @@ Page({
           infoData: that.data.infoData
         })
         wx.showToast({
-          title: res.msg
+          title: '操作失败！',
+        })
+      } else {
+        wx.showToast({
+          title: '操作成功！',
         })
       }
+    }).catch(res => {
+      wx.showToast({
+        title: res
+      })
     })
   },
   attentionTap(e) {
@@ -161,7 +169,11 @@ Page({
           infoData: that.data.infoData
         })
         wx.showToast({
-          title: res.msg
+          title: '操作失败！',
+        })
+      } else {
+        wx.showToast({
+          title: '操作成功！',
         })
       }
     })

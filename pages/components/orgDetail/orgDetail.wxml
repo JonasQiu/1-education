@@ -25,7 +25,7 @@
 	</scroll-view>
 </view>
 
-<view style="margin-bottom: 100rpx;">
+<view style="margin-bottom: 180rpx;">
 	<!-- 组件跳转 -->
 	<info wx:if="{{0===TabCur}}" infoObj="{{infoData[0].obj}}" myUserInfo="{{myUserInfo}}" bind:callLoadData="loadData" />
 	<lesson wx:if="{{1===TabCur}}" lessonList="{{infoData[1].list}}" />
@@ -36,9 +36,9 @@
 <!-- 关注与分享 -->
 <view class="tabbar">
 	<view class="attention w-50" bindtap="attentionTap">
-		<text class="{{infoData[0].obj.userInfo.isMyFollow?'cuIcon-favorfill':'cuIcon-favor'}}"></text> {{infoData[0].obj.userInfo.isMyFollow?'已关注':'关注'}}
+		<text class="{{infoData[0].obj.userInfo.isMyFollow?'cuIcon-favorfill':'cuIcon-favor'}}" style="font-size: 36rpx;"></text> {{infoData[0].obj.userInfo.isMyFollow?'已关注':'关注'}}
 	</view>
 	<view class="fork w-50" bindtap="collectTap">
-		<text class="cuIcon-fork"></text> {{infoData[0].obj.isCollect?'已收藏':'收藏'}}
+		<text class="cuIcon-fork" style="font-size: 36rpx;"></text> {{infoData[0].obj.isCollect?'已收藏':'收藏'}}
 	</view>
 </view>
