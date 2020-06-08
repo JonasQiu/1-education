@@ -4,6 +4,7 @@ const comData = require('../../../utils/Org/getOrgDetailList')
 const comUTO = require('../../../utils/User/UserToOrg')
 const comUTU = require('../../../utils/User/UserToUser')
 const comLocation = require('../../../utils/Func/location')
+const comEco = require('../../../utils/Ecosystem/getPage')
 
 
 Page({
@@ -53,6 +54,7 @@ Page({
     that.loadData({
       detail: options.query
     })
+
   },
   loadData(e) {
     let orgId = e.detail
@@ -61,6 +63,8 @@ Page({
     comOrg.getOrg(orgId).then(async res => {
       // 👇 读取评论列表
       res = await comOrg.fixComments(res)
+      // 👇 读取生态圈列表
+      that.data.infoData[3].list = await comEco.getEcoByOrg(orgId)
       // 👇 读取距离信息
       res.location.distance = await comLocation.getDistance(res.location.lat, res.location.lng)
       // 👇 展示星级信息
@@ -69,6 +73,7 @@ Page({
       // 👇 获取我的信息，用来展示讨论区头像
       let userInfo = wx.getStorageSync('userInfo')
       that.data.infoData[0].obj = res
+
       let showData = {
         myUserInfo: {
           avatarUrl: 'cloud://education-1hoqw.6564-education-1hoqw-1302178671/something/用户.png'

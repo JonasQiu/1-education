@@ -71,7 +71,7 @@
 					<text class="commentNum">（{{ecoObj.comments.length}}）</text>
 					<view class="commentChunk">
 						<image src="{{myAvatar}}" class="avatar-comment"></image>
-						<input type="text" class="inputComment" placeholder="快来写下你的评论吧 ~ " confirm-type="发表" bindconfirm="sendUserComment"></input>
+						<input type="text" class="inputComment" placeholder="快来写下你的评论吧 ~ " confirm-type="发表" bindconfirm="sendUserComment" value="{{commentValue}}"></input>
 					</view>
 					<view class="commentList">
 						<view class="listShow" wx:for="{{ecoObj.comments}}">

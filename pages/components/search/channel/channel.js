@@ -74,14 +74,9 @@ Component({
           myData.showList[j].distance = await comLocation.getDistance(myData.showList[j].location.lat, myData.showList[j].location.lng)
           myData.showList[j].showStar = parseInt(myData.showList[j].star)
         }
-
-        console.log(myData.showList);
-
         myData.toggleDelay = true
         that.toggleDelay(that)
         that.setData(myData)
-        console.log(this.data.showList[0].distance, this.data.showList[0].star);
-
         wx.hideLoading()
         return true
       }).catch(res => {

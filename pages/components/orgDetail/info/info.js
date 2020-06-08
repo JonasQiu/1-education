@@ -89,6 +89,10 @@ Component({
           wx.showToast({
             title: '操作失败！',
           })
+        } else {
+          wx.showToast({
+            title: '操作成功！',
+          })
         }
         that.data.Loading.likeComment = false
         that.triggerEvent('callLoadData', that.data.infoObj._id)
