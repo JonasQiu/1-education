@@ -131,7 +131,7 @@
   width: 94%;
   background: #fff;
   box-shadow: 5rpx 10rpx 10rpx #ccc;
-  border-radius: 50rpx;
+  border-radius: 20rpx;
 }
 
 .chat-title {
@@ -149,7 +149,7 @@
 }
 
 /* 左边导航条 */
- .chunk{
+.chunk {
   height: 90rpx;
   line-height: 90rpx;
 }
@@ -160,7 +160,8 @@
   line-height: 80rpx !important;
   border-bottom: 2rpx solid #ddd;
 }
-.user-avater-img{
+
+.user-avater-img {
   width: 70rpx;
   height: 70rpx;
   line-height: 80rpx;

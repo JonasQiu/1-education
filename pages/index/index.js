@@ -2,6 +2,7 @@
 const app = getApp()
 let userInfo = {};
 const comAsk = require('../../utils/Func/ask')
+const comTime = require('../../utils/Func/time')
 
 Page({
   data: {
@@ -18,59 +19,14 @@ Page({
     TabCur: 1,
     scrollLeft: 0,
     InputBottom: 0,
-    msgList: [{
-      userId: '54bac78c5ecd3a23005318b4110c12b3',
-      userAvatar: 'https://wx.qlogo.cn/mmopen/vi_32/Uvh0lKxKdAlYddyxmqVXJict2xUscT5npJiaIDsOGn3XQNyDkMcMTHVs0rskEAyUscDLugIkkWG2urjRpLuTBcww/132',
-      msgContent: 'https://wx.qlogo.cn/mmopen/vi_32/Uvh0lKxKdAlYddyxmqVXJict2xUscT5npJiaIDsOGn3XQNyDkMcMTHVs0rskEAyUscDLugIkkWG2urjRpLuTBcww/132',
-      msgType: 1, //0文本 1图片
-      time: Date.now(), //时间戳
-      showTime: '几分前', //通过time转换用来显示的
-    }],
-    my: {
-      userId: '54bac78c5ecd3a23005318b4110c12b3'
-    },
-    askRoomName: [{
-      name: '用户消息列表',
-      list: [{
-        name: '刘海弟弟',
-        avatarImg: 'https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKYZ3GU02RDbwtlRaHzgJM3cWeTzr6hACLP8IyoKhhv0O8ibB29lvlXpAtH8UB2alLia5dQWbNvIw3A/132',
-        userId: '54bac78c5ecd3a23005318b4110c12b3'
-      }, {
-        name: '刘海的大哥丘金龙',
-        avatarImg: 'https://wx.qlogo.cn/mmopen/vi_32/Uvh0lKxKdAlYddyxmqVXJict2xUscT5npJiaIDsOGn3XQNyDkMcMTHVs0rskEAyUscDLugIkkWG2urjRpLuTBcww/132',
-        userId: 'd721728a5ecf306e00564d773e18ace5'
-      }]
-    }, {
-      name: '分类频道大厅',
-      list: [{
-        name: '互联网',
-        avatarImg: '',
-        userId: ''
-      }, {
-        name: '艺术',
-        avatarImg: '',
-        userId: ''
-      }, {
-        name: '舞蹈',
-        avatarImg: '',
-        userId: ''
-      }]
-    }, {
-      name: '机构频道大厅',
-      list: [{
-        name: '第六小学',
-        avatarImg: '',
-        userId: ''
-      }, {
-        name: '第五小学',
-        avatarImg: '',
-        userId: ''
-      }]
-    }],
+    msgList: [],
+    myUserInfo: {},
+    askRoomName: [],
+    roomObj: {},
     inpValue: ''
   },
 
-  // 
+  //////////////////////////////////
   // ask
   showModal(e) {
     this.setData({
@@ -103,25 +59,76 @@ Page({
   },
   // 选择列表
   naviToChat(e) {
-    console.log(e.currentTarget.dataset.id)
-    this.hideModal()
+    this.loadChat(e.currentTarget.dataset.roominfo)
+  },
+  // 刷新聊天界面
+  loadChat(roominfo) {
+    let that = this;
+    wx.showLoading({
+      title: '正在连接频道中',
+    })
+    if (that.data.roomObj) {
+      // 如果之前连过，先断开之前的
+      if (!comAsk.unsubscribe(that.data.roomObj.userId)) {
+        wx.hideLoading()
+        wx.showToast({
+          title: '连接失败，断开上一个连接失败！',
+        })
+        return
+      }
+    }
+    comAsk.subscribeMessage(roominfo.userId, that.receiveMessages, function () {
+      comAsk.subscribePresence(roominfo.userId)
+      wx.hideLoading()
+      // 关闭左侧栏，将房间信息保存，清空聊天窗口记录，清空输入框
+      that.setData({
+        modalName: null,
+        roomObj: roominfo,
+        msgList: [],
+        inpValue: '',
+      })
+    })
+  },
+  // 收到消息 添加到聊天列表，添加至缓存，实时滚动
+  receiveMessages(msg) {
+    let obj = JSON.parse(msg.content)
+    obj.showTime = comTime.showTime(obj.time)
+    // 添加到聊天列表
+    this.data.msgList.push(obj)
+    this.setData({
+      msgList: this.data.msgList
+    })
   },
 
   // 发送数据
   sendMsg(e) {
-    this.data.msgList.push({
-      userId: '54bac78c5ecd3a23005318b4110c12b3',
-      userAvatar: 'https://wx.qlogo.cn/mmopen/vi_32/Uvh0lKxKdAlYddyxmqVXJict2xUscT5npJiaIDsOGn3XQNyDkMcMTHVs0rskEAyUscDLugIkkWG2urjRpLuTBcww/132',
-      msgContent: this.data.inpValue,
-      msgType: 0, //0文本 1图片
-      time: Date.now(), //时间戳
-      showTime: '几分前', //通过time转换用来显示的
+    let that = this;
+    if (that.data.inpValue.trim() == '') {
+      wx.showToast({
+        title: '消息不能为空哦',
+      })
+      return
+    }
+    let msg = JSON.stringify({
+      userId: that.data.myUserInfo._id,
+      userAvatar: that.data.myUserInfo.avatarUrl,
+      userName: that.data.myUserInfo.nickName,
+      msgContent: that.data.inpValue,
+      msgType: 0,
+      time: Date.now(),
+    })
+    comAsk.sendMessages(that.data.roomObj.userId, msg, function () {
+      wx.showToast({
+        title: '发送成功',
+      })
+    }, function (error) {
+      wx.showToast({
+        title: '发送失败:' + error,
+      })
     })
     this.setData({
-      msgList: this.data.msgList,
       inpValue: ''
     })
-    // 加缓存和onload获取缓存
   },
   //点击后，图片进行预览
   showImg(e) {
@@ -158,7 +165,6 @@ Page({
       ListTouchDirection: null
     })
   },
-
   // 底部导航切换
   NavChange(e) {
     this.setData({
@@ -166,5 +172,30 @@ Page({
     })
   },
   // 加载页面立刻执行
-  onLoad: function () {}
+  onLoad: function () {
+    let that = this;
+    comAsk.getTypeList().then(res => {
+      that.setData({
+        askRoomName: [{
+          name: '用户消息列表',
+          list: res[0]
+        }, {
+          name: '分类频道大厅',
+          list: res[1]
+        }, {
+          name: '机构频道大厅',
+          list: res[2]
+        }]
+      })
+    })
+
+    wx.getStorage({
+      key: 'userInfo',
+      success: res => {
+        that.setData({
+          myUserInfo: res.data
+        })
+      }
+    })
+  }
 })

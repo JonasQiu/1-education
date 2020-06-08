@@ -1,6 +1,7 @@
 const comOrg = require('../Org/getOrg')
 const comFunUser = require('../User/Fun_User')
 const comType = require('../Type/Type')
+const app = getApp();
 
 function getTypeList() {
     return new Promise(async (resolve, reject) => {
@@ -51,6 +52,57 @@ function getTypeList() {
     })
 }
 
+// 订阅频道 onMessage参数msg onSuccess无参
+function subscribeMessage(channel, onMessage, onSuccess) {
+    var self = this;
+    app.globalData.goeasy.subscribe({
+        channel,
+        onMessage,
+        onSuccess
+    });
+}
+//发送消息 onSuccess无参 onFailed参数：error
+function sendMessages(channel, message, onSuccess, onFailed) {
+    app.globalData.goeasy.publish({
+        channel,
+        message,
+        onSuccess,
+        onFailed
+    });
+}
+// 取消订阅 返回bool
+async function unsubscribe(channel) {
+    return await new Promise((resolve, reject) => {
+        app.globalData.goeasy.unsubscribe({
+            channel,
+            onSuccess: function () {
+                resolve(true)
+            },
+            onFailed: function (error) {
+                resolve(false)
+            }
+        });
+    })
+}
+// 监听用户上下线 onPresence参数 presenceEvents
+function subscribePresence(channel) {
+    goEasy.subscribePresence({
+        channel,
+        onPresence: function (presenceEvents) {
+            console.log("Presence events", presenceEvents);
+        }
+    });
+}
+
+// 是否连接在线
+function IsOnline() {
+    return app.globalData.isOnline
+}
+
 module.exports = {
-    getTypeList
+    getTypeList,
+    subscribeMessage,
+    sendMessages,
+    unsubscribe,
+    IsOnline
 }

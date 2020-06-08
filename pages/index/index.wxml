@@ -13,18 +13,18 @@
 		</view>
 		<!-- 聊天框 -->
 		<view class="chat-area">
-			<view class="chat-title">刘海弟弟</view>
+			<view class="chat-title">{{roomObj.name}}</view>
 			<!-- 聊天记录展示 -->
 			<scroll-view scroll-y style="height:calc( 100vh - 120rpx - 260rpx)" class="cu-chat">
-				<view class="cu-item {{item.userId==my.userId?'self':''}}" wx:for="{{msgList}}">
+				<view class="cu-item {{item.userId==myUserInfo._id?'self':''}}" wx:for="{{msgList}}">
 					<view class="main">
-						<view class="content {{item.userId==my.userId?'bg-green':''}} shadow">
+						<view class="content {{item.userId==myUserInfo._id?'bg-green':''}} shadow">
 							<text wx:if="{{item.msgType==0}}">{{item.msgContent}}</text>
 							<image wx:elif="{{item.msgType==1}}" src="{{item.msgContent}}" bindtap="showImg" class="radius" mode="widthFix"></image>
 						</view>
 					</view>
 					<view class="cu-avatar radius" style="background-image:url({{item.userAvatar}});"></view>
-					<view class="date">{{item.time}}</view>
+					<view class="date">{{item.userName}} 发表于 {{item.showTime}}</view>
 				</view>
 			</scroll-view>
 
@@ -53,7 +53,7 @@
 						<text class="cuIcon-github text-grey"></text>
 						<text class="text-grey" style="margin-left:15rpx">{{item.name}}</text>
 					</view>
-					<view class="right-nav-content bg-gray content" wx:if="{{true}}" wx:for="{{item.list}}" wx:for-item="room" bindtap="naviToChat" data-id="{{room.userId}}">
+					<view class="right-nav-content bg-gray content" wx:if="{{true}}" wx:for="{{item.list}}" wx:for-item="room" bindtap="naviToChat" data-roominfo="{{room}}">
 						<image class="user-avater-img" src="{{room.avatarImg}}"></image>
 						<text class="text-grey">{{room.name}}</text>
 					</view>
