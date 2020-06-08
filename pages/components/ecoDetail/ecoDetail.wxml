@@ -96,6 +96,6 @@
 <view class="tabbar">
 	<view wx:for="{{tabbarList}}" class="attention w-50" wx:key="index" bindtap="{{item.event}}">
 		<text wx:if="{{item.name!='cuIcon-share'}}" class="{{item.name}}" ></text>
-		<button wx:else class="{{item.name}}" open-type='share' style="background-color:#fff;height:80rpx;line-height:80rpx;border:none;"></button>
+		<button wx:else class="{{item.name}}" open-type='share' style="background-color:#fff;height:80rpx;line-height:80rpx;border:none;outline:none"></button>
 	</view>
 </view>

@@ -5,41 +5,58 @@
 <my wx:if="{{PageCur=='my'}}"></my>
 <!-- ask -->
 <view wx:if="{{PageCur=='ask'}}" class="ask">
-	<scroll-view scroll-y class="DrawerPage {{modalName=='viewModal'?'show':''}}">
-		<cu-custom bgColor="bg-gradual-blue">
-			<view slot="content">咨询</view>
-		</cu-custom>
-		<view class='padding-top  text-center'>
-			<view class='cu-btn bg-green lg block shadow radius margin-right-xl margin-left-xl' bindtap="showModal" data-target="viewModal">
-				咨询大厅
-			</view>
+	<view class="DrawerPage {{modalName=='viewModal'?'show':''}}">
+		<!-- 顶部导航 -->
+		<view class="topFlex bg-white ">
+			<text class="cuIcon-list icon-btn"  bindtap="showModal" data-target="viewModal"></text>
+			<text class="ask-title">咨询大厅</text>
 		</view>
-		<view class=" cu-list menu card-menu margin-top-xl margin-bottom-xl shadow-lg" style="margin-bottom:120rpx">
-			<view class="cu-item arrow {{modalName=='move-box-'+ index?'move-cur':''}}" wx:for="{{20}}" wx:key="index" bindtouchstart="ListTouchStart" bindtouchmove="ListTouchMove" bindtouchend="ListTouchEnd" data-target="move-box-{{index}}">
-				<view class="content">
-					<text class="cuIcon-github text-grey"></text>
-					<text class="text-grey">{{index +1}}</text>
+		<!-- 聊天框 -->
+		<view class="chat-area">
+			<view class="chat-title">刘海弟弟</view>
+			<!-- 聊天记录展示 -->
+			<scroll-view scroll-y style="height:65vh;margin-bottom:80rpx" class="cu-chat">
+				<view class="cu-item {{item.userId==my.userId?'self':''}}" wx:for="{{msgList}}">
+					<view class="main">
+						<view class="content {{item.userId==my.userId?'bg-green':''}} shadow">
+							<text wx:if="{{item.msgType==0}}">{{item.msgContent}}</text>
+							<image wx:elif="{{item.msgType==1}}" src="{{item.msgContent}}" bindtap="showImg" class="radius" mode="widthFix"></image>
+						</view>
+					</view>
+					<view class="cu-avatar radius" style="background-image:url({{item.userAvatar}});"></view>
+					<view class="date">{{item.time}}</view>
 				</view>
+			</scroll-view>
+
+			<!-- 输入框发送 -->
+			<view class="cu-bar foot input {{InputBottom!=0?'cur':''}}" style="bottom:{{InputBottom}}px">
+				<input class="solid-bottom bg-gray" style="border-radius:15rpx" bindfocus="InputFocus" bindblur="InputBlur" adjust-position="{{false}}" value="{{inpValue}}" focus="{{false}}" maxlength="300" cursor-spacing="10"></input>
 				<view class="action">
-					<view class="text-grey text-xs">22:20</view>
-					<view class="cu-tag round bg-grey sm">5</view>
+					<text class="cuIcon-emojifill text-grey"></text>
+					<text class="cuIcon-picfill text-grey"></text>
 				</view>
-				<view class="move">
-					<view class="bg-grey">置顶</view>
-					<view class="bg-red">删除</view>
-				</view>
+				<button class="cu-btn bg-green shadow" bindtap="sendMsg">发送</button>
 			</view>
 		</view>
-	</scroll-view>
+	</view>
+
+	<!-- 点击model -->
 	<view class="DrawerClose {{modalName=='viewModal'?'show':''}}" bindtap="hideModal">
 		<text class="cuIcon-pullright"></text>
 	</view>
+	<!-- 右边导航信息 -->
 	<scroll-view scroll-y style="padding-bottom:90rpx" class="DrawerWindow  {{modalName=='viewModal'?'show':''}}">
 		<view class="cu-list menu card-menu margin-top-xl margin-bottom-xl shadow-lg">
-			<view class="cu-item arrow" wx:for="{{20}}" wx:key="index" >
-				<view class="content">
-					<text class="cuIcon-github text-grey"></text>
-					<text class="text-grey">{{index +1}}</text>
+			<view class="cu-item" wx:for="{{askRoomName}}" wx:key="index" style="padding-bottom:30rpx;">
+				<view class="content ">
+					<view class="chunk">
+						<text class="cuIcon-github text-grey"></text>
+						<text class="text-grey" style="margin-left:15rpx">{{item.name}}</text>
+					</view>
+					<view class="right-nav-content bg-gray content" wx:if="{{true}}" wx:for="{{item.list}}" wx:for-item="room" bindtap="naviToChat" data-id="{{room.userId}}">
+						<image class="user-avater-img" src="{{room.avatarImg}}"></image>
+						<text class="text-grey">{{room.name}}</text>
+					</view>
 				</view>
 			</view>
 		</view>

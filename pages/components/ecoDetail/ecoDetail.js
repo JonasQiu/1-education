@@ -129,21 +129,13 @@ Page({
 
   //分享
   share() {
-    console.log('share')
-    return {
-      title: this.data.ecoObj.title,
-      path: './ecoDetail',
-      // imageUrl: this.data.ecoObj.swiperList[0],
-      success(res) {
-        console.log('success', res)
-      }
-    }
+    this.onShareAppMessage()
   },
   // 更多点赞人
   moreAppre() {
-    wx.navigateTo({
-      url: './appreciateList/appreciateList',
-    })
+    // wx.navigateTo({
+    //   url: './appreciateList/appreciateList',
+    // })
     wx.setStorage({
       data: this.data.ecoObj,
       key: 'appreciateList',

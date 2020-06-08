@@ -15,7 +15,6 @@
     "pages/components/orgDetail/lesson/lesson",
     "pages/components/orgDetail/teacher/teacher",
     "pages/components/ecoDetail/ecoDetail",
-    "pages/components/ecoDetail/appreciateList/appreciateList",
     "pages/components/usallyList/usallyList",
     "pages/components/askWindow/askWindow"
   ],

@@ -3,7 +3,7 @@
 /* 页面 */
 .page {
   background-color: #e4f9f5;
-  margin-bottom: 100rpx;
+  padding-bottom: 90rpx;
 }
 
 /* 块 */

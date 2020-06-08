@@ -49,6 +49,28 @@
 }
 
 /* 顶部导航栏 */
+.topFlex {
+  margin-top: 40rpx;
+  height: 100rpx;
+  width: 100%;
+  position: relative;
+  display: flex;
+  align-items: center !important;
+}
+
+.icon-btn {
+  width: 90rpx;
+  height: 90rpx;
+  line-height: 90rpx;
+  text-align: center;
+  font-size: 50rpx !important;
+}
+
+.ask-title {
+  font-size: 34rpx;
+  font-weight: 700;
+}
+
 .position {
   font-size: 28rpx;
   position: fixed;
@@ -96,8 +118,56 @@
   width: 100vw;
   overflow: hidden;
   height: 100vh;
+  /* padding-bottom: 70rpx; */
   background-color: rgb(4, 138, 246);
 }
+
+.chat-area {
+  position: relative;
+  padding: 10rpx 0rpx;
+  border: 2rpx solid rgb(241, 241, 241);
+  margin: 20rpx auto 120rpx;
+  overflow: hidden;
+  width: 94%;
+  background: #fff;
+  box-shadow: 5rpx 10rpx 10rpx #ccc;
+  border-radius: 50rpx;
+}
+
+.chat-title {
+  height: 80rpx;
+  line-height: 80rpx;
+  font-size: 30rpx;
+  font-weight: 600;
+  text-align: center;
+  border-bottom: 2rpx solid #ddd;
+}
+
+.foot {
+  position: absolute !important;
+  bottom: 0;
+}
+
+/* 左边导航条 */
+ .chunk{
+  height: 90rpx;
+  line-height: 90rpx;
+}
+
+.right-nav-content {
+  padding-left: 30rpx;
+  height: 80rpx;
+  line-height: 80rpx !important;
+  border-bottom: 2rpx solid #ddd;
+}
+.user-avater-img{
+  width: 70rpx;
+  height: 70rpx;
+  line-height: 80rpx;
+  border-radius: 50%;
+}
+
+
 
 .DrawerPage {
   position: fixed;
