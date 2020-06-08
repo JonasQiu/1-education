@@ -1,3 +1,22 @@
+.chunk {
+  border: 2rpx solid rgb(241, 241, 241);
+  margin: 20rpx auto 40rpx;
+  width: 92%;
+  background: #fff;
+  box-shadow: 15rpx 20rpx 20rpx #ccc;
+  border-radius: 30rpx;
+  overflow: hidden;
+  padding: 30rpx;
+}
+
+.title {
+  font-size: 28rpx;
+  color: #666;
+  font-weight: 600;
+  letter-spacing: 1px;
+  font-family: "Microsoft Yahei";
+}
+
 .lesson {
   display: flex;
   background-color: #ffffff;
@@ -13,6 +32,7 @@
 .image {
   width: 300rpx;
   height: 180rpx;
+  border-radius: 20rpx;
 }
 
 .apply_num {
