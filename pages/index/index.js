@@ -47,7 +47,7 @@ Page({
   },
   InputFocus(e) {
     this.setData({
-      InputBottom: e.detail.height
+      InputBottom: e.detail.height - 69
     })
   },
   // 获取输入数据
