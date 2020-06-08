@@ -41,6 +41,7 @@ function deOrgTypeList(orgList) {
 }
 
 module.exports = {
+    twoTypeList,
     getType,
     getTypeList,
     getTypeName,
