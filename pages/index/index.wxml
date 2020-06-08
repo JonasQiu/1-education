@@ -15,7 +15,7 @@
 		<view class="chat-area">
 			<view class="chat-title">刘海弟弟</view>
 			<!-- 聊天记录展示 -->
-			<scroll-view scroll-y style="height:65vh;margin-bottom:80rpx" class="cu-chat">
+			<scroll-view scroll-y style="height:calc( 100vh - 120rpx - 260rpx)" class="cu-chat">
 				<view class="cu-item {{item.userId==my.userId?'self':''}}" wx:for="{{msgList}}">
 					<view class="main">
 						<view class="content {{item.userId==my.userId?'bg-green':''}} shadow">
@@ -29,7 +29,7 @@
 			</scroll-view>
 
 			<!-- 输入框发送 -->
-			<view class="cu-bar foot input {{InputBottom!=0?'cur':''}}" style="bottom:{{InputBottom}}px">
+			<view class="cu-bar foot ask-foot input {{InputBottom!=0?'cur':''}}" style="bottom:{{InputBottom}}px">
 				<input class="solid-bottom bg-gray" style="border-radius:15rpx" bindfocus="InputFocus" bindblur="InputBlur" adjust-position="{{false}}" value="{{inpValue}}" focus="{{false}}" maxlength="300" cursor-spacing="10"></input>
 				<view class="action">
 					<text class="cuIcon-emojifill text-grey"></text>

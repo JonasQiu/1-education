@@ -24,7 +24,10 @@ Component({
     }, {
       src: 'cuIcon-barcode',
       name: '付款码'
-    }, {
+      }, {
+        src: 'cuIcon-present',
+        name: '活动'
+      }, {
       src: 'cuIcon-redpacket',
       name: '红包/卡卷'
     }],

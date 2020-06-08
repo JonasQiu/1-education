@@ -59,9 +59,8 @@
 .contain {
   color: #000;
   display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  margin: 30rpx 0 0 0;
+  justify-content: space-around;
+  margin: 30rpx 15rpx 0;
 }
 
 .box {
@@ -87,10 +86,9 @@
   height: 550rpx;
   background-color: white;
   display: flex;
-  flex-direction: row;
   justify-content: space-around;
   flex-wrap: wrap;
-  overflow: hidden;
+  /* overflow: hidden; */
   border-radius: 30rpx;
   padding: 140rpx 30rpx 40rpx;
   margin: -130rpx 0 0 0;
@@ -98,6 +96,7 @@
 
 .fun_box {
   display: flex;
+  width: 24%;
   flex-direction: column;
   align-items: center;
   padding-top: 5rpx
@@ -132,10 +131,6 @@
 }
 
 /* 导航栏 */
-.nav {
-  border-radius: 15rpx;
-}
-
 .nav .cu-item {
   height: 70rpx;
   display: inline-block;
@@ -147,7 +142,7 @@
 /* 卡片内容 */
 .content {
   padding-top: 15rpx;
-  margin-bottom: 110rpx;
+  padding-bottom: 110rpx;
   background-color: #e4f9f5;
 }
 
