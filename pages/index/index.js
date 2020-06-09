@@ -47,7 +47,7 @@ Page({
   },
   InputFocus(e) {
     this.setData({
-      InputBottom: e.detail.height -69
+      InputBottom: e.detail.height - 69
     })
   },
   // 获取输入数据
@@ -55,6 +55,16 @@ Page({
     this.setData({
       InputBottom: 0,
       inpValue: e.detail.value
+    })
+  },
+  // 选取图片发送
+  choosePhoto(e) {
+    wx.chooseImage({
+      success(res) {
+        const tempFilePaths = res.tempFilePaths
+        console.log(tempFilePaths)
+        // 触发sendmsg函数
+      }
     })
   },
   // 选择列表

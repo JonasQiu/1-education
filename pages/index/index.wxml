@@ -46,7 +46,7 @@
 				<input class="solid-bottom bg-gray" style="border-radius:15rpx" cursor-spacing='140' bindfocus="InputFocus" bindblur="InputBlur" adjust-position="{{false}}" value="{{inpValue}}" focus="{{false}}" maxlength="300" cursor-spacing="10"></input>
 				<view class="action">
 					<text class="cuIcon-emojifill text-grey"></text>
-					<text class="cuIcon-picfill text-grey"></text>
+					<text class="cuIcon-picfill text-grey" bindtap="choosePhoto"></text>
 				</view>
 				<button class="cu-btn bg-green shadow" bindtap="sendMsg">发送</button>
 			</view>

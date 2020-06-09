@@ -16,6 +16,32 @@ Component({
     attentionCount: 0,
     collectionCount: 0,
     fansCount: 0,
+    // 宫格列表
+    FunList: [  {
+      icon: "cloud://education-1hoqw.6564-education-1hoqw-1302178671/something/关注.png",
+      name: '我的关注'
+    }, {
+      icon: "cloud://education-1hoqw.6564-education-1hoqw-1302178671/something/阅读,文章.png",
+      name: '我的文章'
+    }, {
+      icon: "cloud://education-1hoqw.6564-education-1hoqw-1302178671/something/我的粉丝.png",
+      name: '我的粉丝'
+    }, {
+      icon: "cloud://education-1hoqw.6564-education-1hoqw-1302178671/something/机构建筑.png",
+      name: '我的机构'
+    }, {
+      icon: "cloud://education-1hoqw.6564-education-1hoqw-1302178671/something/历史.png",
+      name: '历史记录'
+    }, {
+      icon: "cloud://education-1hoqw.6564-education-1hoqw-1302178671/something/文章.png",
+      name: '收藏文章'
+    }, {
+      icon: "cloud://education-1hoqw.6564-education-1hoqw-1302178671/something/分享.png",
+      name: '分享有礼'
+    }, {
+      icon: "cloud://education-1hoqw.6564-education-1hoqw-1302178671/something/机构认证.png",
+      name: '收藏机构'
+    }],
   },
   created() {
     wx.showLoading({

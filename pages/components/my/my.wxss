@@ -69,3 +69,38 @@ map,
 .padding-40 {
   padding-top: 50rpx;
 }
+
+/* 宫格列表样式 */
+.contain_box {
+  background-color: white;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  /* overflow: hidden; */
+  border-radius: 20rpx;
+  margin-left:30rpx ;
+  margin-right: 30rpx;
+  padding: 40rpx 30rpx 20rpx;
+}
+
+.fun_box {
+  display: flex;
+  width: 24%;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20rpx;
+  padding-top: 5rpx;
+}
+
+.fun_box_icon {
+  height: 60rpx;
+  width: 60rpx;
+  font-size: 60rpx;
+  text-align: center;
+  margin-bottom: 10rpx;
+}
+
+.txt_1 {
+  font-size: 30rpx;
+  text-align: center;
+}

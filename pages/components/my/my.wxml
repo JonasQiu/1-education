@@ -19,15 +19,26 @@
 		<view class="flex flex-sub flex-direction solid-right">
 			<view class="text-xxl text-blue">{{attentionCount}}</view>
 			<view class="margin-top-xs">
-				<text class="cuIcon-favorfill"></text> 关注</view>
+				<text class="cuIcon-add"></text> 关注</view>
 		</view>
 		<view class="flex flex-sub flex-direction">
 			<view class="text-xxl text-green">{{collectionCount}}</view>
 			<view class="margin-top-xs">
-				<text class="cuIcon-fork"></text> 收藏</view>
+				<text class="cuIcon-favorfill"></text> 收藏</view>
 		</view>
 	</view>
-	<view class="cu-list menu card-menu margin-top-xl margin-bottom-xl shadow-lg radius">
+	
+	<!-- 宫格列表 -->
+	<view class="contain_box margin-top-sm radius" wx:key="index">
+		<view class="fun_box" wx:for="{{FunList}}" wx:key="index">
+			<image class="fun_box_icon" src="{{item.icon}}" mode="widthFix"></image>
+			<text class="txt_1">{{item.name}}</text>
+		</view>
+	</view>
+
+
+	<!-- 设置部分 -->
+	<view class="cu-list menu card-menu margin-top-sm margin-bottom-xl shadow-lg radius">
 		<view class="cu-item arrow">
 			<view class="content" bindtap="CopyLink" data-link="https://github.com/weilanwl/ColorUI">
 				<text class="cuIcon-github text-grey"></text>
