@@ -1,8 +1,10 @@
 @import "/colorui/main.wxss";
 @import "/colorui/icon.wxss";
 @import "/colorui/animation.wxss";
+
+/* @import "/pages/components/search/channel/channel.wxss"; */
 @import "/pages/components/ecosystem/ecosystem.wxss";
-@import "/pages/components/search/channel/channel.wxss";
+
 
 /* topbar */
 .scrollTop {
@@ -26,8 +28,8 @@
 .nav .cu-item {
   height: 60rpx;
   display: inline-block;
-  line-height: 60rpx;
-  margin: 0 10rpx 20rpx;
+  line-height: 50rpx;
+  margin: 0 10rpx 10rpx;
   padding: 0 20rpx;
 }
 

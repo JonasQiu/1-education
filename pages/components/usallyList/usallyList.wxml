@@ -3,7 +3,7 @@
 <view class="scrollTop" style="margin-top:{{navTop}}px">{{titleName}}</view>
 <scroll-view scroll-y style="height:93vh;" lower-threshold="500" bindscrolltolower="lower" scroll-with-animation scroll-top="{{goTop}}">
 	<!-- 导航栏nav -->
-	<scroll-view scroll-x class="bg-white nav">
+	<scroll-view scroll-x class="bg-white nav" style="height: 60rpx;">
 		<view class="flex text-center">
 			<view class="cu-item flex-sub {{index==TabCur?'text-orange cur':''}}" wx:for="{{dataList}}" wx:key="index" bindtap="tabSelect" data-id="{{index}}">
 				{{item.nav}}
@@ -13,7 +13,7 @@
 
 	<!-- 内容 -->
 	<view class="content">
-		<view class="item {{toggleDelay?'animation-slide-bottom':''}}" bindtap="naviToDetail" data-id="{{item._id}}" wx:for="{{dataList[TabCur].list}}" wx:key="index" style="animation-delay: {{(index+1)*0.2}}s;" style="padding:25rpx">
+		<view class="{{typeIndex!=2?'item':'eco-nav'}} {{toggleDelay?'animation-slide-bottom':''}}" bindtap="naviToDetail" data-id="{{item._id}}" wx:for="{{dataList[TabCur].list}}" wx:key="index" style="animation-delay: {{(index+1)*0.2}}s;" style="padding:25rpx">
 			<block wx:if="{{typeIndex==0}}">
 				<view class="userInfo"></view>
 				<image src='{{item.avatarUrl}}' class="avatarUrl"></image>
