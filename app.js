@@ -1,7 +1,5 @@
 //app.js
 import GoEasy from './utils/Func/goeasy';
-
-
 App({
   onLaunch: function () {
     Array.prototype.remove = function (val) {
