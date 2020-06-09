@@ -109,9 +109,7 @@
   font-size: 47rpx !important;
 }
 
-.foot {
-  border-top: 2rpx solid #ccc;
-}
+
 
 /* ask */
 .ask {
@@ -144,8 +142,8 @@
 }
 
 .ask-foot {
-  position: absolute !important;
-  bottom: 0;
+  box-shadow: 0 -1rpx 6rpx rgba(0, 0, 0, 0.1);
+  border-top: 2rpx solid #ccc;
 }
 
 /* 左边导航条 */
