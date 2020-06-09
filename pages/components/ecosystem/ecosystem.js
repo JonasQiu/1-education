@@ -28,6 +28,8 @@ Component({
     navTop: wx.getSystemInfoSync().statusBarHeight,
     searchList: [],
     starNum: 0,
+    isShowUsu: false,
+    usuallyIndex: 0
   },
   created() {
     wx.showLoading({
@@ -52,6 +54,11 @@ Component({
     // 点赞
     sendLike(e) {
       var that = this;
+      let index = e.currentTarget.dataset.myindex
+      this.setData({
+        isShowUsu: !this.data.isShowUsu,
+        usuallyIndex: index
+      })
       if (!wx.getStorageSync('userInfo')) {
         wx.showToast({
           title: '请先登录好吧',
@@ -61,7 +68,6 @@ Component({
       wx.showLoading({
         title: '请稍后…',
       })
-      let index = e.currentTarget.dataset.myindex
       let p = that.data.EcoList[index].isLike ? comUserToEco.Unlike(that.data.EcoList[index]._id) : comUserToEco.like(that.data.EcoList[index]._id)
       p.then(res => {
         that.fun_search()
@@ -101,6 +107,12 @@ Component({
       p.then(async res => {
         // 因为搜索内容fix过了，所以不要再fix了，会报错，所以除了搜索之外的需要fix。fix就是完善数据
         res.ecoList = index == 3 ? res.ecoList : comEco.FixUserType(await comEco.fixLikeUser(res.ecoList))
+        for (let i = 0; i < res.ecoList.length; i++) {
+          res.ecoList[i]['likeIdList'] = []
+          for (let j = 0; j < res.ecoList[i]['likes'].length; j++) {
+            res.ecoList[i]['likeIdList'].push(res.ecoList[i]['likes'][j]['_id'])
+          }
+        }
         // 添加到原来的数组后面
         that.data.EcoList.push(...res.ecoList)
         that.setData({
@@ -111,6 +123,9 @@ Component({
           isBottom: res.isBottom, // 判断是否到底了
           isLoading: false // 加载完毕，取消正在加载状态
         })
+        console.log(that.ecoList[that.data.usuallyIndex].likeIdList);
+
+
         wx.hideLoading()
       }).catch(res => {
         wx.showToast({

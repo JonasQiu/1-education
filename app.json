@@ -27,7 +27,8 @@
   },
   "usingComponents": {
     "cu-custom": "/colorui/components/cu-custom",
-    "return": "/pages/components/return/return"
+    "return": "/pages/components/return/return",
+    "usually": "/pages/components/usallyList/usallyList"
   },
   "sitemapLocation": "sitemap.json",
   "permission": {

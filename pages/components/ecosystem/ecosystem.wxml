@@ -19,7 +19,8 @@
 			</view>
 		</view>
 	</scroll-view>
-
+	<!-- 点赞的通用列表 -->
+	<usually wx:if="{{isShowUsu}}" typeIndex='0' list="{{ecoList[usuallyIndex].likeIdList}}" titleName="点赞的人" />
 	<!-- 推荐、关注、热帖、官方-->
 	<view wx:for="{{EcoList}}" class="eco-nav" wx:key="index">
 		<view bindtap="naviToDetail" data-ecoid="{{item._id}}">
@@ -55,4 +56,5 @@
 	<view class="goTop" bindtap="goTop">
 		<text class="cuIcon-top text-white"></text>
 	</view>
+
 </scroll-view>
