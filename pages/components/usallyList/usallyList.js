@@ -41,7 +41,7 @@ Component({
         case 0:
           p = new Promise(async (resolve, reject) => {
             let UserTypeList = ['普通用户', '专业人士', '机构', '官方']
-            let origin = await comFunUser.getInfoList(list)
+            let origin = await comFunUser.getInfoList(that.data.list)
             let showData = [{
               nav: '全部',
               list: origin
@@ -76,23 +76,27 @@ Component({
           break;
         case 1:
           p = new Promise(async (resolve, reject) => {
-            let ecoList = list
-            let originList = comType.deOrgTypeList(ecoList)
+            let orgList = that.data.list
+            let originList = comType.deOrgTypeList(orgList)
             let typeList = Object.keys(originList)
-            for (let i = 0; i < ecoList.length; i++) {
+            for (let i = 0; i < orgList.length; i++) {
               // 得到2地的距离
-              ecoList[i].distance = await comLocation.getDistance(ecoList[i].location.lat, ecoList[i].location.lng)
-              ecoList[i].showStar = parseInt(ecoList[i].star)
+              orgList[i].distance = await comLocation.getDistance(orgList[i].location.lat, orgList[i].location.lng)
+              orgList[i].showStar = parseInt(orgList[i].star)
             }
             let showDataList = []
             showDataList[0] = {
               nav: '全部',
-              list: ecoList
+              list: [...orgList].sort(function (a, b) {
+                return b.star - a.star
+              })
             }
-            for (let i = 1; i < typeList.length; i++) {
-              showDataList[i] = {
+            for (let i = 0; i < typeList.length; i++) {
+              showDataList[i + 1] = {
                 'nav': typeList[i],
-                'list': originList[typeList[i]]
+                'list': [...originList[typeList[i]]].sort(function (a, b) {
+                  return b.star - a.star
+                })
               }
             }
             resolve(showDataList)
@@ -100,14 +104,17 @@ Component({
           break;
         case 2:
           p = new Promise(async (resolve, reject) => {
-            let ecoList = comEco.FixUserType(await comEco.fixLikeUser(list))
-            console.log(ecoList)
+            let ecoList = comEco.FixUserType(await comEco.fixLikeUser(that.data.list))
             resolve([{
               nav: '最新',
-              list: ecoList
+              list: [...ecoList].sort(function (a, b) {
+                return b.createTime - a.createTime
+              })
             }, {
               nav: '最热',
-              list: []
+              list: [...ecoList].sort(function (a, b) {
+                return b.likeNum - a.likeNum
+              })
             }])
           });
           break;

@@ -24,7 +24,7 @@
 			"disablePlugins": [],
 			"outputPath": ""
 		},
-		"useCompilerModule": true,
+		"useCompilerModule": false,
 		"userConfirmedUseCompilerModuleSwitch": false
 	},
 	"compileType": "miniprogram",
@@ -119,31 +119,10 @@
 					"scene": null
 				},
 				{
-					"id": -1,
-					"name": "pages/components/position/position",
-					"pathName": "pages/components/position/position",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/components/orgDetail/orgDetail",
-					"pathName": "pages/components/orgDetail/orgDetail",
-					"query": "query='eWu4xmOWBvjLGJvLbwitDSTchAhmiSeY1DQFhMH8HeKz16nI'",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/components/orgDetail/orgDetail",
-					"pathName": "pages/components/orgDetail/orgDetail",
-					"query": "query=FeROQQ35jOh25P8XgnwPInQWQvoPS4TiliuuWbwJUjUWUktK",
-					"scene": null
-				},
-				{
-					"id": 11,
+					"id": 8,
 					"name": "通用模板",
 					"pathName": "pages/components/usallyList/usallyList",
-					"query": "typeIndex=2&titleName=机构列表",
+					"query": "typeIndex=1&titleName=生态圈",
 					"scene": null
 				}
 			]

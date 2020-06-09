@@ -30,7 +30,7 @@ App({
         }
       }
     })
-    this.initGoEasy()
+    // this.initGoEasy()
   },
   globalData: {
     // ask
