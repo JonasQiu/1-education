@@ -1,4 +1,5 @@
 // components/homePage/homePage.js
+const comOrg = require('../../../utils/Org/getOrg')
 Component({
   /**
    * 组件的属性列表
@@ -24,10 +25,10 @@ Component({
     }, {
       src: 'cuIcon-barcode',
       name: '付款码'
-      }, {
-        src: 'cuIcon-present',
-        name: '活动'
-      }, {
+    }, {
+      src: 'cuIcon-present',
+      name: '活动'
+    }, {
       src: 'cuIcon-redpacket',
       name: '红包/卡卷'
     }],
@@ -267,6 +268,13 @@ Component({
         })
       }
     })
+    comOrg.getOrgList(0, 115).then(res => {
+      this.setData({
+        orgList: res.orgList
+      })
+      // 存储到缓存中，方便下次加载
+      // 下拉刷新列表，一次push加载6条,然后其他nav选项根据type来筛选list
+    }).catch()
   },
   /**
    * 组件的方法列表
