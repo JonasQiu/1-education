@@ -57,6 +57,16 @@ Page({
       inpValue: e.detail.value
     })
   },
+  // 选取图片发送
+  choosePhoto(e) {
+    wx.chooseImage({
+      success(res) {
+        const tempFilePaths = res.tempFilePaths
+        console.log(tempFilePaths)
+        // 触发sendmsg函数
+      }
+    })
+  },
   // 选择列表
   naviToChat(e) {
     this.loadChat(e.currentTarget.dataset.roominfo)

@@ -15,7 +15,7 @@
 		<view class="chat-area">
 			<view class="chat-title">{{roomObj.name}}</view>
 			<!-- 聊天记录展示 -->
-			<scroll-view scroll-y style="height:calc( 100vh - 120rpx - 290rpx);padding-bottom:50rpx" class="cu-chat">
+			<scroll-view scroll-y style="height:calc( 100vh - 120rpx - 390rpx);padding-bottom:50rpx" class="cu-chat">
 				<block wx:for="{{msgList}}">
 					<!-- 自己 -->
 					<view wx:if="{{item.userId==myUserInfo._id}}" class="cu-item self">
@@ -40,15 +40,13 @@
 						<view class="date">{{item.userName}} 发表于 {{item.showTime}}</view>
 					</view>
 				</block>
-
 			</scroll-view>
-
 			<!-- 输入框发送 -->
-			<view class="cu-bar foot ask-foot input {{InputBottom!=0?'cur':''}}" style="bottom:{{InputBottom}}px">
-				<input class="solid-bottom bg-gray" style="border-radius:15rpx" bindfocus="InputFocus" bindblur="InputBlur" adjust-position="{{false}}" value="{{inpValue}}" focus="{{false}}" maxlength="300" cursor-spacing="10"></input>
+			<view class="cu-bar ask-foot input {{InputBottom!=0?'cur':''}}" style="bottom:{{InputBottom}}px">
+				<input class="solid-bottom bg-gray" style="border-radius:15rpx" cursor-spacing='140' bindfocus="InputFocus" bindblur="InputBlur" adjust-position="{{false}}" value="{{inpValue}}" focus="{{false}}" maxlength="300" cursor-spacing="10"></input>
 				<view class="action">
 					<text class="cuIcon-emojifill text-grey"></text>
-					<text class="cuIcon-picfill text-grey"></text>
+					<text class="cuIcon-picfill text-grey" bindtap="choosePhoto"></text>
 				</view>
 				<button class="cu-btn bg-green shadow" bindtap="sendMsg">发送</button>
 			</view>
