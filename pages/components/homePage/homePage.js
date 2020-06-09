@@ -1,5 +1,6 @@
-// components/homePage/homePage.js
 const comOrg = require('../../../utils/Org/getOrg')
+const comType = require("../../../utils/Type/Type")
+
 Component({
   /**
    * 组件的属性列表
@@ -92,10 +93,12 @@ Component({
     // 卡片列表
     orgAllList: [],
     orgList: [],
+    orgReallyList: [],
     orgListStart: 0,
-    orgListEnd: 5,   
+    orgListEnd: 5,
     orgListNum: 5,
-    typeList: ["全部", "设计", "硬件研发", "外语", "移动开发", "认证考试", "电商平台", "学校", "财会金融", "音乐舞蹈", "互联网产品"]
+    typeList: [],
+    typeAllList: []
   },
   created() {
     wx.showLoading({
@@ -116,13 +119,27 @@ Component({
         })
       }
     })
+    // 得到全部组织list
     comOrg.getOrgList(0, 115).then(res => {
       this.setData({
         orgAllList: res.orgList
       })
+      // 得到不同类的组织list
+      const typeAllListObj = {
+        "全部": this.data.orgAllList,
+        ...comType.deOrgTypeList(this.data.orgAllList)
+      }
+      for (let prop in typeAllListObj) {
+        this.data.typeAllList.push(typeAllListObj[prop])
+      }
+      this.setData({
+        typeList: Object.keys(typeAllListObj),
+        typeAllList: this.data.typeAllList
+      })
+      this.setData({
+        orgList: this.data.typeAllList[0]
+      })
       this.touchBottom()
-      // 存储到缓存中，方便下次加载
-      // 下拉刷新列表，一次push加载6条,然后其他nav选项根据type来筛选list
     }).catch()
   },
   /**
@@ -133,14 +150,13 @@ Component({
     // card列表事件
     // 触底事件
     touchBottom(e) {
-      this.data.orgList.push(...this.data.orgAllList.slice(this.data.orgListStart, this.data.orgListEnd))
+      this.data.orgReallyList.push(...this.data.orgList.slice(this.data.orgListStart, this.data.orgListEnd))
       this.setData({
-        orgList: this.data.orgList,
+        orgReallyList: this.data.orgReallyList,
         orgListStart: this.data.orgListStart + this.data.orgListNum,
         orgListEnd: this.data.orgListEnd + this.data.orgListNum
       })
-      console.log(this.data.orgList)
-      if (this.data.orgList.length == this.data.orgAllList.length) {
+      if (this.data.orgList.length == this.data.orgReallyList.length) {
         wx.showToast({
           title: '数据已加载完毕',
         })
@@ -171,10 +187,11 @@ Component({
         url: '/pages/components/search/search',
       })
     },
-
+    // 卡片导航选择
     tabSelect(e) {
       this.setData({
         TabCur: e.currentTarget.dataset.id,
+        orgList: this.data.typeAllList[e.currentTarget.dataset.id],
         scrollLeft: (e.currentTarget.dataset.id - 1) * 60
       })
     },

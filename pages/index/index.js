@@ -23,7 +23,9 @@ Page({
     myUserInfo: {},
     askRoomName: [],
     roomObj: {},
-    inpValue: ''
+    inpValue: '',
+    chatChunkHeight: 0,
+    scrollTop: 0
   },
 
   //////////////////////////////////
@@ -60,9 +62,11 @@ Page({
   // 选取图片发送
   choosePhoto(e) {
     wx.chooseImage({
+      count: 1,
       success(res) {
-        const tempFilePaths = res.tempFilePaths
-        console.log(tempFilePaths)
+        // const tempFilePaths = res.tempFilePaths
+        console.log(wx.getFileSystemManager().readFileSync(res.tempFilePaths[0], "base64"))
+        // console.log(tempFilePaths)
         // 触发sendmsg函数
       }
     })
@@ -136,14 +140,15 @@ Page({
       })
     })
     this.setData({
-      inpValue: ''
+      inpValue: '',
+      scrollTop: this.data.chatChunkHeight
     })
   },
   //点击后，图片进行预览
   showImg(e) {
     wx.previewImage({
-      current: this.data.swiperList[e.currentTarget.dataset.imgindex],
-      urls: this.data.swiperList
+      current: 1,
+      urls: e.currentTarget.dataset.imgurl
     })
   },
   // 
@@ -197,7 +202,13 @@ Page({
         }]
       })
     })
-
+    // 得到元素的高度
+    // wx.createSelectorQuery().select('.scrollTop').boundingClientRect(function (res) {
+    //   that.setData({
+    //     chatChunkHeight: res.height || 0
+    //   })
+    // }).exec();
+   
     wx.getStorage({
       key: 'userInfo',
       success: res => {
