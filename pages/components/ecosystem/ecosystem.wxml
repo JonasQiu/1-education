@@ -1,4 +1,6 @@
-<scroll-view scroll-y style="height:93vh;margin-top:{{navTop}}px" lower-threshold="500" bindscrolltolower="lower" scroll-with-animation scroll-top="{{goTop}}">
+<!-- 点赞的通用列表 -->
+<usually wx:if="{{isShowUsu}}" typeIndex='0' list="{{showlikeIdList}}" titleName="点赞的人" bind:callshowChange="showLikeList" />
+<scroll-view scroll-y wx:else style="height:93vh;margin-top:{{navTop}}px" lower-threshold="500" bindscrolltolower="lower" scroll-with-animation scroll-top="{{goTop}}">
 	<view class="scrollTop">生态圈</view>
 	<!-- 搜索栏 -->
 	<view class="cu-bar search bg-white">
@@ -19,8 +21,6 @@
 			</view>
 		</view>
 	</scroll-view>
-	<!-- 点赞的通用列表 -->
-	<usually wx:if="{{isShowUsu}}" typeIndex='0' list="{{ecoList[usuallyIndex].likeIdList}}" titleName="点赞的人" />
 	<!-- 推荐、关注、热帖、官方-->
 	<view wx:for="{{EcoList}}" class="eco-nav" wx:key="index">
 		<view bindtap="naviToDetail" data-ecoid="{{item._id}}">
@@ -45,7 +45,7 @@
 				</view>
 			</view>
 		</view>
-		<view class="eco-call" style="font-size:55rpx">
+		<view class="eco-call" style="font-size:55rpx" bindtap="showLikeList" data-likeIdList="{{item.likeIdList}}">
 			<text class="cuIcon-likefill {{item.isLike ? 'text-red' : 'text-gray'}}"  catchtap="sendLike" data-myindex="{{index}}"></text>
 			<view class="eco-callImg">
 				<image class="cu-avatar radius margin-left" src="{{likeUser.avatarUrl}}" wx:for="{{item.likes}}" wx:for-item="likeUser" wx:key="index"></image>

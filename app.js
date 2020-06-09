@@ -37,6 +37,9 @@ App({
     isOnline: false,
     goeasy: '',
   },
+  initCimg() {
+
+  },
   initGoEasy() { //初始化goeasy
     let userInfo = wx.getStorageSync('userInfo')
     let that = this;

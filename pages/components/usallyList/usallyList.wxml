@@ -1,4 +1,6 @@
-<return />
+<view class="return text-white" bindtap="backTo">
+	<text class="cuIcon-back"></text>
+</view>
 <!-- 数据：生态圈、typeList、机构列表、 -->
 <view class="scrollTop" style="margin-top:{{navTop}}px">{{titleName}}</view>
 <scroll-view scroll-y style="height:93vh;" lower-threshold="500" bindscrolltolower="lower" scroll-with-animation scroll-top="{{goTop}}">

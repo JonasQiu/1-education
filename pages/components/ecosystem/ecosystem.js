@@ -29,7 +29,8 @@ Component({
     searchList: [],
     starNum: 0,
     isShowUsu: false,
-    usuallyIndex: 0
+    usuallyIndex: 0,
+    showlikeIdList: []
   },
   created() {
     wx.showLoading({
@@ -51,14 +52,17 @@ Component({
    * 组件的方法列表
    */
   methods: {
+    showLikeList(e) {
+      let that = this;
+      this.setData({
+        isShowUsu: !that.data.isShowUsu,
+        showlikeIdList: e.currentTarget.dataset.likeidlist ? e.currentTarget.dataset.likeidlist : []
+      })
+    },
     // 点赞
     sendLike(e) {
       var that = this;
       let index = e.currentTarget.dataset.myindex
-      this.setData({
-        isShowUsu: !this.data.isShowUsu,
-        usuallyIndex: index
-      })
       if (!wx.getStorageSync('userInfo')) {
         wx.showToast({
           title: '请先登录好吧',
@@ -123,11 +127,9 @@ Component({
           isBottom: res.isBottom, // 判断是否到底了
           isLoading: false // 加载完毕，取消正在加载状态
         })
-        console.log(that.ecoList[that.data.usuallyIndex].likeIdList);
-
-
         wx.hideLoading()
       }).catch(res => {
+        console.log(res)
         wx.showToast({
           title: '刷新失败！',
         })

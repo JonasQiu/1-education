@@ -1,8 +1,8 @@
 @import "/colorui/main.wxss";
 @import "/colorui/icon.wxss";
 @import "/colorui/animation.wxss";
-
-/* @import "/pages/components/search/channel/channel.wxss"; */
+@import "/pages/components/return/return.wxss";
+@import "/pages/components/search/channel/channel.wxss";
 @import "/pages/components/ecosystem/ecosystem.wxss";
 
 

@@ -1,101 +1,105 @@
 <!-- 详情页 -->
-<view class="page">
-	<!-- 是否返回 -->
-	<return />
-	<scroll-view scroll-y style="height:110vh" scroll-top="{{scrollTop}}">
-		<!-- 轮播图 -->
-		<swiper class="screen-swiper {{DotStyle?'square-dot':'round-dot'}}" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500">
-			<swiper-item wx:for="{{swiperList}}" wx:key bindtap="showImg" data-imgIndex="{{index}}">
-				<image src="{{item}}" mode="aspectFill"></image>
-			</swiper-item>
-		</swiper>
-		<!-- 内容块 -->
-		<view class="relative">
-			<view class="absolute {{toggleDelay?'animation-slide-bottom':''}}" style="animation-delay: {{(index+1)*0.2}}s;">
-				<view class="chunk eco-head">
-					<!-- 头部 -->
-					<image class="avatar" src="{{ecoObj.userInfo.avatarUrl}}"></image>
-					<view class="eco-nameInfo">
-						<view class="eco-name">{{ecoObj.userInfo.nickName}}</view>
-						<!-- 创建时间 -->
-						<view class="first-change-time">发表于 {{ecoObj.fixCreateTime}}</view>
+<!-- 点赞的通用列表 -->
+<usually wx:if="{{isShowUsu}}" typeIndex='0' list="{{ecoObj.likeIdList}}" titleName="点赞的人" bind:callshowChange="showLikeList" />
+<view wx:else>
+	<view class="page">
+		<!-- 是否返回 -->
+		<return />
+		<scroll-view scroll-y style="height:110vh" scroll-top="{{scrollTop}}">
+			<!-- 轮播图 -->
+			<swiper class="screen-swiper {{DotStyle?'square-dot':'round-dot'}}" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500">
+				<swiper-item wx:for="{{swiperList}}" wx:key bindtap="showImg" data-imgIndex="{{index}}">
+					<image src="{{item}}" mode="aspectFill"></image>
+				</swiper-item>
+			</swiper>
+			<!-- 内容块 -->
+			<view class="relative">
+				<view class="absolute {{toggleDelay?'animation-slide-bottom':''}}" style="animation-delay: {{(index+1)*0.2}}s;">
+					<view class="chunk eco-head">
+						<!-- 头部 -->
+						<image class="avatar" src="{{ecoObj.userInfo.avatarUrl}}"></image>
+						<view class="eco-nameInfo">
+							<view class="eco-name">{{ecoObj.userInfo.nickName}}</view>
+							<!-- 创建时间 -->
+							<view class="first-change-time">发表于 {{ecoObj.fixCreateTime}}</view>
+						</view>
+						<!-- <view class="head-attention">+</view> -->
+						<text class="{{ecoObj.userInfo.isMyFollow?'cuIcon-roundaddfill':'cuIcon-roundadd'}} follow" catchtap="setFollow"></text>
 					</view>
-					<!-- <view class="head-attention">+</view> -->
-					<text class="{{ecoObj.userInfo.isMyFollow?'cuIcon-roundaddfill':'cuIcon-roundadd'}} follow" catchtap="setFollow"></text>
-				</view>
-				<view class="chunk chInfo">
-					<!-- 描述 -->
-					<view class="eco-info">
-						<view class="eco-title">{{ecoObj.title}}</view>
-						<!-- <view class="line"></view> -->
-						<!-- 分割线line有icon -->
-						<view class="eco-content">{{ecoObj.content}}</view>
-						<text class="last-change-time read">浏览 {{ecoObj.readNum}} 万</text>
-						<text class="last-change-time edit">最后编辑于 {{ecoObj.fixLastTime}}</text>
-					</view>
-					<view class="line"></view>
+					<view class="chunk chInfo">
+						<!-- 描述 -->
+						<view class="eco-info">
+							<view class="eco-title">{{ecoObj.title}}</view>
+							<!-- <view class="line"></view> -->
+							<!-- 分割线line有icon -->
+							<view class="eco-content">{{ecoObj.content}}</view>
+							<text class="last-change-time read">浏览 {{ecoObj.readNum}} 万</text>
+							<text class="last-change-time edit">最后编辑于 {{ecoObj.fixLastTime}}</text>
+						</view>
+						<view class="line"></view>
 
-					<!-- 互动次数显示 -->
-					<view class="active">
-						<!-- 点赞多少次 -->
-						<view class="appreciate" bindtap="appreciate">
-							<view class="{{ecoObj.isLike?'cuIcon-appreciatefill':'cuIcon-appreciate'}} likeNum"></view>
-							<view class="likeNum">{{ecoObj.likeNum}}</view>
+						<!-- 互动次数显示 -->
+						<view class="active">
+							<!-- 点赞多少次 -->
+							<view class="appreciate" bindtap="appreciate">
+								<view class="{{ecoObj.isLike?'cuIcon-appreciatefill':'cuIcon-appreciate'}} likeNum"></view>
+								<view class="likeNum">{{ecoObj.likeNum}}</view>
+							</view>
+							<!-- 展示点赞人列表 -->
+							<view class="avatarList" bindtap="showLikeList">
+								<image class="likeAvatar" src="{{item.avatarUrl}}" wx:for="{{ecoObj.likes}}"></image>
+							</view>
+							<text class="avat-more" bindtap="showLikeList" wx:if="{{ecoObj.likes.length>5}}">更多</text>
 						</view>
-						<!-- 展示点赞人列表 -->
-						<view class="avatarList">
-							<image class="likeAvatar" src="{{item.avatarUrl}}" wx:for="{{ecoObj.likes}}"></image>
-						</view>
-						<text class="avat-more" bindtap="moreAppre" wx:if="{{ecoObj.likes.length>5}}">更多</text>
 					</view>
-				</view>
-				<!-- 机构介绍 -->
-				<view class="chunk" bindtap="goOrgDetail">
-					<view class="padding-20 org">
-						<image class="eco-orgHeadImg" src="{{ecoObj.orgInfo.cimg.logo}}"></image>
-						<view class="info">
-							<view class="eco-orgName m-b-10">{{ecoObj.orgInfo.info.orgName}}</view>
-							<text wx:for="{{ecoObj.orgInfo.showStar}}" class="cuIcon-favorfill text-yellow"></text><text wx:for="{{5-ecoObj.orgInfo.showStar}}" class="cuIcon-favor"></text>
-							<text style="margin-top: 5rpx;font-size: 23rpx;"> {{ecoObj.orgInfo.star}} 分 | 距离 {{ecoObj.orgInfo.distance}} km</text>
-							<!-- <text style="margin-top: 5rpx;font-size: 23rpx;"></text> -->
-							<view class="eco-address" style="margin-top: 10rpx;font-size: 23rpx;">{{ecoObj.orgInfo.location.address}}</view>
-						</view>
+					<!-- 机构介绍 -->
+					<view class="chunk" bindtap="goOrgDetail">
+						<view class="padding-20 org">
+							<image class="eco-orgHeadImg" src="{{ecoObj.orgInfo.cimg.logo}}"></image>
+							<view class="info">
+								<view class="eco-orgName m-b-10">{{ecoObj.orgInfo.info.orgName}}</view>
+								<text wx:for="{{ecoObj.orgInfo.showStar}}" class="cuIcon-favorfill text-yellow"></text><text wx:for="{{5-ecoObj.orgInfo.showStar}}" class="cuIcon-favor"></text>
+								<text style="margin-top: 5rpx;font-size: 23rpx;"> {{ecoObj.orgInfo.star}} 分 | 距离 {{ecoObj.orgInfo.distance}} km</text>
+								<!-- <text style="margin-top: 5rpx;font-size: 23rpx;"></text> -->
+								<view class="eco-address" style="margin-top: 10rpx;font-size: 23rpx;">{{ecoObj.orgInfo.location.address}}</view>
+							</view>
 
-						<!-- 收藏 -->
-						<text class="{{ecoObj.orgInfo.isCollect?'cuIcon-favorfill':'cuIcon-favor'}} collect" catchtap="setCollect"></text>
+							<!-- 收藏 -->
+							<text class="{{ecoObj.orgInfo.isCollect?'cuIcon-favorfill':'cuIcon-favor'}} collect" catchtap="setCollect"></text>
+						</view>
 					</view>
-				</view>
-				<!-- 评论 -->
-				<view class="chunk comment">
-					<text class="commentTitle">讨论</text>
-					<text class="commentNum">（{{ecoObj.comments.length}}）</text>
-					<view class="commentChunk">
-						<image src="{{myAvatar}}" class="avatar-comment"></image>
-						<input type="text" class="inputComment" placeholder="快来写下你的评论吧 ~ " confirm-type="发表" bindconfirm="sendUserComment" value="{{commentValue}}"></input>
-					</view>
-					<view class="commentList">
-						<view class="listShow" wx:for="{{ecoObj.comments}}">
-							<image class="avatar-comment" src="{{item.userInfo.avatarUrl}}"></image>
-							<view class="info-comment">
-								<text class="info-name">{{item.userInfo.nickName}}</text>
-								<text class="info-time">{{item.showTime}}</text>
-								<!-- 点赞个数 -->
-								<text class="{{item.isMyLike?'cuIcon-appreciatefill':'cuIcon-appreciate'}} info-call" catchtap="sendLikeComment" data-myindex="{{index}}">
+					<!-- 评论 -->
+					<view class="chunk comment">
+						<text class="commentTitle">讨论</text>
+						<text class="commentNum">（{{ecoObj.comments.length}}）</text>
+						<view class="commentChunk">
+							<image src="{{myAvatar}}" class="avatar-comment"></image>
+							<input type="text" class="inputComment" placeholder="快来写下你的评论吧 ~ " confirm-type="发表" bindconfirm="sendUserComment" value="{{commentValue}}"></input>
+						</view>
+						<view class="commentList">
+							<view class="listShow" wx:for="{{ecoObj.comments}}">
+								<image class="avatar-comment" src="{{item.userInfo.avatarUrl}}"></image>
+								<view class="info-comment">
+									<text class="info-name">{{item.userInfo.nickName}}</text>
+									<text class="info-time">{{item.showTime}}</text>
+									<!-- 点赞个数 -->
+									<text class="{{item.isMyLike?'cuIcon-appreciatefill':'cuIcon-appreciate'}} info-call" catchtap="sendLikeComment" data-myindex="{{index}}">
 									<text class="appNum"> ({{item.likeNum}})</text>
-								</text>
-								<view class="info-content">{{item.content}}</view>
+									</text>
+									<view class="info-content">{{item.content}}</view>
+								</view>
 							</view>
 						</view>
 					</view>
 				</view>
 			</view>
-		</view>
-	</scroll-view>
-</view>
+		</scroll-view>
+	</view>
 
-<view class="tabbar">
-	<view wx:for="{{tabbarList}}" class="attention w-50" wx:key="index" bindtap="{{item.event}}">
-		<text wx:if="{{item.name!='cuIcon-share'}}" class="{{item.name}}" ></text>
-		<button wx:else class="{{item.name}}" open-type='share' style="background-color:#fff;height:80rpx;line-height:80rpx;border:none;outline:none"></button>
+	<view class="tabbar">
+		<view wx:for="{{tabbarList}}" class="attention w-50" wx:key="index" bindtap="{{item.event}}">
+			<text wx:if="{{item.name!='cuIcon-share'}}" class="{{item.name}}" ></text>
+			<button wx:else class="{{item.name}}" open-type='share' style="background-color:#fff;height:80rpx;line-height:80rpx;border:none;outline:none"></button>
+		</view>
 	</view>
 </view>

@@ -9,7 +9,9 @@ Component({
   // 组件的初始数据
   data: {
     //登录部分
-    userInfo: {},
+    userInfo: {
+      avatarUrl: 'cloud://education-1hoqw.6564-education-1hoqw-1302178671/something/logo.png'
+    },
     //关注 收藏 粉丝数部分
     attentionCount: 0,
     collectionCount: 0,

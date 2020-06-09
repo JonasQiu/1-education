@@ -28,6 +28,8 @@ Component({
     toggleDelay: false
   },
   attached() {
+    console.log(this.properties);
+
     this.LoadData()
 
   },
@@ -159,6 +161,9 @@ Component({
       wx.navigateTo({
         url: url
       })
+    },
+    backTo() {
+      this.triggerEvent('callshowChange')
     },
     // ECO 生态圈
     sendLike(e) {

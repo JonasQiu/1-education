@@ -1,13 +1,13 @@
 <!-- 登录模块 -->
 <scroll-view scroll-y class="scrollPage">
 	<button class="UCenter-bg padding-40" open-type="getUserInfo" bindgetuserinfo="onGetUserInfo">
-		<image src="{{userInfo.avatarUrl?userInfo.avatarUrl:'/images/logo.png'}}" class="{{userInfo.avatarUrl?'png':''}}" mode="widthFix"></image>
+		<image src="{{userInfo.avatarUrl}}" class="{{userInfo._id?'png':''}}" mode="widthFix"></image>
 		<view class="text-xl">{{userInfo.nickName?userInfo.nickName:'游客'}}
 		</view>
 		<view class="m-10">
 			<text>{{userInfo._id?'已登录':'未登录'}}</text>
 		</view>
-		<image src="/images/wave.gif" mode="scaleToFill" class="gif-wave"></image>
+		<image src="cloud://education-1hoqw.6564-education-1hoqw-1302178671/something/wave.gif" mode="scaleToFill" class="gif-wave"></image>
 	</button>
 	<!-- 粉丝关注收藏 -->
 	<view class="padding flex text-center text-grey bg-white shadow-warp">

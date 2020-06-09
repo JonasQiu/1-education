@@ -41,7 +41,8 @@ Page({
       collect: false,
       follow: false,
     },
-    scrollTop: 0
+    scrollTop: 0,
+    isShowUsu: false,
   },
   toggleDelay(that) {
     clearTimeout(that.timer)
@@ -66,6 +67,13 @@ Page({
     }).exec();
 
   },
+  // 展示更多点赞
+  showLikeList() {
+    let that = this;
+    that.setData({
+      isShowUsu: !that.data.isShowUsu
+    })
+  },
   onShareAppMessage(options) {
     this.onShareAppMessage()
   },
@@ -79,6 +87,7 @@ Page({
     // 机构信息
     comEco.getPage(ecoId).then(async res => {
       // 👇 读取点赞列表
+      res.likeIdList = [...res.likes]
       res = (await comEco.fixLikeUser([res]))[0]
       // 👇 读取评论列表
       res = await comEco.fixComments(res)
@@ -130,16 +139,6 @@ Page({
   //分享
   share() {
     this.onShareAppMessage()
-  },
-  // 更多点赞人
-  moreAppre() {
-    // wx.navigateTo({
-    //   url: './appreciateList/appreciateList',
-    // })
-    wx.setStorage({
-      data: this.data.ecoObj,
-      key: 'appreciateList',
-    })
   },
   //点击后，图片进行预览
   showImg(e) {
