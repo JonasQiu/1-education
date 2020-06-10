@@ -50,7 +50,7 @@
 
 /* 轮播图 */
 .homepage-swiper {
-  margin: 40rpx 30rpx 20rpx;
+  margin: 40rpx 50rpx 20rpx;
   border-radius: 25rpx;
   overflow: hidden;
 }
@@ -60,7 +60,7 @@
   color: #000;
   display: flex;
   justify-content: space-around;
-  margin: 30rpx 15rpx 0;
+  margin: 30rpx 20rpx 0;
 }
 
 .box {
@@ -76,6 +76,8 @@
 }
 
 .txt {
+  letter-spacing: 1px;
+  font-family: "Microsoft Yahei";
   font-size: 30rpx;
   text-align: center;
   font-weight: bold;
@@ -83,15 +85,14 @@
 
 /* 宫格列表样式 */
 .contain_box {
-  height: 550rpx;
+  height: 700rpx;
   background-color: white;
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
-  /* overflow: hidden; */
-  border-radius: 30rpx;
-  padding: 140rpx 30rpx 40rpx;
-  margin: -130rpx 0 0 0;
+  border-radius: 40rpx;
+  padding: 270rpx 30rpx 40rpx;
+  margin: -240rpx 0 0 0;
 }
 
 .fun_box {
@@ -111,8 +112,12 @@
 }
 
 .txt_1 {
-  font-size: 30rpx;
+  color: #666;
+  letter-spacing: 1px;
+  font-family: "Microsoft Yahei";
+  font-size: 28rpx;
   text-align: center;
+  font-weight: bold;
 }
 
 .img_2 {

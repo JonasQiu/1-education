@@ -1,6 +1,7 @@
 const comOrg = require('../../../utils/Org/getOrg')
 const comType = require("../../../utils/Type/Type")
 const comCimg = require("../../../utils/Func/loadCimg")
+const comLocation = require('../../../utils/Func/location')
 Component({
   /**
    * 组件的属性列表
@@ -94,7 +95,13 @@ Component({
       }
     })
     // 得到全部组织list
-    comOrg.getOrgList(0, 115).then(res => {
+    comOrg.getOrgList(0, 115).then(async res => {
+      // for (let j = 0; j < res.orgList.length; j++) {
+      //   // 得到2地的距离
+      //   res.orgList[j].distance = await comLocation.getDistance(res.orgList[j].location.lat, res.orgList[j].location.lng)
+      //   res.orgList[j].showStar = parseInt(res.orgList[j].star)
+      // }
+      // console.log(res.orgList);
       this.setData({
         orgAllList: res.orgList
       })
