@@ -1,6 +1,5 @@
 const comOrg = require('../../../utils/Org/getOrg')
 const comType = require("../../../utils/Type/Type")
-const comCimg = require("../../../utils/Func/loadCimg")
 const comLocation = require('../../../utils/Func/location')
 Component({
   /**
@@ -44,8 +43,6 @@ Component({
     orgListNum: 5,
     typeList: [],
     typeAllList: [],
-    // 是否展示load组件
-    isShowLoad: true
   },
   attached(e) {
     let that = this
@@ -58,38 +55,33 @@ Component({
         })
       }
     })
-    // 得到全部组织list
-    comOrg.getOrgList(0, 115).then(async res => {
+    wx.getStorage({
+      key: 'homePageData',
+      success(res) {
+        const resOrgList = res.data.allList
+        that.setData({
+          HomePageInfo: res.data.HomePageInfo,
+          orgAllList: resOrgList
+        })
+        console.log(that.data.orgAllList)
+        // 得到不同类的组织list
+        const typeAllListObj = {
+          "全部": that.data.orgAllList,
+          ...comType.deOrgTypeList(that.data.orgAllList)
+        }
+        for (let prop in typeAllListObj) {
+          that.data.typeAllList.push(typeAllListObj[prop])
+        }
+        that.setData({
+          typeList: Object.keys(typeAllListObj),
+          typeAllList: that.data.typeAllList
+        })
+        that.setData({
+          orgList: that.data.typeAllList[0]
+        })
+        that.touchBottom()
 
-      for (let j = 0; j < res.orgList.length; j++) {
-        // 得到2地的距离
-
-        res.orgList[j].showStar = parseInt(res.orgList[j].star)
-        // res.orgList[j].distance = await comLocation.getDistance(res.orgList[j].location.lat, res.orgList[j].location.lng)
       }
-      // console.log(res.orgList[0].distance)
-      this.setData({
-        orgAllList: res.orgList
-      })
-      // 得到不同类的组织list
-      const typeAllListObj = {
-        "全部": this.data.orgAllList,
-        ...comType.deOrgTypeList(this.data.orgAllList)
-      }
-      for (let prop in typeAllListObj) {
-        this.data.typeAllList.push(typeAllListObj[prop])
-      }
-      this.setData({
-        typeList: Object.keys(typeAllListObj),
-        typeAllList: this.data.typeAllList
-      })
-      this.setData({
-        orgList: this.data.typeAllList[0]
-      })
-      this.touchBottom()
-    })
-    this.setData({
-      HomePageInfo: comCimg.getHomePageSwiper()
     })
   },
   /**
@@ -139,8 +131,8 @@ Component({
     },
     // 卡片导航选择
     tabSelect(e) {
+      this.data.orgReallyList = []
       this.setData({
-        orgReallyList: [],
         orgListStart: 0,
         orgListEnd: 5,
         TabCur: e.currentTarget.dataset.id,

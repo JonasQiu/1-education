@@ -4,6 +4,8 @@ let userInfo = {};
 const comAsk = require('../../utils/Func/ask')
 const comTime = require('../../utils/Func/time')
 const comCimg = require("../../utils/Func/loadCimg")
+const comOrg = require('../../utils/Org/getOrg')
+const comLocation = require('../../utils/Func/location')
 
 Page({
   data: {
@@ -190,20 +192,45 @@ Page({
   // 加载页面立刻执行
   onLoad: function () {
     let that = this;
-    wx.showLoading({
-      title: '正在获取数据',
+    wx.getLocation({
+      success: (res2) => {
+        let {
+          latitude,
+          longitude
+        } = res2
+        new Promise(async (resolve, reject) => {
+          let pCimg = comCimg.initCimg()
+          let pOrgList = comOrg.getOrgList(0, 115)
+          let orgList = (await pOrgList).orgList
+          console.log(orgList);
+
+          for (let j = 0; j < orgList.length; j++) {
+            // 得到2地的距离
+            orgList[j].showStar = parseInt(orgList[j].star)
+            orgList[j].distance = comLocation.getDistance(latitude, longitude, orgList[j].location.lat, orgList[j].location.lng)
+          }
+          wx.setStorageSync('homePageData', {
+            HomePageInfo: comCimg.getHomePageSwiper(),
+            allList: orgList
+          })
+
+          await pCimg
+          that.setData({
+            isLoadData: true
+          })
+        }).catch(res => {
+          wx.showToast({
+            title: '加载数据失败',
+          })
+        })
+      },
+      fail() {
+        wx.showToast({
+          title: '加载数据失败',
+        })
+      }
     })
-    comCimg.initCimg().then(res => {
-      that.setData({
-        isLoadData: true
-      })
-      wx.hideLoading()
-    }).catch(res => {
-      wx.showToast({
-        title: '加载数据失败',
-      })
-      wx.hideLoading()
-    })
+
     comAsk.getTypeList().then(res => {
       that.setData({
         askRoomName: [{
@@ -218,6 +245,7 @@ Page({
         }]
       })
     })
+
     // 得到元素的高度
     // wx.createSelectorQuery().select('.scrollTop').boundingClientRect(function (res) {
     //   that.setData({

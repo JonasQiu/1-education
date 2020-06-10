@@ -59,37 +59,51 @@ Page({
   loadData(e) {
     let orgId = e.detail
     let that = this
-    // 机构信息
-    comOrg.getOrg(orgId).then(async res => {
-      // 👇 读取评论列表
-      res = await comOrg.fixComments(res)
-      // 👇 读取生态圈列表
-      that.data.infoData[3].list = comEco.FixUserType(await comEco.fixLikeUser(await comEco.getEcoByOrg(orgId)))
-      // 👇 读取距离信息
-      res.location.distance = await comLocation.getDistance(res.location.lat, res.location.lng)
-      // 👇 展示星级信息
-      res.star = res.star.toString().length == 1 ? res.star + '.0' : res.star
-      res.showStar = parseInt(res.star)
-      // 👇 获取我的信息，用来展示讨论区头像
-      let userInfo = wx.getStorageSync('userInfo')
-      that.data.infoData[0].obj = res
+    wx.getLocation({
+      success: (p) => {
+        let {
+          latitude,
+          longitude
+        } = p;
+        // 机构信息
+        comOrg.getOrg(orgId).then(async res => {
+          // 👇 读取评论列表
+          res = await comOrg.fixComments(res)
+          // 👇 读取生态圈列表
+          that.data.infoData[3].list = comEco.FixUserType(await comEco.fixLikeUser(await comEco.getEcoByOrg(orgId)))
+          // 👇 读取距离信息
+          res.location.distance = comLocation.getDistance(latitude, longitude, res.location.lat, res.location.lng)
+          // 👇 展示星级信息
+          res.star = res.star.toString().length == 1 ? res.star + '.0' : res.star
+          res.showStar = parseInt(res.star)
+          // 👇 获取我的信息，用来展示讨论区头像
+          let userInfo = wx.getStorageSync('userInfo')
+          that.data.infoData[0].obj = res
 
-      let showData = {
-        myUserInfo: {
-          avatarUrl: 'cloud://education-1hoqw.6564-education-1hoqw-1302178671/something/用户.png'
-        },
-        infoData: that.data.infoData,
+          let showData = {
+            myUserInfo: {
+              avatarUrl: 'cloud://education-1hoqw.6564-education-1hoqw-1302178671/something/用户.png'
+            },
+            infoData: that.data.infoData,
+          }
+          if (userInfo) {
+            showData.myUserInfo = userInfo
+          }
+          that.setData(showData)
+          wx.hideLoading()
+        }).catch(res => {
+          // 异常报错
+          console.log(res)
+          wx.navigateBack()
+        })
+      },
+      fail(res) {
+        // 异常报错
+        console.log(res)
+        wx.navigateBack()
       }
-      if (userInfo) {
-        showData.myUserInfo = userInfo
-      }
-      that.setData(showData)
-      wx.hideLoading()
-    }).catch(res => {
-      // 异常报错
-      console.log(res)
-      wx.navigateBack()
     })
+
   },
   collectTap(e) {
     let that = this;
