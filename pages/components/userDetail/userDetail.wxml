@@ -1,0 +1,26 @@
+<view class="box">
+	<view class="info">
+		<view class="sex {{userInfoObj.sex?'cuIcon-male text-red':'cuIcon-female text-pink'}}"></view>
+		<view class="avatar">
+			<image src="{{userInfoObj.avatarUrl}}" class="avatar-img"></image>
+			<view class="name">{{userInfoObj.nickName}}</view>
+		</view>
+		<view class="user-type">
+			<view class="name-border">{{userInfoObj.userType==0?'普通用户':userInfoObj.userType==1?'机构':'专业人士'}}</view>
+		</view>
+	</view>
+	<view class="num">
+		<view class="atten">
+			<view>关注数</view>
+			<view>{{userInfoObj.myFollow.length}}</view>
+		</view>
+		<view class="fun">
+			<view>粉丝数</view>
+			<view>{{userInfoObj.myFans.length}}</view>
+		</view>
+		<view class="acti">
+			<view>文章数</view>
+			<view>{{userInfoObj.myArticle.length}}</view>
+		</view>
+	</view>
+</view>

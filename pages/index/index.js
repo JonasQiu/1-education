@@ -45,7 +45,6 @@ Page({
     })
   },
   tabSelect(e) {
-    console.log(e);
     this.setData({
       TabCur: e.currentTarget.dataset.id,
       scrollLeft: (e.currentTarget.dataset.id - 1) * 60
@@ -70,7 +69,6 @@ Page({
       success(res) {
         // const tempFilePaths = res.tempFilePaths
         console.log(wx.getFileSystemManager().readFileSync(res.tempFilePaths[0], "base64"))
-        // console.log(tempFilePaths)
         // 触发sendmsg函数
       }
     })
@@ -202,8 +200,6 @@ Page({
           let pCimg = comCimg.initCimg()
           let pOrgList = comOrg.getOrgList(0, 115)
           let orgList = (await pOrgList).orgList
-          console.log(orgList);
-
           for (let j = 0; j < orgList.length; j++) {
             // 得到2地的距离
             orgList[j].showStar = parseInt(orgList[j].star)

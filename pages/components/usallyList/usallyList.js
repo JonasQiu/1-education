@@ -25,13 +25,11 @@ Component({
     TabCur: 0,
     dataList: [],
     // 动画
-    toggleDelay: false
+    toggleDelay: false,
+    isShowUser: false
   },
   attached() {
-    console.log(this.properties);
-
     this.LoadData()
-
   },
   methods: {
     // ALL
@@ -133,24 +131,43 @@ Component({
           return;
       }
       p.then(res => {
-        console.log(res)
         that.setData({
-          dataList: res
+          dataList: res,
+          toggleDelay: true
         })
+        that.toggleDelay(that)
         wx.hideLoading()
       }).catch(res => {
         wx.hideLoading()
       })
     },
+    // 从上而下一个个展示数据
+    toggleDelay(that) {
+      clearTimeout(that.timer)
+      that.timer = setTimeout(function () {
+        that.setData({
+          toggleDelay: false
+        })
+      }, 3000)
+    },
     tabSelect(e) {
       this.setData({
+        toggleDelay: true,
         TabCur: e.currentTarget.dataset.id,
       })
+      this.toggleDelay(this)
     },
     goTop(e) {
       this.setData({
         goTop: 0
       })
+    },
+    // 是否展示用户信息
+    isShow(e) {
+      this.setData({
+        isShowUser: e.currentTarget.dataset.show
+      })
+      console.log(this.data.isShowUser)
     },
     naviToDetail(e) {
       let url;
@@ -213,8 +230,6 @@ Component({
       return list
     },
     // USER 用户
-
-
   }
 
 })

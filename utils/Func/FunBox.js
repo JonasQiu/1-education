@@ -13,6 +13,15 @@ module.exports = {
     MyLikePage,
     MyCollectOrg,
     MyHistoryPage,
+    getUserInfo
+}
+
+function getUserInfo(userId) {
+    return new Promise(async(resolve, reject) => {
+        db.collection('User').doc(userId).get().then(async res => {
+            resolve(await res.data)
+        })
+    })
 }
 
 function MyOrg(Id) {

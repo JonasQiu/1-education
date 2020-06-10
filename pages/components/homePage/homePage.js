@@ -58,7 +58,8 @@ Component({
       '6z1VYcMXS3Dh5yE0VKWaTgC55C4ol6y5e31KQYILWMPhlA0p',
       'A5Qx5zWex0zvSaJjkWCZAK1stwsk9KiYGokwdt4kLngkStS8',
       '5OKpkLYLGlwrUw3ZjVYpwFF6vTrOhqCOiKUxeEEdo7qUvh5x',
-    ]
+    ],
+    toggleDelay: false
   },
   attached(e) {
     let that = this
@@ -92,8 +93,10 @@ Component({
           typeAllList: that.data.typeAllList
         })
         that.setData({
-          orgList: that.data.typeAllList[0]
+          orgList: that.data.typeAllList[0],
+          toggleDelay: true
         })
+        that.toggleDelay(that)
         that.touchBottom()
       }
     })
@@ -117,6 +120,15 @@ Component({
           title: '数据已加载完毕',
         })
       }
+    },
+    // 从上而下一个个展示数据
+    toggleDelay(that) {
+      clearTimeout(that.timer)
+      that.timer = setTimeout(function () {
+        that.setData({
+          toggleDelay: false
+        })
+      }, 3000)
     },
     orgDetail(e) {
       wx.navigateTo({
@@ -151,8 +163,10 @@ Component({
         orgListEnd: 5,
         TabCur: e.currentTarget.dataset.id,
         orgList: this.data.typeAllList[e.currentTarget.dataset.id],
-        scrollLeft: (e.currentTarget.dataset.id - 1) * 60
+        scrollLeft: (e.currentTarget.dataset.id - 1) * 60,
+        toggleDelay: true
       })
+      this.toggleDelay(this)
       this.touchBottom()
     },
     // cardSwiper
