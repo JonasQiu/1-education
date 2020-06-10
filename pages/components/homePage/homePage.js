@@ -34,37 +34,7 @@ Component({
       src: 'cuIcon-redpacket',
       name: '红包/卡卷'
     }],
-    // 轮播图列表
     cardCur: 0,
-    swiperList: [{
-      id: 0,
-      type: 'image',
-      url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big84000.jpg'
-    }, {
-      id: 1,
-      type: 'image',
-      url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big84001.jpg',
-    }, {
-      id: 2,
-      type: 'image',
-      url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big39000.jpg'
-    }, {
-      id: 3,
-      type: 'image',
-      url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big10001.jpg'
-    }, {
-      id: 4,
-      type: 'image',
-      url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big25011.jpg'
-    }, {
-      id: 5,
-      type: 'image',
-      url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big21016.jpg'
-    }, {
-      id: 6,
-      type: 'image',
-      url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big99008.jpg'
-    }],
     // 卡片列表
     orgAllList: [],
     orgList: [],
@@ -73,15 +43,9 @@ Component({
     orgListEnd: 5,
     orgListNum: 5,
     typeList: [],
-    typeAllList: []
-  },
-  created() {
-    wx.showLoading({
-      title: '正在加载数据...',
-    })
-  },
-  ready() {
-    wx.hideLoading()
+    typeAllList: [],
+    // 是否展示load组件
+    isShowLoad: true
   },
   attached(e) {
     let that = this
@@ -96,13 +60,14 @@ Component({
     })
     // 得到全部组织list
     comOrg.getOrgList(0, 115).then(async res => {
-      // for (let j = 0; j < res.orgList.length; j++) {
-      //   // 得到2地的距离
-      //   res.orgList[j].distance = await comLocation.getDistance(res.orgList[j].location.lat, res.orgList[j].location.lng)
-      //   res.orgList[j].showStar = parseInt(res.orgList[j].star)
-      // }
-      // console.log(res.orgList);
-      console.log(res)
+
+      for (let j = 0; j < res.orgList.length; j++) {
+        // 得到2地的距离
+
+        res.orgList[j].showStar = parseInt(res.orgList[j].star)
+        // res.orgList[j].distance = await comLocation.getDistance(res.orgList[j].location.lat, res.orgList[j].location.lng)
+      }
+      // console.log(res.orgList[0].distance)
       this.setData({
         orgAllList: res.orgList
       })
@@ -139,7 +104,7 @@ Component({
       this.setData({
         orgReallyList: this.data.orgReallyList,
         orgListStart: this.data.orgListStart + this.data.orgListNum,
-        orgListEnd: this.data.orgListEnd + this.data.orgListNum
+        orgListEnd: this.data.orgListEnd + this.data.orgListNum,
       })
       if (this.data.orgList.length == this.data.orgReallyList.length) {
         wx.showToast({
@@ -175,10 +140,14 @@ Component({
     // 卡片导航选择
     tabSelect(e) {
       this.setData({
+        orgReallyList: [],
+        orgListStart: 0,
+        orgListEnd: 5,
         TabCur: e.currentTarget.dataset.id,
         orgList: this.data.typeAllList[e.currentTarget.dataset.id],
         scrollLeft: (e.currentTarget.dataset.id - 1) * 60
       })
+      this.touchBottom()
     },
     // cardSwiper
     cardSwiper(e) {

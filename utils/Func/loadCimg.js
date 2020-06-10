@@ -9,7 +9,8 @@ function initCimg() {
                 let obj = (await db.collection('Cimg').doc("HomePageSwiper").get()).data
                 let resObj = {
                     version: '',
-                    list: []
+                    list: [],
+                    swiperList: []
                 }
                 if (localImg.HomePageSwiper && obj.version == localImg.HomePageSwiper.version) {
                     // 无需更新
@@ -37,6 +38,28 @@ function initCimg() {
                         resObj.list[i] = {
                             'icon': await obj.list[i]['p'],
                             'name': obj.list[i]['name']
+                        }
+                    }
+                    for (let i = 0; i < obj.swiperList.length; i++) {
+                        obj.swiperList[i]['p'] = new Promise(async (resolve, reject) => {
+                            let temp = await wx.cloud.downloadFile({
+                                fileID: obj.swiperList[i]['img']
+                            })
+                            wx.saveFile({
+                                tempFilePath: temp.tempFilePath,
+                                success(res_save) {
+                                    resolve(res_save.savedFilePath)
+                                },
+                                fail(res) {
+                                    reject(res)
+                                }
+                            })
+                        })
+                    }
+                    for (let i = 0; i < obj.swiperList.length; i++) {
+                        resObj.swiperList[i] = {
+                            'img': await obj.swiperList[i]['p'],
+                            'name': obj.swiperList[i]['name']
                         }
                     }
                 }
@@ -105,6 +128,28 @@ function initCimg() {
                         resObj.list[i] = {
                             'icon': await obj.list[i]['p'],
                             'name': obj.list[i]['name']
+                        }
+                    }
+                    for (let i = 0; i < obj.othericon.length; i++) {
+                        obj.othericon[i]['p'] = new Promise(async (resolve, reject) => {
+                            let temp = await wx.cloud.downloadFile({
+                                fileID: obj.othericon[i]['icon']
+                            })
+                            wx.saveFile({
+                                tempFilePath: temp.tempFilePath,
+                                success(res_save) {
+                                    resolve(res_save.savedFilePath)
+                                },
+                                fail(res) {
+                                    reject(res)
+                                }
+                            })
+                        })
+                    }
+                    for (let i = 0; i < obj.othericon.length; i++) {
+                        resObj.othericon[i] = {
+                            'img': await obj.othericon[i]['p'],
+                            'name': obj.othericon[i]['name']
                         }
                     }
                 }

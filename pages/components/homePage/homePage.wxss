@@ -85,13 +85,13 @@
 
 /* 宫格列表样式 */
 .contain_box {
-  height: 700rpx;
+  height: 635rpx;
   background-color: white;
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
   border-radius: 40rpx;
-  padding: 270rpx 30rpx 40rpx;
+  padding: 265rpx 30rpx 40rpx;
   margin: -240rpx 0 0 0;
 }
 
@@ -104,9 +104,9 @@
 }
 
 .fun_box_icon {
-  height: 90rpx;
-  width: 90rpx;
-  font-size: 80rpx;
+  height: 80rpx;
+  width: 80rpx;
+  font-size: 70rpx;
   text-align: center;
   margin-bottom: 10rpx;
 }

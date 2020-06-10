@@ -1,4 +1,7 @@
-<scroll-view scroll-y class="page" style="height:100vh" bindscrolltolower="touchBottom" lower-threshold='500'>
+<!-- 页面未加载完毕时显示 -->
+<!-- <page-load wx:if="{{isShowLoad}}" /> -->
+<!-- 页面加载完毕显示 -->
+<scroll-view scroll-y class="page" style="height:100vh" bindscrolltolower="touchBottom" lower-threshold='500' >
 	<!-- 顶部导航 -->
 	<view class="topFlex">
 		<!-- 定位及温度 -->
@@ -25,9 +28,9 @@
 		</view>
 		<!-- 轮播图 -->
 		<swiper class="screen-swiper homepage-swiper {{DotStyle?'square-dot':'round-dot'}}" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500">
-			<swiper-item wx:for="{{swiperList}}" wx:key>
-				<image src="{{item.url}}" mode="aspectFill" wx:if="{{item.type=='image'}}"></image>
-				<video src="{{item.url}}" autoplay loop muted show-play-btn="{{false}}" controls="{{false}}" objectFit="cover" wx:if="{{item.type=='video'}}"></video>
+			<swiper-item wx:for="{{HomePageInfo.swiperList}}">
+				<image src="{{item.img}}" mode="aspectFill"></image>
+				<!-- <video src="{{item.img}}" autoplay loop muted show-play-btn="{{false}}" controls="{{false}}" objectFit="cover" wx:if="{{item.type=='video'}}"></video> -->
 			</swiper-item>
 		</swiper>
 		<!-- 功能列表 -->

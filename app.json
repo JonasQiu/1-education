@@ -28,7 +28,8 @@
   "usingComponents": {
     "cu-custom": "/colorui/components/cu-custom",
     "return": "/pages/components/return/return",
-    "usually": "/pages/components/usallyList/usallyList"
+    "usually": "/pages/components/usallyList/usallyList",
+    "page-load": "/pages/components/pageLoad/pageLoad"
   },
   "sitemapLocation": "sitemap.json",
   "permission": {
