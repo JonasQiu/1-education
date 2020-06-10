@@ -40,41 +40,11 @@
 
 	<!-- 设置部分 -->
 	<view class="cu-list menu card-menu shadow-lg radius orther">
-		<view class="cu-item arrow">
-			<view class="content" bindtap="CopyLink" data-link="https://github.com/weilanwl/ColorUI">
-				<text class="cuIcon-github text-grey"></text>
-				<text class="text-grey">GitHub</text>
+		<view class="cu-item arrow" wx:for="{{My.othericon}}">
+			<view class="content" bindtap="CopyLink">
+				<image src="{{item.img}}"></image>
+				<text class="text-grey">{{item.name}}</text>
 			</view>
-		</view>
-		<view class="cu-item arrow">
-			<navigator class="content" url="/pages/about/about/about" hover-class="none">
-				<image src="{{My.logo}}" class="png" mode="aspectFit"></image>
-				<text class="text-grey">关于ColorUI组件库</text>
-			</navigator>
-		</view>
-		<view class="cu-item arrow">
-			<navigator class="content" url="/pages/about/log/log" hover-class="none">
-				<text class="cuIcon-formfill text-green"></text>
-				<text class="text-grey">日志</text>
-			</navigator>
-		</view>
-		<view class="cu-item arrow">
-			<view class="content" bindtap="showQrcode">
-				<text class="cuIcon-appreciatefill text-red"></text>
-				<text class="text-grey">赞赏支持</text>
-			</view>
-		</view>
-		<view class="cu-item arrow">
-			<button class="cu-btn content" open-type="feedback">
-				<text class="cuIcon-writefill text-cyan"></text>
-				<text class="text-grey">意见反馈</text>
-			</button>
-		</view>
-		<view class="cu-item arrow">
-			<navigator class="content" url="/pages/about/test/list" hover-class="none">
-				<text class="cuIcon-creativefill text-orange"></text>
-				<text class="text-grey">Bug测试</text>
-			</navigator>
 		</view>
 	</view>
 	<view class="cu-tabbar-height"></view>
