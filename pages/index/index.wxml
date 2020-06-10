@@ -78,7 +78,7 @@
 		</scroll-view>
 	</view>
 </view>
-
+<page-load wx:else />
 <!-- 底部导航 -->
 <view class="shadow foot cu-bar tabbar bg-white">
 	<view class="action {{PageCur=='homePage'?'text-green':'text-gray'}}" bindtap="NavChange" data-cur="homePage">

@@ -71,7 +71,8 @@ function initCimg() {
                     version: '',
                     gif: '',
                     logo: '',
-                    list: []
+                    list: [],
+                    othericon:[]
                 }
                 // 判断版本号
                 if (localImg.My && obj.version == localImg.My.version) {
