@@ -1,5 +1,6 @@
+<usually wx:if="{{isShowUsu}}" typeIndex='{{usuallyData.typeIndex}}' list="{{usuallyData.list}}" titleName="{{usuallyData.titleName}}" bind:callshowChange="changePage" />
 <!-- 登录模块 -->
-<scroll-view scroll-y class="scrollPage">
+<scroll-view scroll-y wx:else class="scrollPage">
 	<button class="UCenter-bg padding-40" open-type="getUserInfo" bindgetuserinfo="onGetUserInfo">
 		<image src="{{userInfo.avatarUrl?userInfo.avatarUrl:My.logo}}" class="{{userInfo.avatarUrl?'png':''}}" mode="widthFix"></image>
 		<view class="text-xl">{{userInfo.nickName?userInfo.nickName:'游客'}}
@@ -10,7 +11,7 @@
 		<image src="{{My.gif}}" mode="scaleToFill" class="gif-wave"></image>
 	</button>
 	<!-- 粉丝关注收藏 -->
-	<view class="padding flex text-center text-grey bg-white shadow-warp">
+	<view class="padding flex text-center text-grey bg-white shadow-warp" style="box-shadow: 0 0 20rpx #ddd;">
 		<view class="flex flex-sub flex-direction solid-right">
 			<view class="text-xxl text-orange">{{fansCount}}</view>
 			<view class="margin-top-xs">
@@ -29,8 +30,8 @@
 	</view>
 
 	<!-- 宫格列表 -->
-	<view class="contain_box margin-top-sm radius" wx:key="index">
-		<view class="fun_box" wx:for="{{My.list}}" wx:key="index">
+	<view class="contain_box radius" wx:key="index" style="margin: 30rpx;">
+		<view class="fun_box" wx:for="{{My.list}}" wx:key="index" bindtap="fun_box" data-myindex="{{index}}" data-myname="{{item.name}}">
 			<image class="fun_box_icon" src="{{item.icon}}" mode="widthFix"></image>
 			<text class="txt_1">{{item.name}}</text>
 		</view>
@@ -38,7 +39,7 @@
 
 
 	<!-- 设置部分 -->
-	<view class="cu-list menu card-menu margin-top-sm margin-bottom-xl shadow-lg radius">
+	<view class="cu-list menu card-menu shadow-lg radius orther">
 		<view class="cu-item arrow">
 			<view class="content" bindtap="CopyLink" data-link="https://github.com/weilanwl/ColorUI">
 				<text class="cuIcon-github text-grey"></text>

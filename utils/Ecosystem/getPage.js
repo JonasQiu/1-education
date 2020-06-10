@@ -294,5 +294,6 @@ module.exports = {
     isLike,
     FixUserType,
     fixComments,
-    getEcoByOrg
+    getEcoByOrg,
+    FixAll
 }

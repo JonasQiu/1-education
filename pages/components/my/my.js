@@ -1,6 +1,8 @@
 // components/my/my.js
-let commonLogin = require("../../../utils/User/Login")
+const commonLogin = require("../../../utils/User/Login")
 const comCimg = require("../../../utils/Func/loadCimg")
+const comFunBox = require('../../../utils/Func/FunBox')
+
 Component({
   //  组件的属性列表
   properties: {
@@ -13,6 +15,12 @@ Component({
     attentionCount: 0,
     collectionCount: 0,
     fansCount: 0,
+    isShowUsu: false,
+    usuallyData: {
+      typeIndex: 0,
+      list: [],
+      titleName: ""
+    }
   },
   created() {
     wx.showLoading({
@@ -76,12 +84,16 @@ Component({
     },
     //获取用户信息，进行登录处理
     onGetUserInfo(e) {
-      // if (1) return;
+      let that = this;
+      if (that.data.userInfo) {
+        wx.showToast({
+          title: '您已经登录过啦',
+        })
+        return
+      }
       wx.showLoading({
         title: '正在登录中…请稍后…',
       })
-      console.log(e.detail.userInfo)
-      const that = this;
       if (e.detail.userInfo) {
         commonLogin.Login(e.detail.userInfo).then(res => {
           that.setData({
@@ -100,5 +112,76 @@ Component({
       }
 
     },
+    fun_box(e) {
+      let that = this;
+      if (!that.data.userInfo) {
+        wx.showToast({
+          title: '请先登录哦',
+        })
+        return;
+      }
+      wx.showLoading({
+        title: '正在跳转…',
+      })
+      let showData = {
+        typeIndex: 0,
+        titleName: e.currentTarget.dataset.myname,
+        list: []
+      }
+      new Promise(async (resolve, reject) => {
+        switch (e.currentTarget.dataset.myindex) {
+          case 0:
+            showData.typeIndex = 1;
+            showData.list = await comFunBox.MyOrg(that.data.userInfo._id);
+            break;
+          case 1:
+            showData.typeIndex = 2;
+            showData.list = await comFunBox.MyPage(that.data.userInfo._id);
+            break;
+          case 2:
+            showData.typeIndex = 0;
+            showData.list = await comFunBox.MyFollow(that.data.userInfo._id);
+            break;
+          case 3:
+            showData.typeIndex = 0;
+            showData.list = await comFunBox.MyFans(that.data.userInfo._id);
+            break;
+          case 4:
+            showData.typeIndex = 2;
+            showData.list = await comFunBox.MyLikePage(that.data.userInfo._id);
+            break;
+          case 5:
+            showData.typeIndex = 1;
+            showData.list = await comFunBox.MyCollectOrg(that.data.userInfo._id);
+            break;
+          case 6:
+            return
+          case 7:
+            showData.typeIndex = 2;
+            showData.list = await comFunBox.MyHistoryPage(that.data.userInfo._id);
+            break;
+        }
+        resolve(showData)
+      }).then(res => {
+        that.setData({
+          usuallyData: res,
+          isShowUsu: true
+        })
+        wx.hideLoading()
+      }).catch(res => {
+        wx.hideLoading()
+        wx.showToast({
+          title: '刷新失败',
+        })
+      })
+
+
+    },
+    changePage() {
+      this.setData({
+        isShowUsu: false
+      })
+    }
+
   }
 })
