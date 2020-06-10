@@ -31,7 +31,7 @@
 .UCenter-bg .gif-wave {
   position: absolute;
   width: 100%;
-  bottom: 0;
+  bottom: -1rpx;
   left: 0;
   z-index: 99;
   mix-blend-mode: screen;
@@ -81,6 +81,7 @@ map,
   margin-left:30rpx ;
   margin-right: 30rpx;
   padding: 40rpx 30rpx 20rpx;
+  box-shadow: 5rpx 5rpx 10rpx #ccc
 }
 
 .fun_box {
