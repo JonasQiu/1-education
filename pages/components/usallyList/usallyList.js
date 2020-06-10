@@ -78,30 +78,38 @@ Component({
           break;
         case 1:
           p = new Promise(async (resolve, reject) => {
-            let orgList = that.data.list
-            let originList = comType.deOrgTypeList(orgList)
-            let typeList = Object.keys(originList)
-            for (let i = 0; i < orgList.length; i++) {
-              // 得到2地的距离
-              orgList[i].distance = await comLocation.getDistance(orgList[i].location.lat, orgList[i].location.lng)
-              orgList[i].showStar = parseInt(orgList[i].star)
-            }
-            let showDataList = []
-            showDataList[0] = {
-              nav: '全部',
-              list: [...orgList].sort(function (a, b) {
-                return b.star - a.star
-              })
-            }
-            for (let i = 0; i < typeList.length; i++) {
-              showDataList[i + 1] = {
-                'nav': typeList[i],
-                'list': [...originList[typeList[i]]].sort(function (a, b) {
-                  return b.star - a.star
-                })
+            wx.getLocation({
+              success: (p) => {
+                let {
+                  latitude,
+                  longitude
+                } = p
+                let orgList = that.data.list
+                let originList = comType.deOrgTypeList(orgList)
+                let typeList = Object.keys(originList)
+                for (let i = 0; i < orgList.length; i++) {
+                  // 得到2地的距离
+                  orgList[i].distance = comLocation.getDistance(latitude, longitude, orgList[i].location.lat, orgList[i].location.lng)
+                  orgList[i].showStar = parseInt(orgList[i].star)
+                }
+                let showDataList = []
+                showDataList[0] = {
+                  nav: '全部',
+                  list: [...orgList].sort(function (a, b) {
+                    return b.star - a.star
+                  })
+                }
+                for (let i = 0; i < typeList.length; i++) {
+                  showDataList[i + 1] = {
+                    'nav': typeList[i],
+                    'list': [...originList[typeList[i]]].sort(function (a, b) {
+                      return b.star - a.star
+                    })
+                  }
+                }
+                resolve(showDataList)
               }
-            }
-            resolve(showDataList)
+            })
           });
           break;
         case 2:
@@ -129,6 +137,8 @@ Component({
         that.setData({
           dataList: res
         })
+        wx.hideLoading()
+      }).catch(res => {
         wx.hideLoading()
       })
     },

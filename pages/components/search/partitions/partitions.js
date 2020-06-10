@@ -1,4 +1,5 @@
-const typeobj = require('../../../../utils/Type/Type')
+const comType = require('../../../../utils/Type/Type')
+const comFunBox = require('../../../../utils/Func/FunBox')
 Component({
   data: {
     TabCur: 0,
@@ -13,7 +14,7 @@ Component({
     });
 
     let typeList = []
-    let objType = typeobj.getType()
+    let objType = comType.getType()
     for (let key in objType) {
       let obj = {
         'id': key,
@@ -49,6 +50,25 @@ Component({
         VerticalNavTop: 0,
         goTop: 0
       })
-    }
+    },
+    chooseType(e) {
+      let that = this;
+      wx.showLoading({
+        title: '正在跳转',
+      })
+      comFunBox.TypeBox(e.currentTarget.dataset.typeid, e.currentTarget.dataset.typename).then(res => {
+        that.triggerEvent('callchangetype', {
+          usuallyData: res,
+          isShowUsu: true
+        })
+        wx.hideLoading()
+      }).catch(res => {
+        wx.hideLoading()
+        wx.showToast({
+          title: '跳转失败！',
+        })
+      })
+    },
+
   }
 })

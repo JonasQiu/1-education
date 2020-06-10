@@ -17,7 +17,7 @@
 			<view class='bg-white'>
 				<text class='cuIcon-title text-green first-floor'>{{item.name}}</text>
 				<view class="second-floor">
-					<view class="item" wx:for="{{item.list}}" wx:key="index" wx:for-item="twoItem" data-typeId="{{twoItem.id}}">
+					<view class="item" wx:for="{{item.list}}" wx:key="index" wx:for-item="twoItem" data-typeid="{{twoItem.id}}" data-typename="{{twoItem.name}}" bindtap="chooseType">
 						<text>{{twoItem.name}}</text>
 					</view>
 				</view>

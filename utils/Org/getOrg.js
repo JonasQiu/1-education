@@ -60,7 +60,7 @@ function getTypeOrg(TypeId) {
             if (res.data.length > 0) {
                 resolve(isCollect(res.data))
             } else {
-                reject([])
+                resolve([])
             }
         }).catch(res => {
             reject([])

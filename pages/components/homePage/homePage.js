@@ -79,7 +79,6 @@ Component({
           HomePageInfo: res.data.HomePageInfo,
           orgAllList: resOrgList
         })
-        console.log(that.data.orgAllList)
         // 得到不同类的组织list
         const typeAllListObj = {
           "全部": that.data.orgAllList,

@@ -6,9 +6,10 @@ const comOrg = require('../Org/getOrg')
 module.exports = {
     Box,
     MyOrg,
-    MyPage,
-    MyFollow,
     MyFans,
+    MyPage,
+    TypeBox,
+    MyFollow,
     MyLikePage,
     MyCollectOrg,
     MyHistoryPage,
@@ -140,5 +141,15 @@ function Box(index, name) {
                 break;
         }
         resolve(showData)
+    })
+}
+
+function TypeBox(typeId, name) {
+    return new Promise(async (resolve, reject) => {
+        resolve({
+            typeIndex: 1,
+            titleName: name,
+            list: await comOrg.getTypeOrg(typeId)
+        })
     })
 }
