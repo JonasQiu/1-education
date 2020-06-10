@@ -7,7 +7,7 @@
 		<view class="m-10">
 			<text>{{userInfo._id?'已登录':'未登录'}}</text>
 		</view>
-		<image src="My.gif" mode="scaleToFill" class="gif-wave"></image>
+		<image src="{{My.gif}}" mode="scaleToFill" class="gif-wave"></image>
 	</button>
 	<!-- 粉丝关注收藏 -->
 	<view class="padding flex text-center text-grey bg-white shadow-warp">

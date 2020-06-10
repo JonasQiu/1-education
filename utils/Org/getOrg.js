@@ -24,6 +24,7 @@ function getOrgList(startNum, Num) {
                 })
             }
         }).catch(res => {
+            console.log(res)
             reject({
                 orgList: [],
                 isBottom: true
@@ -45,6 +46,7 @@ function getOrg(orgId) {
                 reject({})
             }
         }).catch(res => {
+            console.log(res)
             reject({})
         })
     })

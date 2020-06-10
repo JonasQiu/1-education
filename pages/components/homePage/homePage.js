@@ -102,6 +102,7 @@ Component({
       //   res.orgList[j].showStar = parseInt(res.orgList[j].star)
       // }
       // console.log(res.orgList);
+      console.log(res)
       this.setData({
         orgAllList: res.orgList
       })
