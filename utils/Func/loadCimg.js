@@ -48,7 +48,9 @@ function initCimg() {
                     version: '',
                     gif: '',
                     logo: '',
+                    list: []
                 }
+                // 判断版本号
                 if (localImg.My && obj.version == localImg.My.version) {
                     // 无需更新
                     resObj = localImg.My
@@ -83,6 +85,28 @@ function initCimg() {
                             }
                         })
                     })
+                    for (let i = 0; i < obj.list.length; i++) {
+                        obj.list[i]['p'] = new Promise(async (resolve, reject) => {
+                            let temp = await wx.cloud.downloadFile({
+                                fileID: obj.list[i]['icon']
+                            })
+                            wx.saveFile({
+                                tempFilePath: temp.tempFilePath,
+                                success(res_save) {
+                                    resolve(res_save.savedFilePath)
+                                },
+                                fail(res) {
+                                    reject(res)
+                                }
+                            })
+                        })
+                    }
+                    for (let i = 0; i < obj.list.length; i++) {
+                        resObj.list[i] = {
+                            'icon': await obj.list[i]['p'],
+                            'name': obj.list[i]['name']
+                        }
+                    }
                 }
                 resolve(resObj)
             }),
@@ -99,7 +123,7 @@ function initCimg() {
 function getHomePageSwiper() {
     let localImg = wx.getStorageSync('localImg')
     if (localImg.HomePageSwiper) {
-        return localImg.HomePageSwiper.list
+        return localImg.HomePageSwiper
     } else {
         return []
     }
@@ -108,10 +132,7 @@ function getHomePageSwiper() {
 function getMy() {
     let localImg = wx.getStorageSync('localImg')
     if (localImg.My) {
-        return {
-            gif: localImg.My.gif,
-            logo: localImg.My.logo
-        }
+        return localImg.My
     } else {
         return {}
     }

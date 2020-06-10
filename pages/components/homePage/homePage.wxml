@@ -32,7 +32,7 @@
 		</swiper>
 		<!-- 功能列表 -->
 		<view class="contain_box" wx:key="index">
-			<view class="fun_box" wx:for="{{FunList}}" wx:key="index">
+			<view class="fun_box" wx:for="{{HomePageInfo.list}}" wx:key="index">
 				<image class="fun_box_icon" src="{{item.icon}}" mode="widthFix"></image>
 				<text class="txt_1">{{item.name}}</text>
 			</view>

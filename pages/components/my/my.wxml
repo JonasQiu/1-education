@@ -1,13 +1,13 @@
 <!-- 登录模块 -->
 <scroll-view scroll-y class="scrollPage">
 	<button class="UCenter-bg padding-40" open-type="getUserInfo" bindgetuserinfo="onGetUserInfo">
-		<image src="{{userInfo.avatarUrl}}" class="{{userInfo._id?'png':''}}" mode="widthFix"></image>
+		<image src="{{userInfo.avatarUrl?userInfo.avatarUrl:My.logo}}" class="{{userInfo.avatarUrl?'png':''}}" mode="widthFix"></image>
 		<view class="text-xl">{{userInfo.nickName?userInfo.nickName:'游客'}}
 		</view>
 		<view class="m-10">
 			<text>{{userInfo._id?'已登录':'未登录'}}</text>
 		</view>
-		<image src="cloud://education-1hoqw.6564-education-1hoqw-1302178671/something/wave.gif" mode="scaleToFill" class="gif-wave"></image>
+		<image src="My.gif" mode="scaleToFill" class="gif-wave"></image>
 	</button>
 	<!-- 粉丝关注收藏 -->
 	<view class="padding flex text-center text-grey bg-white shadow-warp">
@@ -27,10 +27,10 @@
 				<text class="cuIcon-favorfill"></text> 收藏</view>
 		</view>
 	</view>
-	
+
 	<!-- 宫格列表 -->
 	<view class="contain_box margin-top-sm radius" wx:key="index">
-		<view class="fun_box" wx:for="{{FunList}}" wx:key="index">
+		<view class="fun_box" wx:for="{{My.list}}" wx:key="index">
 			<image class="fun_box_icon" src="{{item.icon}}" mode="widthFix"></image>
 			<text class="txt_1">{{item.name}}</text>
 		</view>
@@ -47,7 +47,7 @@
 		</view>
 		<view class="cu-item arrow">
 			<navigator class="content" url="/pages/about/about/about" hover-class="none">
-				<image src="/images/logo.png" class="png" mode="aspectFit"></image>
+				<image src="{{My.logo}}" class="png" mode="aspectFit"></image>
 				<text class="text-grey">关于ColorUI组件库</text>
 			</navigator>
 		</view>

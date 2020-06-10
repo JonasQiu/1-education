@@ -1,5 +1,6 @@
 // components/my/my.js
 let commonLogin = require("../../../utils/User/Login")
+const comCimg = require("../../../utils/Func/loadCimg")
 Component({
   //  组件的属性列表
   properties: {
@@ -8,40 +9,10 @@ Component({
 
   // 组件的初始数据
   data: {
-    //登录部分
-    userInfo: {
-      avatarUrl: 'cloud://education-1hoqw.6564-education-1hoqw-1302178671/something/logo.png'
-    },
     //关注 收藏 粉丝数部分
     attentionCount: 0,
     collectionCount: 0,
     fansCount: 0,
-    // 宫格列表
-    FunList: [  {
-      icon: "cloud://education-1hoqw.6564-education-1hoqw-1302178671/something/关注.png",
-      name: '我的关注'
-    }, {
-      icon: "cloud://education-1hoqw.6564-education-1hoqw-1302178671/something/阅读,文章.png",
-      name: '我的文章'
-    }, {
-      icon: "cloud://education-1hoqw.6564-education-1hoqw-1302178671/something/我的粉丝.png",
-      name: '我的粉丝'
-    }, {
-      icon: "cloud://education-1hoqw.6564-education-1hoqw-1302178671/something/机构建筑.png",
-      name: '我的机构'
-    }, {
-      icon: "cloud://education-1hoqw.6564-education-1hoqw-1302178671/something/历史.png",
-      name: '历史记录'
-    }, {
-      icon: "cloud://education-1hoqw.6564-education-1hoqw-1302178671/something/文章.png",
-      name: '收藏文章'
-    }, {
-      icon: "cloud://education-1hoqw.6564-education-1hoqw-1302178671/something/分享.png",
-      name: '分享有礼'
-    }, {
-      icon: "cloud://education-1hoqw.6564-education-1hoqw-1302178671/something/机构认证.png",
-      name: '收藏机构'
-    }],
   },
   created() {
     wx.showLoading({
@@ -54,6 +25,9 @@ Component({
   //组件初始化处理
   attached() {
     const that = this;
+    that.setData({
+      My: comCimg.getMy()
+    })
     wx.getStorage({
       key: 'userInfo',
       success(res) {

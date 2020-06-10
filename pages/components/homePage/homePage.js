@@ -1,6 +1,6 @@
 const comOrg = require('../../../utils/Org/getOrg')
 const comType = require("../../../utils/Type/Type")
-
+const comCimg = require("../../../utils/Func/loadCimg")
 Component({
   /**
    * 组件的属性列表
@@ -32,32 +32,6 @@ Component({
     }, {
       src: 'cuIcon-redpacket',
       name: '红包/卡卷'
-    }],
-    // 宫格列表——第一导航
-    FunList: [{
-      icon: "cloud://education-1hoqw.6564-education-1hoqw-1302178671/something/小学.png",
-      name: '小学'
-    }, {
-      icon: "cloud://education-1hoqw.6564-education-1hoqw-1302178671/something/初中.png",
-      name: '初中'
-    }, {
-      icon: "cloud://education-1hoqw.6564-education-1hoqw-1302178671/something/高中fix.png",
-      name: '高中'
-    }, {
-      icon: "cloud://education-1hoqw.6564-education-1hoqw-1302178671/something/考研培训fix.png",
-      name: '考研培训'
-    }, {
-      icon: "cloud://education-1hoqw.6564-education-1hoqw-1302178671/something/职场培训.png",
-      name: '职场培训'
-    }, {
-      icon: "cloud://education-1hoqw.6564-education-1hoqw-1302178671/something/兴趣培养.png",
-      name: '兴趣培养'
-    }, {
-      icon: "cloud://education-1hoqw.6564-education-1hoqw-1302178671/something/竞赛培训.png",
-      name: '竞赛培训'
-    }, {
-      icon: "cloud://education-1hoqw.6564-education-1hoqw-1302178671/something/心理咨询.png",
-      name: '心理咨询'
     }],
     // 轮播图列表
     cardCur: 0,
@@ -140,7 +114,10 @@ Component({
         orgList: this.data.typeAllList[0]
       })
       this.touchBottom()
-    }).catch()
+    })
+    this.setData({
+      HomePageInfo: comCimg.getHomePageSwiper()
+    })
   },
   /**
    * 组件的方法列表

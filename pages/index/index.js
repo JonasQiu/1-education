@@ -3,6 +3,7 @@ const app = getApp()
 let userInfo = {};
 const comAsk = require('../../utils/Func/ask')
 const comTime = require('../../utils/Func/time')
+const comCimg = require("../../utils/Func/loadCimg")
 
 Page({
   data: {
@@ -25,7 +26,8 @@ Page({
     roomObj: {},
     inpValue: '',
     chatChunkHeight: 0,
-    scrollTop: 0
+    scrollTop: 0,
+    isLoadData: false
   },
 
   //////////////////////////////////
@@ -188,6 +190,20 @@ Page({
   // 加载页面立刻执行
   onLoad: function () {
     let that = this;
+    wx.showLoading({
+      title: '正在获取数据',
+    })
+    comCimg.initCimg().then(res => {
+      that.setData({
+        isLoadData: true
+      })
+      wx.hideLoading()
+    }).catch(res => {
+      wx.showToast({
+        title: '加载数据失败',
+      })
+      wx.hideLoading()
+    })
     comAsk.getTypeList().then(res => {
       that.setData({
         askRoomName: [{
@@ -208,7 +224,7 @@ Page({
     //     chatChunkHeight: res.height || 0
     //   })
     // }).exec();
-   
+
     wx.getStorage({
       key: 'userInfo',
       success: res => {
