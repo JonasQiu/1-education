@@ -152,8 +152,8 @@
 }
 
 .item {
-  padding: 30rpx 0rpx;
-  height: 290rpx;
+  padding: 20rpx 10rpx;
+  height: 250rpx;
   display: flex;
   border: 2rpx solid rgb(241, 241, 241);
   margin: 0 auto 30rpx;
@@ -165,7 +165,7 @@
 
 .item-img {
   margin-left: 15rpx;
-  width: 230rpx;
+  width: 200rpx;
   height: 100%;
   border-radius: 50%;
 }

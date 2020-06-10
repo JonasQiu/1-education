@@ -1,6 +1,8 @@
 const comOrg = require('../../../utils/Org/getOrg')
 const comType = require("../../../utils/Type/Type")
 const comLocation = require('../../../utils/Func/location')
+const comFunBox = require('../../../utils/Func/FunBox')
+
 Component({
   /**
    * 组件的属性列表
@@ -18,6 +20,12 @@ Component({
     hotSearch: "王后雄(满1000减100)",
     TabCur: 0,
     scrollLeft: 0,
+    isShowUsu: false,
+    usuallyData: {
+      typeIndex: 0,
+      list: [],
+      titleName: ""
+    },
     // box的列表
     boxList: [{
       src: 'cuIcon-scan',
@@ -43,6 +51,14 @@ Component({
     orgListNum: 5,
     typeList: [],
     typeAllList: [],
+    swiperUrl: [
+      'GmiGh0pi9YDKSyyLLdE2gDv272h6WhapVbRMb5rtgw2DGilT',
+      'rM0lK6iLHhbeCzw7116x4jJ7DvKeZ3VIOh0m6dT42Ti0boJY',
+      'yiaBwBryu3PielTDe5ttCwu114RXjCu036TOulNLZT5TOIDr',
+      '6z1VYcMXS3Dh5yE0VKWaTgC55C4ol6y5e31KQYILWMPhlA0p',
+      'A5Qx5zWex0zvSaJjkWCZAK1stwsk9KiYGokwdt4kLngkStS8',
+      '5OKpkLYLGlwrUw3ZjVYpwFF6vTrOhqCOiKUxeEEdo7qUvh5x',
+    ]
   },
   attached(e) {
     let that = this
@@ -80,7 +96,6 @@ Component({
           orgList: that.data.typeAllList[0]
         })
         that.touchBottom()
-
       }
     })
   },
@@ -147,5 +162,35 @@ Component({
         cardCur: e.detail.current
       })
     },
+    swiperToOrg(e) {
+      wx.navigateTo({
+        url: `/pages/components/orgDetail/orgDetail?query=${this.data.swiperUrl[e.currentTarget.dataset.myindex]}`,
+      })
+    },
+    // FunBox
+    FunBox(e) {
+      let that = this;
+      wx.showLoading({
+        title: '正在跳转',
+      })
+      comFunBox.Box(e.currentTarget.dataset.myindex, e.currentTarget.dataset.myname).then(res => {
+        that.setData({
+          usuallyData: res,
+          isShowUsu: true
+        })
+        wx.hideLoading()
+      }).catch(res => {
+        wx.hideLoading()
+        wx.showToast({
+          title: '跳转失败！',
+        })
+      })
+
+    },
+    changePage() {
+      this.setData({
+        isShowUsu: false
+      })
+    }
   },
 })

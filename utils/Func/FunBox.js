@@ -4,6 +4,7 @@ const comEco = require('../Ecosystem/getPage')
 const comOrg = require('../Org/getOrg')
 
 module.exports = {
+    Box,
     MyOrg,
     MyPage,
     MyFollow,
@@ -107,4 +108,37 @@ function MyCollectOrg(Id) {
 
 function MyHistoryPage(Id) {
     return comEco.getHistoryPage()
+}
+
+function Box(index, name) {
+    return new Promise(async (resolve, reject) => {
+        let showData = {
+            typeIndex: 1,
+            titleName: name,
+            list: []
+        }
+        switch (index) {
+            case 0:
+            case 1:
+            case 2:
+                showData.list = await comOrg.searchOrg(name)
+                break;
+            case 3:
+                showData.list = (await comOrg.getOrgList(0, 20)).orgList
+                break;
+            case 4:
+                showData.list = (await comOrg.getOrgList(20, 20)).orgList
+                break;
+            case 5:
+                showData.list = (await comOrg.getOrgList(40, 20)).orgList
+                break;
+            case 6:
+                showData.list = (await comOrg.getOrgList(60, 20)).orgList
+                break;
+            case 7:
+                showData.list = (await comOrg.getOrgList(80, 20)).orgList
+                break;
+        }
+        resolve(showData)
+    })
 }
