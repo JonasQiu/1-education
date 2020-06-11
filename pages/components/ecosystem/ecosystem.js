@@ -64,7 +64,8 @@ Component({
     sendLike(e) {
       var that = this;
       let index = e.currentTarget.dataset.myindex
-      if (!wx.getStorageSync('userInfo')) {
+      let userInfo = wx.getStorageSync('userInfo')
+      if (!userInfo._id) {
         wx.showToast({
           title: '请先登录好吧',
         })
@@ -75,7 +76,7 @@ Component({
       })
       let p = that.data.EcoList[index].isLike ? comUserToEco.Unlike(that.data.EcoList[index]._id) : comUserToEco.like(that.data.EcoList[index]._id)
       p.then(res => {
-        that.fun_search()
+        that.loadData(that.data.TabCur, that.data.starNum, true)
       }).catch(res => {
         wx.hideLoading()
       })
@@ -129,6 +130,7 @@ Component({
           isLoading: false, // 加载完毕，取消正在加载状态
           isLoadData: true,
         })
+        wx.hideLoading()
       }).catch(res => {
         console.log(res)
         wx.showToast({

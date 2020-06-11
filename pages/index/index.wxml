@@ -53,7 +53,11 @@
 					<button class="cu-btn bg-green shadow" bindtap="sendMsg">发送</button>
 				</view>
 			</view>
-			<view wx:else style="position:absolute;left:41%;top:48%;font-size:40rpx;background-color:#fff;">请先登录</view>
+			<view wx:else style="position:absolute;top:48%;left:8%;font-size:40rpx;background-color:#fff;text-align:center;">
+				<view>请先登录</view>
+				<view>必须同时在同一频道下才可以聊天哦</view>
+			</view>
+
 		</view>
 
 		<!-- 点击model -->

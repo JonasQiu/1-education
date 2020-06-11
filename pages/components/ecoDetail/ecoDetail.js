@@ -188,7 +188,8 @@ Page({
       })
       return
     }
-    if (!wx.getStorageSync('userInfo')) {
+    let userInfo = wx.getStorageSync('userInfo')
+    if (!userInfo._id) {
       wx.showToast({
         title: '请先登录好吧',
       })

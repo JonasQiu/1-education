@@ -330,7 +330,7 @@ Page({
       },
       fail() {
         wx.showToast({
-          title: '加载数据失败',
+          title: '授权并打开gps',
         })
       }
     })
