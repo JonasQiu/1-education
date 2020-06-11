@@ -115,3 +115,7 @@ map,
   box-shadow: 5rpx 5rpx 10rpx #ccc;
   margin: 40rpx 30rpx 40rpx;
 }
+
+.cu-list .cu-item .content {
+  line-height: 1;
+}

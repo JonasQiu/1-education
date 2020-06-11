@@ -42,7 +42,7 @@
 	<view class="cu-list menu card-menu shadow-lg radius orther">
 		<view class="cu-item arrow" wx:for="{{My.othericon}}">
 			<view class="content" bindtap="CopyLink">
-				<image src="{{item.img}}"></image>
+				<image src="{{item.img}}" style="margin-right:30rpx"></image>
 				<text class="text-grey">{{item.name}}</text>
 			</view>
 		</view>
