@@ -1,2 +1,2 @@
 <return/>
-<map longitude="{{longitude}}" scale="19" latitude="{{latitude}}" style="height:100vh;width:100vw" id='mymap' markers="{{markers}}"></map>
+<map longitude="{{longitude}}" scale="16" latitude="{{latitude}}" style="height:100vh;width:100vw" id='mymap' markers="{{markers}}"></map>
