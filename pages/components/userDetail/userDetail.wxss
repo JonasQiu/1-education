@@ -1,13 +1,20 @@
 @import "/colorui/icon.wxss";
+@import "/colorui/main.wxss";
+
+.usua {
+  position: fixed;
+  left: 0;
+  top: 0;
+}
 
 .box {
   background-color: #fff;
-  width: 600rpx;
   position: fixed;
-  left: calc(50% - 300rpx);
-  top: 50%;
-  transform: translateY(-50%);
+  left: calc(50% - 310rpx);
+  top: calc(50% - 200rpx);
   text-align: center;
+  z-index: 2;
+  border-radius: 30rpx;
 }
 
 .info {
@@ -20,7 +27,7 @@
 .sex {
   width: 200rpx;
   height: 100%;
-  margin-top: 50rpx;
+  margin-top: 35rpx;
   font-size: 50rpx !important;
 }
 
@@ -46,22 +53,29 @@
 }
 
 .user-type {
-  width: 200rpx;
   height: 100%;
 }
 
 .name-border {
-  margin-top: 50rpx;
-  padding: 10rpx 0rpx;
+  margin: 30rpx 30rpx;
+  padding: 10rpx 20rpx;
   border: 2rpx solid rgb(250, 171, 24);
   color: rgb(250, 171, 24);
+  border-radius: 30rpx;
+  font-size: 27rpx;
+  font-weight: 300;
+  letter-spacing: 2px;
+  font-family: "Microsoft Yahei";
 }
 
 .num {
   display: flex;
   text-align: center;
   font-size: 30rpx;
-  height: 150rpx;
+  font-weight: 200;
+  letter-spacing: 2px;
+  font-family: "Microsoft Yahei";
+  margin: 20rpx;
 }
 
 .atten {
@@ -70,7 +84,7 @@
   color: red;
 }
 
-.fun {
+.fan {
   flex: 1;
   align-items: center;
   color: black;
@@ -80,4 +94,25 @@
   flex: 1;
   align-items: center;
   color: orange;
+}
+
+.mask {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background-color: #000;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  opacity: 0.3;
+}
+
+.button {
+  font-weight: 500;
+  letter-spacing: 2px;
+  font-family: "Microsoft Yahei";
+  width: 90%;
+  margin: 0 0 20rpx;
+  opacity: 0.9;
+  height: 70rpx !important;
 }

@@ -1,26 +1,29 @@
-<view class="box">
+<view class="box" wx:if="{{userInfoObj}}">
 	<view class="info">
-		<view class="sex {{userInfoObj.sex?'cuIcon-male text-red':'cuIcon-female text-pink'}}"></view>
+		<view class="sex {{userInfoObj.gender!=0?'cuIcon-male text-blue':'cuIcon-female text-pink'}}"></view>
 		<view class="avatar">
 			<image src="{{userInfoObj.avatarUrl}}" class="avatar-img"></image>
 			<view class="name">{{userInfoObj.nickName}}</view>
 		</view>
 		<view class="user-type">
-			<view class="name-border">{{userInfoObj.userType==0?'普通用户':userInfoObj.userType==1?'机构':'专业人士'}}</view>
+			<view class="name-border">{{showType}}</view>
 		</view>
 	</view>
 	<view class="num">
-		<view class="atten">
+		<view class="atten" bindtap="goFollowList">
 			<view>关注数</view>
 			<view>{{userInfoObj.myFollow.length}}</view>
 		</view>
-		<view class="fun">
+		<view class="fan" bindtap="goFanList">
 			<view>粉丝数</view>
 			<view>{{userInfoObj.myFans.length}}</view>
 		</view>
-		<view class="acti">
+		<view class="acti" bindtap="goPageList">
 			<view>文章数</view>
 			<view>{{userInfoObj.myArticle.length}}</view>
 		</view>
 	</view>
+	<button class="cu-btn round bg-blue shadow button" role="button" aria-disabled="false" bindtap="follow">{{userInfoObj.isMyFollow?'取消关注':'关注'}}</button>
+	<button class="cu-btn round bg-black shadow button" role="button" aria-disabled="false" bindtap="byebye">{{bye?'取消拉黑':'拉黑'}}</button>
 </view>
+<view class='mask' bindtap="exit"></view>

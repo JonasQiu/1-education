@@ -35,6 +35,7 @@ Page({
     commentHeight: 0,
     commentValue: '',
     isAppre: true,
+    showUserInfo: false,
     Loading: {
       like: false,
       likeComment: false,
@@ -43,6 +44,11 @@ Page({
     },
     scrollTop: 0,
     isShowUsu: false,
+    usuallyData: {
+      typeIndex: 0,
+      list: [],
+      titleName: ""
+    },
   },
   toggleDelay(that) {
     clearTimeout(that.timer)
@@ -71,7 +77,19 @@ Page({
   showLikeList() {
     let that = this;
     that.setData({
+      usuallyData: {
+        typeIndex: 0,
+        list: that.data.ecoObj.likeIdList,
+        titleName: "点赞的人"
+      },
       isShowUsu: !that.data.isShowUsu
+    })
+  },
+  // 展示用户信息详情列表
+  showUserInfoFun() {
+    let that = this;
+    that.setData({
+      showUserInfo: that.data.showUserInfo ? '' : that.data.ecoObj.userInfo
     })
   },
   onShareAppMessage(options) {
