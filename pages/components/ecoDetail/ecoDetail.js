@@ -36,6 +36,7 @@ Page({
     commentValue: '',
     isAppre: true,
     showUserInfo: false,
+    focusComment: false,
     Loading: {
       like: false,
       likeComment: false,
@@ -67,8 +68,6 @@ Page({
     let that = this
     that.loadData(options.ecoId, true)
     comUTE.read(options.ecoId)
-
-
   },
   // 展示更多点赞
   showLikeList() {
@@ -167,10 +166,9 @@ Page({
   },
   commentNavi() {
     this.setData({
-      scrollTop: this.data.commentHeight,
+      focusComment: true,
     })
   },
-
   //分享
   share() {
     this.onShareAppMessage()

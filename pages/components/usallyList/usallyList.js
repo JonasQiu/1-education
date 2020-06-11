@@ -112,7 +112,7 @@ Component({
           break;
         case 2:
           p = new Promise(async (resolve, reject) => {
-            let ecoList = comEco.FixUserType(await comEco.fixLikeUser(that.data.list))
+            let ecoList = comEco.FixUserType(await comEco.fixLikeUser(await comEco.reLoadPageList(that.data.list)))
             resolve([{
               nav: '最新',
               list: [...ecoList].sort(function (a, b) {
@@ -199,7 +199,8 @@ Component({
     // ECO 生态圈
     sendLike(e) {
       var that = this;
-      if (!wx.getStorageSync('userInfo')) {
+      let userInfo = wx.getStorageSync('userInfo')
+      if (!userInfo._id) {
         wx.showToast({
           title: '请先登录好吧',
         })
@@ -211,6 +212,7 @@ Component({
       let index = e.currentTarget.dataset.myindex
       let p = that.data.dataList[that.data.TabCur]['list'][index].isLike ? comUserToEco.Unlike(that.data.dataList[that.data.TabCur]['list'][index]._id) : comUserToEco.like(that.data.dataList[that.data.TabCur]['list'][index]._id)
       p.then(res => {
+        console.log(res);
         that.LoadData()
       }).catch(res => {
         wx.hideLoading()

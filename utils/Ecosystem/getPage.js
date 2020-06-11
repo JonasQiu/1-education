@@ -220,14 +220,15 @@ function fixTime(ecoList) {
 function fixLikeUser(ecoList) {
     return new Promise((resolve, reject) => {
         let pList = []
-        for (let i = 0; i < ecoList.length; i++) {
-            pList[i] = comFunUser.getInfoList(ecoList[i].likes)
+        let list = [...ecoList]
+        for (let i = 0; i < list.length; i++) {
+            pList[i] = comFunUser.getInfoList(list[i].likes)
         }
         (async () => {
             for (let i = 0; i < pList.length; i++) {
-                ecoList[i].likes = (await pList[i])
+                list[i].likes = (await pList[i])
             }
-            resolve(ecoList)
+            resolve(list)
         })()
     })
 }
@@ -283,6 +284,19 @@ function getEcoByOrg(orgId) {
     })
 }
 
+function reLoadPageList(pageList) {
+    return new Promise(async (resolve, reject) => {
+        let p = []
+        for (let i = 0; i < pageList.length; i++) {
+            p.push(getPage(pageList[i]._id))
+        }
+        for (let i = 0; i < p.length; i++) {
+            pageList[i] = await p[i]
+        }
+        resolve(pageList)
+    })
+}
+
 module.exports = {
     getPage,
     getPageList,
@@ -295,5 +309,6 @@ module.exports = {
     FixUserType,
     fixComments,
     getEcoByOrg,
-    FixAll
+    FixAll,
+    reLoadPageList
 }
