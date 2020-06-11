@@ -52,6 +52,9 @@ Page({
   },
   sendUserMsg(e) {
     let that = this;
+    this.setData({
+      InputBottom: 0,
+    })
     if (e.detail.value.trim() == '') {
       wx.showToast({
         title: '提交消息不能为空哦',
@@ -93,8 +96,22 @@ Page({
     })
   },
   getInputValue(e) {
+    if (this.data.lastValue == e.detail.value) {
+      // 清空 inputValue
+      this.setData({
+        lastValue: ''
+      })
+    } else {
+      this.setData({
+        inpValue: e.detail.value
+      })
+    }
+    this.data.lastValue = e.detail.value
+  },
+  InputBlur(e) {
     this.setData({
-      inpValue: e.detail.value
+      // inpValue: '',
+      InputBottom: 0,
     })
   },
   // 选取图片发送
@@ -119,7 +136,6 @@ Page({
               msgType: 1,
               time: Date.now(),
             })
-            console.log(res.fileID)
             comAsk.sendMessages(that.data.roomObj.userId, msg, function () {
               wx.showToast({
                 title: '发送成功',
@@ -224,10 +240,13 @@ Page({
         title: '发送失败:' + error,
       })
     })
+    console.log(this.data.inpValue)
     this.setData({
+      InputBottom: 0,
       inpValue: '',
       scrollTop: this.data.chatChunkHeight
     })
+    console.log(this.data.inpValue)
   },
   //点击后，图片进行预览
   showImg(e) {
