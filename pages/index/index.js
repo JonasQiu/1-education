@@ -107,12 +107,11 @@ Page({
       })
     }
     this.data.lastValue = e.detail.value
-    console.log(this.data.inpValue)
   },
   InputBlur(e) {
     this.setData({
       // inpValue: '',
-      // InputBottom: 0,
+      InputBottom: 0,
     })
   },
   // 选取图片发送
