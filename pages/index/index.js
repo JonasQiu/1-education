@@ -174,8 +174,6 @@ Page({
   receiveMessages(msg) {
     let obj = JSON.parse(msg.content)
     let time = new Date()
-    // time.setDate(time.now())
-    // time.getHours()
     obj.showTime = time.getHours() + ":" + time.getMinutes()
     // 添加到聊天列表
     this.data.msgList.push(obj)

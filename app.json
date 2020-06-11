@@ -15,8 +15,7 @@
     "pages/components/orgDetail/lesson/lesson",
     "pages/components/orgDetail/teacher/teacher",
     "pages/components/ecoDetail/ecoDetail",
-    "pages/components/usallyList/usallyList",
-    "pages/components/askWindow/askWindow"
+    "pages/components/usallyList/usallyList"
   ],
   "window": {
     "backgroundTextStyle": "light",
