@@ -101,11 +101,12 @@ Page({
       this.setData({
         lastValue: ''
       })
+    } else {
+      this.setData({
+        inpValue: e.detail.value
+      })
     }
     this.data.lastValue = e.detail.value
-    this.setData({
-      inpValue: e.detail.value
-    })
     console.log(this.data.inpValue)
   },
   InputBlur(e) {
