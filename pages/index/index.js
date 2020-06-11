@@ -92,10 +92,8 @@ Page({
       InputBottom: e.detail.height - 69
     })
   },
-  // 获取输入数据
-  InputBlur(e) {
+  getInputValue(e) {
     this.setData({
-      InputBottom: 0,
       inpValue: e.detail.value
     })
   },
@@ -153,8 +151,6 @@ Page({
             wx.hideLoading()
           }
         })
-
-        // 触发sendmsg函数
       }
     })
   },
