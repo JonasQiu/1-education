@@ -66,12 +66,8 @@ Page({
   onLoad: function (options) {
     let that = this
     that.loadData(options.ecoId, true)
-    // 得到评论区块距离顶部的高度
-    wx.createSelectorQuery().select('.comment').boundingClientRect(function (res) {
-      that.setData({
-        commentHeight: res.top
-      })
-    }).exec();
+    comUTE.read(options.ecoId)
+
 
   },
   // 展示更多点赞
@@ -149,6 +145,13 @@ Page({
           }]
           showData.isLoadData = true
           that.setData(showData)
+          // 得到评论区块距离顶部的高度
+          wx.createSelectorQuery().select('.comment').boundingClientRect(function (res) {
+            console.log(res);
+            that.setData({
+              commentHeight: res.top
+            })
+          }).exec();
         }).catch(res => {
           // 异常报错
           console.log(res)
