@@ -61,7 +61,7 @@ Component({
       }
       if (myUserInfo._id == that.data.userInfoObj._id) {
         wx.showToast({
-          title: '你不能关注你自己',
+          title: '你不能关注自己',
         })
         return
       }
@@ -87,9 +87,9 @@ Component({
     },
     byebye() {
       let myUserInfo = wx.getStorageSync('userInfo')
-      if (myUserInfo._id == that.data.userInfoObj._id) {
+      if (myUserInfo._id == this.data.userInfoObj._id) {
         wx.showToast({
-          title: '你不能拉黑你自己',
+          title: '你不能拉黑自己',
         })
         return
       }

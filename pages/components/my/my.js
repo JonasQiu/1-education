@@ -99,6 +99,9 @@ Component({
           that.setData({
             userInfo: res,
           })
+          wx.redirectTo({
+            url: '/pages/index/index',
+          })
           wx.hideLoading();
           that.numDH(0)
         })

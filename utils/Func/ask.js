@@ -10,6 +10,11 @@ function getTypeList() {
             let userInfo = wx.getStorageSync('userInfo')
             if (userInfo) {
                 let infoList = []
+                infoList.push({
+                    name: "默认大厅",
+                    // avatarImg: "/image/logo.png",
+                    userId: "wtl"
+                })
                 comFunUser.getInfoList(userInfo.myFollow).then(res => {
                     for (let i = 0; i < res.length; i++) {
                         infoList.push({

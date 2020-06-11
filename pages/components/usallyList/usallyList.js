@@ -164,10 +164,14 @@ Component({
     },
     // 是否展示用户信息
     isShow(e) {
-      this.setData({
-        isShowUser: e.currentTarget.dataset.show
-      })
-      console.log(this.data.isShowUser)
+      let that = this
+      let data = {
+        isShowUser: !that.data.isShowUser
+      }
+      if (e.currentTarget.dataset.myid) {
+        data.showId = e.currentTarget.dataset.myid
+      }
+      this.setData(data)
     },
     naviToDetail(e) {
       let url;

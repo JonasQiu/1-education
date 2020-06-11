@@ -159,6 +159,9 @@ Component({
     tabSelect(e) {
       this.data.orgReallyList = []
       this.setData({
+        toggleDelay: false
+      })
+      this.setData({
         orgListStart: 0,
         orgListEnd: 5,
         TabCur: e.currentTarget.dataset.id,

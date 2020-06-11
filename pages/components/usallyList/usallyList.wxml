@@ -18,9 +18,8 @@
 		<view class="{{typeIndex!=2?'item':'eco-nav'}} {{toggleDelay?'animation-slide-bottom':''}}" wx:for="{{dataList[TabCur].list}}" wx:key="index" style="animation-delay: {{(index+1)*0.2}}s;" style="padding:25rpx">
 			<!-- 用户 -->
 			<block wx:if="{{typeIndex==0}}">
-				<view class="userInfo"></view>
-				<image src='{{item.avatarUrl}}' class="avatarUrl" bindtap="isShow" data-show="true"></image>
-				<view class="info2">
+				<image src='{{item.avatarUrl}}' class="avatarUrl" catchtap="isShow" data-myid="{{item._id}}"></image>
+				<view class="info2" catchtap="isShow" data-myid="{{item._id}}">
 					<view class="info3">
 						<text class="nickName">{{item.nickName}}</text>
 						<text class="fixUserType">{{item.fixUserType}}</text>
@@ -32,10 +31,7 @@
 					</view>
 				</view>
 			</block>
-			<!-- 用户信息展示 -->
-			<view wx:if="{{isShowUser}}" class="modal" bindtap="isShow" data-show="false">
-				<user-detail userId="{{item._id}}" />
-			</view>
+
 
 			<!-- 机构 -->
 			<block wx:if="{{typeIndex==1}}">
@@ -83,7 +79,8 @@
 			</block>
 		</view>
 	</view>
-
+	<!-- 用户信息展示 -->
+	<user-detail userId="{{showId}}" wx:if="{{isShowUser}}" bind:callshowUserInfoFun="isShow" />
 	<!-- 回到顶部，内容有wxml的html、wcss的css、js中的goTop数据用于scroll的scroll-top属性和事件 -->
 	<view class="goTop" bindtap="goTop">
 		<text class="cuIcon-top text-white"></text>

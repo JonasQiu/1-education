@@ -50,6 +50,43 @@ Page({
       scrollLeft: (e.currentTarget.dataset.id - 1) * 60
     })
   },
+  sendUserMsg(e) {
+    let that = this;
+    if (e.detail.value.trim() == '') {
+      wx.showToast({
+        title: '提交消息不能为空哦',
+      })
+    } else {
+      wx.showLoading({
+        title: '正在提交中…',
+      })
+      let msg = JSON.stringify({
+        userId: that.data.myUserInfo._id,
+        userAvatar: that.data.myUserInfo.avatarUrl,
+        userName: that.data.myUserInfo.nickName,
+        msgContent: e.detail.value,
+        msgType: 0,
+        time: Date.now(),
+      })
+      comAsk.sendMessages(that.data.roomObj.userId, msg, function () {
+        wx.showToast({
+          title: '发送成功',
+        })
+        that.setData({
+          inpValue: '',
+          scrollTop: that.data.chatChunkHeight
+        })
+      }, function (error) {
+        wx.showToast({
+          title: '发送失败:' + error,
+        })
+        that.setData({
+          inpValue: '',
+          scrollTop: that.data.chatChunkHeight
+        })
+      })
+    }
+  },
   InputFocus(e) {
     this.setData({
       InputBottom: e.detail.height - 69
@@ -64,11 +101,39 @@ Page({
   },
   // 选取图片发送
   choosePhoto(e) {
+    const that = this
     wx.chooseImage({
       count: 1,
       success(res) {
         // const tempFilePaths = res.tempFilePaths
-        console.log(wx.getFileSystemManager().readFileSync(res.tempFilePaths[0], "base64"))
+        wx.showLoading({
+          title: '正在提交中…',
+        })
+        let msg = JSON.stringify({
+          userId: that.data.myUserInfo._id,
+          userAvatar: that.data.myUserInfo.avatarUrl,
+          userName: that.data.myUserInfo.nickName,
+          msgContent: `data:image/jpg;base64,${wx.getFileSystemManager().readFileSync(res.tempFilePaths[0], "base64")}`,
+          msgType: 1,
+          time: Date.now(),
+        })
+        comAsk.sendMessages(that.data.roomObj.userId, msg, function () {
+          wx.showToast({
+            title: '发送成功',
+          })
+          that.setData({
+            inpValue: '',
+            scrollTop: that.data.chatChunkHeight
+          })
+        }, function (error) {
+          wx.showToast({
+            title: '发送失败:' + error,
+          })
+          that.setData({
+            inpValue: '',
+            scrollTop: that.data.chatChunkHeight
+          })
+        })
         // 触发sendmsg函数
       }
     })
@@ -94,6 +159,7 @@ Page({
       }
     }
     comAsk.subscribeMessage(roominfo.userId, that.receiveMessages, function () {
+      wx.setStorageSync('curChat', roominfo)
       wx.hideLoading()
       // 关闭左侧栏，将房间信息保存，清空聊天窗口记录，清空输入框
       that.setData({
@@ -186,6 +252,14 @@ Page({
     this.setData({
       PageCur: e.currentTarget.dataset.cur
     })
+    let curChat = wx.getStorageSync('curChat')
+    if (e.currentTarget.dataset.cur == 'ask' && comAsk.IsOnline()) {
+      if (!curChat) {
+        curChat = this.data.askRoomName[0]['list'][0]
+      }
+      console.log(curChat);
+      this.loadChat(curChat)
+    }
   },
   // 加载页面立刻执行
   onLoad: function () {
@@ -198,19 +272,17 @@ Page({
         } = res2
         new Promise(async (resolve, reject) => {
           let pCimg = comCimg.initCimg()
-          let pOrgList = comOrg.getOrgList(0, 115)
-          let orgList = (await pOrgList).orgList
+          let orgList = (await comOrg.getOrgList(0, 115)).orgList
           for (let j = 0; j < orgList.length; j++) {
             // 得到2地的距离
             orgList[j].showStar = parseInt(orgList[j].star)
             orgList[j].distance = comLocation.getDistance(latitude, longitude, orgList[j].location.lat, orgList[j].location.lng)
           }
+          await pCimg
           wx.setStorageSync('homePageData', {
             HomePageInfo: comCimg.getHomePageSwiper(),
             allList: orgList
           })
-
-          await pCimg
           that.setData({
             isLoadData: true
           })

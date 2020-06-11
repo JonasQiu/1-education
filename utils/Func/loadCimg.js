@@ -70,9 +70,8 @@ function initCimg() {
                 let resObj = {
                     version: '',
                     gif: '',
-                    logo: '',
                     list: [],
-                    othericon:[]
+                    othericon: []
                 }
                 // 判断版本号
                 if (localImg.My && obj.version == localImg.My.version) {
@@ -84,20 +83,6 @@ function initCimg() {
                     resObj['gif'] = await new Promise(async (resolve, reject) => {
                         let temp = await wx.cloud.downloadFile({
                             fileID: obj['gif']
-                        })
-                        wx.saveFile({
-                            tempFilePath: temp.tempFilePath,
-                            success(res_save) {
-                                resolve(res_save.savedFilePath)
-                            },
-                            fail(res) {
-                                reject(res)
-                            }
-                        })
-                    })
-                    resObj['logo'] = await new Promise(async (resolve, reject) => {
-                        let temp = await wx.cloud.downloadFile({
-                            fileID: obj['logo']
                         })
                         wx.saveFile({
                             tempFilePath: temp.tempFilePath,

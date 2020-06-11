@@ -2,7 +2,7 @@
 <!-- 登录模块 -->
 <scroll-view scroll-y wx:else class="scrollPage">
 	<button class="UCenter-bg padding-40" open-type="getUserInfo" bindgetuserinfo="onGetUserInfo">
-		<image src="{{userInfo.avatarUrl?userInfo.avatarUrl:My.logo}}" class="{{userInfo.avatarUrl?'png':''}}" mode="widthFix"></image>
+		<image src="{{userInfo.avatarUrl?userInfo.avatarUrl:'/image/logo.png'}}" class="{{userInfo.avatarUrl?'png':''}}" mode="widthFix"></image>
 		<view class="text-xl">{{userInfo.nickName?userInfo.nickName:'游客'}}
 		</view>
 		<view class="m-10">
