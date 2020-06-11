@@ -109,31 +109,51 @@ Page({
         wx.showLoading({
           title: '正在提交中…',
         })
-        let msg = JSON.stringify({
-          userId: that.data.myUserInfo._id,
-          userAvatar: that.data.myUserInfo.avatarUrl,
-          userName: that.data.myUserInfo.nickName,
-          msgContent: `data:image/jpg;base64,${wx.getFileSystemManager().readFileSync(res.tempFilePaths[0], "base64")}`,
-          msgType: 1,
-          time: Date.now(),
+        wx.cloud.uploadFile({
+          cloudPath: "chatImg/" + Date.now() + '.png', // 上传至云端的路径
+          filePath: res.tempFilePaths[0], // 小程序临时文件路径
+          success: res => {
+            let msg = JSON.stringify({
+              userId: that.data.myUserInfo._id,
+              userAvatar: that.data.myUserInfo.avatarUrl,
+              userName: that.data.myUserInfo.nickName,
+              msgContent: res.fileID,
+              msgType: 1,
+              time: Date.now(),
+            })
+            console.log(res.fileID)
+            comAsk.sendMessages(that.data.roomObj.userId, msg, function () {
+              wx.showToast({
+                title: '发送成功',
+              })
+              that.setData({
+                inpValue: '',
+                scrollTop: that.data.chatChunkHeight
+              })
+              wx.hideLoading()
+            }, function (error) {
+              wx.showToast({
+                title: '发送失败:' + error,
+              })
+              that.setData({
+                inpValue: '',
+                scrollTop: that.data.chatChunkHeight
+              })
+              wx.hideLoading()
+            })
+          },
+          fail: (error) => {
+            wx.showToast({
+              title: '发送失败:' + error,
+            })
+            that.setData({
+              inpValue: '',
+              scrollTop: that.data.chatChunkHeight
+            })
+            wx.hideLoading()
+          }
         })
-        comAsk.sendMessages(that.data.roomObj.userId, msg, function () {
-          wx.showToast({
-            title: '发送成功',
-          })
-          that.setData({
-            inpValue: '',
-            scrollTop: that.data.chatChunkHeight
-          })
-        }, function (error) {
-          wx.showToast({
-            title: '发送失败:' + error,
-          })
-          that.setData({
-            inpValue: '',
-            scrollTop: that.data.chatChunkHeight
-          })
-        })
+
         // 触发sendmsg函数
       }
     })
