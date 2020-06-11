@@ -30,11 +30,12 @@ Component({
     starNum: 0,
     isShowUsu: false,
     usuallyIndex: 0,
-    showlikeIdList: []
+    showlikeIdList: [],
+    isLoadData: false
   },
   created() {
-    wx.showLoading({
-      title: '正在加载数据...',
+    this.setData({
+      isLoadData: false
     })
   },
   ready() {},
@@ -125,9 +126,9 @@ Component({
           EcoList: that.data.EcoList,
           starNum: that.data.starNum + Num, // 将获取数据的开始指针向后移动
           isBottom: res.isBottom, // 判断是否到底了
-          isLoading: false // 加载完毕，取消正在加载状态
+          isLoading: false, // 加载完毕，取消正在加载状态
+          isLoadData: true,
         })
-        wx.hideLoading()
       }).catch(res => {
         console.log(res)
         wx.showToast({
@@ -165,8 +166,8 @@ Component({
     tabSelect(e) {
       // 由于搜索页是要么没有要么提前获取了数据存到了searchList里面了，所以不需要提示
       if (e.currentTarget.dataset.id != 3) {
-        wx.showLoading({
-          title: '正在加载数据中…',
+        this.setData({
+          isLoadData: false
         })
       }
       this.loadData(e.currentTarget.dataset.id, 3, true)

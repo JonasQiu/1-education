@@ -1,37 +1,39 @@
 <return />
+<view wx:if="{{isLoadData}}">
+	<!-- 机构信息 -->
+	<view class="detail">
+		<view class="detail-pro" style="background-image: url({{infoData[0].obj.img.bgimg?infoData[0].obj.img.bgimg:infoData[0].obj.img.logo}});background-repeat: space;">
+			<image src="{{infoData[0].obj.img.logo}}" class="detail-info-avatar"></image>
+			<view class="info">
+				<!-- 可设置学生数（报名课程的同学），课程数，好评率 -->
+				<view style="font-size: 36rpx;">{{infoData[0].obj.info.orgName}}</view>
+				<view style="font-size: 28rpx;">
+					<text wx:for="{{infoData[0].obj.showStar}}" class="cuIcon-favorfill text-yellow"></text>
+					<text wx:for="{{5-infoData[0].obj.showStar}}" class="cuIcon-favor"></text> {{infoData[0].obj.star}} 分 | {{infoData[0].obj.location.distance}} km</view>
 
-<!-- 机构信息 -->
-<view class="detail">
-	<view class="detail-pro" style="background-image: url({{infoData[0].obj.img.bgimg?infoData[0].obj.img.bgimg:infoData[0].obj.img.logo}});background-repeat: space;">
-		<image src="{{infoData[0].obj.img.logo}}" class="detail-info-avatar"></image>
-		<view class="info">
-			<!-- 可设置学生数（报名课程的同学），课程数，好评率 -->
-			<view style="font-size: 36rpx;">{{infoData[0].obj.info.orgName}}</view>
-			<view style="font-size: 28rpx;">
-				<text wx:for="{{infoData[0].obj.showStar}}" class="cuIcon-favorfill text-yellow"></text>
-				<text wx:for="{{5-infoData[0].obj.showStar}}" class="cuIcon-favor"></text> {{infoData[0].obj.star}} 分 | {{infoData[0].obj.location.distance}} km</view>
-
-			<view style="font-size: 28rpx;">{{infoData[0].obj.location.address}}</view>
+				<view style="font-size: 28rpx;">{{infoData[0].obj.location.address}}</view>
+			</view>
 		</view>
 	</view>
-</view>
 
-<!-- info -->
-<view class="resources">
-	<scroll-view scroll-x class="bg-white nav text-center" scroll-with-animation scroll-left="{{scrollLeft}}">
-		<view class="cu-item {{index==TabCur?'text-green cur':''}}" wx:for="{{infoData}}" wx:key="index" bindtap="tabSelect" data-id="{{index}}">
-			{{item.nav+(index==0?'':' ('+item.list.length+')')}}
-		</view>
-	</scroll-view>
-</view>
+	<!-- info -->
+	<view class="resources">
+		<scroll-view scroll-x class="bg-white nav text-center" scroll-with-animation scroll-left="{{scrollLeft}}">
+			<view class="cu-item {{index==TabCur?'text-green cur':''}}" wx:for="{{infoData}}" wx:key="index" bindtap="tabSelect" data-id="{{index}}">
+				{{item.nav+(index==0?'':' ('+item.list.length+')')}}
+			</view>
+		</scroll-view>
+	</view>
 
-<view style="margin-bottom: 180rpx;">
-	<!-- 组件跳转 -->
-	<info wx:if="{{0===TabCur}}" infoObj="{{infoData[0].obj}}" myUserInfo="{{myUserInfo}}" bind:callLoadData="loadData" />
-	<lesson wx:if="{{1===TabCur}}" lessonList="{{infoData[1].list}}" />
-	<teacher wx:if="{{2===TabCur}}" teacherList="{{infoData[2].list}}" />
-	<active wx:if="{{3===TabCur}}" activeList="{{infoData[3].list}}" />
+	<view style="margin-bottom: 180rpx;">
+		<!-- 组件跳转 -->
+		<info wx:if="{{0===TabCur}}" infoObj="{{infoData[0].obj}}" myUserInfo="{{myUserInfo}}" bind:callLoadData="loadData" />
+		<lesson wx:if="{{1===TabCur}}" lessonList="{{infoData[1].list}}" />
+		<teacher wx:if="{{2===TabCur}}" teacherList="{{infoData[2].list}}" />
+		<active wx:if="{{3===TabCur}}" activeList="{{infoData[3].list}}" />
+	</view>
 </view>
+<page-load wx:else />
 
 <!-- 关注与分享 -->
 <view class="tabbar">

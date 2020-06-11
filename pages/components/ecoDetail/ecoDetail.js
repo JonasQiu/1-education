@@ -49,6 +49,7 @@ Page({
       list: [],
       titleName: ""
     },
+    isLoadData: false
   },
   toggleDelay(that) {
     clearTimeout(that.timer)
@@ -98,55 +99,68 @@ Page({
   loadData(ecoId, reSet) {
     let that = this
     if (reSet) {
-      wx.showLoading({
-        title: '正在加载中',
+      that.setData({
+        isLoadData: false
       })
     }
     // 机构信息
-    comEco.getPage(ecoId).then(async res => {
-      // 👇 读取点赞列表
-      res.likeIdList = [...res.likes]
-      res = (await comEco.fixLikeUser([res]))[0]
-      // 👇 读取评论列表
-      res = await comEco.fixComments(res)
-      // 👇 读取距离信息
-      res.orgInfo.distance = await comLocation.getDistance(res.orgInfo.location.lat, res.orgInfo.location.lng)
-      // 👇 展示星级信息
-      res.orgInfo.showStar = parseInt(res.orgInfo.star)
-      // 👇 展示前五个点赞用户信息
-      res.likes = res.likes.length > 5 ? res.likes.slice(0, 5) : res.likes
-      // 👇 获取我的信息，用来展示讨论区头像
-      let userInfo = wx.getStorageSync('userInfo')
-      let showData = {
-        myAvatar: userInfo ? userInfo.avatarUrl : 'cloud://education-1hoqw.6564-education-1hoqw-1302178671/something/用户.png',
-        swiperList: res.cimg || res.orgInfo.cimg || [res.userInfo.avatarUrl],
-        ecoObj: res,
+    wx.getLocation({
+      success: (p) => {
+        let {
+          latitude,
+          longitude
+        } = p
+        comEco.getPage(ecoId).then(async res => {
+          // 👇 读取点赞列表
+          res.likeIdList = [...res.likes]
+          res = (await comEco.fixLikeUser([res]))[0]
+          // 👇 读取评论列表
+          res = await comEco.fixComments(res)
+          // 👇 读取距离信息
+          res.orgInfo.distance = comLocation.getDistance(latitude, longitude, res.orgInfo.location.lat, res.orgInfo.location.lng)
+          // 👇 展示星级信息
+          res.orgInfo.showStar = parseInt(res.orgInfo.star)
+          // 👇 展示前五个点赞用户信息
+          res.likes = res.likes.length > 5 ? res.likes.slice(0, 5) : res.likes
+          // 👇 获取我的信息，用来展示讨论区头像
+          let userInfo = wx.getStorageSync('userInfo')
+          let showData = {
+            myAvatar: userInfo ? userInfo.avatarUrl : '/image/logo.png',
+            swiperList: res.cimg || res.orgInfo.cimg || [res.userInfo.avatarUrl],
+            ecoObj: res,
+          }
+          console.log(res)
+          if (reSet) {
+            showData.toggleDelay = true
+            that.toggleDelay(that)
+          }
+          showData.tabbarList = [{
+            name: res.isLike ? 'cuIcon-appreciatefill' : 'cuIcon-appreciate',
+            event: "appreciate"
+          }, {
+            name: 'cuIcon-community',
+            event: "commentNavi"
+          }, {
+            name: 'cuIcon-add',
+            event: "setFollow"
+          }, {
+            name: 'cuIcon-share',
+            event: "share"
+          }]
+          showData.isLoadData = true
+          that.setData(showData)
+        }).catch(res => {
+          // 异常报错
+          console.log(res)
+          wx.navigateBack()
+        })
+      },
+      fail: (res) => {
+        console.log(res)
+        wx.navigateBack()
       }
-      console.log(res)
-      if (reSet) {
-        showData.toggleDelay = true
-        that.toggleDelay(that)
-      }
-      showData.tabbarList = [{
-        name: res.isLike ? 'cuIcon-appreciatefill' : 'cuIcon-appreciate',
-        event: "appreciate"
-      }, {
-        name: 'cuIcon-community',
-        event: "commentNavi"
-      }, {
-        name: 'cuIcon-add',
-        event: "setFollow"
-      }, {
-        name: 'cuIcon-share',
-        event: "share"
-      }]
-      that.setData(showData)
-      wx.hideLoading()
-      wx.hideToast()
-    }).catch(res => {
-      // 异常报错
-      console.log(res)
     })
+
   },
   commentNavi() {
     this.setData({

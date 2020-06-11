@@ -22,36 +22,39 @@
 		</view>
 	</scroll-view>
 	<!-- 推荐、关注、热帖、官方-->
-	<view wx:for="{{EcoList}}" class="eco-nav" wx:key="index">
-		<view bindtap="naviToDetail" data-ecoid="{{item._id}}">
-			<view class="head">
-				<image src="{{item.userInfo.avatarUrl}}" class="eco-headImg" mode="aspectFill"></image>
-				<view class="eco-info">
-					<text class="eco-name">{{item.userInfo.nickName}}</text>
-					<view class="eco-time text-gray">发表于 {{item.fixCreateTime}}</view>
+	<view wx:if="{{isLoadData}}">
+		<view wx:for="{{EcoList}}" class="eco-nav" wx:key="index">
+			<view bindtap="naviToDetail" data-ecoid="{{item._id}}">
+				<view class="head">
+					<image src="{{item.userInfo.avatarUrl}}" class="eco-headImg" mode="aspectFill"></image>
+					<view class="eco-info">
+						<text class="eco-name">{{item.userInfo.nickName}}</text>
+						<view class="eco-time text-gray">发表于 {{item.fixCreateTime}}</view>
+					</view>
+					<text wx:if="s" class="eco-office">{{item.userInfo.fixUserType}}</text>
 				</view>
-				<text wx:if="s" class="eco-office">{{item.userInfo.fixUserType}}</text>
-			</view>
-			<view class="eco-desc">{{item.content}}</view>
-			<view class="eco-imgContent">
-				<image mode="{{item.cimg.length === 1?'widthFix':'aspectFill'}}" class="{{item.cimg.length === 1 ? 'eco-oneImg' : item.cimg.length ===4 ? 'eco-fourImg' : 'eco-moreImg'}}" wx:for="{{item.cimg}}" wx:for-item="img" src="{{img}}" wx:key="index"></image>
-			</view>
-			<view class="eco-more">
-				<!-- 浏览是指，点击进去详情页则记录一次 -->
-				<text class="text-gray read">{{'浏览 '+item.shareNum+' 次'}}</text>
-				<view style="font-size:55rpx">
-					<text class="eco-text cuIcon-likefill {{item.isLike ? 'text-red' : 'text-gray'}}" catchtap="sendLike" data-myindex="{{index}}"></text>
-					<text class="eco-text text-gray cuIcon-commentfill"></text>
+				<view class="eco-desc">{{item.content}}</view>
+				<view class="eco-imgContent">
+					<image mode="{{item.cimg.length === 1?'widthFix':'aspectFill'}}" class="{{item.cimg.length === 1 ? 'eco-oneImg' : item.cimg.length ===4 ? 'eco-fourImg' : 'eco-moreImg'}}" wx:for="{{item.cimg}}" wx:for-item="img" src="{{img}}" wx:key="index"></image>
+				</view>
+				<view class="eco-more">
+					<!-- 浏览是指，点击进去详情页则记录一次 -->
+					<text class="text-gray read">{{'浏览 '+item.shareNum+' 次'}}</text>
+					<view style="font-size:55rpx">
+						<text class="eco-text cuIcon-likefill {{item.isLike ? 'text-red' : 'text-gray'}}" catchtap="sendLike" data-myindex="{{index}}"></text>
+						<text class="eco-text text-gray cuIcon-commentfill"></text>
+					</view>
 				</view>
 			</view>
-		</view>
-		<view class="eco-call" style="font-size:55rpx" bindtap="showLikeList" data-likeIdList="{{item.likeIdList}}">
-			<text class="cuIcon-likefill {{item.isLike ? 'text-red' : 'text-gray'}}"  catchtap="sendLike" data-myindex="{{index}}"></text>
-			<view class="eco-callImg">
-				<image class="cu-avatar radius margin-left" src="{{likeUser.avatarUrl}}" wx:for="{{item.likes}}" wx:for-item="likeUser" wx:key="index"></image>
+			<view class="eco-call" style="font-size:55rpx" bindtap="showLikeList" data-likeIdList="{{item.likeIdList}}">
+				<text class="cuIcon-likefill {{item.isLike ? 'text-red' : 'text-gray'}}"  catchtap="sendLike" data-myindex="{{index}}"></text>
+				<view class="eco-callImg">
+					<image class="cu-avatar radius margin-left" src="{{likeUser.avatarUrl}}" wx:for="{{item.likes}}" wx:for-item="likeUser" wx:key="index"></image>
+				</view>
 			</view>
 		</view>
 	</view>
+	<page-load wx:else />
 	<!-- 回到顶部，内容有wxml的html、wcss的css、js中的goTop数据用于scroll的scroll-top属性和事件 -->
 	<view class="goTop" bindtap="goTop">
 		<text class="cuIcon-top text-white"></text>

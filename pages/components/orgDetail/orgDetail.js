@@ -34,7 +34,8 @@ Page({
     }],
     lesson: [],
     teacher: [],
-    active: []
+    active: [],
+    isLoadData: false
   },
 
   /**
@@ -48,9 +49,6 @@ Page({
         isShow: true
       })
     }
-    wx.showLoading({
-      title: '正在加载中',
-    })
     that.loadData({
       detail: options.query
     })
@@ -82,15 +80,15 @@ Page({
 
           let showData = {
             myUserInfo: {
-              avatarUrl: 'cloud://education-1hoqw.6564-education-1hoqw-1302178671/something/用户.png'
+              avatarUrl: '/image/logo.png'
             },
             infoData: that.data.infoData,
           }
           if (userInfo) {
             showData.myUserInfo = userInfo
           }
+          showData.isLoadData = true
           that.setData(showData)
-          wx.hideLoading()
         }).catch(res => {
           // 异常报错
           console.log(res)
