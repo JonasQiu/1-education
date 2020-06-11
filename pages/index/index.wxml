@@ -33,7 +33,7 @@
 						<view class="cu-item" wx:else>
 							<view class="cu-avatar radius" style="background-image:url({{item.userAvatar}});"></view>
 							<view class="main">
-								<view class="content shadow">
+								<view class="content bg-gray shadow">
 									<text wx:if="{{item.msgType==0}}">{{item.msgContent}}</text>
 									<image wx:elif="{{item.msgType==1}}" src="{{item.msgContent}}" data-imgurl="{{item.msgContent}}" bindtap="showImg" class="radius" mode="widthFix"></image>
 								</view>

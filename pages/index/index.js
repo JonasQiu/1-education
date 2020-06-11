@@ -173,7 +173,10 @@ Page({
   // 收到消息 添加到聊天列表，添加至缓存，实时滚动
   receiveMessages(msg) {
     let obj = JSON.parse(msg.content)
-    obj.showTime = comTime.showTime(obj.time)
+    let time = new Date()
+    // time.setDate(time.now())
+    // time.getHours()
+    obj.showTime = time.getHours() + ":" + time.getMinutes()
     // 添加到聊天列表
     this.data.msgList.push(obj)
     this.setData({
