@@ -1,6 +1,6 @@
 <!-- 详情页 -->
 <!-- 点赞的通用列表 -->
-<usually wx:if="{{isShowUsu}}" typeIndex='0' list="{{ecoObj.likeIdList}}" titleName="点赞的人" bind:callshowChange="showLikeList" />
+<usually wx:if="{{isShowUsu}}" typeIndex='{{usuallyData.typeIndex}}' list="{{usuallyData.list}}" titleName="{{usuallyData.titleName}}" bind:callshowChange="showLikeList" />
 <view wx:else>
 	<view class="page">
 		<!-- 是否返回 -->
@@ -15,7 +15,7 @@
 			<!-- 内容块 -->
 			<view class="relative">
 				<view class="absolute {{toggleDelay?'animation-slide-bottom':''}}" style="animation-delay: {{(index+1)*0.2}}s;">
-					<view class="chunk eco-head">
+					<view class="chunk eco-head" bindtap="showUserInfoFun">
 						<!-- 头部 -->
 						<image class="avatar" src="{{ecoObj.userInfo.avatarUrl}}"></image>
 						<view class="eco-nameInfo">
@@ -95,6 +95,7 @@
 			</view>
 		</scroll-view>
 	</view>
+	<user-detail userId="{{ecoObj.userInfo._id}}" wx:if="{{showUserInfo}}" bind:callshowUserInfoFun="showUserInfoFun" />
 
 	<view class="tabbar">
 		<view wx:for="{{tabbarList}}" class="attention w-50" wx:key="index" bindtap="{{item.event}}">

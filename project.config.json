@@ -24,7 +24,7 @@
 			"disablePlugins": [],
 			"outputPath": ""
 		},
-		"useCompilerModule": true,
+		"useCompilerModule": false,
 		"userConfirmedUseCompilerModuleSwitch": false
 	},
 	"compileType": "miniprogram",
@@ -120,9 +120,9 @@
 				},
 				{
 					"id": 8,
-					"name": "通用模板",
-					"pathName": "pages/components/usallyList/usallyList",
-					"query": "typeIndex=1&titleName=生态圈",
+					"name": "用户信息",
+					"pathName": "pages/components/userDetail/userDetail",
+					"query": "userId=54bac78c5ecd3a23005318b4110c12b3",
 					"scene": null
 				}
 			]
