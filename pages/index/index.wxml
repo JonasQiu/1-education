@@ -45,7 +45,7 @@
 				</scroll-view>
 				<!-- 输入框发送 -->
 				<view class="cu-bar ask-foot input {{InputBottom!=0?'cur':''}}" style="bottom:{{InputBottom}}px">
-					<input class="solid-bottom bg-gray" style="border-radius:15rpx" cursor-spacing='140' bindfocus="InputFocus" bindinput="getInputValue" bindconfirm="sendUserMsg" adjust-position="{{false}}" value="{{inpValue}}" focus="{{false}}" maxlength="300" cursor-spacing="10"></input>
+					<input class="solid-bottom bg-gray" style="border-radius:15rpx" bindfocus="InputFocus" bindinput="getInputValue" bindblur="InputBlur" bindconfirm="sendUserMsg" adjust-position="{{false}}" value="{{inpValue}}" focus="{{false}}" maxlength="300" cursor-spacing="10"></input>
 					<view class="action">
 						<text class="cuIcon-emojifill text-grey"></text>
 						<text class="cuIcon-picfill text-grey" bindtap="choosePhoto"></text>

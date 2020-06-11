@@ -52,6 +52,9 @@ Page({
   },
   sendUserMsg(e) {
     let that = this;
+    this.setData({
+      InputBottom: 0,
+    })
     if (e.detail.value.trim() == '') {
       wx.showToast({
         title: '提交消息不能为空哦',
@@ -97,6 +100,11 @@ Page({
       inpValue: e.detail.value
     })
   },
+  // InputBlur(e) {
+  //   this.setData({
+  //     inpValue: ''
+  //   })
+  // },
   // 选取图片发送
   choosePhoto(e) {
     const that = this
@@ -225,6 +233,7 @@ Page({
       })
     })
     this.setData({
+      InputBottom: 0,
       inpValue: '',
       scrollTop: this.data.chatChunkHeight
     })
