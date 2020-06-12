@@ -71,3 +71,28 @@
 		</view>
 	</view>
 </scroll-view>
+
+<!-- 没有缓存时，第一次展示 -->
+<view wx:if="{{interestShow}}">
+	<view class="interest {{interestShow?'animation-scale-up':'animation-scale-down'}}">
+		<!-- 标题 -->
+		<view class="cu-bar bg-white">
+			<view class="action">
+				<text class="cuIcon-title text-orange"></text> 请选择您感兴趣的分类
+			</view>
+			<view class="action">
+				<button class="cu-btn line-cyan shadow" style="font-size:22rpx height:50rpx" bindtap="exit">跳过</button>
+			</view>
+		</view>
+		<!-- 列表 -->
+		<view class="padding-sm">
+			<view class="flex flex-wrap justify-around">
+				<button class="line-{{item.color}} cu-btn {{toggleDelay?'animation-slide-bottom':''}} margin-sm basis-sm shadow" style="animation-delay: {{(index+1)*0.1}}s;" wx:for="{{interestlist}}" wx:key="{{index}}">{{item.name}}</button>
+				<button class="line-red cu-btn {{toggleDelay?'animation-slide-bottom':''}} margin-sm basis-sm shadow" style="animation-delay: {{15*0.1}}s; flex-basis: 60%" bindtap="exit">确定</button>
+			</view>
+		</view>
+	</view>
+
+	<!-- 遮罩层 -->
+	<view class='mask' bindtap="exit"></view>
+</view>

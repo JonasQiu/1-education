@@ -59,7 +59,9 @@ Component({
       'A5Qx5zWex0zvSaJjkWCZAK1stwsk9KiYGokwdt4kLngkStS8',
       '5OKpkLYLGlwrUw3ZjVYpwFF6vTrOhqCOiKUxeEEdo7qUvh5x',
     ],
-    toggleDelay: false
+    toggleDelay: false,
+    interestShow: false,
+    interestlist: [],
   },
   attached(e) {
     let that = this
@@ -72,6 +74,7 @@ Component({
         })
       }
     })
+    // 得到轮播图和8个icon的信息
     wx.getStorage({
       key: 'homePageData',
       success(res) {
@@ -100,6 +103,28 @@ Component({
         that.touchBottom()
       }
     })
+    // 感兴趣分类的显示
+    const type = comType.getType()
+    const interelist = []
+    const color = ['red', 'orange', 'olive', 'green', 'cyan', 'blue', 'purple', 'mauve']
+    let z = 0;
+    for (let key in type) {
+      interelist.push({
+        name: type[key].name,
+        color: color[z++ % 8]
+      })
+    }
+    if (interelist.length % 2 != 0) {
+      interelist.pop()
+    }
+    if (!wx.getStorageSync('isFrist')) {
+      this.setData({
+        interestShow: true,
+        toggleDelay: true,
+        interestlist: interelist
+      })
+    }
+    this.toggleDelay(this)
   },
   /**
    * 组件的方法列表
@@ -129,6 +154,16 @@ Component({
           toggleDelay: false
         })
       }, 3000)
+    },
+    // 感兴趣的分类选择隐藏
+    exit(e) {
+      this.setData({
+        interestShow: false
+      })
+      wx.setStorage({
+        data: true,
+        key: 'isFrist',
+      })
     },
     orgDetail(e) {
       wx.navigateTo({
