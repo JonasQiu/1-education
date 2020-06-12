@@ -8,8 +8,8 @@
 				<!-- 可设置学生数（报名课程的同学），课程数，好评率 -->
 				<view style="font-size: 36rpx;">{{infoData[0].obj.info.orgName}}</view>
 				<view style="font-size: 28rpx;">
-					<text wx:for="{{infoData[0].obj.showStar}}" class="cuIcon-favorfill text-yellow"></text>
-					<text wx:for="{{5-infoData[0].obj.showStar}}" class="cuIcon-favor"></text> {{infoData[0].obj.star}} 分 | {{infoData[0].obj.location.distance}} km</view>
+					<text wx:for="{{infoData[0].obj.showStar}}" class="cuIcon-favorfill text-yellow" wx:key="index"></text>
+					<text wx:for="{{5-infoData[0].obj.showStar}}" wx:key="index" class="cuIcon-favor"></text> {{infoData[0].obj.star}} 分 | {{infoData[0].obj.location.distance}} km</view>
 
 				<view style="font-size: 28rpx;">{{infoData[0].obj.location.address}}</view>
 			</view>

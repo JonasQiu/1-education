@@ -30,6 +30,10 @@ Component({
   },
   attached() {
     this.LoadData()
+    this.setData({
+      toggleDelay: true
+    })
+    this.toggleDelay(this)
   },
   methods: {
     // ALL

@@ -1,7 +1,7 @@
 <view wx:if="{{userInfoObj}} ">
 	<view class="box animation-scale-up ">
 		<view class="info">
-			<view class="sex {{userInfoObj.gender!=0?'cuIcon-male text-blue':'cuIcon-female text-pink'}}"></view>
+			<view class="sex {{userInfoObj.gender!=2?'cuIcon-male text-blue':'cuIcon-female text-pink'}}"></view>
 			<view class="avatar">
 				<image src="{{userInfoObj.avatarUrl}}" class="avatar-img"></image>
 				<view class="name">{{userInfoObj.nickName}}</view>

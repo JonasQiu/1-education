@@ -46,7 +46,7 @@ Component({
    */
   methods: {
     search(e) {
-      fun_search(e);
+      this.fun_search(e);
     },
     fun_search(keyWord) {
       wx.showLoading({

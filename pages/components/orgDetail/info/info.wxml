@@ -1,6 +1,6 @@
 <view class="page">
 	<swiper wx:if="{{infoObj.cimg.orgImg.length>0?true:false}}" class="screen-swiper round-dot chunk" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500">
-		<swiper-item wx:for="{{infoObj.cimg.orgImg}}" wx:key bindtap="showImg" data-imgIndex="{{index}}">
+		<swiper-item wx:for="{{infoObj.cimg.orgImg}}" wx:key="index" bindtap="showImg" data-imgIndex="{{index}}">
 			<image src="{{item}}" mode="aspectFill"></image>
 		</swiper-item>
 	</swiper>
@@ -34,7 +34,7 @@
 			<input type="text" class="inputComment" placeholder="快来写下你的评论吧 ~ " confirm-type="发表" bindconfirm="sendUserComment"></input>
 		</view>
 		<view class="commentList">
-			<view class="listShow" wx:for="{{infoObj.comment}}">
+			<view class="listShow" wx:for="{{infoObj.comment}}" wx:key="index">
 				<image class="avatar-comment" src="{{item.userInfo.avatarUrl}}"></image>
 				<view class="info-comment">
 					<text class="info-name">{{item.userInfo.nickName}}</text>

@@ -42,7 +42,7 @@
 					</view>
 					<view class="msg" bindtap="naviToDetail" data-id="{{item._id}}">
 						<view class="userName">{{item.description}}</view>
-						<text wx:for="{{item.showStar}}" class="cuIcon-favorfill text-yellow"></text><text wx:for="{{5-item.showStar}}" class="cuIcon-favor"></text>
+						<text wx:for="{{item.showStar}}" class="cuIcon-favorfill text-yellow" wx:key="index"></text><text wx:for="{{5-item.showStar}}" wx:key="index" class="cuIcon-favor"></text>
 						<text> {{item.star}} 分</text>
 						<view style="margin-top: 5rpx;">距离 {{item.distance}} km</view>
 					</view>
