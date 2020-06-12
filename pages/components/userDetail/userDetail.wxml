@@ -1,5 +1,5 @@
-<view wx:if="{{userInfoObj}}">
-	<view class="box">
+<view wx:if="{{userInfoObj}} ">
+	<view class="box animation-scale-up ">
 		<view class="info">
 			<view class="sex {{userInfoObj.gender!=0?'cuIcon-male text-blue':'cuIcon-female text-pink'}}"></view>
 			<view class="avatar">

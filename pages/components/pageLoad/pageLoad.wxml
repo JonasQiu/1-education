@@ -1,4 +1,4 @@
-<view class='cu-load load-modal'>
+<view class='cu-load load-modal animation-scale-up'>
 	<!-- <view class='cuIcon-emojifill text-orange'></view> -->
 	<image src='/image/logo.png' class='png' mode='aspectFit'></image>
 	<view class='gray-text'>加载中...</view>

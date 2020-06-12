@@ -250,9 +250,10 @@ Page({
   },
   //点击后，图片进行预览
   showImg(e) {
+    console.log(e.currentTarget.dataset.imgurl)
     wx.previewImage({
       current: 1,
-      urls: e.currentTarget.dataset.imgurl
+      urls: [e.currentTarget.dataset.imgurl]
     })
   },
   // 

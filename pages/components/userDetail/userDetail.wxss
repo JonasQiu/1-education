@@ -1,5 +1,6 @@
 @import "/colorui/icon.wxss";
 @import "/colorui/main.wxss";
+@import "/colorui/animation.wxss";
 
 .usua {
   position: fixed;
@@ -10,10 +11,12 @@
 .box {
   background-color: #fff;
   position: fixed;
-  left: calc(50% - 310rpx);
-  top: calc(50% - 200rpx);
+  left: calc(50% - 335rpx);
+  top: calc(50% - 260rpx);
   text-align: center;
   z-index: 2;
+  width: 670rpx;
+  height: 520rpx;
   border-radius: 30rpx;
 }
 
@@ -25,7 +28,7 @@
 }
 
 .sex {
-  width: 200rpx;
+  width: 235rpx;
   height: 100%;
   margin-top: 35rpx;
   font-size: 50rpx !important;
@@ -53,7 +56,9 @@
 }
 
 .user-type {
+  width: 235rpx;
   height: 100%;
+  font-size: 24rpx;
 }
 
 .name-border {
