@@ -29,7 +29,21 @@ Page({
     inpValue: '',
     chatChunkHeight: 0,
     scrollTop: 0,
-    isLoadData: false
+    isLoadData: false,
+    showToastData: {
+      show: false,
+      title: '',
+      content: ''
+    }
+  },
+  DiyShowToast(title, content) {
+    this.setData({
+      showToastData: {
+        show: !this.data.showToastData.show,
+        title,
+        content
+      }
+    })
   },
 
   //////////////////////////////////
@@ -324,14 +338,22 @@ Page({
             isLoadData: true
           })
         }).catch(res => {
-          wx.showToast({
-            title: '加载数据失败',
+          that.setData({
+            showToastData: {
+              show: true,
+              title: '加载数据失败',
+              content: '请保证打开GPS且授权位置信息'
+            }
           })
         })
       },
       fail() {
-        wx.showToast({
-          title: '授权并打开gps',
+        that.setData({
+          showToastData: {
+            show: true,
+            title: '加载数据失败',
+            content: '请保证打开GPS且授权位置信息'
+          }
         })
       }
     })
@@ -348,6 +370,14 @@ Page({
           name: '机构频道大厅',
           list: res[2]
         }]
+      })
+    }).catch(res => {
+      that.setData({
+        showToastData: {
+          show: true,
+          title: '加载数据失败',
+          content: '请保证打开GPS且授权位置信息'
+        }
       })
     })
 

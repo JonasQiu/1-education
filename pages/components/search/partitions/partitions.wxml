@@ -1,7 +1,7 @@
 <!-- 轮播图 -->
 <swiper class="screen-swiper round-dot" indicator-dots="true" circular="true" autoplay="true" interval="3000" duration="500">
-	<swiper-item wx:for="{{4}}" wx:key="index">
-		<image src="https://image.weilanwl.com/img/4x3-{{index+1}}.jpg" mode='aspectFill'></image>
+	<swiper-item wx:for="{{swiper}}" wx:key="index">
+		<image src="{{item.img}}" mode='aspectFill'></image>
 	</swiper-item>
 </swiper>
 <view class="VerticalBox">

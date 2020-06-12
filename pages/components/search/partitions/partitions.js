@@ -29,10 +29,15 @@ Component({
       }
       typeList.push(obj)
     }
-
-    this.setData({
+    let showData = {
       list: typeList,
-    })
+    }
+    let localImg = wx.getStorageSync('localImg')
+    if (localImg.HomePageSwiper.swiperList) {
+      showData.swiper = localImg.HomePageSwiper.swiperList
+    }
+
+    this.setData(showData)
     wx.hideLoading()
   },
   methods: {

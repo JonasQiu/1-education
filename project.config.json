@@ -124,6 +124,20 @@
 					"pathName": "pages/components/userDetail/userDetail",
 					"query": "userId=54bac78c5ecd3a23005318b4110c12b3",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "加载页面",
+					"pathName": "pages/components/pageLoad/pageLoad",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 10,
+					"name": "提示页",
+					"pathName": "pages/components/PageToast/PageToast",
+					"query": "title=标题&content=这里是内容",
+					"scene": null
 				}
 			]
 		}

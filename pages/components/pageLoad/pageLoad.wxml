@@ -1,4 +1,18 @@
-<view class='cu-load load-modal animation-scale-up'>
+<view class="cu-modal show" wx:if="{{isToast}}">
+	<view class="cu-dialog">
+		<view class="cu-bar bg-white justify-end">
+			<view class="content">{{title}}</view>
+			<!-- <view class="action" bindtap="hideModal">
+				<text class="cuIcon-close text-red"></text>
+			</view> -->
+		</view>
+		<view class="padding-xl">
+			{{content}}
+		</view>
+	</view>
+</view>
+
+<view class='cu-load load-modal animation-scale-up' wx:else>
 	<!-- <view class='cuIcon-emojifill text-orange'></view> -->
 	<image src='/image/logo.png' class='png' mode='aspectFit'></image>
 	<view class='gray-text'>加载中...</view>
