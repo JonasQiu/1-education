@@ -62,8 +62,6 @@ Component({
     toggleDelay: false,
     interestShow: false,
     interestlist: [],
-    chooseClass: false,
-    isChoose:false
   },
   attached(e) {
     let that = this
@@ -76,63 +74,71 @@ Component({
         })
       }
     })
-    // 得到轮播图和8个icon的信息
-    wx.getStorage({
-      key: 'homePageData',
-      success(res) {
-        const resOrgList = res.data.allList
-        that.setData({
-          HomePageInfo: res.data.HomePageInfo,
-          orgAllList: resOrgList
-        })
-        // 得到不同类的组织list
-        const typeAllListObj = {
-          "全部": that.data.orgAllList,
-          ...comType.deOrgTypeList(that.data.orgAllList)
-        }
-        for (let prop in typeAllListObj) {
-          that.data.typeAllList.push(typeAllListObj[prop])
-        }
-        that.setData({
-          typeList: Object.keys(typeAllListObj),
-          typeAllList: that.data.typeAllList
-        })
-        that.setData({
-          orgList: that.data.typeAllList[0],
-          toggleDelay: true
-        })
-        that.toggleDelay(that)
-        that.touchBottom()
-      }
-    })
-    // 感兴趣分类的显示
-    const type = comType.getType()
-    const interelist = []
-    const color = ['red', 'orange', 'olive', 'green', 'cyan', 'blue', 'purple', 'mauve']
-    let z = 0;
-    for (let key in type) {
-      interelist.push({
-        name: type[key].name,
-        color: color[z++ % 8],
-        isChoose:false
-      })
-    }
-    if (interelist.length % 2 != 0) {
-      interelist.pop()
-    }
     if (!wx.getStorageSync('isFrist')) {
-      this.setData({
-        interestShow: true,
-        toggleDelay: true,
-        interestlist: interelist
-      })
+      // 感兴趣分类的显示
+      const type = comType.getType()
+      const interestlist = []
+      const color = ['red', 'orange', 'olive', 'green', 'cyan', 'blue', 'purple', 'mauve']
+      let z = 0;
+      for (let key in type) {
+        interestlist.push({
+          id: key,
+          name: type[key].name,
+          color: color[z++ % 8],
+          isChoose: false
+        })
+      }
+      if (interestlist.length % 2 != 0) {
+        interestlist.pop()
+      }
+      if (!wx.getStorageSync('isFrist')) {
+        this.setData({
+          interestShow: true,
+          toggleDelay: true,
+          interestlist: interestlist
+        })
+      }
+      this.toggleDelay(this)
+    } else {
+      this.showOrgTypeList()
     }
-    this.toggleDelay(this)
   },
   /**
    * 组件的方法列表
    */
   methods: {
+    showOrgTypeList() {
+      let that = this
+      // 得到轮播图和8个icon的信息
+      wx.getStorage({
+        key: 'homePageData',
+        success(res) {
+          const resOrgList = res.data.allList
+          that.setData({
+            HomePageInfo: res.data.HomePageInfo,
+            orgAllList: resOrgList
+          })
+          // 得到不同类的组织list
+          const typeAllListObj = {
+            "全部": that.data.orgAllList,
+            ...comType.deOrgTypeList(that.data.orgAllList)
+          }
+          for (let prop in typeAllListObj) {
+            that.data.typeAllList.push(typeAllListObj[prop])
+          }
+          that.setData({
+            typeList: Object.keys(typeAllListObj),
+            typeAllList: that.data.typeAllList
+          })
+          that.setData({
+            orgList: that.data.typeAllList[0],
+            toggleDelay: true
+          })
+          that.toggleDelay(that)
+          that.touchBottom()
+        }
+      })
+    },
     // 
     // card列表事件
     // 触底事件
@@ -167,21 +173,15 @@ Component({
         data: true,
         key: 'isFrist',
       })
+      this.showOrgTypeList()
     },
     // 感兴趣的分类的选择分选
     chooseClassActive(e) {
-      if (e.currentTarget.dataset.item.isChoose) {
-        e.currentTarget.dataset.item.isChoose = false
-      } else {
-        e.currentTarget.dataset.item.isChoose = true
-      }
+      let index = e.currentTarget.dataset.myindex
+      this.data.interestlist[index].isChoose = !this.data.interestlist[index].isChoose
       this.setData({
         interestlist: this.data.interestlist,
-        isChoose: e.currentTarget.dataset.item.isChoose,
-        chooseClass:true
       })
-      console.log(this.data.isChoose, e.currentTarget.dataset.item.isChoose);
-      
     },
     orgDetail(e) {
       wx.navigateTo({
