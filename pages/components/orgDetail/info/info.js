@@ -114,7 +114,7 @@ Component({
     },
     callPhone(e) {
       wx.makePhoneCall({
-        phoneNumber: e.currentTarget.dataset.phoneNum,
+        phoneNumber: e.currentTarget.dataset.phonenum,
       })
     }
   }

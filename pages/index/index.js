@@ -319,11 +319,12 @@ Page({
     let orgList = [];
     new Promise(async (resolve, reject) => {
       pCimg = comCimg.initCimg()
-      orgList = (await comOrg.getOrgList(0, 115)).orgList
-      for (let j = 0; j < orgList.length; j++) {
-        orgList[j].showStar = parseInt(orgList[j].star)
+      if (orgList != []) {
+        return
+      } else {
+        orgList = (await comOrg.getOrgList(0, 115)).orgList
       }
-      resolve()
+      resolve(orgList)
     }).catch(res => {
       that.setData({
         showToastData: {
@@ -354,8 +355,10 @@ Page({
             latitude,
             longitude
           } = res2
+          orgList = (await comOrg.getOrgList(0, 115)).orgList
           for (let j = 0; j < orgList.length; j++) {
             orgList[j].distance = comLocation.getDistance(latitude, longitude, orgList[j].location.lat, orgList[j].location.lng)
+            orgList[j].showStar = parseInt(orgList[j].star)
           }
           await pCimg
           resolve({

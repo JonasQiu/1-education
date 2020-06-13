@@ -15,11 +15,10 @@
 				<text class="cuIcon-right"></text>
 			</view>
 		</view>
-
 	</view>
 	<!-- 打电话 -->
 	<view class="chunk">
-		<view class="flex" bindtap="callPhone" data-phoneNum="{{infoObj.info.phone}}">
+		<view class="flex" bindtap="callPhone" data-phonenum="{{infoObj.info.phone}}">
 			<view><text class="cuIcon-phone"></text> {{infoObj.info.phone}} </view>
 			<view><text class="cuIcon-right"></text></view>
 		</view>
