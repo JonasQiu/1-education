@@ -62,6 +62,8 @@ Component({
     toggleDelay: false,
     interestShow: false,
     interestlist: [],
+    chooseClass: false,
+    isChoose:false
   },
   attached(e) {
     let that = this
@@ -111,7 +113,8 @@ Component({
     for (let key in type) {
       interelist.push({
         name: type[key].name,
-        color: color[z++ % 8]
+        color: color[z++ % 8],
+        isChoose:false
       })
     }
     if (interelist.length % 2 != 0) {
@@ -164,6 +167,21 @@ Component({
         data: true,
         key: 'isFrist',
       })
+    },
+    // 感兴趣的分类的选择分选
+    chooseClassActive(e) {
+      if (e.currentTarget.dataset.item.isChoose) {
+        e.currentTarget.dataset.item.isChoose = false
+      } else {
+        e.currentTarget.dataset.item.isChoose = true
+      }
+      this.setData({
+        interestlist: this.data.interestlist,
+        isChoose: e.currentTarget.dataset.item.isChoose,
+        chooseClass:true
+      })
+      console.log(this.data.isChoose, e.currentTarget.dataset.item.isChoose);
+      
     },
     orgDetail(e) {
       wx.navigateTo({

@@ -5,26 +5,32 @@
 		</swiper-item>
 	</swiper>
 	<!-- 地图 -->
-	<view class="map-container plr2 chunk" bindtap="lookMap"  data-latitude="{{infoObj.location.lat}}" data-longitude="{{infoObj.location.lng}}">
-		<map class="map" id="map" latitude="{{infoObj.location.lat}}" longitude="{{infoObj.location.lng}}" scale="16" enable-rotate enable-traffic></map>
-		<view class="flex "  data-latitude="{{infoObj.location.lat}}" data-longitude="{{infoObj.location.lng}}">
-			<view><text class="cuIcon-locationfill"></text> {{infoObj.location.address}} </view>
+	<view class="map-container plr2 chunk" data-latitude="{{infoObj.location.lat}}" data-longitude="{{infoObj.location.lng}}">
+		<map class="map" id="map" latitude="{{infoObj.location.lat}}" bindtap="lookMap" longitude="{{infoObj.location.lng}}" scale="16" enable-rotate enable-traffic></map>
+		<view class="flex " bindtap="lookMap" data-latitude="{{infoObj.location.lat}}" data-longitude="{{infoObj.location.lng}}">
+			<view>
+				<text class="cuIcon-locationfill"></text> {{infoObj.location.address}}
+			</view>
+			<view>
+				<text class="cuIcon-right"></text>
+			</view>
+		</view>
+
+	</view>
+	<!-- 打电话 -->
+	<view class="chunk">
+		<view class="flex" bindtap="callPhone" data-phoneNum="{{infoObj.info.phone}}">
+			<view><text class="cuIcon-phone"></text> {{infoObj.info.phone}} </view>
 			<view><text class="cuIcon-right"></text></view>
 		</view>
 	</view>
-
+	<!-- 机构介绍 -->
 	<view class="pro border chunk" bindtap="test">
 		<!-- <text class="cuIcon-form"></text> 客户介绍 -->
 		<view class="orgDec">机构介绍</view>
 		<view class="p-top">{{infoObj.description}}</view>
 	</view>
-	<!-- 具体信息 -->
-	<!-- <view class="info">
-		<view class="flex border" bindtap="callPhone" data-phoneNum="{{infoObj.info.phone}}" style="padding-top: 30rpx;">
-			<view><text class="cuIcon-phone"></text> {{infoObj.info.phone}} </view>
-			<view><text class="cuIcon-right"></text></view>
-		</view>
-	</view> -->
+
 	<!-- 评论 -->
 	<view class="chunk comment">
 		<text class="commentTitle">讨论</text>
