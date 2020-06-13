@@ -315,49 +315,24 @@ Page({
   // 加载页面立刻执行
   onLoad: function () {
     let that = this;
-    wx.getLocation({
-      success: (res2) => {
-        let {
-          latitude,
-          longitude
-        } = res2
-        new Promise(async (resolve, reject) => {
-          let pCimg = comCimg.initCimg()
-          let orgList = (await comOrg.getOrgList(0, 115)).orgList
-          for (let j = 0; j < orgList.length; j++) {
-            // 得到2地的距离
-            orgList[j].showStar = parseInt(orgList[j].star)
-            orgList[j].distance = comLocation.getDistance(latitude, longitude, orgList[j].location.lat, orgList[j].location.lng)
-          }
-          await pCimg
-          wx.setStorageSync('homePageData', {
-            HomePageInfo: comCimg.getHomePageSwiper(),
-            allList: orgList
-          })
-          that.setData({
-            isLoadData: true
-          })
-        }).catch(res => {
-          that.setData({
-            showToastData: {
-              show: true,
-              title: '加载数据失败',
-              content: '请保证打开GPS且授权位置信息'
-            }
-          })
-        })
-      },
-      fail() {
-        that.setData({
-          showToastData: {
-            show: true,
-            title: '加载数据失败',
-            content: '请保证打开GPS且授权位置信息'
-          }
-        })
+    let pCimg;
+    let orgList = [];
+    new Promise(async (resolve, reject) => {
+      pCimg = comCimg.initCimg()
+      orgList = (await comOrg.getOrgList(0, 115)).orgList
+      for (let j = 0; j < orgList.length; j++) {
+        orgList[j].showStar = parseInt(orgList[j].star)
       }
+      resolve()
+    }).catch(res => {
+      that.setData({
+        showToastData: {
+          show: true,
+          title: '加载数据失败',
+          content: '请保证打开GPS且授权位置信息'
+        }
+      })
     })
-
     comAsk.getTypeList().then(res => {
       that.setData({
         askRoomName: [{
@@ -371,15 +346,59 @@ Page({
           list: res[2]
         }]
       })
+    })
+    new Promise(async (resolve, reject) => {
+      wx.getLocation({
+        success: async (res2) => {
+          let {
+            latitude,
+            longitude
+          } = res2
+          for (let j = 0; j < orgList.length; j++) {
+            orgList[j].distance = comLocation.getDistance(latitude, longitude, orgList[j].location.lat, orgList[j].location.lng)
+          }
+          await pCimg
+          resolve({
+            HomePageInfo: comCimg.getHomePageSwiper(),
+            allList: orgList
+          })
+        },
+        fail: async (res) => {
+          for (let j = 0; j < orgList.length; j++) {
+            orgList[j].distance = 0
+          }
+          await pCimg
+          resolve({
+            HomePageInfo: comCimg.getHomePageSwiper(),
+            allList: orgList
+          })
+        }
+      })
+    }).then(res => {
+      if (res.HomePageInfo) {
+        wx.setStorageSync('homePageData', res)
+        that.setData({
+          isLoadData: true
+        })
+      } else {
+        that.setData({
+          showToastData: {
+            show: true,
+            title: '加载数据失败',
+            content: '请保证打开GPS且授权位置信息'
+          }
+        })
+      }
     }).catch(res => {
       that.setData({
         showToastData: {
           show: true,
           title: '加载数据失败',
-          content: '请保证打开GPS且授权位置信息'
+          content: '请保证打开GPS且授权位置信息:' + res
         }
       })
     })
+
 
     // 得到元素的高度
     // wx.createSelectorQuery().select('.scrollTop').boundingClientRect(function (res) {

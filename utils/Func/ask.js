@@ -8,7 +8,7 @@ function getTypeList() {
         resolve([await new Promise((resolve, reject) => {
             // 用户列表
             let userInfo = wx.getStorageSync('userInfo')
-            if (userInfo) {
+            if (userInfo._id) {
                 let infoList = []
                 infoList.push({
                     name: "默认大厅",

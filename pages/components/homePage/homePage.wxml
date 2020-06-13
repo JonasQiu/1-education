@@ -88,7 +88,7 @@
 		<view class="padding-sm">
 			<view class="flex flex-wrap justify-around">
 				<button class="{{item.isChoose ?'bg':'line'}}-{{item.color}} cu-btn {{toggleDelay?'animation-slide-bottom':''}} margin-sm basis-sm shadow" style="animation-delay: {{(index+1)*0.1}}s;" wx:for="{{interestlist}}" wx:key="index" bindtap="chooseClassActive" data-myindex="{{index}}">{{item.name}}</button>
-				<button class="line-red cu-btn {{toggleDelay?'animation-slide-bottom':''}} margin-sm basis-sm shadow" style="animation-delay: {{15*0.1}}s; flex-basis: 60%" bindtap="exit">确定</button>
+				<button class="bg-red cu-btn {{toggleDelay?'animation-slide-bottom':''}} margin-sm basis-sm shadow" style="animation-delay: {{15*0.1}}s; flex-basis: 90%" bindtap="exit">确定</button>
 			</view>
 		</view>
 	</view>
