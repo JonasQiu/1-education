@@ -37,7 +37,7 @@ Component({
         })
         return
       }
-      if (!wx.getStorageSync('userInfo')) {
+      if (!wx.getStorageSync('userInfo')._id) {
         wx.showToast({
           title: '请先登录好吧',
         })

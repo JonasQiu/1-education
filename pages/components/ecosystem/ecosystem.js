@@ -64,16 +64,12 @@ Component({
     sendLike(e) {
       var that = this;
       let index = e.currentTarget.dataset.myindex
-      let userInfo = wx.getStorageSync('userInfo')
-      if (!userInfo._id) {
+      if (!wx.getStorageSync('userInfo')._id) {
         wx.showToast({
           title: '请先登录好吧',
         })
         return
       }
-      wx.showLoading({
-        title: '请稍后…',
-      })
       let p = that.data.EcoList[index].isLike ? comUserToEco.Unlike(that.data.EcoList[index]._id) : comUserToEco.like(that.data.EcoList[index]._id)
       p.then(res => {
         that.loadData(that.data.TabCur, that.data.starNum, true)

@@ -189,8 +189,7 @@ Page({
       })
       return
     }
-    let userInfo = wx.getStorageSync('userInfo')
-    if (!userInfo._id) {
+    if (!wx.getStorageSync('userInfo')._id) {
       wx.showToast({
         title: '请先登录好吧',
       })
@@ -230,7 +229,7 @@ Page({
       })
       return
     }
-    if (!wx.getStorageSync('userInfo')) {
+    if (!wx.getStorageSync('userInfo')._id) {
       wx.showToast({
         title: '请先登录好吧',
       })
@@ -267,7 +266,7 @@ Page({
       })
       return
     }
-    if (!wx.getStorageSync('userInfo')) {
+    if (!wx.getStorageSync('userInfo')._id) {
       wx.showToast({
         title: '请先登录好吧',
       })
@@ -305,7 +304,7 @@ Page({
       })
       return
     }
-    if (!wx.getStorageSync('userInfo')) {
+    if (!wx.getStorageSync('userInfo')._id) {
       wx.showToast({
         title: '请先登录好吧',
       })
@@ -342,6 +341,12 @@ Page({
         title: '提交评论内容不能为空哦',
       })
     } else {
+      if (!wx.getStorageSync('userInfo')._id) {
+        wx.showToast({
+          title: '请先登录好吧',
+        })
+        return
+      }
       wx.showLoading({
         title: '正在提交中…',
       })

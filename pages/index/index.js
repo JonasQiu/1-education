@@ -49,6 +49,20 @@ Page({
   //////////////////////////////////
   // ask
   showModal(e) {
+    comAsk.getTypeList().then(res => {
+      this.setData({
+        askRoomName: [{
+          name: '用户消息列表',
+          list: res[0]
+        }, {
+          name: '分类频道大厅',
+          list: res[1]
+        }, {
+          name: '机构频道大厅',
+          list: res[2]
+        }]
+      })
+    })
     this.setData({
       modalName: e.currentTarget.dataset.target
     })

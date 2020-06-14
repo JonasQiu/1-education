@@ -105,11 +105,11 @@ Page({
   },
   collectTap(e) {
     let that = this;
-    if (!that.data.myUserInfo) {
+    if (!wx.getStorageSync('userInfo')._id) {
       wx.showToast({
-        'title': '请先登录'
+        title: '请先登录好吧',
       })
-      return;
+      return
     }
     if (that.data.isLoaddingCollect) {
       wx.showToast({
@@ -146,11 +146,11 @@ Page({
   },
   attentionTap(e) {
     let that = this;
-    if (!that.data.myUserInfo) {
+    if (!wx.getStorageSync('userInfo')._id) {
       wx.showToast({
-        'title': '请先登录'
+        title: '请先登录好吧',
       })
-      return;
+      return
     }
     if (that.data.myUserInfo._id == that.data.infoData[0].obj.userInfo._id) {
       wx.showToast({
