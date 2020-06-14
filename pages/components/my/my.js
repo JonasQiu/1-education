@@ -39,10 +39,12 @@ Component({
     wx.getStorage({
       key: 'userInfo',
       success(res) {
-        that.setData({
-          userInfo: res.data,
-        })
-        that.numDH(0)
+        if (res.data._id) {
+          that.setData({
+            userInfo: res.data,
+          })
+          that.numDH(0)
+        }
       }
     })
   },
