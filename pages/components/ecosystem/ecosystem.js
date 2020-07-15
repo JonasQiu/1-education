@@ -16,7 +16,6 @@ Component({
    */
   data: {
     isShow: false,
-    navTop: wx.getSystemInfoSync().statusBarHeight,
     // 导航栏
     TabCur: 0,
     scrollLeft: 0,

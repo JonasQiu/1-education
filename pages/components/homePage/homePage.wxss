@@ -10,7 +10,7 @@
 
 /* 顶部导航栏 */
 .topFlex {
-  height: 135rpx;
+  height: 105rpx;
   width: 100%;
   position: relative;
   display: flex;
@@ -228,7 +228,8 @@
   left: 0;
   opacity: 0.3;
 }
-.interest{
+
+.interest {
   z-index: 20;
   position: fixed;
   left: 8%;

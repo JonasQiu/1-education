@@ -1,6 +1,6 @@
 <!-- 点赞的通用列表 -->
 <usually wx:if="{{isShowUsu}}" typeIndex='0' list="{{showlikeIdList}}" titleName="点赞的人" bind:callshowChange="showLikeList" />
-<scroll-view scroll-y wx:else style="height:93vh;margin-top:{{navTop}}px" lower-threshold="500" bindscrolltolower="lower" scroll-with-animation scroll-top="{{goTop}}">
+<scroll-view scroll-y wx:else style="height:93vh;padding-top:{{navTop}}px" lower-threshold="500" bindscrolltolower="lower" scroll-with-animation scroll-top="{{goTop}}">
 	<view class="scrollTop">生态圈</view>
 	<!-- 搜索栏 -->
 	<view class="cu-bar search bg-white">

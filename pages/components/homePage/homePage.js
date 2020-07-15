@@ -14,6 +14,7 @@ Component({
    * 组件的初始数据
    */
   data: {
+    navTop: wx.getSystemInfoSync().statusBarHeight,
     position: '英德',
     weather: '阴',
     degree: "26",

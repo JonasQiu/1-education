@@ -2,7 +2,7 @@
 <!-- <page-load wx:if="{{isShowLoad}}" /> -->
 <!-- 页面加载完毕显示 -->
 <usually wx:if="{{isShowUsu}}" typeIndex='{{usuallyData.typeIndex}}' list="{{usuallyData.list}}" titleName="{{usuallyData.titleName}}" bind:callshowChange="changePage" />
-<scroll-view scroll-y wx:else class="page" style="height:100vh" bindscrolltolower="touchBottom" lower-threshold='500'>
+<scroll-view scroll-y wx:else class="page" style="padding-top:{{navTop}}px" bindscrolltolower="touchBottom" lower-threshold='500'>
 	<!-- 顶部导航 -->
 	<view class="topFlex">
 		<!-- 定位及温度 -->

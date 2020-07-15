@@ -9,6 +9,7 @@ const comLocation = require('../../utils/Func/location')
 
 Page({
   data: {
+    navTop: wx.getSystemInfoSync().statusBarHeight,
     askNum: 20,
     PageCur: 'homePage',
     position: '英德',
