@@ -4,7 +4,7 @@
 	<ecosystem wx:if="{{PageCur=='ecosystem'}}"></ecosystem>
 	<search wx:if="{{PageCur=='search'}}"></search>
 	<my wx:if="{{PageCur=='my'}}"></my>
-	<view wx:if="{{PageCur=='ask'}}" class="ask" style="padding-top:{{navTop}}px">
+	<view wx:if="{{PageCur=='ask'}}" class="ask" style="margin-top:{{navTop}}px">
 		<view class="DrawerPage {{modalName=='viewModal'?'show':''}}">
 			<!-- 顶部导航 -->
 			<view class="topFlex bg-white ">
